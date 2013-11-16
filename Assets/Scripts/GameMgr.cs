@@ -24,7 +24,7 @@ public class GameMgr : MonoBehaviour {
     void Start () {
         Application.runInBackground = true;
         s_instance = this;
-        player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player"),4);
+        player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
         bomb_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb"), 100);
 	}
 	

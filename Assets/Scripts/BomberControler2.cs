@@ -10,10 +10,12 @@ public class BomberControler2 : MonoBehaviour {
     public float jump_speed = 1.0f;
     public bool IsNetworkControlled = false;
     public bool IsPlayer = false;
+    Animator m_animator;
 	void Start () {
 	    body = GetComponent<Rigidbody>();
         GameObject Bomb = ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb");
         pool = new PoolSystem<GameObject>(Bomb,10);
+        m_animator = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -50,7 +52,7 @@ public class BomberControler2 : MonoBehaviour {
             else if (Input.GetKeyUp(key_binding[i]))
                 flag |= action_callback[i](this, false);
 
-            if ((flag & 1 )!= 0)
+            if ((flag & 1 )!= 0 && GameMgr.Instance != null)
                 GameMgr.Instance.PlayerMove(moveFlags, transform.position);
         }
     }
@@ -88,6 +90,8 @@ public class BomberControler2 : MonoBehaviour {
         //  Debug.Log("fall velocity " + fall_velocity);
         if (fall_velocity > 20)
             fall_velocity = 20;*/
+        m_animator.SetFloat("Speed", move.z);
+        m_animator.SetFloat("Direction", move.x);
         transform.Translate(move * speed * Time.deltaTime + gravity*fall_velocity);
     }
 

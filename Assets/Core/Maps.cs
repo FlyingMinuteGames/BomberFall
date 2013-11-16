@@ -261,6 +261,7 @@ public class Maps {
         Size = new IntVector2(x, y); 
         Clear();
         Generate();
+        Debug.Log("load map with size : " + Size);
         for (var i = 0; i < x; i++)
         {
             for (var j = 0; j < y; j++)
@@ -312,13 +313,16 @@ public class Maps {
     public void ExplodeAt(IntVector2 a, int radius)
     {
         int x = a.x + radius, y = a.y + radius, z = a.x - radius, w = a.y - radius;
+        Debug.Log(a);
         for (int i = a.x+1; i <= a.x + radius; i++)
         {
+            
             if (i >= m_size.x)
             {
                 x = i-1;
                 break;
             }
+            Debug.Log("i++" + i);
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(i, a.y));

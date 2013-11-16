@@ -85,7 +85,7 @@ public class NetworkMgr : MonoBehaviour {
     Vector3 GetInitPos(int index)
     {
         if (index < 0 || index > 3)
-            return new Vector3();
+            return Vector3.zero;
         Vector3 pos  = current_map.TilePosToWorldPos(new IntVector2(index%2 != 0 ? current_map.Size.x - 1 : 0, index > 0 && index < 3 ? current_map.Size.y - 1 : 0));
         return pos;
     }
@@ -336,12 +336,12 @@ public class NetworkMgr : MonoBehaviour {
             BombScript script = ((BombScript)o);
             m_bombs[o.GetInstanceID()] = script;
 
-            script.callback = () =>
+            /*script.callback = () =>
             {
                 Vector3 pos = script.transform.position;
                 IntVector2 tpos = current_map.GetTilePosition(pos.x, pos.z);
                 this.HandleExplode(script, tpos, 1);
-            };
+            };*/
         }
     
     }

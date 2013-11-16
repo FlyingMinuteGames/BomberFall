@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour {
 public GameObject networkManager; // Prefab
 
 private GameObject instantiatedMaster; //Prefab instancié
-private NetworkMgr scriptStartNet;
+private GameMgr scriptStartNet;
 
 private string serverIP = "127.0.0.1";
 private int serverPort = 25000;
@@ -33,10 +33,9 @@ private int serverPort = 25000;
         {
             //Création du serveur
             instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
-            instantiatedMaster.name = "NetworkManager";
-            scriptStartNet = instantiatedMaster.GetComponent<NetworkMgr>();
-            scriptStartNet.server = true;
-            scriptStartNet.listenPort = serverPort;
+            instantiatedMaster.name = "GameMgr";
+            scriptStartNet = instantiatedMaster.GetComponent<GameMgr>();
+            scriptStartNet.StartServer();
             Destroy(this);
         }
         if ( GUI.Button(new Rect(10, 60, sizeButtonX, sizeButtonY), "Join"))
@@ -44,10 +43,9 @@ private int serverPort = 25000;
             //Rejoindre serveur
             instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
             instantiatedMaster.name = "NetworkManager";
-            scriptStartNet = instantiatedMaster.GetComponent<NetworkMgr>();
-            scriptStartNet.server = false;
-            scriptStartNet.remoteIP = serverIP;
-            scriptStartNet.listenPort = serverPort;
+            instantiatedMaster.name = "GameMgr";
+            scriptStartNet = instantiatedMaster.GetComponent<GameMgr>();
+            scriptStartNet.StartClient(serverIP);
             Debug.Log("Main menu remote IP "+serverIP);
             Destroy(this);
 

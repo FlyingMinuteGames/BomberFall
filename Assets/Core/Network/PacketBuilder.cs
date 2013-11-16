@@ -1,0 +1,67 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.IO;
+public class PacketBuilder  {
+
+    public static Packet BuildMovePlayerPacket(int guid, int moveFlag ,Vector3 pos)
+    {
+        Packet p = new Packet(4+4+4*3,(int)Opcode.MSG_PLAYER_MOVE);
+        p.Write(guid);
+        p.Write(moveFlag);
+        p.WriteVector3(pos);
+        return p;
+    }
+
+    public static Packet BuildPlayAnnouncementPacket(int announceId)
+    { return null; }
+
+    public static Packet BuildConnectPacket(int flag, int sessionId)
+    {
+        Packet p = new Packet(4 * 2, (int)Opcode.CMSG_CONNECT);
+        /* if flag == 0
+         * 
+         */
+        p.Write(flag);
+        p.Write(sessionId);
+        return p;
+    }
+
+    public static Packet BuildPlayerConnectPacket(int sessionId,int guid, int player_index)
+    {
+        Packet p = new Packet(12,(int)Opcode.SMSG_PLAYER_CONNECTED);
+        p.Write(sessionId);
+        p.Write(player_index);
+        p.Write(guid);
+        return p;
+    }
+
+    public static Packet BuildSendMapPacket(Maps map)
+    { 
+        MemoryStream stream = new MemoryStream();
+        map.SaveToStream(stream);
+        Packet p = new Packet((int)stream.Length, Opcode.SMSG_SEND_MAP);
+        p.Write(stream.ToArray());
+        return p;
+    }
+    public static Packet BuildInstantiateObjPacket(byte[] values)
+    {
+        Packet p = new Packet(values.Length, Opcode.SMSG_INSTANTIATE_OBJ);
+        p.Write(values);
+        return p;
+    }
+
+    public static Packet BuildSpawnBomb(Vector3 pos)
+    {
+        Packet p = new Packet(3 * 4, Opcode.CMSG_PLAYER_DROP_BOMB);
+        p.WriteVector3(pos);
+        return p;
+    }
+
+    public static Packet BuildBombExplode(IntVector2 pos)
+    {
+        Packet p = new Packet(8, Opcode.SMSG_BOMB_EXPLODE);
+        p.Write(pos.x);
+        p.Write(pos.y);
+        return p;
+    }
+}

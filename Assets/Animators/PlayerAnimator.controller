@@ -55,63 +55,63 @@ BlendTree:
   m_PrefabInternal: {fileID: 0}
   m_Name: Locomotion
   m_Childs:
-  - m_Motion: {fileID: 7400002, guid: 5b6e5c29d3bc72140b43bda7698f6ee9, type: 3}
+  - m_Motion: {fileID: 7400002, guid: 871ac50f9973c0146a34455035a67abc, type: 3}
     m_Threshold: .714285731
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400006, guid: 5b6e5c29d3bc72140b43bda7698f6ee9, type: 3}
+  - m_Motion: {fileID: 7400006, guid: 871ac50f9973c0146a34455035a67abc, type: 3}
     m_Threshold: .857142866
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400004, guid: 5b6e5c29d3bc72140b43bda7698f6ee9, type: 3}
+  - m_Motion: {fileID: 7400004, guid: 871ac50f9973c0146a34455035a67abc, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: 6f3c8198c2014534896f16c7b6f863c2, type: 3}
+  - m_Motion: {fileID: 7400000, guid: c75d051490b463240947ef0dd0ed6f8e, type: 3}
     m_Threshold: 1.14285707
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: 5b6e5c29d3bc72140b43bda7698f6ee9, type: 3}
+  - m_Motion: {fileID: 7400000, guid: 871ac50f9973c0146a34455035a67abc, type: 3}
     m_Threshold: 1.28571415
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400000, guid: 75c2bdcc6f3b2084d8bfdf62847fa7e5, type: 3}
+  - m_Motion: {fileID: 7400000, guid: c51e4206b8a64644696a20313e253ea8, type: 3}
     m_Threshold: 1.42857122
     m_Position: {x: 0, y: .600000024}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400002, guid: 75c2bdcc6f3b2084d8bfdf62847fa7e5, type: 3}
+  - m_Motion: {fileID: 7400002, guid: c51e4206b8a64644696a20313e253ea8, type: 3}
     m_Threshold: 1.5714283
     m_Position: {x: .600000024, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400006, guid: 75c2bdcc6f3b2084d8bfdf62847fa7e5, type: 3}
+  - m_Motion: {fileID: 7400006, guid: c51e4206b8a64644696a20313e253ea8, type: 3}
     m_Threshold: 1.71428537
     m_Position: {x: -.600000024, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
-  - m_Motion: {fileID: 7400004, guid: 75c2bdcc6f3b2084d8bfdf62847fa7e5, type: 3}
+  - m_Motion: {fileID: 7400004, guid: c51e4206b8a64644696a20313e253ea8, type: 3}
     m_Threshold: 1.85714245
     m_Position: {x: 0, y: -.600000024}
     m_TimeScale: 1
@@ -268,24 +268,6 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
---- !u!1101 &110141039
-Transition:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110246283}
-  m_DstState: {fileID: 110228756}
-  m_TransitionDuration: .394736856
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: JumpDown
-    m_EventTreshold: 0
-    m_ExitTime: .605263114
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
 --- !u!1101 &110164181
 Transition:
   m_ObjectHideFlags: 3
@@ -330,24 +312,6 @@ Transition:
   - m_ConditionMode: 4
     m_ConditionEvent: Direction
     m_EventTreshold: -.100000001
-    m_ExitTime: .951854467
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
---- !u!1101 &110197008
-Transition:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110228756}
-  m_DstState: {fileID: 110246283}
-  m_TransitionDuration: .0481455065
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: JumpDown
-    m_EventTreshold: 0
     m_ExitTime: .951854467
   m_Atomic: 1
   m_Solo: 0
@@ -478,15 +442,13 @@ StateMachine:
       - {fileID: 110127833}
       - {fileID: 110190038}
       - {fileID: 110116443}
-      - {fileID: 110197008}
     data:
       first: {fileID: 110236068}
       second:
       - {fileID: 110107991}
     data:
       first: {fileID: 110246283}
-      second:
-      - {fileID: 110141039}
+      second: []
     data:
       first: {fileID: 110260855}
       second:

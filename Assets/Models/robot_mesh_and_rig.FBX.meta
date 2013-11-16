@@ -1,0 +1,501 @@
+fileFormatVersion: 2
+guid: f0c9f182cf5469b46904e6a52038e65b
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: RobotMesh
+    100004: RobotSkeleton
+    100006: RobotSkeleton Footsteps
+    100008: RobotSkeleton Head
+    100010: RobotSkeleton HeadNub
+    100012: RobotSkeleton L Calf
+    100014: RobotSkeleton L Clavicle
+    100016: RobotSkeleton L Finger0
+    100018: RobotSkeleton L Finger0Nub
+    100020: RobotSkeleton L Finger1
+    100022: RobotSkeleton L Finger1Nub
+    100024: RobotSkeleton L Foot
+    100026: RobotSkeleton L Forearm
+    100028: RobotSkeleton L Hand
+    100030: RobotSkeleton L HorseLink
+    100032: RobotSkeleton L Thigh
+    100034: RobotSkeleton L Toe0
+    100036: RobotSkeleton L Toe0Nub
+    100038: RobotSkeleton L UpperArm
+    100040: RobotSkeleton Neck
+    100042: RobotSkeleton Pelvis
+    100044: RobotSkeleton R Calf
+    100046: RobotSkeleton R Clavicle
+    100048: RobotSkeleton R Finger0
+    100050: RobotSkeleton R Finger0Nub
+    100052: RobotSkeleton R Finger1
+    100054: RobotSkeleton R Finger1Nub
+    100056: RobotSkeleton R Foot
+    100058: RobotSkeleton R Forearm
+    100060: RobotSkeleton R Hand
+    100062: RobotSkeleton R HorseLink
+    100064: RobotSkeleton R Thigh
+    100066: RobotSkeleton R Toe0
+    100068: RobotSkeleton R Toe0Nub
+    100070: RobotSkeleton R UpperArm
+    100072: RobotSkeleton Spine
+    100074: RobotSkeleton Spine1
+    400000: //RootNode
+    400002: RobotMesh
+    400004: RobotSkeleton
+    400006: RobotSkeleton Footsteps
+    400008: RobotSkeleton Head
+    400010: RobotSkeleton HeadNub
+    400012: RobotSkeleton L Calf
+    400014: RobotSkeleton L Clavicle
+    400016: RobotSkeleton L Finger0
+    400018: RobotSkeleton L Finger0Nub
+    400020: RobotSkeleton L Finger1
+    400022: RobotSkeleton L Finger1Nub
+    400024: RobotSkeleton L Foot
+    400026: RobotSkeleton L Forearm
+    400028: RobotSkeleton L Hand
+    400030: RobotSkeleton L HorseLink
+    400032: RobotSkeleton L Thigh
+    400034: RobotSkeleton L Toe0
+    400036: RobotSkeleton L Toe0Nub
+    400038: RobotSkeleton L UpperArm
+    400040: RobotSkeleton Neck
+    400042: RobotSkeleton Pelvis
+    400044: RobotSkeleton R Calf
+    400046: RobotSkeleton R Clavicle
+    400048: RobotSkeleton R Finger0
+    400050: RobotSkeleton R Finger0Nub
+    400052: RobotSkeleton R Finger1
+    400054: RobotSkeleton R Finger1Nub
+    400056: RobotSkeleton R Foot
+    400058: RobotSkeleton R Forearm
+    400060: RobotSkeleton R Hand
+    400062: RobotSkeleton R HorseLink
+    400064: RobotSkeleton R Thigh
+    400066: RobotSkeleton R Toe0
+    400068: RobotSkeleton R Toe0Nub
+    400070: RobotSkeleton R UpperArm
+    400072: RobotSkeleton Spine
+    400074: RobotSkeleton Spine1
+    4300000: RobotMesh
+    9500000: //RootNode
+    13700000: RobotMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: RobotSkeleton
+      humanName: Hips
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .109784238, y: 0, z: .054892119}
+        preQ: {x: -.500221729, y: -.499778092, z: .500221729, w: .499778092}
+        postQ: {x: .500221729, y: .499778092, z: .499778092, w: -.500221729}
+        length: .137230337
+        modified: 1
+    - boneName: RobotSkeleton L Thigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .087952435, y: 0, z: .0439762175}
+        preQ: {x: .953747869, y: .300602227, z: -.00165729411, w: .0005217258}
+        postQ: {x: 4.470348e-08, y: -.0129012456, z: .999916732, w: 2.98023206e-08}
+        length: .109940581
+        modified: 1
+    - boneName: RobotSkeleton R Thigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .087952435, y: 0, z: .0439762175}
+        preQ: {x: -.967291832, y: -.253665626, z: -2.30291732e-07, w: 7.19661671e-07}
+        postQ: {x: 8.94069743e-08, y: 6.70552254e-07, z: -.99999994, w: 4.47034871e-08}
+        length: .109940581
+        modified: 1
+    - boneName: RobotSkeleton L Calf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .068261005, y: 0, z: .0341305025}
+        preQ: {x: .00721483072, y: .00319603295, z: -.663088083, w: .748499691}
+        postQ: {x: .000114083283, y: .0118349344, z: -.999883771, w: -.0096120676}
+        length: .0853262916
+        modified: 1
+    - boneName: RobotSkeleton R Calf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .0640176982, y: 0, z: .0320088491}
+        preQ: {x: 2.96803336e-07, y: 1.12728195e-07, z: -.723252654, w: .690583408}
+        postQ: {x: -1.19209304e-07, y: 6.85453529e-07, z: -.999052703, w: -.0435158387}
+        length: .0800221562
+        modified: 1
+    - boneName: RobotSkeleton L Foot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .0183479544, y: 0, z: .00917397719}
+        preQ: {x: .00367251039, y: .0124889016, z: -.997791767, w: -.0651313365}
+        postQ: {x: 7.4505806e-08, y: 5.51342964e-07, z: -.99999994, w: 7.4505806e-08}
+        length: .0229349528
+        modified: 1
+    - boneName: RobotSkeleton R Foot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .0213984381, y: 0, z: .0106992191}
+        preQ: {x: 8.94069672e-08, y: 6.70552254e-07, z: -.995004296, w: .0998315662}
+        postQ: {x: 4.47034836e-08, y: 6.85453415e-07, z: -.99999994, w: 0}
+        length: .0267480575
+        modified: 1
+    - boneName: RobotSkeleton Spine1
+      humanName: Spine
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .100047998, y: 0, z: .0500239991}
+        preQ: {x: -5.96046412e-08, y: 6.85453358e-07, z: -.99999994, w: -.000267714233}
+        postQ: {x: -1.19209282e-07, y: 6.70552197e-07, z: -.99999994, w: -.000267699332}
+        length: .125060037
+        modified: 1
+    - boneName: RobotSkeleton Neck
+      humanName: Chest
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0327798314, y: 0, z: .0163899157}
+        preQ: {x: -2.98023206e-08, y: -6.85453358e-07, z: .999999881, w: .000398069591}
+        postQ: {x: -5.96046448e-08, y: -6.40749931e-07, z: .999999881, w: .00039808455}
+        length: .040974807
+        modified: 1
+    - boneName: RobotSkeleton Head
+      humanName: Head
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0163899157, y: 0, z: .00819495786}
+        preQ: {x: -0, y: -5.96046448e-07, z: .99999994, w: 0}
+        postQ: {x: -1.49011612e-08, y: -5.66244125e-07, z: .99999994, w: 0}
+        length: .0204874035
+        modified: 1
+    - boneName: RobotSkeleton L Clavicle
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: -15.000001, z: -15.000001}
+        max: {x: 0, y: 15.000001, z: 30.0000019}
+        value: {x: .0507051572, y: 0, z: .0253525786}
+        preQ: {x: .499999732, y: .499998778, z: .500000238, w: -.500001192}
+        postQ: {x: -7.09149845e-07, y: -.707106769, z: .707106769, w: -5.61188017e-07}
+        length: .0633814633
+        modified: 1
+    - boneName: RobotSkeleton R Clavicle
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: -15.000001, z: -15.000001}
+        max: {x: 0, y: 15.000001, z: 30.0000019}
+        value: {x: .050705146, y: 0, z: .025352573}
+        preQ: {x: -.499999017, y: .499999493, z: .500000894, w: .500000417}
+        postQ: {x: 3.02574875e-07, y: .707106709, z: -.707106769, w: 3.7112531e-07}
+        length: .0633814484
+        modified: 1
+    - boneName: RobotSkeleton L UpperArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .107122146, y: 0, z: .0535610728}
+        preQ: {x: -.0855246782, y: -.644021571, z: .630506694, w: -.424715281}
+        postQ: {x: -5.99771681e-07, y: .998283505, z: -.0585642904, w: -1.35014929e-07}
+        length: .133902714
+        modified: 1
+    - boneName: RobotSkeleton R UpperArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .107122213, y: 0, z: .0535611063}
+        preQ: {x: -.412749529, y: .640053093, z: -.644322515, w: -.069413498}
+        postQ: {x: 1.20489858e-08, y: .0671235323, z: -.99774462, w: -4.98061127e-07}
+        length: .133902803
+        modified: 1
+    - boneName: RobotSkeleton L Forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .0892524272, y: 0, z: .0446262136}
+        preQ: {x: .411416471, y: .523753643, z: -.5559237, w: .497360349}
+        postQ: {x: -3.62051615e-08, y: .664346218, z: -.747424901, w: -7.42729682e-08}
+        length: .111565568
+        modified: 1
+    - boneName: RobotSkeleton R Forearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .0892524198, y: 0, z: .0446262099}
+        preQ: {x: .484507173, y: -.568624735, z: .513381183, w: .422325045}
+        postQ: {x: 4.18978743e-07, y: -.752994597, z: .658026576, w: -3.3370452e-07}
+        length: .11156556
+        modified: 1
+    - boneName: RobotSkeleton L Hand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .0446262136, y: 0, z: .0223131068}
+        preQ: {x: 2.70083529e-08, y: .998273253, z: -.0587401055, w: -7.84628824e-08}
+        postQ: {x: 3.51787312e-05, y: .711518407, z: .702667356, w: -3.55906523e-05}
+        length: .0557827838
+        modified: 1
+    - boneName: RobotSkeleton R Hand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .0446262099, y: 0, z: .0223131049}
+        preQ: {x: -5.97792749e-08, y: .0671267137, z: -.997744441, w: 5.32476463e-07}
+        postQ: {x: -3.5170473e-05, y: -.717397988, z: .696663558, w: -3.6299818e-05}
+        length: .0557827801
+        modified: 1
+    skeleton:
+    - name: robot_mesh_and_rig
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton
+      position: {x: 8.93277541e-09, y: .215930462, z: -.00651600817}
+      rotation: {x: .49999997, y: -.5, z: -.49999997, w: -.49999997}
+      scale: {x: .99999994, y: .99999994, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Footsteps
+      position: {x: -0, y: 0, z: -.228398487}
+      rotation: {x: 0, y: 0, z: -.707106292, w: .707107246}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Pelvis
+      position: {x: 9.31324462e-10, y: 8.32667321e-16, z: -2.98023224e-08}
+      rotation: {x: .499999285, y: -.500000656, z: -.499999285, w: -.500000656}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Spine
+      position: {x: -.0698599219, y: -7.5826938e-05, z: 1.04011966e-10}
+      rotation: {x: 2.05636002e-06, y: 2.98022389e-08, z: 2.98022815e-08, w: -.99999994}
+      scale: {x: .99999994, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton L Thigh
+      position: {x: .0698598772, y: 7.55185538e-05, z: .10505946}
+      rotation: {x: -.0434379242, y: .998971283, z: .0128142247, w: -.00229680515}
+      scale: {x: 1, y: 1, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton L Calf
+      position: {x: -.109940596, y: 4.7652402e-09, z: -3.05194447e-09}
+      rotation: {x: -6.55088215e-08, y: 1.38093936e-08, z: .156803817, w: .987629771}
+      scale: {x: .99999994, y: .999999821, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L HorseLink
+      position: {x: -.0685625225, y: 2.99134406e-08, z: -4.89661574e-08}
+      rotation: {x: 5.22772119e-08, y: -2.81962702e-08, z: -.0487958789, w: .998808742}
+      scale: {x: .99999994, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton L Foot
+      position: {x: -.0168281551, y: 3.59152885e-09, z: 1.25918111e-08}
+      rotation: {x: .0124883354, y: -.00367246615, z: -.0651314706, w: .997791767}
+      scale: {x: 1.00000012, y: .99999994, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L Toe0
+      position: {x: -.0354032144, y: .0544447042, z: 0}
+      rotation: {x: -1.54543081e-08, y: 1.54543081e-08, z: -.707106769, w: .707106769}
+      scale: {x: .99999994, y: 1, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton L Toe0Nub
+      position: {x: -.00412276993, y: 0, z: -9.53674295e-09}
+      rotation: {x: -9.55341356e-16, y: -1.75552483e-30, z: .99999994, w: -1.83758906e-15}
+      scale: {x: -.99999994, y: -1, z: -.99999994}
+      transformModified: 1
+    - name: RobotSkeleton R Thigh
+      position: {x: .069859907, y: 7.61194387e-05, z: -.105059467}
+      rotation: {x: .00537873805, y: .999985516, z: 1.35567507e-06, w: -1.07994133e-07}
+      scale: {x: 1.00000036, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Calf
+      position: {x: -.109940551, y: -5.35374323e-09, z: -2.5348875e-08}
+      rotation: {x: -3.9910887e-08, y: 1.9456655e-08, z: .107543401, w: .994200349}
+      scale: {x: 1, y: 1, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R HorseLink
+      position: {x: -.0643968955, y: 3.95490787e-08, z: 2.70874878e-08}
+      rotation: {x: 3.91473272e-08, y: 5.59982172e-10, z: -.211518869, w: .977373838}
+      scale: {x: .999999881, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R Foot
+      position: {x: -.0168279745, y: 3.05020755e-08, z: -9.65288383e-09}
+      rotation: {x: 3.27536021e-09, y: -6.54546781e-08, z: .0998315811, w: .995004356}
+      scale: {x: 1.00000024, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Toe0
+      position: {x: -.0354032144, y: .0544447079, z: 0}
+      rotation: {x: -1.54543081e-08, y: 1.54543081e-08, z: -.707106769, w: .707106769}
+      scale: {x: .99999994, y: 1, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R Toe0Nub
+      position: {x: -.00412276993, y: 0, z: 0}
+      rotation: {x: 1.69702715e-30, y: -9.55341356e-16, z: 1.77635684e-15, w: .99999994}
+      scale: {x: .99999994, y: 1, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton Spine1
+      position: {x: -.0673704073, y: -4.59426119e-05, z: 3.89235266e-09}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton Neck
+      position: {x: -.125060052, y: 6.69581932e-05, z: 7.63494867e-09}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1.00000012, y: 1, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton Head
+      position: {x: -.0409748219, y: 3.26233021e-05, z: 2.52984522e-09}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1.00000012, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton HeadNub
+      position: {x: -.423499018, y: 5.96046434e-10, z: -1.13686835e-15}
+      rotation: {x: -4.11746534e-20, y: -3.38813159e-21, z: -1.39504867e-40, w: .99999994}
+      scale: {x: 1, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton L Clavicle
+      position: {x: -4.20783728e-08, y: 3.25642613e-05, z: .0220047459}
+      rotation: {x: -.707106709, y: -1.00790874e-06, z: .707106769, w: 9.3084634e-07}
+      scale: {x: 1.00000024, y: 1.00000024, z: 1.00000024}
+      transformModified: 1
+    - name: RobotSkeleton L UpperArm
+      position: {x: -.0633814484, y: 1.32265425e-08, z: -1.04360772e-07}
+      rotation: {x: .66401732, y: .0209179223, z: .0248954874, w: -.747009814}
+      scale: {x: .999999881, y: .999999881, z: .999999583}
+      transformModified: 1
+    - name: RobotSkeleton L Forearm
+      position: {x: -.133902714, y: -1.54131627e-07, z: 4.48239028e-08}
+      rotation: {x: -4.2954877e-08, y: -6.25419228e-09, z: .0301081929, w: .999546587}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L Hand
+      position: {x: -.11156553, y: 9.5417807e-09, z: 1.64115068e-08}
+      rotation: {x: -.743248761, y: -3.33883763e-05, z: 3.7244663e-05, w: .66901511}
+      scale: {x: 1.00000012, y: .999999881, z: .999999762}
+      transformModified: 1
+    - name: RobotSkeleton L Finger0
+      position: {x: -.0150027582, y: .00500531634, z: -.0363670066}
+      rotation: {x: .711281478, y: .000302267028, z: .00547006726, w: .702885926}
+      scale: {x: 1.00000024, y: .999999821, z: .999999702}
+      transformModified: 1
+    - name: RobotSkeleton L Finger0Nub
+      position: {x: -.0646368414, y: -2.98023217e-10, z: 7.45058043e-11}
+      rotation: {x: -9.31322519e-10, y: 1.4188116e-10, z: -1.16415315e-10, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L Finger1
+      position: {x: -.0169513337, y: -.00160694693, z: .035498172}
+      rotation: {x: .000513396226, y: -.0150887566, z: -7.78036429e-06, w: .999885976}
+      scale: {x: 1, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: RobotSkeleton L Finger1Nub
+      position: {x: -.0590924434, y: -5.96046434e-10, z: 0}
+      rotation: {x: 6.77626358e-20, y: 9.31322575e-10, z: -7.27595761e-11, w: .99999994}
+      scale: {x: .99999994, y: .999999821, z: .999999881}
+      transformModified: 1
+    - name: RobotSkeleton R Clavicle
+      position: {x: 1.10406728e-09, y: 3.26855989e-05, z: -.022004744}
+      rotation: {x: .707106769, y: -9.30846397e-07, z: .707106769, w: -1.00790874e-06}
+      scale: {x: 1.00000012, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R UpperArm
+      position: {x: -.0633814484, y: -6.24165608e-09, z: -5.02912911e-08}
+      rotation: {x: .658001602, y: .00663200533, z: -.00787610281, w: .752946079}
+      scale: {x: .999999583, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Forearm
+      position: {x: -.133902848, y: 1.25466684e-07, z: 4.61006078e-09}
+      rotation: {x: -2.58809134e-08, y: 2.17264056e-08, z: .00106421113, w: .999999404}
+      scale: {x: 1.00000048, y: 1.00000024, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R Hand
+      position: {x: -.111565545, y: -1.33702287e-07, z: 3.20468208e-09}
+      rotation: {x: .66901511, y: -3.71868518e-05, z: 3.34438118e-05, w: -.743248701}
+      scale: {x: .999999642, y: 1.00000024, z: .999999881}
+      transformModified: 1
+    - name: RobotSkeleton R Finger0
+      position: {x: -.0149727408, y: .000327959715, z: .0352457389}
+      rotation: {x: -.711281478, y: -.00030232541, z: .00547008403, w: .702885926}
+      scale: {x: 1.00000012, y: .999999881, z: .999999583}
+      transformModified: 1
+    - name: RobotSkeleton R Finger0Nub
+      position: {x: -.0646368414, y: 4.76837148e-09, z: 1.19209287e-09}
+      rotation: {x: 3.49245938e-10, y: -2.13851455e-26, z: .99999994, w: 6.1232336e-17}
+      scale: {x: -1, y: -1, z: -1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Finger1
+      position: {x: -.0169512704, y: 1.11320287e-05, z: -.0362709649}
+      rotation: {x: .00130951765, y: -1.97580956e-08, z: 1.94557348e-08, w: .999999106}
+      scale: {x: .999999821, y: .999999821, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton R Finger1Nub
+      position: {x: -.0590924434, y: 5.96046434e-10, z: 0}
+      rotation: {x: 0, y: 0, z: .99999994, w: -2.91038894e-11}
+      scale: {x: -1, y: -1.00000012, z: -1.00000012}
+      transformModified: 1
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 3
+  userData: 

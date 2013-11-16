@@ -1,0 +1,598 @@
+fileFormatVersion: 2
+guid: 05757bde2fc301245b0dc0aa419dcc24
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: RobotMesh
+    100004: RobotSkeleton
+    100006: RobotSkeleton Footsteps
+    100008: RobotSkeleton Head
+    100010: RobotSkeleton HeadNub
+    100012: RobotSkeleton L Calf
+    100014: RobotSkeleton L Clavicle
+    100016: RobotSkeleton L Finger0
+    100018: RobotSkeleton L Finger0Nub
+    100020: RobotSkeleton L Finger1
+    100022: RobotSkeleton L Finger1Nub
+    100024: RobotSkeleton L Foot
+    100026: RobotSkeleton L Forearm
+    100028: RobotSkeleton L Hand
+    100030: RobotSkeleton L HorseLink
+    100032: RobotSkeleton L Thigh
+    100034: RobotSkeleton L Toe0
+    100036: RobotSkeleton L Toe0Nub
+    100038: RobotSkeleton L UpperArm
+    100040: RobotSkeleton Neck
+    100042: RobotSkeleton Pelvis
+    100044: RobotSkeleton R Calf
+    100046: RobotSkeleton R Clavicle
+    100048: RobotSkeleton R Finger0
+    100050: RobotSkeleton R Finger0Nub
+    100052: RobotSkeleton R Finger1
+    100054: RobotSkeleton R Finger1Nub
+    100056: RobotSkeleton R Foot
+    100058: RobotSkeleton R Forearm
+    100060: RobotSkeleton R Hand
+    100062: RobotSkeleton R HorseLink
+    100064: RobotSkeleton R Thigh
+    100066: RobotSkeleton R Toe0
+    100068: RobotSkeleton R Toe0Nub
+    100070: RobotSkeleton R UpperArm
+    100072: RobotSkeleton Spine
+    100074: RobotSkeleton Spine1
+    100076: Back Wall
+    100078: Box005
+    100080: Box006
+    100082: Box007
+    100084: Box008
+    100086: Box009
+    100088: Box010
+    100090: Box011
+    100092: Box012
+    100094: Box013
+    100096: Box014
+    100098: Box015
+    100100: Box016
+    100102: Box017
+    100104: Box018
+    100106: Box019
+    100108: Box020
+    100110: Box021
+    100112: Box022
+    100114: Box023
+    100116: Box024
+    100118: Box025
+    100120: Box027
+    100122: Box028
+    100124: Box030
+    100126: Box031
+    100128: Box032
+    100130: Box033
+    100132: Box034
+    100134: Box035
+    100136: Box036
+    100138: Box037
+    100140: Box038
+    100142: Box039
+    100144: Box040
+    100146: Box041
+    100148: Box042
+    100150: Box043
+    100152: Box044
+    100154: Box045
+    100156: Box046
+    100158: Box048
+    100160: Box049
+    100162: Box051
+    100164: Box052
+    100166: Box053
+    100168: Box054
+    100170: Box055
+    100172: Box056
+    100174: Box057
+    100176: Box058
+    100178: Box059
+    100180: Box060
+    100182: Box061
+    100184: Box062
+    100186: Box063
+    100188: CupSwitch1
+    100190: CupSwitch2
+    100192: Floor
+    100194: Following Robot
+    100196: Following Robot.Target
+    100198: IMAGI
+    100200: Left Wall
+    100202: M
+    100204: Nail 4
+    100206: Nail1
+    100208: Nail2
+    100210: Nail3
+    100212: Nail5
+    100214: Nail6
+    100216: NARIUM
+    100218: OilTank
+    100220: Particle View 001
+    100222: PhotometricLight001
+    100224: PhotometricLight002
+    100226: PhotometricLight003
+    100228: PhotometricLight004
+    100230: PhotometricLight005
+    100232: PhotometricLight006
+    100234: PhotometricLight007
+    100236: PhotometricLight008
+    100238: PhotometricLight009
+    100240: PhotometricLight010
+    100242: PhotometricLight011
+    100244: PhotometricLight012
+    100246: PhotometricLight013
+    100248: PhotometricLight014
+    100250: PhotometricLight015
+    100252: PhotometricLight016
+    100254: PhotometricLight017
+    100256: PhotometricLight018
+    100258: PhotometricLight019
+    100260: PhotometricLight020
+    100262: Pick Up Letter Camera
+    100264: Pick Up Letter Camera.Target
+    100266: Stairs
+    100268: Switch1
+    100270: Switch2
+    100272: Targeting Robot Camera
+    100274: Targeting Robot Camera.Target
+    100276: Title Camera
+    100278: Title Camera.Target
+    100280: Top Crate
+    100282: TPhotometricLight003
+    100284: TPhotometricLight003.Target
+    100286: TPhotometricLight004
+    100288: TPhotometricLight004.Target
+    100290: TPhotometricLight005
+    100292: TPhotometricLight005.Target
+    400000: //RootNode
+    400002: RobotMesh
+    400004: RobotSkeleton
+    400006: RobotSkeleton Footsteps
+    400008: RobotSkeleton Head
+    400010: RobotSkeleton HeadNub
+    400012: RobotSkeleton L Calf
+    400014: RobotSkeleton L Clavicle
+    400016: RobotSkeleton L Finger0
+    400018: RobotSkeleton L Finger0Nub
+    400020: RobotSkeleton L Finger1
+    400022: RobotSkeleton L Finger1Nub
+    400024: RobotSkeleton L Foot
+    400026: RobotSkeleton L Forearm
+    400028: RobotSkeleton L Hand
+    400030: RobotSkeleton L HorseLink
+    400032: RobotSkeleton L Thigh
+    400034: RobotSkeleton L Toe0
+    400036: RobotSkeleton L Toe0Nub
+    400038: RobotSkeleton L UpperArm
+    400040: RobotSkeleton Neck
+    400042: RobotSkeleton Pelvis
+    400044: RobotSkeleton R Calf
+    400046: RobotSkeleton R Clavicle
+    400048: RobotSkeleton R Finger0
+    400050: RobotSkeleton R Finger0Nub
+    400052: RobotSkeleton R Finger1
+    400054: RobotSkeleton R Finger1Nub
+    400056: RobotSkeleton R Foot
+    400058: RobotSkeleton R Forearm
+    400060: RobotSkeleton R Hand
+    400062: RobotSkeleton R HorseLink
+    400064: RobotSkeleton R Thigh
+    400066: RobotSkeleton R Toe0
+    400068: RobotSkeleton R Toe0Nub
+    400070: RobotSkeleton R UpperArm
+    400072: RobotSkeleton Spine
+    400074: RobotSkeleton Spine1
+    400076: Back Wall
+    400078: Box005
+    400080: Box006
+    400082: Box007
+    400084: Box008
+    400086: Box009
+    400088: Box010
+    400090: Box011
+    400092: Box012
+    400094: Box013
+    400096: Box014
+    400098: Box015
+    400100: Box016
+    400102: Box017
+    400104: Box018
+    400106: Box019
+    400108: Box020
+    400110: Box021
+    400112: Box022
+    400114: Box023
+    400116: Box024
+    400118: Box025
+    400120: Box027
+    400122: Box028
+    400124: Box030
+    400126: Box031
+    400128: Box032
+    400130: Box033
+    400132: Box034
+    400134: Box035
+    400136: Box036
+    400138: Box037
+    400140: Box038
+    400142: Box039
+    400144: Box040
+    400146: Box041
+    400148: Box042
+    400150: Box043
+    400152: Box044
+    400154: Box045
+    400156: Box046
+    400158: Box048
+    400160: Box049
+    400162: Box051
+    400164: Box052
+    400166: Box053
+    400168: Box054
+    400170: Box055
+    400172: Box056
+    400174: Box057
+    400176: Box058
+    400178: Box059
+    400180: Box060
+    400182: Box061
+    400184: Box062
+    400186: Box063
+    400188: CupSwitch1
+    400190: CupSwitch2
+    400192: Floor
+    400194: Following Robot
+    400196: Following Robot.Target
+    400198: IMAGI
+    400200: Left Wall
+    400202: M
+    400204: Nail 4
+    400206: Nail1
+    400208: Nail2
+    400210: Nail3
+    400212: Nail5
+    400214: Nail6
+    400216: NARIUM
+    400218: OilTank
+    400220: Particle View 001
+    400222: PhotometricLight001
+    400224: PhotometricLight002
+    400226: PhotometricLight003
+    400228: PhotometricLight004
+    400230: PhotometricLight005
+    400232: PhotometricLight006
+    400234: PhotometricLight007
+    400236: PhotometricLight008
+    400238: PhotometricLight009
+    400240: PhotometricLight010
+    400242: PhotometricLight011
+    400244: PhotometricLight012
+    400246: PhotometricLight013
+    400248: PhotometricLight014
+    400250: PhotometricLight015
+    400252: PhotometricLight016
+    400254: PhotometricLight017
+    400256: PhotometricLight018
+    400258: PhotometricLight019
+    400260: PhotometricLight020
+    400262: Pick Up Letter Camera
+    400264: Pick Up Letter Camera.Target
+    400266: Stairs
+    400268: Switch1
+    400270: Switch2
+    400272: Targeting Robot Camera
+    400274: Targeting Robot Camera.Target
+    400276: Title Camera
+    400278: Title Camera.Target
+    400280: Top Crate
+    400282: TPhotometricLight003
+    400284: TPhotometricLight003.Target
+    400286: TPhotometricLight004
+    400288: TPhotometricLight004.Target
+    400290: TPhotometricLight005
+    400292: TPhotometricLight005.Target
+    2300000: Back Wall
+    2300002: Box005
+    2300004: Box006
+    2300006: Box007
+    2300008: Box008
+    2300010: Box009
+    2300012: Box010
+    2300014: Box011
+    2300016: Box012
+    2300018: Box013
+    2300020: Box014
+    2300022: Box015
+    2300024: Box016
+    2300026: Box017
+    2300028: Box018
+    2300030: Box019
+    2300032: Box020
+    2300034: Box021
+    2300036: Box022
+    2300038: Box023
+    2300040: Box024
+    2300042: Box025
+    2300044: Box027
+    2300046: Box028
+    2300048: Box030
+    2300050: Box031
+    2300052: Box032
+    2300054: Box033
+    2300056: Box034
+    2300058: Box035
+    2300060: Box036
+    2300062: Box037
+    2300064: Box038
+    2300066: Box039
+    2300068: Box040
+    2300070: Box041
+    2300072: Box042
+    2300074: Box043
+    2300076: Box044
+    2300078: Box045
+    2300080: Box046
+    2300082: Box048
+    2300084: Box049
+    2300086: Box051
+    2300088: Box052
+    2300090: Box053
+    2300092: Box054
+    2300094: Box055
+    2300096: Box056
+    2300098: Box057
+    2300100: Box058
+    2300102: Box059
+    2300104: Box060
+    2300106: Box061
+    2300108: Box062
+    2300110: Box063
+    2300112: CupSwitch1
+    2300114: CupSwitch2
+    2300116: Floor
+    2300118: IMAGI
+    2300120: Left Wall
+    2300122: M
+    2300124: Nail 4
+    2300126: Nail1
+    2300128: Nail2
+    2300130: Nail3
+    2300132: Nail5
+    2300134: Nail6
+    2300136: NARIUM
+    2300138: OilTank
+    2300140: Stairs
+    2300142: Switch1
+    2300144: Switch2
+    2300146: Top Crate
+    3300000: Back Wall
+    3300002: Box005
+    3300004: Box006
+    3300006: Box007
+    3300008: Box008
+    3300010: Box009
+    3300012: Box010
+    3300014: Box011
+    3300016: Box012
+    3300018: Box013
+    3300020: Box014
+    3300022: Box015
+    3300024: Box016
+    3300026: Box017
+    3300028: Box018
+    3300030: Box019
+    3300032: Box020
+    3300034: Box021
+    3300036: Box022
+    3300038: Box023
+    3300040: Box024
+    3300042: Box025
+    3300044: Box027
+    3300046: Box028
+    3300048: Box030
+    3300050: Box031
+    3300052: Box032
+    3300054: Box033
+    3300056: Box034
+    3300058: Box035
+    3300060: Box036
+    3300062: Box037
+    3300064: Box038
+    3300066: Box039
+    3300068: Box040
+    3300070: Box041
+    3300072: Box042
+    3300074: Box043
+    3300076: Box044
+    3300078: Box045
+    3300080: Box046
+    3300082: Box048
+    3300084: Box049
+    3300086: Box051
+    3300088: Box052
+    3300090: Box053
+    3300092: Box054
+    3300094: Box055
+    3300096: Box056
+    3300098: Box057
+    3300100: Box058
+    3300102: Box059
+    3300104: Box060
+    3300106: Box061
+    3300108: Box062
+    3300110: Box063
+    3300112: CupSwitch1
+    3300114: CupSwitch2
+    3300116: Floor
+    3300118: IMAGI
+    3300120: Left Wall
+    3300122: M
+    3300124: Nail 4
+    3300126: Nail1
+    3300128: Nail2
+    3300130: Nail3
+    3300132: Nail5
+    3300134: Nail6
+    3300136: NARIUM
+    3300138: OilTank
+    3300140: Stairs
+    3300142: Switch1
+    3300144: Switch2
+    3300146: Top Crate
+    4300000: RobotMesh
+    4300002: Floor
+    4300004: Back Wall
+    4300006: Left Wall
+    4300008: Box005
+    4300010: Box006
+    4300012: Box007
+    4300014: Box008
+    4300016: Box009
+    4300018: Box010
+    4300020: Box011
+    4300022: Box012
+    4300024: Box013
+    4300026: Box014
+    4300028: Box015
+    4300030: Box016
+    4300032: Box017
+    4300034: Box018
+    4300036: Box019
+    4300038: Box020
+    4300040: Box021
+    4300042: Box022
+    4300044: Box023
+    4300046: Box024
+    4300048: Box025
+    4300050: Box027
+    4300052: Box028
+    4300054: CupSwitch1
+    4300056: Switch1
+    4300058: CupSwitch2
+    4300060: Switch2
+    4300062: Box030
+    4300064: Box031
+    4300066: Top Crate
+    4300068: OilTank
+    4300070: Stairs
+    4300072: Box032
+    4300074: NARIUM
+    4300076: IMAGI
+    4300078: M
+    4300080: Nail1
+    4300082: Nail 4
+    4300084: Nail5
+    4300086: Nail6
+    4300088: Nail3
+    4300090: Nail2
+    4300092: Box033
+    4300094: Box034
+    4300096: Box035
+    4300098: Box036
+    4300100: Box037
+    4300102: Box038
+    4300104: Box039
+    4300106: Box040
+    4300108: Box041
+    4300110: Box042
+    4300112: Box043
+    4300114: Box044
+    4300116: Box045
+    4300118: Box046
+    4300120: Box048
+    4300122: Box049
+    4300124: Box051
+    4300126: Box052
+    4300128: Box053
+    4300130: Box054
+    4300132: Box055
+    4300134: Box056
+    4300136: Box057
+    4300138: Box058
+    4300140: Box059
+    4300142: Box060
+    4300144: Box061
+    4300146: Box062
+    4300148: Box063
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: RobotMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 1437
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

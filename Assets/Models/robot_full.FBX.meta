@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: d8000e8316464844aa79e7656433d91b
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: RobotMesh
+    100004: RobotSkeleton
+    100006: RobotSkeleton Footsteps
+    100008: RobotSkeleton Head
+    100010: RobotSkeleton HeadNub
+    100012: RobotSkeleton L Calf
+    100014: RobotSkeleton L Clavicle
+    100016: RobotSkeleton L Finger0
+    100018: RobotSkeleton L Finger0Nub
+    100020: RobotSkeleton L Finger1
+    100022: RobotSkeleton L Finger1Nub
+    100024: RobotSkeleton L Foot
+    100026: RobotSkeleton L Forearm
+    100028: RobotSkeleton L Hand
+    100030: RobotSkeleton L HorseLink
+    100032: RobotSkeleton L Thigh
+    100034: RobotSkeleton L Toe0
+    100036: RobotSkeleton L Toe0Nub
+    100038: RobotSkeleton L UpperArm
+    100040: RobotSkeleton Neck
+    100042: RobotSkeleton Pelvis
+    100044: RobotSkeleton R Calf
+    100046: RobotSkeleton R Clavicle
+    100048: RobotSkeleton R Finger0
+    100050: RobotSkeleton R Finger0Nub
+    100052: RobotSkeleton R Finger1
+    100054: RobotSkeleton R Finger1Nub
+    100056: RobotSkeleton R Foot
+    100058: RobotSkeleton R Forearm
+    100060: RobotSkeleton R Hand
+    100062: RobotSkeleton R HorseLink
+    100064: RobotSkeleton R Thigh
+    100066: RobotSkeleton R Toe0
+    100068: RobotSkeleton R Toe0Nub
+    100070: RobotSkeleton R UpperArm
+    100072: RobotSkeleton Spine
+    100074: RobotSkeleton Spine1
+    400000: //RootNode
+    400002: RobotMesh
+    400004: RobotSkeleton
+    400006: RobotSkeleton Footsteps
+    400008: RobotSkeleton Head
+    400010: RobotSkeleton HeadNub
+    400012: RobotSkeleton L Calf
+    400014: RobotSkeleton L Clavicle
+    400016: RobotSkeleton L Finger0
+    400018: RobotSkeleton L Finger0Nub
+    400020: RobotSkeleton L Finger1
+    400022: RobotSkeleton L Finger1Nub
+    400024: RobotSkeleton L Foot
+    400026: RobotSkeleton L Forearm
+    400028: RobotSkeleton L Hand
+    400030: RobotSkeleton L HorseLink
+    400032: RobotSkeleton L Thigh
+    400034: RobotSkeleton L Toe0
+    400036: RobotSkeleton L Toe0Nub
+    400038: RobotSkeleton L UpperArm
+    400040: RobotSkeleton Neck
+    400042: RobotSkeleton Pelvis
+    400044: RobotSkeleton R Calf
+    400046: RobotSkeleton R Clavicle
+    400048: RobotSkeleton R Finger0
+    400050: RobotSkeleton R Finger0Nub
+    400052: RobotSkeleton R Finger1
+    400054: RobotSkeleton R Finger1Nub
+    400056: RobotSkeleton R Foot
+    400058: RobotSkeleton R Forearm
+    400060: RobotSkeleton R Hand
+    400062: RobotSkeleton R HorseLink
+    400064: RobotSkeleton R Thigh
+    400066: RobotSkeleton R Toe0
+    400068: RobotSkeleton R Toe0Nub
+    400070: RobotSkeleton R UpperArm
+    400072: RobotSkeleton Spine
+    400074: RobotSkeleton Spine1
+    4300000: RobotMesh
+    7400000: walking_cycle
+    9500000: //RootNode
+    13700000: RobotMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: walking_cycle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 68
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: RobotSkeleton
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

@@ -8,6 +8,12 @@ public enum GOType
     GO_BOMB,
     GO_BONUS
 }
+public enum GameMgrType
+{
+    CLIENT,
+    SERVER
+}
+
 public class GameMgr : MonoBehaviour {
 
 	// Use this for initialization
@@ -19,8 +25,15 @@ public class GameMgr : MonoBehaviour {
     }
     public PoolSystem<GameObject> player_pool;
     public PoolSystem<GameObject> bomb_pool;
-    Client c = null;
-    Server s = null;
+    public Client c = null;
+    public Server s = null;
+    public Maps maps;
+    public bool game_started = false;
+    private GameMgrType type;
+    public GameMgrType Type
+    {
+        get { return type; }
+    }
     void Start () {
         Application.runInBackground = true;
         s_instance = this;
@@ -37,6 +50,13 @@ public class GameMgr : MonoBehaviour {
             //s.SendPacketTo(client,PacketBuilder.BuildMovePlayerPacket()=;
         };
         //StartClient("127.0.0.1");
+    }
+
+    public void StartGame()
+    {
+        //maps = Maps.LoadMapsFromFile("map1.map");
+        game_started = true;
+        s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
     }
 
     public int Spawn(GOType type,Vector3 pos,int guid = -1)

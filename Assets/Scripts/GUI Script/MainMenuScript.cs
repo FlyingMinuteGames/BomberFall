@@ -21,7 +21,7 @@ public class MainMenuScript : MonoBehaviour {
 
     public GUISkin skin;
     public Texture logo;
-    public GameObject networkManager; // Prefab
+    private GameObject networkManager; // Prefab
 
     private GameObject instantiatedMaster; //Prefab instancié
     private NetworkMgr scriptStartNet;
@@ -91,6 +91,9 @@ public class MainMenuScript : MonoBehaviour {
 
 
     private bool hasMapFiles;
+    private GameMgr gameMgr;
+
+
 
     void Start()
     {
@@ -157,7 +160,7 @@ public class MainMenuScript : MonoBehaviour {
         //Sets Key Bindings accordingly to playerprefs values
         LoadFromPlayerPrefs("keybindings");
 
-       //Sets Video Options accordingly to playerprefs values
+        //Sets Video Options accordingly to playerprefs values
         LoadFromPlayerPrefs("video");
         comboBoxControl.SetSelectedItemIndex(m_ratio);
         comboBoxQuality.SetSelectedItemIndex(quality);
@@ -171,7 +174,7 @@ public class MainMenuScript : MonoBehaviour {
         comboBoxMaps.SetSelectedItemIndex(m_map_index);
         comboboxNbPlayers.SetSelectedItemIndex(m_nb_players);
         comboboxNbCPUs.SetSelectedItemIndex(m_nb_CPUs);
-
+        networkManager = ResourcesLoader.LoadResources<GameObject>("Prefabs/GameMgr");
 	}
 
     /*
@@ -459,9 +462,11 @@ public class MainMenuScript : MonoBehaviour {
             return true;
         return false;
     }
-
+    public bool active = true;
     void OnGUI()
     {
+        if (!active)
+            return;
         GUI.DrawTexture(new Rect(20, 50, 307 * 1.4f, 31 * 1.4f), logo);
         GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
 
@@ -707,20 +712,28 @@ public class MainMenuScript : MonoBehaviour {
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
             {
+                instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
+                instantiatedMaster.name = "GameMgr";
+               
+                gameMgr = instantiatedMaster.GetComponent<GameMgr>();
+                gameMgr.maps = Maps.LoadMapsFromFile("map1.map");
+                gameMgr.StartServer();
                 if (m_nb_players > 0)//IF MORE THAN ONE PLAYER ELSE NO LOBBY NEEDED JUST LAUNCH THE GAME
                 {
                     isHost = true;
-                    m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player "+(m_connected_players.Count+1), false));
+                    //m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player "+(m_connected_players.Count+1), false));
                     submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
                 }
                 else
                 {
+                    
+                    /*
                     instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
                     instantiatedMaster.name = "NetworkManager";
                     scriptStartNet = instantiatedMaster.GetComponent<NetworkMgr>();
                     scriptStartNet.server = true;
                     scriptStartNet.listenPort = serverPort;
-                    Destroy(this);
+                    Destroy(this);*/
                 }
             }
 
@@ -768,7 +781,11 @@ public class MainMenuScript : MonoBehaviour {
                 //Check server connection
                 //IF fails -> display error message 
                 // ELSE CONNECT TO LOBBY 
+                instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
+                instantiatedMaster.name = "GameMgr";
 
+                gameMgr = instantiatedMaster.GetComponent<GameMgr>();
+                gameMgr.StartClient(serverIP);
                 isHost = false;
                 m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player " + (m_connected_players.Count + 1), false));
                 submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
@@ -875,12 +892,12 @@ public class MainMenuScript : MonoBehaviour {
             //CHAT SECTION
             GUI.Box(MenuUtils.ResizeGUI(new Rect(80, 300, 250, 65)), "", skin.box);
             m_chat_scrollPosition = GUI.BeginScrollView(MenuUtils.ResizeGUI(new Rect(80, 300, 250, 65)), m_chat_scrollPosition, MenuUtils.ResizeGUI(new Rect(0, 0, 200, 10 * (m_chat_messages.Count + 1))));
-
+            Debug.Log("scroll" + m_chat_scrollPosition);
 
 
             for (int i = 0; i < m_chat_messages.Count; i++)
             {
-                GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 10 * (i+1), 380, 40)), m_chat_messages[i].sender + " : " + m_chat_messages[i].message, skin.label);
+                GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 10 * i, 380, 65)), m_chat_messages[i].sender + " : " + m_chat_messages[i].message, skin.label);
             }
 
 
@@ -895,10 +912,20 @@ public class MainMenuScript : MonoBehaviour {
 
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(335, 365, 50, 20)), "Send", skin.button) || GUIKeyDown(KeyCode.Return))
             {
-                if (m_message.Length > 0){
-                    m_chat_messages.Add(new MenuConfig.ChatMessage(m_sender, m_message));
+                if (m_message.Length > 0)
+                {
+                    if (gameMgr.s != null)
+                    {
+                        gameMgr.s.SendPacketBroadCast(PacketBuilder.BuildSendMessage("Server", m_message));
+                        AddMessage("Server", m_message);
+                    }
+                    else if (gameMgr.c != null)
+                    {
+                        gameMgr.c.SendPacket(PacketBuilder.BuildSendMessage("Player", m_message));
+                    }
                     m_message = "";
                 }
+
             }
 
 
@@ -908,29 +935,14 @@ public class MainMenuScript : MonoBehaviour {
 
                 if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Back to host settings", skin.button))
                 {
-
-                    submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;
-                    
+                    submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;   
                 }
 
                 if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Force Launch", skin.button))
                 {
-                    instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
-                    instantiatedMaster.name = "NetworkManager";
-                    scriptStartNet = instantiatedMaster.GetComponent<NetworkMgr>();
-                    scriptStartNet.listenPort = serverPort;
-
-                    if (isHost)
-                        scriptStartNet.server = true;
-                    else
-                    { 
-                        scriptStartNet.server = false;
-                        scriptStartNet.remoteIP = serverIP;
-                    }
-                    
-                    Destroy(this);
-
-
+                    gameMgr.StartGame();
+                    //gameObject.SetActive(false);//Destroy(this);
+                    active = false;
                 }
             }
 
@@ -943,4 +955,10 @@ public class MainMenuScript : MonoBehaviour {
     }
 
 
+
+    public void AddMessage(string name, string message)
+    {
+        m_chat_messages.Add(new MenuConfig.ChatMessage(name, message));
+        m_chat_scrollPosition = new Vector2(0, Mathf.Infinity);
+    }
 }

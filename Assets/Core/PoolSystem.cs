@@ -34,6 +34,7 @@ public class PoolSystem<T> where T : Object{
             GameObject go = (GameObject)((Object)o);
             go.SetActive(true);
             UnityUtils.SetLayerRecursivlyOn(go.transform, 0);
+            Debug.Log("postion : "+pos);
             go.transform.position = pos;
             go.transform.rotation = rot;
         }

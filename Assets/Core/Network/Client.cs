@@ -12,7 +12,6 @@ public class Client
     string address;
     int port;
     int sessionId = -1;
-    public Maps maps;
     bool m_isRunning = false;
     public int Session
     {
@@ -71,6 +70,12 @@ public class Client
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
                 Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                if (size == 0)
+                {
+                    Packet p = new Packet(size, opcode, null);
+                    HandlePacket(tcpClient, p);
+                    continue;
+                }
                 if (size > BUFFER_SIZE)
                 {
 
@@ -82,6 +87,7 @@ public class Client
                     bytesRead = sock.Receive(buffer, last, SocketFlags.None); //clientStream.Read(buffer, 0, last);
                     continue;
                 }
+                
                 bytesRead = sock.Receive(buffer, size, SocketFlags.None);
                 if (bytesRead == size)
                 {
@@ -122,7 +128,8 @@ public class Client
     public void LoadMap(byte[] buffer)
     {
         System.IO.MemoryStream stream = new System.IO.MemoryStream(buffer);
-        maps = Maps.LoadMapsFromStream(stream);
+
+        GameMgr.Instance.maps = Maps.LoadMapsFromStream(stream);
     }
 
     public void Destroy()

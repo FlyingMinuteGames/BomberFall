@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System;
@@ -42,10 +43,11 @@ public class Packet  {
 
     public Packet(int size, int opcode)
     {
-
-        m_data = new byte[size];
         m_size = size;
         m_opcode = opcode;
+        if (size == 0)
+            return;
+        m_data = new byte[size];
     }
 
     public Packet(int size, int opcode,byte[] data)
@@ -53,16 +55,20 @@ public class Packet  {
 
         m_size = size;
         m_opcode = opcode;
+        if (size == 0 || data == null)
+            return;
         m_data = new byte[size];
         Array.Copy(data, m_data, m_size);
     }
 
     public Packet(int size, Opcode opcode)
     {
-
-        m_data = new byte[size];
+        
         m_size = size;
         m_opcode = (int)opcode;
+        if (size == 0)
+            return;
+        m_data = new byte[size];
     }
 
     public Packet(int size, Opcode opcode, byte[] data)
@@ -70,17 +76,19 @@ public class Packet  {
 
         m_size = size;
         m_opcode = (int)opcode;
+        if (size == 0 || data == null)
+            return;
         m_data = new byte[size];
         Array.Copy(data, m_data, m_size);
     }
-
-
 
     public Packet(byte[] data)
     {
 
         m_size = ToInt(data);
         m_opcode = ToInt(data,4);
+        if (m_size <= 8)
+            return;
         m_data = new byte[data.Length-8];
         Array.Copy(data, 8, m_data, 0, m_size);
     }
@@ -113,6 +121,11 @@ public class Packet  {
         Array.Copy(BitConverter.GetBytes(value),0,m_data,cursor,2);
         cursor += 2;
     }
+    public void Write(char value)
+    {
+        Array.Copy(BitConverter.GetBytes(value), 0, m_data, cursor, 2);
+        cursor += 2;
+    }
     public void Write (int value)
     {
         Array.Copy(BitConverter.GetBytes(value), 0, m_data, cursor, 4);
@@ -122,6 +135,15 @@ public class Packet  {
     {
         Array.Copy(BitConverter.GetBytes(value), 0, m_data, cursor, 4);
         cursor += 4;
+    }
+
+    public void Write(string value)
+    {
+        foreach (char c in value)
+        {
+            Write(c);
+        }
+        Write((char)0);
     }
 
     public void Write(Vector3 value)
@@ -165,6 +187,32 @@ public class Packet  {
         cursor += 1;
         return value;
     }
+
+    public char ReadChar()
+    {
+        var value = BitConverter.ToChar(m_data, cursor);
+        cursor += 2;
+        return value;
+    }
+
+    public string ReadString()
+    {
+        IList<char> _string = new List<char>();
+
+        char tmp;
+        int c = 0;
+        while ((tmp = ReadChar()) != 0)
+        {
+            _string.Add(tmp);
+            Debug.Log("read tmp : "+tmp+" count : "+c);
+
+        }
+        char[] _str = new char[_string.Count];
+        for (int i = 0, len = _string.Count; i < len; i++)
+            _str[i] = _string[i];
+        return new string(_str);
+    }
+
     public byte ReadByte()
     {
         return m_data[cursor++];

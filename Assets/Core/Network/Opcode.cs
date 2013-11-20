@@ -4,14 +4,12 @@ using System.Collections;
 
 
 /*
- *
  *  - MSG -> Server/Client message
  *  - CMSG -> Client Message
  *  - SMSG -> Server Message
  */
 public enum Opcode
 { 
-   
     MSG_PLAYER_MOVE,
     CMSG_PLAYER_DROP_BOMB,
     SMSG_PLAYER_DIE,
@@ -23,7 +21,6 @@ public enum Opcode
     SMSG_SEND_MAP,
     SMSG_INSTANTIATE_OBJ,
     SMSG_BOMB_EXPLODE,
-
-    
-
+    SMSG_START_GAME,
+    MSG_SEND_MESSAGE
 }

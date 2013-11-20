@@ -64,4 +64,18 @@ public class PacketBuilder  {
         p.Write(pos.y);
         return p;
     }
+
+    public static Packet BuildStartGame()
+    {
+        Packet p = new Packet(0,Opcode.SMSG_START_GAME);
+        return p;
+    }
+
+    public static Packet BuildSendMessage(string name, string message)
+    {
+        Packet p = new Packet((name.Length + message.Length + 2) * 2, Opcode.MSG_SEND_MESSAGE);
+        p.Write(name);
+        p.Write(message);
+        return p;
+    }
 }

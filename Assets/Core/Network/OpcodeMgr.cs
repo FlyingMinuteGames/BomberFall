@@ -15,7 +15,6 @@ public class OpcodeMgr  {
         public _HandlePacket handler;
     }
     private Dictionary<Opcode,_HandlePacket> m_handler = new Dictionary<Opcode,_HandlePacket>();
-    private HandlePacketStruct[] test = new HandlePacketStruct[]{ new HandlePacketStruct(Opcode.MSG_PLAYER_MOVE,(p)=>{Debug.Log("recv packet MSG_PLAYER_MOVE");})};
 
     public void SetHandler(HandlePacketStruct[] handlers)
     {
@@ -31,6 +30,6 @@ public class OpcodeMgr  {
     }
     public OpcodeMgr()
     {
-        SetHandler(test);
+        //SetHandler(test);
     }
 }

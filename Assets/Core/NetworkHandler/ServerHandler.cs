@@ -7,7 +7,8 @@ public class ServerHandler  {
     public static OpcodeMgr.HandlePacketStruct[] handlers = new OpcodeMgr.HandlePacketStruct[]{ 
             new OpcodeMgr.HandlePacketStruct(Opcode.MSG_PLAYER_MOVE, HandleMovePlayer),
             new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_PLAYER_DROP_BOMB, HandleDropBomb),
-            new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_CONNECT,HandleConnect)
+            new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_CONNECT,HandleConnect),
+            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage)
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -40,5 +41,18 @@ public class ServerHandler  {
         else 
             current.RegisterPlayer(p.Sender);
         
+    }
+
+    public static void HandleSendMessage(Packet p)
+    {
+        string name, message;
+        name = p.ReadString();
+        message = p.ReadString();
+        if(!GameMgr.Instance.game_started)
+        {
+            MainMenuScript menu = GameObject.Find("MenuCam").GetComponent<MainMenuScript>();
+            menu.AddMessage(name, message);
+            current.SendPacketBroadCast(p);
+        }
     }
 }

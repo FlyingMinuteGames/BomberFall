@@ -20,7 +20,7 @@ public class BomberControler2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (IsPlayer)
+        if (IsPlayer && GameMgr.Instance && GameMgr.Instance.game_started)
             UpdateInput();
 	}
     private int stack = 0;
@@ -59,6 +59,7 @@ public class BomberControler2 : MonoBehaviour {
 
     public void SpawnBomb()
     { 
+        
         GameMgr.Instance.SpawnBomb(transform.position);
         /*GameObject o = pool.Pop(transform.position,new Quaternion());
         if (o == null)

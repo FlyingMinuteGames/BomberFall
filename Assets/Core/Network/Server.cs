@@ -21,14 +21,14 @@ public class Server //: INetwork
     public  delegate void _OnClientConnected(TcpClient cl);
     public _OnClientConnected OnClientConnected;
     private int session = 0;
-    Maps maps;
+    
     public Server()
     {
         m_sessions = new Dictionary<int, TcpClient>();
         tcp_server = new TcpListener(Config.DEFAULT_PORT);
         listener_thread = new Thread(new ThreadStart(ListenForClients));
         listener_thread.Start();
-        maps = Maps.LoadMapsFromFile("map1.map");
+        
     }
 
     public void SetHandler(OpcodeMgr.HandlePacketStruct[] handler)
@@ -86,6 +86,12 @@ public class Server //: INetwork
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
                 Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                if (size == 0)
+                {
+                    Packet p = new Packet(size, opcode, null);
+                    HandlePacket(tcpClient, p);
+                    continue;
+                }
                 if(size > BUFFER_SIZE)
                 {
                     
@@ -154,6 +160,7 @@ public class Server //: INetwork
 
         int _session = ++session; 
         m_sessions[_session] = cl;
+        Maps maps = GameMgr.Instance.maps;
         SendPacketTo(cl, PacketBuilder.BuildSendMapPacket(maps));
         byte[] data = ObjectMgr.Instance.DumpData();
         if(data.Length > 0)
@@ -172,12 +179,15 @@ public class Server //: INetwork
     {
         if (index < 0 || index > 3)
             return Vector3.zero;
+        Maps maps = GameMgr.Instance.maps;
         Vector3 pos = maps.TilePosToWorldPos(new IntVector2(index % 2 != 0 ? maps.Size.x - 1 : 0, index > 0 && index < 3 ? maps.Size.y - 1 : 0));
+        pos.y = 0.5150594f;
         return pos;
     }
 
     public void SpawnBomb(Vector3 pos)
     {
+        Maps maps = GameMgr.Instance.maps;
         IntVector2 tpos = maps.GetTilePosition(pos.x,pos.z);
          pos =   maps.TilePosToWorldPos(tpos);
         

@@ -9,8 +9,10 @@ public class ClientHandler
             new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_CREATE_PLAYER,HandleCreatePlayer),
             new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_BOMB_EXPLODE, HandleBombExplode),
             new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_SEND_MAP,HandleSendMap),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_INSTANTIATE_OBJ,HandInstantiateObject),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_PLAYER_CONNECTED,HandlePlayerConnected)
+            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_INSTANTIATE_OBJ,HandleInstantiateObject),
+            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_PLAYER_CONNECTED,HandlePlayerConnected),
+            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_START_GAME,HandleStartGame),
+            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage)
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -39,7 +41,7 @@ public class ClientHandler
         int x, y;
         x = p.ReadInt();
         y = p.ReadInt();
-        current.maps.ExplodeAt(new IntVector2(x, y), 2);
+        GameMgr.Instance.maps.ExplodeAt(new IntVector2(x, y), 2);
     }
 
     public static void HandlePlayerConnected(Packet p)
@@ -66,10 +68,10 @@ public class ClientHandler
         current.LoadMap(buffer);
     }
 
-    public static void HandInstantiateObject(Packet p)
+    public static void HandleInstantiateObject(Packet p)
     {
         int count = p.Size / 16, guid,type;
-        float x,y;
+        float x,y,z = 0;
 
         GameMgr gmgr = GameMgr.Instance;
         for (var i = 0; i < count; i++)
@@ -78,7 +80,9 @@ public class ClientHandler
             type = p.ReadInt();
             x =p.ReadFloat();
             y = p.ReadFloat();
-            gmgr.Spawn((GOType)type, new Vector3(x, 0, y), guid);
+            if (type == (int)(GOType.GO_PLAYER))
+                z = 0.5150594f;
+            gmgr.Spawn((GOType)type, new Vector3(x, z, y), guid);
             if (type == (int)(GOType.GO_BOMB))
             {
                 GameObject go = ObjectMgr.Instance.get(guid);
@@ -90,6 +94,25 @@ public class ClientHandler
                     });
 
             }
+        }
+    }
+
+    public static void HandleStartGame(Packet p)
+    {
+        Debug.Log("START GAME");
+        GameMgr.Instance.game_started = true;
+        GameObject.Find("MenuCam").GetComponent<MainMenuScript>().active = false;
+    }
+
+    public static void HandleSendMessage(Packet p)
+    {
+        string name, message;
+        name = p.ReadString();
+        message = p.ReadString();
+        if (!GameMgr.Instance.game_started)
+        {
+            MainMenuScript menu = GameObject.Find("MenuCam").GetComponent<MainMenuScript>();
+            menu.AddMessage(name, message);
         }
     }
 }

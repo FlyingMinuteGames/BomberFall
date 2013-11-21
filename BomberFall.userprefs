@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameMgr.cs">
     <Files>
+      <File FileName="Assets\Scripts\GameMgr.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GameMgr.cs" Line="18" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

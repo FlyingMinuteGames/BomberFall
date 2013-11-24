@@ -38,7 +38,7 @@ public class Async : MonoBehaviour {
     {
         while (!stop)
         {
-            Debug.Log("try to do action");
+            //Debug.Log("try to do action");
             if (m_queue.Count == 0)
             {
                 

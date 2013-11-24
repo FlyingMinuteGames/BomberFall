@@ -30,6 +30,7 @@ public class GameMgr : MonoBehaviour {
     public Client c = null;
     public Server s = null;
     public Maps maps;
+    public GameIntel gameIntel;
     public bool game_started = false;
     private GameMgrType type;
     public GameMgrType Type

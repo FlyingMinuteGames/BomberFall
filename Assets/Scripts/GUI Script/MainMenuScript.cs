@@ -467,7 +467,7 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (!active)
             return;
-        GUI.DrawTexture(new Rect(20, 50, 307 * 1.4f, 31 * 1.4f), logo);
+        //GUI.DrawTexture(new Rect(20, 50, 307 * 1.4f, 31 * 1.4f), logo);
         GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
 
         GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 530, 500, 40)), "Blablabla footer stuff", skin.label);
@@ -708,14 +708,18 @@ public class MainMenuScript : MonoBehaviour {
 
             for(int index = 0, len = MenuConfig.power_ups_settings.Length; index < len; index++)
                 MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (index*20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index]);
-
+            
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
             {
                 instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
                 instantiatedMaster.name = "GameMgr";
+
+
                
                 gameMgr = instantiatedMaster.GetComponent<GameMgr>();
+
+                gameMgr.gameIntel = new GameIntel(m_game_duration, m_gameplay_mode, MenuConfig.power_ups_settings, m_nb_players, m_nb_CPUs, m_auth_reco, m_disable_persp_change);
                 gameMgr.maps = Maps.LoadMapsFromFile("map1.map");
                 gameMgr.StartServer();
                 if (m_nb_players > 0)//IF MORE THAN ONE PLAYER ELSE NO LOBBY NEEDED JUST LAUNCH THE GAME
@@ -813,13 +817,13 @@ public class MainMenuScript : MonoBehaviour {
             GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(280, 60, 300, 400)));
             GUI.Box(MenuUtils.ResizeGUI(new Rect(0, 0, 200, 200)), "HOST SETTINGS OVERVIEW", skin.box);
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 20, 150, 20)), "Server IP :", skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "GameMode :", skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 20, 150, 20)), "Server IP : ", skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "GameMode :"/*+(gameMgr.gameIntel.game_mode == Config.GameMode.ARCADE ? "Arcade" : "Survival")*/, skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 40, 150, 20)), "Map name :", skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Players :", skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs :", skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change :", skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :", skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Players : "/*+gameMgr.gameIntel.nb_players*/, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs : "/*+gameMgr.gameIntel.nb_cpus*/, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change : "/*+(gameMgr.gameIntel.disable_persp_change ? "Deactivated" : "Activated")*/, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :" /*+ (gameMgr.gameIntel.auth_reco ? "Authorized" : "Not Authorized")*/, skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 90, 150, 20)), "Active power-ups :", skin.label);
 
 

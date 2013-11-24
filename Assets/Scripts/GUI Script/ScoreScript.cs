@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerUpController : MonoBehaviour {
-
-
-    public Config.PowerType type;
-    public Texture illustration;
+public class ScoreScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

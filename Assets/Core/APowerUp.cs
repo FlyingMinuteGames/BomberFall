@@ -8,14 +8,19 @@ public abstract class APowerUp {
         
     }
 
-    //Destructor
+    //Remove item from scene and put it back to pool
     public void Delete(GameObject powerGO){
 
     }
 
+    public void AssignToSlot(GameObject powerGO)
+    {
+
+    }
+
     public abstract void OnPickUp(GameObject powerGO, int ClientGuid);
+
     public abstract void OnUse();
-    public abstract void OnTimedOut();
 
 
 }

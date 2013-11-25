@@ -13,6 +13,12 @@ public class Client
     int port;
     int sessionId = -1;
     bool m_isRunning = false;
+    private bool m_isBoth = false;
+    public bool Both
+    {
+        get { return m_isBoth; }
+        set { m_isBoth = value; }
+    }
     public int Session
     {
         get { return sessionId; }
@@ -117,6 +123,8 @@ public class Client
 
     private void HandlePacket(TcpClient client, Packet packet)
     {
+        if (m_isBoth)
+            return;
         Debug.Log("handle !");
         packet.Sender = client;
         Async.Instance.DelayedAction(() =>

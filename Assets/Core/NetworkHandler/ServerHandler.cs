@@ -39,7 +39,7 @@ public class ServerHandler  {
         if ((flag & 1) != 0 && current.Session.ContainsKey(session))
             ;//ok reconnect player;
         else 
-            current.RegisterPlayer(p.Sender);
+            current.RegisterPlayer(p.Sender,flag);
         
     }
 

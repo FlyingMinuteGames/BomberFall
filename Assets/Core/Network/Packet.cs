@@ -98,7 +98,8 @@ public class Packet  {
         byte[] data = new byte[4 + 4 + m_size];
         Packet.ToByte(data,m_size,0);
         Packet.ToByte(data,m_opcode,4);
-        System.Array.Copy(m_data, 0, data, 8, m_size);
+        if(m_data != null)
+            System.Array.Copy(m_data, 0, data, 8, m_size);
         return data;
     }
 

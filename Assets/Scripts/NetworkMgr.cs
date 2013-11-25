@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public enum WorldState
+/*public enum WorldState
 {
     CENTER,
     LATERAL_X,
     LATERAL_X2,
     LATERAL_Z,
     LATERAL_Z2
-}
+}*/
 
 public enum MoveState
 { 

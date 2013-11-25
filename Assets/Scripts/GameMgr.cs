@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 public enum GOType
 {
@@ -13,6 +13,18 @@ public enum GameMgrType
     CLIENT,
     SERVER
 }
+
+
+public enum WorldState
+{
+    UNKNOWN,
+    CENTER,
+    LATERAL_X,
+    LATERAL_X2,
+    LATERAL_Z,
+    LATERAL_Z2
+}
+
 
 public class GameMgr : MonoBehaviour {
 
@@ -30,6 +42,7 @@ public class GameMgr : MonoBehaviour {
     public Maps maps;
     public bool game_started = false;
     private GameMgrType type;
+    private WorldState m_state = WorldState.CENTER;
     public GameMgrType Type
     {
         get { return type; }
@@ -97,11 +110,14 @@ public class GameMgr : MonoBehaviour {
 
     public void StartClient(string address)
     {
+       
         c = new Client(address);
         ClientHandler.current = c;
+        if (s != null)
+            c.Both = true;
         c.SetHandler(ClientHandler.handlers);
         c.Connect();
-        c.SendPacket(PacketBuilder.BuildConnectPacket(0, 0));
+        c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
     }
 
     void OnDestroy()
@@ -132,5 +148,24 @@ public class GameMgr : MonoBehaviour {
     {
         Packet p = PacketBuilder.BuildSpawnBomb(pos);
         c.SendPacket(p);
+    }
+
+    IEnumerator ChangePhaseTimer()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(30);
+            ChangePhase();
+        }
+    }
+
+    public void ChangePhase(WorldState state = WorldState.UNKNOWN)
+    {
+        if(state != WorldState.UNKNOWN)
+            m_state = state;
+        else m_state = m_state == WorldState.CENTER ? (WorldState)((int)(WorldState.CENTER)+Mathf.Ceil(Random.Range(1,4))) : WorldState.CENTER;
+
+        IList<GameObject> l = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
+
     }
 }

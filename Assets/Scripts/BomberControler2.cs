@@ -11,6 +11,7 @@ public class BomberControler2 : MonoBehaviour {
     public bool IsNetworkControlled = false;
     public bool IsPlayer = false;
     Animator m_animator;
+    public WorldState state = WorldState.CENTER;
 	void Start () {
 	    body = GetComponent<Rigidbody>();
         GameObject Bomb = ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb");
@@ -36,8 +37,8 @@ public class BomberControler2 : MonoBehaviour {
                                             (me,enable) => { me.m_force += !enable ? Vector3.forward : Vector3.back; return 1;},
                                             (me,enable) => { me.m_force += !enable ? Vector3.right : Vector3.left; return 1;},
                                             (me,enable) => { me.m_force += enable ? Vector3.right : Vector3.left; return 1;},*/
-                                            (me,enable) => { /*if(me.stack > 0) me.fall_velocity =-0.15f*me.jump_speed; return 0;},*/me.moveFlags = enable ? me.moveFlags | (int)MoveState.MOVE_FORWARD : me.moveFlags & ~(int)MoveState.MOVE_FORWARD; return 1;},
-                                            (me,enable) => {  /*return 0;},*/me.moveFlags = enable ? me.moveFlags | (int)MoveState.MOVE_BACKWARD : me.moveFlags & ~(int)MoveState.MOVE_BACKWARD; return 1;},
+                                            (me,enable) => { if(me.stack > 0 && me.state != WorldState.CENTER) {me.fall_velocity =-0.15f*me.jump_speed; return 1;} if(me.state != WorldState.CENTER)return 0;me.moveFlags = enable ? me.moveFlags | (int)MoveState.MOVE_FORWARD : me.moveFlags & ~(int)MoveState.MOVE_FORWARD; return 1;},
+                                            (me,enable) => { if(me.state != WorldState.CENTER) return 0; me.moveFlags = enable ? me.moveFlags | (int)MoveState.MOVE_BACKWARD : me.moveFlags & ~(int)MoveState.MOVE_BACKWARD; return 1;},
                                             (me,enable) => { me.moveFlags = enable ? me.moveFlags | (int)MoveState.MOVE_LEFT : me.moveFlags & ~(int)MoveState.MOVE_LEFT; return 1;},
                                             (me,enable) => { me.moveFlags = enable ? me.moveFlags | (int)MoveState.MOVE_RIGHT : me.moveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;},
                                             (me,enable) => { if(enable) me.SpawnBomb(); return 1;}
@@ -85,12 +86,12 @@ public class BomberControler2 : MonoBehaviour {
             move -= Vector3.left;
 
 
-        /*if(stack == 0)
+        if(stack == 0 && state != WorldState.CENTER)
             fall_velocity += Time.deltaTime * gravity_acceleration;
         
         //  Debug.Log("fall velocity " + fall_velocity);
         if (fall_velocity > 20)
-            fall_velocity = 20;*/
+            fall_velocity = 20;
         m_animator.SetFloat("Speed", move.z);
         m_animator.SetFloat("Direction", move.x);
         transform.Translate(move * speed * Time.deltaTime + gravity*fall_velocity);

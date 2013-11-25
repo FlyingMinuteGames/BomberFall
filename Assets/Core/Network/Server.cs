@@ -155,9 +155,10 @@ public class Server //: INetwork
         }
     }
 
-    public void RegisterPlayer(TcpClient cl)
+    public void RegisterPlayer(TcpClient cl,int flags)
     {
 
+        
         int _session = ++session; 
         m_sessions[_session] = cl;
         Maps maps = GameMgr.Instance.maps;
@@ -165,7 +166,12 @@ public class Server //: INetwork
         byte[] data = ObjectMgr.Instance.DumpData();
         if(data.Length > 0)
             SendPacketTo(cl,PacketBuilder.BuildInstantiateObjPacket(data));
+
         int guid = GameMgr.Instance.Spawn(GOType.GO_PLAYER,GetInitPos(session-1));
+
+
+        if ((flags & 4) != 0) // hack lol
+            ObjectMgr.Instance.get(guid).GetComponent<BomberControler2>().IsPlayer = true; 
         SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         SendPacketTo(cl,PacketBuilder.BuildPlayerConnectPacket(_session,guid, 0));
     }

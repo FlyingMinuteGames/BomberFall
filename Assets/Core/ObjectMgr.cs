@@ -74,4 +74,15 @@ public class ObjectMgr {
         return data;
     }
 
+    public IList<GameObject> Get(GOType type)
+    {
+        IList<GameObject> objs = new List<GameObject>();
+        foreach (var obj in m_objects)
+        {
+            if (obj.Value.type == type)
+                objs.Add(obj.Value.go);
+        }
+        return objs;
+    }
+
 }

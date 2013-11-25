@@ -718,6 +718,7 @@ public class MainMenuScript : MonoBehaviour {
                 gameMgr = instantiatedMaster.GetComponent<GameMgr>();
                 gameMgr.maps = Maps.LoadMapsFromFile("map1.map");
                 gameMgr.StartServer();
+                gameMgr.StartClient("127.0.0.1");
                 if (m_nb_players > 0)//IF MORE THAN ONE PLAYER ELSE NO LOBBY NEEDED JUST LAUNCH THE GAME
                 {
                     isHost = true;

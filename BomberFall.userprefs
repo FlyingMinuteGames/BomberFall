@@ -2,11 +2,6 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameMgr.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Scripts\GUI Script\MainMenuScript.cs" Line="1" Column="1" />
-=======
-      <File FileName="Assets\Scripts\GameMgr.cs" Line="1" Column="1" />
->>>>>>> 125ce186e3e1daabf8e7f6d6cdb7d3ec755ae77d
       <File FileName="Assets\Scripts\GameMgr.cs" Line="18" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

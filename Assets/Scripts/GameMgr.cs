@@ -6,7 +6,7 @@ public enum GOType
 {
     GO_PLAYER,
     GO_BOMB,
-    GO_BONUS
+    GO_PWRUP
 }
 public enum GameMgrType
 {
@@ -37,9 +37,12 @@ public class GameMgr : MonoBehaviour {
     }
     public PoolSystem<GameObject> player_pool;
     public PoolSystem<GameObject> bomb_pool;
+    public PoolSystem<GameObject> pwr_up_pool;
+
     public Client c = null;
     public Server s = null;
     public Maps maps;
+    public GameIntel gameIntel;
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
@@ -47,11 +50,13 @@ public class GameMgr : MonoBehaviour {
     {
         get { return type; }
     }
+
     void Start () {
         Application.runInBackground = true;
         s_instance = this;
         player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
         bomb_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb"), 100);
+        pwr_up_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/PowerUp"), 100);
 	}
 	
     public void StartServer()
@@ -79,10 +84,9 @@ public class GameMgr : MonoBehaviour {
         {
             case GOType.GO_PLAYER:
                 go = player_pool.Pop(pos, Quaternion.identity);
-                return  ObjectMgr.Instance.Register(go, type, guid);;
+                return  ObjectMgr.Instance.Register(go, type, guid);
             case GOType.GO_BOMB:
                 go = bomb_pool.Pop(pos, Quaternion.identity);
-
                 return ObjectMgr.Instance.Register(go, type, guid);
         }
         return -1;

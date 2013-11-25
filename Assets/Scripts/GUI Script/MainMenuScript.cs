@@ -467,7 +467,7 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (!active)
             return;
-        //GUI.DrawTexture(new Rect(20, 50, 307 * 1.4f, 31 * 1.4f), logo);
+        GUI.DrawTexture(new Rect(20, 50, 600 * 0.8f, 189 * 0.8f), logo);
         GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
 
         GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 530, 500, 40)), "Blablabla footer stuff", skin.label);
@@ -720,7 +720,7 @@ public class MainMenuScript : MonoBehaviour {
                 gameMgr = instantiatedMaster.GetComponent<GameMgr>();
 
                 gameMgr.gameIntel = new GameIntel(m_game_duration, m_gameplay_mode, MenuConfig.power_ups_settings, m_nb_players, m_nb_CPUs, m_auth_reco, m_disable_persp_change);
-                gameMgr.maps = Maps.LoadMapsFromFile("map1.map");
+                gameMgr.maps = Maps.LoadMapsFromFile(MenuConfig.maps_string[m_map_index]);
                 gameMgr.StartServer();
                 gameMgr.StartClient("127.0.0.1");
                 if (m_nb_players > 0)//IF MORE THAN ONE PLAYER ELSE NO LOBBY NEEDED JUST LAUNCH THE GAME

@@ -30,7 +30,7 @@ public class BomberControler2 : MonoBehaviour {
     private float fall_velocity = 0;
     private Vector3 gravity = Vector3.back;
     delegate int Callback(BomberControler2 me, bool enable);
-    private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey")};
+    private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("RightKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey")};
     private Callback[] action_callback = {
                                             /*(me,enable) => { me.m_force += enable ? Vector3.forward : Vector3.back; return 1;},
                                             (me,enable) => { me.m_force += !enable ? Vector3.forward : Vector3.back; return 1;},

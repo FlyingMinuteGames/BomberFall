@@ -102,6 +102,9 @@ public class ClientHandler
         Debug.Log("START GAME");
         GameMgr.Instance.game_started = true;
         GameObject.Find("MenuCam").GetComponent<MainMenuScript>().active = false;
+        HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
+        hud.Init();
+
     }
 
     public static void HandleSendMessage(Packet p)

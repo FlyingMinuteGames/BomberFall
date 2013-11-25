@@ -74,6 +74,9 @@ public class NetworkMgr : MonoBehaviour {
     {
         get { return current_map; }
     }
+
+    public string map_path = "map1.map";
+
 	// Use this for initialization
     private static NetworkMgr s_networkMgr = null;
     public static NetworkMgr Instance
@@ -97,7 +100,7 @@ public class NetworkMgr : MonoBehaviour {
         {
             Network.InitializeSecurity();
             Network.InitializeServer(4, listenPort, true);
-            current_map = Maps.LoadMapsFromFile("map1.map");
+            current_map = Maps.LoadMapsFromFile(map_path);
         }
         else
         {

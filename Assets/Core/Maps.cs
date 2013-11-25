@@ -249,7 +249,7 @@ public class Maps {
     public void LoadFromFile(string path)
     {
         Debug.Log("load " + path);
-        FileStream stream = new FileStream(PATH + "\\" + path, FileMode.Open);
+        FileStream stream = new FileStream(PATH + "\\Maps\\" + path, FileMode.Open);
         LoadFromStream(stream);
         stream.Close();
     }

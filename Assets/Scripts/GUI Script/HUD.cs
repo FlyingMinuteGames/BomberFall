@@ -12,6 +12,7 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("In start of HUD");
         m_displayer = transform.FindChild("Displayer").gameObject;
         m_scoreDisplayer = m_displayer.transform.FindChild("Score").gameObject;
         m_timeDisplayer = m_displayer.transform.FindChild("Timer").gameObject;

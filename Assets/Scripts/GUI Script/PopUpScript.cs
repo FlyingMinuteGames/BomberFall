@@ -12,7 +12,7 @@ public class PopUpScript : MonoBehaviour {
 	void Awake() {
         active = false;
         message = "empty default message that shouldn't ever be seen";
-        WindowRectangle = new Rect(200, 200, 200, 150);
+        WindowRectangle = new Rect((Screen.width / 2) - 250, (Screen.height / 2)-150, 250, 150);
 	}
 	
     void OnGUI()
@@ -27,9 +27,9 @@ public class PopUpScript : MonoBehaviour {
     {
         GUI.BringWindowToFront(wid);
         GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(0, 0,WindowRectangle.width, WindowRectangle.height)));
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 0, 10, 20)), message, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 10, WindowRectangle.width, WindowRectangle.height - 60)), message, skin.label);
 
-            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(10, 30, 100, 30)), "Close", skin.button))
+            if (GUI.Button(MenuUtils.ResizeGUI(new Rect((WindowRectangle.width/2) - 50, WindowRectangle.height - 40, 100, 30)), "Close", skin.button))
                 this.active = false;
         GUI.EndGroup();
         GUI.DragWindow();

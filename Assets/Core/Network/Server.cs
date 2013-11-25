@@ -43,7 +43,7 @@ public class Server //: INetwork
         m_clients = new List<TcpClient>();
         while (m_isRunning)
         {
-            Debug.Log("listen");
+            //Debug.Log("listen");
             if (!tcp_server.Pending())
             {
                 Thread.Sleep(100);

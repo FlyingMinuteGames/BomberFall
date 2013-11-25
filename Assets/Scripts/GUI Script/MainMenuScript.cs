@@ -42,7 +42,6 @@ public class MainMenuScript : MonoBehaviour {
     private bool m_fullscreen = false;
     private bool isHost;
 
-    //To add to playerprefs
     private float m_game_duration = 30f;
     private int m_gameplay_mode = 0;
     private int m_map_index = 0;
@@ -54,6 +53,7 @@ public class MainMenuScript : MonoBehaviour {
     private string m_message = "";
     private string m_sender = "Player 1";
 
+    private PopUpScript popup;
 
    
 
@@ -106,6 +106,7 @@ public class MainMenuScript : MonoBehaviour {
         Screen.showCursor = true;
         Screen.lockCursor = false;
 
+        popup = gameObject.transform.FindChild("PopupContainer").gameObject.GetComponent<PopUpScript>();
 
         ////Initialize Option Values
         MenuConfig.m_keybindings = new String[MenuConfig.m_keybindings_labels.Length];
@@ -715,7 +716,7 @@ public class MainMenuScript : MonoBehaviour {
                 instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
                 instantiatedMaster.name = "GameMgr";
 
-
+                popup.ShowMessage("Test popup message and fun stuff");
                
                 gameMgr = instantiatedMaster.GetComponent<GameMgr>();
 
@@ -897,7 +898,7 @@ public class MainMenuScript : MonoBehaviour {
             //CHAT SECTION
             GUI.Box(MenuUtils.ResizeGUI(new Rect(80, 300, 250, 65)), "", skin.box);
             m_chat_scrollPosition = GUI.BeginScrollView(MenuUtils.ResizeGUI(new Rect(80, 300, 250, 65)), m_chat_scrollPosition, MenuUtils.ResizeGUI(new Rect(0, 0, 200, 10 * (m_chat_messages.Count + 1))));
-            Debug.Log("scroll" + m_chat_scrollPosition);
+            //Debug.Log("scroll" + m_chat_scrollPosition);
 
 
             for (int i = 0; i < m_chat_messages.Count; i++)

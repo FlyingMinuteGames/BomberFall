@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameMgr.cs">
+    <Files>
+<<<<<<< HEAD
+      <File FileName="Assets\Scripts\GameMgr.cs" Line="1" Column="1" />
+=======
+      <File FileName="Assets\Scripts\GUI Script\MainMenuScript.cs" Line="1" Column="1" />
+>>>>>>> Fix Server/Client
+      <File FileName="Assets\Scripts\GameMgr.cs" Line="18" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

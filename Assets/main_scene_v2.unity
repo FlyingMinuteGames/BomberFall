@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: 27fa7451e4bd16b42b411a24050fff74, type: 2}
-  logo: {fileID: 0}
+  logo: {fileID: 2800000, guid: 736d67c2582e0154ebf3c3534643170b, type: 3}
   active: 1
 --- !u!124 &424667708
 Behaviour:

@@ -10,6 +10,13 @@ public class PoolSystem<T> where T : Object{
         template = _template;
         m_data = new Queue<T>(allocate);
         m_IsGo = template.GetType() == typeof(GameObject);
+        GameObject ctn_go = null;
+        if (m_IsGo)
+        {
+            ctn_go = new GameObject();
+            ctn_go.name = "Pool(" + template.name + ")";
+        }
+
         for (int i = 0; i < allocate; i++)
         {
             Object obj = Object.Instantiate(template);
@@ -19,6 +26,7 @@ public class PoolSystem<T> where T : Object{
                 GameObject go = (GameObject)obj;
                 UnityUtils.SetLayerRecursivlyOn(go.transform, Config.POOL_LAYER);
                 go.SetActive(false);
+                go.transform.parent = ctn_go.transform;
             }
             m_data.Enqueue(o);
         }

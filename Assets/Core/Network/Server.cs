@@ -85,7 +85,7 @@ public class Server //: INetwork
                     break;
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
-                Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                //Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
                 if (size == 0)
                 {
                     Packet p = new Packet(size, opcode, null);
@@ -128,7 +128,7 @@ public class Server //: INetwork
     }
     private void HandlePacket(TcpClient client, Packet packet)
     {
-        Debug.Log("handle !");
+        //Debug.Log("handle !");
         packet.Sender = client;
         Async.Instance.DelayedAction(() =>
         {
@@ -139,7 +139,7 @@ public class Server //: INetwork
     public void SendPacketTo(TcpClient client, Packet packet)
     {
         byte[] data = packet.ToByte();
-        Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        //Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         
         client.Client.Send(data);//client.GetStream().Write(data,0,data.Length);
     }
@@ -147,7 +147,7 @@ public class Server //: INetwork
     public void SendPacketBroadCast(Packet packet, TcpClient except = null)
     {
         byte[] data = packet.ToByte();
-        Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        //Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         foreach(TcpClient client in m_clients)
         {
             if(client != except)
@@ -171,7 +171,7 @@ public class Server //: INetwork
 
 
         if ((flags & 4) != 0) // hack lol
-            ObjectMgr.Instance.get(guid).GetComponent<BomberControler2>().IsPlayer = true; 
+            ObjectMgr.Instance.get(guid).GetComponent<BomberControler2>().m_IsPlayer = true; 
         SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         SendPacketTo(cl,PacketBuilder.BuildPlayerConnectPacket(_session,guid, 0));
     }

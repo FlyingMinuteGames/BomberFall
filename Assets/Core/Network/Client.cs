@@ -156,7 +156,7 @@ public class Client
             guid = value;
             player = ObjectMgr.Instance.get(guid);
             Debug.Log("player : " + (player == null)+ " guid : " + guid);
-            player.GetComponent<BomberControler2>().IsPlayer = true;
+            player.GetComponent<BomberControler2>().m_IsPlayer = true;
         } 
     }
 }

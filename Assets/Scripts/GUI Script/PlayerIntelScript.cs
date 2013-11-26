@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScoreScript : MonoBehaviour {
+public class PlayerIntelScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

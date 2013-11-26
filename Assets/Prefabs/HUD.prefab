@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 400002}
   m_Layer: 8
   m_Name: Displayer
-  m_TagString: Untagged
+  m_TagString: Hud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   - 114: {fileID: 11400002}
   m_Layer: 8
   m_Name: Score
-  m_TagString: Untagged
+  m_TagString: Hud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - 114: {fileID: 11400004}
   m_Layer: 8
   m_Name: Timer
-  m_TagString: Untagged
+  m_TagString: Hud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,8 +75,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.38392162e-05, y: -.0439723134, z: -.00788024068}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -6.9347744, y: 9.00546646, z: 162.854523}
+  m_LocalScale: {x: .125495553, y: .125495553, z: .125495553}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -239,6 +239,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8977462b044a0c4ea87ba52641d0507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_textures:
+  - {fileID: 2800000, guid: 93258d0d82290f348953e190b0fc4ad6, type: 3}
+  - {fileID: 2800000, guid: b9dc1a27203102248a6757283596746d, type: 3}
+  - {fileID: 2800000, guid: 5a129fc6738ed944e80e55fa905583b2, type: 3}
+  - {fileID: 2800000, guid: 6faa7dab2b0b5c1418b3f657e41fbfce, type: 3}
+  textMeshPrefab: {fileID: 10200000, guid: 5ab7973c380e9b447955a4fe25dc9620, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

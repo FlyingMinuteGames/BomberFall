@@ -36,7 +36,7 @@ public class AnimControllerScript : MonoBehaviour
 
     void Start()
     {
-
+        //gameObject.transform.FindChild("RobotMesh").gameObject.renderer.material.color = Color.red + Color.yellow;
         m_PlayerCollider = gameObject.GetComponent<CapsuleCollider>();
         m_animator = gameObject.GetComponent<Animator>();
 

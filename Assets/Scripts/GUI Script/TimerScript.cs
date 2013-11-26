@@ -8,7 +8,7 @@ public class TimerScript : MonoBehaviour {
 	// Use this for initialization
     private float startValue = 0f;
     private TextMesh textmesh;
-    string result = "00.00";
+    string result = "";
     bool ended = false;
     NumberFormatInfo twodecimals;
 

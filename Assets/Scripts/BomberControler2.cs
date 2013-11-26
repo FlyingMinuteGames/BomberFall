@@ -94,7 +94,6 @@ public class BomberControler2 : MonoBehaviour {
         if ((m_MoveFlags & (int)MoveState.MOVE_RIGHT) != 0)
             move -= Vector3.left;
 
-
         if(m_State !=WorldState.CENTER)
         {
             if(!m_IsOnGround)
@@ -104,8 +103,10 @@ public class BomberControler2 : MonoBehaviour {
         }
         m_Animator.SetFloat("Speed", move.z);
         m_Animator.SetFloat("Direction", move.x);
+        m_animator.speed = 3f;
         transform.Translate(move * speed * Time.deltaTime - s_BaseGravity[(int)m_State]* fall_velocity);
         transform.rotation = s_BaseRotation[(int)m_State];
+
     }
 
     void OnCollisionEnter(Collision collision)

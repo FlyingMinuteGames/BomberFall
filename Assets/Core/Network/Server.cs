@@ -171,7 +171,7 @@ public class Server //: INetwork
 
 
         if ((flags & 4) != 0) // hack lol
-            ObjectMgr.Instance.get(guid).GetComponent<BomberControler2>().m_IsPlayer = true; 
+            ObjectMgr.Instance.get(guid).GetComponent<BomberController>().m_IsPlayer = true; 
         SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         SendPacketTo(cl,PacketBuilder.BuildPlayerConnectPacket(_session,guid, 0));
     }

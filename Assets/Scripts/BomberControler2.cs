@@ -103,7 +103,7 @@ public class BomberControler2 : MonoBehaviour {
         }
         m_Animator.SetFloat("Speed", move.z);
         m_Animator.SetFloat("Direction", move.x);
-        m_animator.speed = 3f;
+        m_Animator.speed = 3f;
         transform.Translate(move * speed * Time.deltaTime - s_BaseGravity[(int)m_State]* fall_velocity);
         transform.rotation = s_BaseRotation[(int)m_State];
 

@@ -43,6 +43,7 @@ public class GameMgr : MonoBehaviour {
     public Server s = null;
     public Maps maps;
     public GameIntel gameIntel;
+    public HUD hud;
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
@@ -57,6 +58,7 @@ public class GameMgr : MonoBehaviour {
         player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
         bomb_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb"), 100);
         pwr_up_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/PowerUp"), 100);
+        hud = GameObject.Find("HUD").GetComponent<HUD>();
 	}
 	
     public void StartServer()
@@ -73,6 +75,7 @@ public class GameMgr : MonoBehaviour {
     public void StartGame()
     {
         //maps = Maps.LoadMapsFromFile("map1.map");
+        hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
     }

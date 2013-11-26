@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 public class HUD : MonoBehaviour
@@ -25,6 +26,8 @@ public class HUD : MonoBehaviour
     public void Init()
     {
         Debug.Log("Init HUD");
+        m_timerscript.Init();
+        m_displayer.SetActive(true);
         setHudToTimer();
     }
 

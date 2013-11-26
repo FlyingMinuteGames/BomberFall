@@ -468,7 +468,7 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (!active)
             return;
-        GUI.DrawTexture(new Rect(20, 50, 600 * 0.8f, 189 * 0.8f), logo);
+        GUI.DrawTexture(new Rect(20, 50, 600 * 0.7f, 189 * 0.7f), logo);
         GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
 
         GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 530, 500, 40)), "Blablabla footer stuff", skin.label);
@@ -716,7 +716,7 @@ public class MainMenuScript : MonoBehaviour {
                 instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
                 instantiatedMaster.name = "GameMgr";
 
-                popup.ShowMessage("Test popup message and fun stuff");
+                //popup.ShowMessage("Test popup message and fun stuff");
                
                 gameMgr = instantiatedMaster.GetComponent<GameMgr>();
 

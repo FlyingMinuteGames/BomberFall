@@ -159,7 +159,7 @@ public class GameMgr : MonoBehaviour {
 
     IEnumerator ChangePhaseTimer()
     {
-        while (true)
+        while (game_started)
         {
             yield return new WaitForSeconds(30);
             ChangePhase();

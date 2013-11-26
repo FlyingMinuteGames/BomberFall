@@ -8,7 +8,7 @@ public class PacketBuilder  {
         Packet p = new Packet(4+4+4*3,(int)Opcode.MSG_PLAYER_MOVE);
         p.Write(guid);
         p.Write(moveFlag);
-        p.WriteVector3(pos);
+        p.Write(pos);
         return p;
     }
 
@@ -53,15 +53,16 @@ public class PacketBuilder  {
     public static Packet BuildSpawnBomb(Vector3 pos)
     {
         Packet p = new Packet(3 * 4, Opcode.CMSG_PLAYER_DROP_BOMB);
-        p.WriteVector3(pos);
+        p.Write(pos); // need to by only 2 float
         return p;
     }
 
-    public static Packet BuildBombExplode(IntVector2 pos)
+    public static Packet BuildBombExplode(IntVector2 pos, int radius = 2)
     {
         Packet p = new Packet(8, Opcode.SMSG_BOMB_EXPLODE);
         p.Write(pos.x);
         p.Write(pos.y);
+        p.Write(radius);
         return p;
     }
 

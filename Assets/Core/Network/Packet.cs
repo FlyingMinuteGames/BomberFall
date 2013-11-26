@@ -22,20 +22,29 @@ public class Packet  {
     }
 
     private int m_size;
+    private byte[] m_data;
+    private int m_cursor = 0;
+    private int m_opcode;
+    private TcpClient m_sender;
+    private byte[] m_buffer = new byte[8];
+    
+    public int Cursor
+    {
+        get { return m_cursor; }
+        set { m_cursor = m_cursor > m_size ? m_size : (m_cursor < 0 ? 0 : value); }
+    }
+
     public int Size
     {
         get { return m_size; }
     }
-    private int m_opcode;
-    private TcpClient sender;
+    
     public TcpClient Sender
     {
-        get { return sender; }
-        set { sender = value; }
+        get { return m_sender; }
+        set { m_sender = value; }
     }
-    private byte[] m_data;
-    private int cursor = 0;
-    private byte[] buffer = new byte[8];
+
     public Opcode GetOpcode()
     {
         return (Opcode)m_opcode;
@@ -102,44 +111,45 @@ public class Packet  {
             System.Array.Copy(m_data, 0, data, 8, m_size);
         return data;
     }
-
-
-    public void  WriteInt(int value)
-    {
-        m_data[cursor++] = (byte)(value >> 24);
-        m_data[cursor++] = ((byte)(value >> 16));
-        m_data[cursor++] = ((byte)(value >> 8));
-        m_data[cursor++] = ((byte)value);
-    }
-
     public void Write (byte value)
     {
-        m_data[cursor++] = value;
-        //m_data.WriteByte(value);
+        if (m_cursor >= m_size)
+            return;
+        m_data[m_cursor++] = value;
     }
     public void Write (short value)
     {
-        Array.Copy(BitConverter.GetBytes(value),0,m_data,cursor,2);
-        cursor += 2;
+        if (m_cursor+2 > m_size)
+            return;
+        Array.Copy(BitConverter.GetBytes(value),0,m_data,m_cursor,2);
+        m_cursor += 2;
     }
     public void Write(char value)
     {
-        Array.Copy(BitConverter.GetBytes(value), 0, m_data, cursor, 2);
-        cursor += 2;
+        if (m_cursor+2 > m_size)
+            return;
+        Array.Copy(BitConverter.GetBytes(value), 0, m_data, m_cursor, 2);
+        m_cursor += 2;
     }
     public void Write (int value)
     {
-        Array.Copy(BitConverter.GetBytes(value), 0, m_data, cursor, 4);
-        cursor += 4;
+        if (m_cursor + 4 > m_size)
+            return;
+        Array.Copy(BitConverter.GetBytes(value), 0, m_data, m_cursor, 4);
+        m_cursor += 4;
     }
     public void Write (float value)
     {
-        Array.Copy(BitConverter.GetBytes(value), 0, m_data, cursor, 4);
-        cursor += 4;
+        if (m_cursor + 4 > m_size)
+            return;
+        Array.Copy(BitConverter.GetBytes(value), 0, m_data, m_cursor, 4);
+        m_cursor += 4;
     }
 
     public void Write(string value)
     {
+        if (m_cursor + (value.Length+1)*2 > m_size)
+            return;
         foreach (char c in value)
         {
             Write(c);
@@ -156,43 +166,46 @@ public class Packet  {
 
     public void Write(byte[] _buffer)
     {
-        Array.Copy(_buffer, 0, m_data, cursor, _buffer.Length);
-        cursor += _buffer.Length;
+        if (m_cursor + _buffer.Length > m_size)
+            return;
+        Array.Copy(_buffer, 0, m_data, m_cursor, _buffer.Length);
+        m_cursor += _buffer.Length;
     }
 
-    public void WriteVector3(Vector3 value)
-    {
-        Write(value.x);
-        Write(value.y);
-        Write(value.z);
-    }
 
     public int ReadInt()
     {
-        Debug.Log("==>"+cursor);
-        var value = BitConverter.ToInt32(m_data, cursor);
-        cursor += 4;
+        if (m_cursor + 4 > m_size)
+            return 0;
+        var value = BitConverter.ToInt32(m_data, m_cursor);
+        m_cursor += 4;
         return value;
     }
 
     public float ReadFloat()
     {
-        var value = BitConverter.ToSingle(m_data, cursor);
-        cursor += 4;
+        if (m_cursor + 4 > m_size)
+            return 0;
+        var value = BitConverter.ToSingle(m_data, m_cursor);
+        m_cursor += 4;
         return value;
     }
 
     public short ReadShort()
     {
-        var value = BitConverter.ToInt16(m_data, cursor);
-        cursor += 1;
+        if (m_cursor + 2 > m_size)
+            return 0;
+        var value = BitConverter.ToInt16(m_data, m_cursor);
+        m_cursor += 1;
         return value;
     }
 
     public char ReadChar()
     {
-        var value = BitConverter.ToChar(m_data, cursor);
-        cursor += 2;
+        if (m_cursor + 2 > m_size)
+            return (char)0;
+        var value = BitConverter.ToChar(m_data, m_cursor);
+        m_cursor += 2;
         return value;
     }
 
@@ -208,6 +221,8 @@ public class Packet  {
             Debug.Log("read tmp : "+tmp+" count : "+c);
 
         }
+        if (_string.Count == 0)
+            return "";
         char[] _str = new char[_string.Count];
         for (int i = 0, len = _string.Count; i < len; i++)
             _str[i] = _string[i];
@@ -216,7 +231,9 @@ public class Packet  {
 
     public byte ReadByte()
     {
-        return m_data[cursor++];
+        if (m_cursor >= m_size)
+            return 0;
+        return m_data[m_cursor++];
     }
 
     public Vector3 ReadVector3()
@@ -230,8 +247,17 @@ public class Packet  {
 
     public void ReadBuffer(byte[] _buffer)
     {
+        if (m_cursor + _buffer.Length > m_size)
+            return;
+        Array.Copy(m_data, m_cursor, _buffer, 0, _buffer.Length);
+        m_cursor += _buffer.Length;
+    }
 
-        Array.Copy(m_data, cursor, _buffer, 0, _buffer.Length);
-        cursor += _buffer.Length;
+    /*
+     * this.Cursor = 0;
+     */
+    public void Rewind()
+    { 
+        this.m_cursor = 0;
     }
 }

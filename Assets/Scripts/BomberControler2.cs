@@ -5,17 +5,15 @@ public class BomberControler2 : MonoBehaviour {
 
     int moveFlags = 0;
     Rigidbody body;
-    PoolSystem<GameObject> pool;
     public float gravity_acceleration = 1.0f;
     public float jump_speed = 1.0f;
     public bool IsNetworkControlled = false;
     public bool IsPlayer = false;
     Animator m_animator;
     public WorldState state = WorldState.CENTER;
+    Quaternion[] baseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.forward) };
 	void Start () {
 	    body = GetComponent<Rigidbody>();
-        GameObject Bomb = ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb");
-        pool = new PoolSystem<GameObject>(Bomb,10);
         m_animator = gameObject.GetComponent<Animator>();
 	}
 	
@@ -84,15 +82,16 @@ public class BomberControler2 : MonoBehaviour {
             move -= Vector3.left;
 
 
-        if(stack == 0 && state != WorldState.CENTER)
+        /*if(stack == 0 && state != WorldState.CENTER)
             fall_velocity += Time.deltaTime * gravity_acceleration;
         
         //  Debug.Log("fall velocity " + fall_velocity);
         if (fall_velocity > 20)
-            fall_velocity = 20;
+            fall_velocity = 20;*/
         m_animator.SetFloat("Speed", move.z);
         m_animator.SetFloat("Direction", move.x);
-        transform.Translate(move * speed * Time.deltaTime + gravity*fall_velocity);
+        transform.Translate(move * speed * Time.deltaTime - gravity*fall_velocity);
+        transform.rotation = baseRotation[(int)state];
     }
 
     void OnCollisionEnter(Collision collision)

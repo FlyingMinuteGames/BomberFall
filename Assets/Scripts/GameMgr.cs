@@ -17,12 +17,12 @@ public enum GameMgrType
 
 public enum WorldState
 {
-    UNKNOWN,
     CENTER,
     LATERAL_X,
     LATERAL_X2,
     LATERAL_Z,
-    LATERAL_Z2
+    LATERAL_Z2,
+    UNKNOWN
 }
 
 

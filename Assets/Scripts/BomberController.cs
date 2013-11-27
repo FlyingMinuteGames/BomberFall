@@ -154,9 +154,13 @@ public class BomberController : MonoBehaviour {
                 break;
             }
         }
-        if (stack > 0 ^ m_IsOnGround)
+        if (stack > 0 && !m_IsOnGround)
+            m_IsOnGround = true;
+        else if (stack == 0 && m_IsOnGround)
             UpdateOnGround();
 
+        if (m_IsOnGround)
+            fall_velocity = 0;
     }
 
     private void UpdateOnGround()
@@ -171,6 +175,13 @@ public class BomberController : MonoBehaviour {
         }
         m_IsOnGround = false;
     }
+
+    void OnChangePhase(WorldState state)
+    {
+        m_State = state;
+        m_MoveFlags = 0;
+    }
+
     void OnRecvMove(object[] o)
     {
         this.m_MoveFlags = (int)o[0];

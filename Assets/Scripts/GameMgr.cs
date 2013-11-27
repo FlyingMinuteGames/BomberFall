@@ -78,6 +78,8 @@ public class GameMgr : MonoBehaviour {
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
+        //StartCoroutine(ChangePhaseTimer());
+        ChangePhase();
     }
 
     public int Spawn(GOType type,Vector3 pos,int guid = -1)
@@ -170,9 +172,11 @@ public class GameMgr : MonoBehaviour {
     {
         if(state != WorldState.UNKNOWN)
             m_state = state;
-        else m_state = m_state == WorldState.CENTER ? (WorldState)((int)(WorldState.CENTER)+Mathf.Ceil(Random.Range(1,4))) : WorldState.CENTER;
+        else m_state = m_state == WorldState.CENTER ? /*(WorldState)((int)(WorldState.CENTER)+Mathf.Ceil(Random.Range(1,4))) */ WorldState.LATERAL_X: WorldState.CENTER;
 
         IList<GameObject> l = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
-
+        foreach (var a in l)
+            a.SendMessage("OnChangePhase", m_state);
+    
     }
 }

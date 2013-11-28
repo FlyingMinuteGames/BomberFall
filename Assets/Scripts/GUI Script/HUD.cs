@@ -69,7 +69,10 @@ public class HUD : MonoBehaviour
                 if (i == 2)
                     j += 150;
 
-                GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(175 + (80 * i) + j, 10, 50 * 0.4f, 60 * 0.4f)), player_textures[i]);
+                GUI.DrawTexture(new Rect(player_names[i].transform.position.x+((i+1)*250), player_names[i].transform.position.y, 50 * 0.4f, 60 * 0.4f), player_textures[i], ScaleMode.ScaleAndCrop);
+
+
+                //GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(175 + (80 * i) + j, 10, 50 * 0.4f, 60 * 0.4f)), player_textures[i], ScaleMode.ScaleAndCrop);
 
             }
         }

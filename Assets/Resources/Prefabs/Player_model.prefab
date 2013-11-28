@@ -1047,6 +1047,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!95 &9500000
 Animator:
+  serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1057,6 +1058,7 @@ Animator:
   m_CullingMode: 1
   m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1068,10 +1070,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c20912c468f0c4184a7ecff70aafca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity_acceleration: 1
-  jump_speed: 1
-  IsNetworkControlled: 0
-  IsPlayer: 0
+  m_GravityAcceleration: .5
+  m_JumpSpeed: 1.39999998
+  m_IsNetworkControlled: 0
+  m_IsPlayer: 0
+  m_State: 0
   speed: 2
 --- !u!136 &13600000
 CapsuleCollider:
@@ -1104,6 +1107,9 @@ SkinnedMeshRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1135,6 +1141,7 @@ SkinnedMeshRenderer:
   - {fileID: 400074}
   - {fileID: 400042}
   - {fileID: 400006}
+  m_BlendShapeWeights: []
   m_RootBone: {fileID: 400052}
   m_AABB:
     m_Center: {x: .00136426091, y: -4.38392162e-05, z: .240501642}

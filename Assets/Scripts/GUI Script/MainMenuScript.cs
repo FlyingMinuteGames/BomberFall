@@ -182,6 +182,8 @@ public class MainMenuScript : MonoBehaviour {
         comboBoxControl.SetSelectedItemIndex(m_ratio);
         comboBoxQuality.SetSelectedItemIndex(quality);
         comboBoxResolution.SetSelectedItemIndex(m_resolution);
+        comboboxAA.SetSelectedItemIndex(m_antialiasing);
+        comboboxVsync.SetSelectedItemIndex(m_vsync);
 
 
         //LOAD FROM PLAYER PREFS
@@ -301,14 +303,11 @@ public class MainMenuScript : MonoBehaviour {
         if (!PlayerPrefs.HasKey("serverIP"))
             PlayerPrefs.SetString("serverIP", "127.0.0.1");
 
-        if (!PlayerPrefs.HasKey("aa"))
-            PlayerPrefs.SetInt("aa", 0);
+        if (!PlayerPrefs.HasKey("AntiAliasing"))
+            PlayerPrefs.SetInt("AntiAliasing", 0);
 
-        if (!PlayerPrefs.HasKey("vsync"))
-            PlayerPrefs.SetInt("vsync", 0);
-
-
-
+        if (!PlayerPrefs.HasKey("VSync"))
+            PlayerPrefs.SetInt("VSync", 0);
 
         PlayerPrefs.Save();
     }
@@ -350,8 +349,8 @@ public class MainMenuScript : MonoBehaviour {
             QualitySettings.SetQualityLevel(quality, true);
             m_sound_effects_volume = PlayerPrefs.GetFloat("SoundVolume") * 10;
             m_music_volume = PlayerPrefs.GetFloat("MusicVolume") * 10;
-            m_vsync = PlayerPrefs.GetInt("vsync");
-            m_antialiasing = PlayerPrefs.GetInt("aa");
+            m_vsync = PlayerPrefs.GetInt("VSync");
+            m_antialiasing = PlayerPrefs.GetInt("AntiAliasing");
 
         }
         else if (st.Equals("keybindings"))
@@ -406,8 +405,8 @@ public class MainMenuScript : MonoBehaviour {
             int _resolution = PlayerPrefs.GetInt("Resolution");
             bool _fullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
             int _quality = PlayerPrefs.GetInt("QualityLevel");
-            int _aa = PlayerPrefs.GetInt("aa");
-            int _vs = PlayerPrefs.GetInt("vsync");
+            int _aa = PlayerPrefs.GetInt("AntiAliasing");
+            int _vs = PlayerPrefs.GetInt("VSync");
 
             if (_ratio != m_ratio || _resolution != m_resolution)
                 _ReloadNeeded = true;
@@ -416,8 +415,8 @@ public class MainMenuScript : MonoBehaviour {
             PlayerPrefs.SetInt("AspectRatio", m_ratio);
             PlayerPrefs.SetInt("Resolution", m_resolution);
             PlayerPrefs.SetInt("QualityLevel", quality);
-            PlayerPrefs.SetInt("aa", m_antialiasing);
-            PlayerPrefs.SetInt("vsync", m_vsync);
+            PlayerPrefs.SetInt("AntiAliasing", m_antialiasing);
+            PlayerPrefs.SetInt("VSync", m_vsync);
 
             PlayerPrefs.SetFloat("SoundVolume", m_sound_effects_volume / 10);
             PlayerPrefs.SetFloat("MusicVolume", m_music_volume / 10);
@@ -432,7 +431,7 @@ public class MainMenuScript : MonoBehaviour {
             if (_quality != quality)
             {
                 QualitySettings.SetQualityLevel(quality);
-                QualitySettings.antiAliasing = _aa;
+                QualitySettings.antiAliasing = m_antialiasing;
                 QualitySettings.vSyncCount = m_vsync;
                 vaaSetted = true;
             }

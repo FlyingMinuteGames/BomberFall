@@ -31,6 +31,7 @@ public class BombScript : MonoBehaviour {
 
         foreach (Transform t in bomb_object.transform)
             child[i++] = t;
+
     }
 
     private void SetActiveChild(bool enable=true)
@@ -45,6 +46,29 @@ public class BombScript : MonoBehaviour {
         if (!m_IsInit)
             Init();
         StartCoroutine(WaitAndExplode(onExplode,onEnd));
+        CheckIfWithinPlayer();
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        Debug.Log("Exit collider !");
+        if (collision.gameObject.tag != "PlayerTrigger")
+            return;
+
+        Debug.Log("Enable collision with bomb");
+        Collider col = collision.transform.parent.collider;
+        Physics.IgnoreCollision(collider, col, false);
+    }
+
+    public void CheckIfWithinPlayer()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1.0f);
+        foreach (Collider col in hitColliders)
+            if (col.gameObject.tag == "Player")
+            {
+                Debug.Log("Disable collision with bomb");
+                Physics.IgnoreCollision(collider, col, true);
+            }
     }
 
     IEnumerator WaitAndExplode(Callback c1,Callback c2)
@@ -52,40 +76,27 @@ public class BombScript : MonoBehaviour {
         progress = 0;
         Debug.Log("begin explode");
         bomb_object.SetActive(true);
+        
         SetActiveChild(true);
         anim.Rewind();
         anim.Play();
         panim.time = 0;
         panim.Clear(true);
         panim.Play();
-
+        ((BoxCollider)collider).center = Vector3.zero;
         yield return new WaitForSeconds(timer[progress++]);
 
         Debug.Log("explode phase 2");
         //bomb_object.SetActive(false);
         SetActiveChild(false);
+        ((BoxCollider)collider).center = Vector3.up * 100;
+        //collider.enabled = false;
         if (c1 != null)
             c1();//StartCoroutine(c1());
 
         yield return new WaitForSeconds(timer[progress++]);
-        if (c2 != null)
-            c2();//StartCoroutine(c2());
+        if (c2 != null) 
+            c2();
         Debug.Log("explode!");
     }
-
-    void OnNetworkInstantiate(NetworkMessageInfo info)
-    {
-        NetworkMgr.Instance.RegisterObj(this,NetworkMgr.ObjectType.OBJECT_BOMB);
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        /*if (timer <= 0)
-        {
-            Debug.Log("explode!");
-            if (callback != null)
-                callback();
-        }
-        else timer -= Time.deltaTime;*/
-	}
 }

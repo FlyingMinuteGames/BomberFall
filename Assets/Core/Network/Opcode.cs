@@ -23,6 +23,8 @@ public enum Opcode
     SMSG_BOMB_EXPLODE,
     SMSG_START_GAME,
     MSG_SEND_MESSAGE,
-    MSG_UPDATE_POSITION // no handle, preparation for movement interpolation
+    MSG_UPDATE_POSITION, // no handle, preparation for movement interpolation
+    MSG_JUMP,
+    SMSG_CHANGE_PHASE
 
 }

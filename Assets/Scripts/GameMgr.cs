@@ -152,6 +152,11 @@ public class GameMgr : MonoBehaviour {
         Packet p = PacketBuilder.BuildMovePlayerPacket(c.Guid, flag, pos);
         c.SendPacket(p);
     }
+    public void PlayerJump(Vector3 pos)
+    {
+        Packet p = PacketBuilder.BuildJumpPacket(c.Guid, pos);
+        c.SendPacket(p);
+    }
 
     public void SpawnBomb(Vector3 pos)
     {
@@ -172,11 +177,13 @@ public class GameMgr : MonoBehaviour {
     {
         if(state != WorldState.UNKNOWN)
             m_state = state;
-        else m_state = m_state == WorldState.CENTER ? /*(WorldState)((int)(WorldState.CENTER)+Mathf.Ceil(Random.Range(1,4))) */ WorldState.LATERAL_X: WorldState.CENTER;
+        else m_state = m_state == WorldState.CENTER ? /*(WorldState)((int)(WorldState.CENTER)+Mathf.Ceil(Random.Range(1,4))) */ WorldState.LATERAL_X : WorldState.CENTER;
 
         IList<GameObject> l = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
         foreach (var a in l)
             a.SendMessage("OnChangePhase", m_state);
-    
+
+        if (s != null)
+            s.SendPacketBroadCast(PacketBuilder.BuildChangePhasePacket(m_state));   
     }
 }

@@ -79,4 +79,19 @@ public class PacketBuilder  {
         p.Write(message);
         return p;
     }
+
+    public static Packet BuildJumpPacket(int guid, Vector3 pos)
+    {
+        Packet p = new Packet(4 + 4 * 3, Opcode.MSG_JUMP);
+        p.Write(guid);
+        p.Write(pos);
+        return p;
+    }
+
+    public static Packet BuildChangePhasePacket(WorldState state)
+    {
+        Packet p = new Packet(4, Opcode.SMSG_CHANGE_PHASE);
+        p.Write((int)state);
+        return p;
+    }
 }

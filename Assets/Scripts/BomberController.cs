@@ -68,6 +68,9 @@ public class BomberController : MonoBehaviour
 
             if ((flag & 1) != 0 && GameMgr.Instance != null)
                 GameMgr.Instance.PlayerMove(m_MoveFlags, transform.position);
+            if ((flag & 2) != 0 && GameMgr.Instance != null)
+                GameMgr.Instance.PlayerJump(transform.position);
+            
         }
     }
 
@@ -116,9 +119,6 @@ public class BomberController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Bomb")
-            return; // ignore bomb !
-
         //register collider
         m_contact[collision.gameObject.GetInstanceID()] = false;
 
@@ -142,8 +142,6 @@ public class BomberController : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Bomb")
-            return; // ignore bomb !
         m_contact.Remove(collision.gameObject.GetInstanceID());
         if (!m_IsOnGround)
             return;
@@ -204,7 +202,7 @@ public class BomberController : MonoBehaviour
             me.m_Animator.SetBool("Jump", true);
 
             me.fall_velocity = -0.15f * me.m_JumpSpeed;
-            return 0;
+            return 2;
         }
 
         if (me.m_State != WorldState.CENTER)
@@ -213,6 +211,12 @@ public class BomberController : MonoBehaviour
         me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_FORWARD : me.m_MoveFlags & ~(int)MoveState.MOVE_FORWARD;
         return 1;
 
+    }
+
+    public void RecvJump(Vector3 start)
+    {
+        transform.position = start;
+        fall_velocity = -0.15f * m_JumpSpeed;
     }
 
 

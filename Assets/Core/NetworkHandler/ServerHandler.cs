@@ -55,4 +55,18 @@ public class ServerHandler  {
             current.SendPacketBroadCast(p);
         }
     }
+
+    public static void HandleJump(Packet p)
+    {
+        int guid;
+        Vector3 start_pos;
+        guid = p.ReadInt();
+        start_pos = p.ReadVector3();
+        GameObject obj;
+        if ((obj = ObjectMgr.Instance.get(guid)) != null)
+        {
+            obj.SendMessage("RecvJump",start_pos);
+            current.SendPacketBroadCast(p, p.Sender);
+        }
+    }
 }

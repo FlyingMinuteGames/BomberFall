@@ -118,4 +118,11 @@ public class ClientHandler
             menu.AddMessage(name, message);
         }
     }
+
+    public static void HandleChangePhase(Packet p)
+    {
+        WorldState state;
+        state = (WorldState)p.ReadInt();
+        GameMgr.Instance.ChangePhase(state);
+    }
 }

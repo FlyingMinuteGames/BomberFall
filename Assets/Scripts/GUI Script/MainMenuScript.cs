@@ -41,6 +41,8 @@ public class MainMenuScript : MonoBehaviour {
     private float m_sound_effects_volume = 10.0f;
     private bool m_fullscreen = false;
     private bool isHost;
+    private int m_antialiasing;
+    private int m_vsync;
 
     private float m_game_duration = 30f;
     private int m_gameplay_mode = 0;
@@ -78,8 +80,10 @@ public class MainMenuScript : MonoBehaviour {
     private GUIContent[] nb_CPUs_combobox;
 
     
-
+    private GUIContent[] m_aa;
     private GUIContent[] m_quality;
+    private GUIContent[] m_vsyncContent;
+
 
     private ComboBox comboBoxControl = new ComboBox();
     private ComboBox comboBoxResolution = new ComboBox();
@@ -88,6 +92,8 @@ public class MainMenuScript : MonoBehaviour {
     private ComboBox comboBoxMaps = new ComboBox();
     private ComboBox comboboxNbPlayers = new ComboBox();
     private ComboBox comboboxNbCPUs = new ComboBox();
+    private ComboBox comboboxAA = new ComboBox();
+    private ComboBox comboboxVsync = new ComboBox();
 
 
     private bool hasMapFiles;
@@ -118,6 +124,9 @@ public class MainMenuScript : MonoBehaviour {
         _16_10_combobox = new GUIContent[MenuConfig.resolution_16_10.Length];
         _16_9_combobox = new GUIContent[MenuConfig.resolution_16_9.Length];
         m_quality = new GUIContent[MenuConfig.quality_string.Length];
+        m_aa = new GUIContent[MenuConfig.aa_string.Length];
+        m_vsyncContent = new GUIContent[MenuConfig.vsync_string.Length];
+
 
         gameplay_mode_combobox = new GUIContent[MenuConfig.gameplay_mode_string.Length];
         maps_combobox = new GUIContent[MenuConfig.maps_string.Length];
@@ -140,6 +149,13 @@ public class MainMenuScript : MonoBehaviour {
 
         for (int i = 0; i < MenuConfig.quality_string.Length; i++)
             m_quality[i] = new GUIContent(MenuConfig.quality_string[i]);
+        for (int i = 0; i < MenuConfig.aa_string.Length; i++)
+            m_aa[i] = new GUIContent(MenuConfig.aa_string[i]);
+        for (int i = 0; i < MenuConfig.vsync_string.Length; i++)
+            m_vsyncContent[i] = new GUIContent(MenuConfig.vsync_string[i]);
+
+
+
 
         for (int i = 0; i < MenuConfig.gameplay_mode_string.Length; i++)
             gameplay_mode_combobox[i] = new GUIContent(MenuConfig.gameplay_mode_string[i]);
@@ -166,6 +182,8 @@ public class MainMenuScript : MonoBehaviour {
         comboBoxControl.SetSelectedItemIndex(m_ratio);
         comboBoxQuality.SetSelectedItemIndex(quality);
         comboBoxResolution.SetSelectedItemIndex(m_resolution);
+        comboboxAA.SetSelectedItemIndex(m_antialiasing);
+        comboboxVsync.SetSelectedItemIndex(m_vsync);
 
 
         //LOAD FROM PLAYER PREFS
@@ -285,7 +303,11 @@ public class MainMenuScript : MonoBehaviour {
         if (!PlayerPrefs.HasKey("serverIP"))
             PlayerPrefs.SetString("serverIP", "127.0.0.1");
 
+        if (!PlayerPrefs.HasKey("AntiAliasing"))
+            PlayerPrefs.SetInt("AntiAliasing", 0);
 
+        if (!PlayerPrefs.HasKey("VSync"))
+            PlayerPrefs.SetInt("VSync", 0);
 
         PlayerPrefs.Save();
     }
@@ -324,9 +346,11 @@ public class MainMenuScript : MonoBehaviour {
             m_ratio = PlayerPrefs.GetInt("AspectRatio");
             quality = PlayerPrefs.GetInt("QualityLevel");
             m_resolution = PlayerPrefs.GetInt("Resolution");
-            QualitySettings.SetQualityLevel(quality);
+            QualitySettings.SetQualityLevel(quality, true);
             m_sound_effects_volume = PlayerPrefs.GetFloat("SoundVolume") * 10;
             m_music_volume = PlayerPrefs.GetFloat("MusicVolume") * 10;
+            m_vsync = PlayerPrefs.GetInt("VSync");
+            m_antialiasing = PlayerPrefs.GetInt("AntiAliasing");
 
         }
         else if (st.Equals("keybindings"))
@@ -375,11 +399,14 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (st.Equals("video"))
         {
-            bool _ReloadNeeded = false;
+            bool _ReloadNeeded = false, vaaSetted = false;
 
             int _ratio = PlayerPrefs.GetInt("AspectRatio");
             int _resolution = PlayerPrefs.GetInt("Resolution");
             bool _fullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
+            int _quality = PlayerPrefs.GetInt("QualityLevel");
+            int _aa = PlayerPrefs.GetInt("AntiAliasing");
+            int _vs = PlayerPrefs.GetInt("VSync");
 
             if (_ratio != m_ratio || _resolution != m_resolution)
                 _ReloadNeeded = true;
@@ -388,6 +415,8 @@ public class MainMenuScript : MonoBehaviour {
             PlayerPrefs.SetInt("AspectRatio", m_ratio);
             PlayerPrefs.SetInt("Resolution", m_resolution);
             PlayerPrefs.SetInt("QualityLevel", quality);
+            PlayerPrefs.SetInt("AntiAliasing", m_antialiasing);
+            PlayerPrefs.SetInt("VSync", m_vsync);
 
             PlayerPrefs.SetFloat("SoundVolume", m_sound_effects_volume / 10);
             PlayerPrefs.SetFloat("MusicVolume", m_music_volume / 10);
@@ -398,6 +427,28 @@ public class MainMenuScript : MonoBehaviour {
 
             if (_ReloadNeeded)
                 LoadResolution();
+
+            if (_quality != quality)
+            {
+                QualitySettings.SetQualityLevel(quality);
+                QualitySettings.antiAliasing = m_antialiasing;
+                QualitySettings.vSyncCount = m_vsync;
+                vaaSetted = true;
+            }
+
+            if (_aa != m_antialiasing && !vaaSetted)
+            {
+                switch(m_antialiasing){
+                    case 0: _aa = 0; break;
+                    case 1: _aa = 2; break;
+                    case 2: _aa = 4; break;
+                    case 3: _aa = 8; break;
+                }
+                QualitySettings.antiAliasing = _aa;
+            }
+
+            if (_vs != m_vsync && !vaaSetted)
+                QualitySettings.vSyncCount = m_vsync;
 
         }
         else if (st.Equals("keybindings"))
@@ -468,7 +519,8 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (!active)
             return;
-        GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(20, 50, 600 * 0.4f, 189 * 0.4f)), logo);
+
+        GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(20, 50, 600 * 0.4f, 189 * 0.4f)), logo, ScaleMode.ScaleToFit);
         GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
 
         GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 530, 500, 40)), "Blablabla footer stuff", skin.label);
@@ -546,42 +598,62 @@ public class MainMenuScript : MonoBehaviour {
         {
 
             GUI.Box(MenuUtils.ResizeGUI(new Rect(260, 120, 500, 400)), "PRESENTATION SETTINGS", skin.box);
-            GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(310, 120, 500, 600)));
+            GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(280, 120, 500, 600)));
 
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(240, 55, 100, 40)), "Aspect Ratio :", skin.label);
 
             int selGrid;
-            if ((selGrid = comboBoxQuality.List(MenuUtils.ResizeGUI(new Rect(70, 225, 100, 20)), m_quality[quality].text, m_quality, skin.customStyles[0])) != quality)
+            if ((selGrid = comboBoxQuality.List(MenuUtils.ResizeGUI(new Rect(70, 225, 150, 20)), m_quality[quality].text, m_quality, skin.button, skin.box, skin.customStyles[0])) != quality)
             {
                 quality = selGrid;
             }
 
+
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(240, 255, 100, 40)), "V-Sync :", skin.label);
+
+            if ((selGrid = comboboxVsync.List(MenuUtils.ResizeGUI(new Rect(325, 255, 150, 20)), m_vsyncContent[m_vsync].text, m_vsyncContent, skin.button, skin.box, skin.customStyles[0])) != m_vsync)
+            {
+                m_vsync = selGrid;
+            }
+
+
+
+
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(240, 225, 100, 40)), "Anti Aliasing :", skin.label);
+
+            if ((selGrid = comboboxAA.List(MenuUtils.ResizeGUI(new Rect(325, 225, 150, 20)), m_aa[m_antialiasing].text, m_aa, skin.button, skin.box, skin.customStyles[0])) != m_antialiasing)
+            {
+                m_antialiasing = selGrid;
+            }
+
+
             GUI.Label(MenuUtils.ResizeGUI(new Rect(240, 145, 100, 40)), "Resolution :", skin.label);
+
 
             switch (m_ratio)
             {
                 case 0:
-                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _4_3_combobox[m_resolution].text, _4_3_combobox, skin.customStyles[0])) != m_resolution)
+                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(330, 145, 100, 20)), _4_3_combobox[m_resolution].text, _4_3_combobox, skin.button, skin.box, skin.customStyles[0])) != m_resolution)
                     {
                         m_resolution = selGrid;
                     }
                     break;
                 case 1:
-                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _16_10_combobox[m_resolution].text, _16_10_combobox, skin.customStyles[0])) != m_resolution)
+                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(330, 145, 100, 20)), _16_10_combobox[m_resolution].text, _16_10_combobox, skin.button, skin.box, skin.customStyles[0])) != m_resolution)
                     {
                         m_resolution = selGrid;
                     }
                     break;
                 case 2:
-                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _16_9_combobox[m_resolution].text, _16_9_combobox, skin.customStyles[0])) != m_resolution)
+                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(330, 145, 100, 20)), _16_9_combobox[m_resolution].text, _16_9_combobox, skin.button, skin.box, skin.customStyles[0])) != m_resolution)
                     {
                         m_resolution = selGrid;
                     }
                     break;
             }
 
-            if ((selGrid = comboBoxControl.List(MenuUtils.ResizeGUI(new Rect(315, 55, 100, 20)), ratio_combobox[m_ratio].text, ratio_combobox, skin.customStyles[0])) != m_ratio)
+            if ((selGrid = comboBoxControl.List(MenuUtils.ResizeGUI(new Rect(330, 55, 100, 20)), ratio_combobox[m_ratio].text, ratio_combobox, skin.button, skin.box, skin.customStyles[0])) != m_ratio)
             {
                 m_ratio = selGrid;
             }
@@ -594,14 +666,12 @@ public class MainMenuScript : MonoBehaviour {
             m_sound_effects_volume = GUI.HorizontalSlider(MenuUtils.ResizeGUI(new Rect(0, 150, 180, 20)), m_sound_effects_volume, 0, 10.0f, skin.horizontalSlider, skin.horizontalSliderThumb);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(195, 145, 60, 40)), Math.Round(m_sound_effects_volume * 10, 0).ToString() + "%", skin.label);
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 195, 85, 20)), "Fullscreen :");
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 195, 85, 20)), "Fullscreen :", skin.label);
 
-            m_fullscreen = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(70, 195, 100, 20)), m_fullscreen, m_fullscreen ? "True" : "False");
+            m_fullscreen = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(70, 195, 100, 20)), m_fullscreen, m_fullscreen ? "True" : "False", skin.toggle);
 
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 225, 100, 40)), "Quality :", skin.label);
-
-
 
 
             GUI.EndGroup();
@@ -666,7 +736,7 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 30, 100, 40)), "Gameplay Mode", skin.label);
 
-            if ((selGrid = comboBoxGamemode.List(MenuUtils.ResizeGUI(new Rect(150, 30, 70, 20)), gameplay_mode_combobox[m_gameplay_mode].text, gameplay_mode_combobox, skin.customStyles[0])) != m_gameplay_mode)
+            if ((selGrid = comboBoxGamemode.List(MenuUtils.ResizeGUI(new Rect(150, 30, 70, 20)), gameplay_mode_combobox[m_gameplay_mode].text, gameplay_mode_combobox, skin.button, skin.box, skin.customStyles[0])) != m_gameplay_mode)
             {
                 m_gameplay_mode = selGrid;
             }
@@ -682,7 +752,7 @@ public class MainMenuScript : MonoBehaviour {
 
             if (hasMapFiles)
             {
-                if ((selGrid2 = comboBoxMaps.List(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 20)), maps_combobox[m_map_index].text, maps_combobox, skin.customStyles[0])) != m_map_index)
+                if ((selGrid2 = comboBoxMaps.List(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 20)), maps_combobox[m_map_index].text, maps_combobox, skin.button, skin.box, skin.customStyles[0])) != m_map_index)
                 {
                     m_map_index = selGrid2;
                 }
@@ -691,7 +761,7 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 50, 50, 40)), "Players", skin.label);
 
-            if ((nbPlayers = comboboxNbPlayers.List(MenuUtils.ResizeGUI(new Rect(310, 50, 25, 20)), nb_players_combobox[m_nb_players].text, nb_players_combobox, skin.customStyles[0])) != m_nb_players)
+            if ((nbPlayers = comboboxNbPlayers.List(MenuUtils.ResizeGUI(new Rect(310, 50, 25, 20)), nb_players_combobox[m_nb_players].text, nb_players_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_players)
             {
                 nb_CPUs_combobox = MenuUtils.SetComboboxRange( 0, 3 - nbPlayers);
                 m_nb_players = nbPlayers;
@@ -699,16 +769,16 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(345, 50, 50, 40)), "CPUs", skin.label);
 
-            if ((nbCPUs = comboboxNbCPUs.List(MenuUtils.ResizeGUI(new Rect(405, 50, 25, 20)), nb_CPUs_combobox[m_nb_CPUs].text, nb_CPUs_combobox, skin.customStyles[0])) != m_nb_CPUs)
+            if ((nbCPUs = comboboxNbCPUs.List(MenuUtils.ResizeGUI(new Rect(405, 50, 25, 20)), nb_CPUs_combobox[m_nb_CPUs].text, nb_CPUs_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_CPUs)
             {
                 nb_players_combobox = MenuUtils.SetComboboxRange(1, 4 - nbCPUs);
                 m_nb_CPUs = nbCPUs;
             }
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 140, 200, 40)), "Active power-ups :");
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 140, 200, 40)), "Active power-ups :", skin.label);
 
             for(int index = 0, len = MenuConfig.power_ups_settings.Length; index < len; index++)
-                MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (index*20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index]);
+                MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (index*20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index], skin.toggle);
             
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
@@ -752,8 +822,8 @@ public class MainMenuScript : MonoBehaviour {
             m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 290, 100, 20)), m_server_password, '*', skin.textField);
 
 
-            m_disable_persp_change = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 320, 190, 20)), m_disable_persp_change, "Disable perspective's change");
-            m_auth_reco = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 340, 190, 20)), m_auth_reco, "Allow players to reconnect");
+            m_disable_persp_change = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 320, 190, 20)), m_disable_persp_change, "Disable perspective's change", skin.toggle);
+            m_auth_reco = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 340, 190, 20)), m_auth_reco, "Allow players to reconnect", skin.toggle);
 
 
 
@@ -781,7 +851,7 @@ public class MainMenuScript : MonoBehaviour {
 
             m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 110, 100, 20)), m_server_password, '*', skin.textField);
 
-            if (GUI.Button(new Rect(140, 240, 190, 80), "Join game"))
+            if (GUI.Button(new Rect(140, 240, 190, 80), "Join game", skin.button))
             {
 
                 //Check server connection
@@ -939,12 +1009,12 @@ public class MainMenuScript : MonoBehaviour {
             if (isHost)
             {
 
-                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Back to host settings", skin.button))
+                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Settings", skin.button))
                 {
                     submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;   
                 }
 
-                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Force Launch", skin.button))
+                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Start", skin.button))
                 {
                     gameMgr.StartGame();
                     //gameObject.SetActive(false);//Destroy(this);

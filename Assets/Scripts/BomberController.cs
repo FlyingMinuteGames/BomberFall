@@ -121,6 +121,8 @@ public class BomberController : MonoBehaviour {
         {
             Debug.Log("normal ->"+contact.normal);
             //Debug.DrawRay(contact.point, contact.normal, Color.red);
+            if(contact.normal.z < -0.5)
+                fall_velocity = fall_velocity < 0 ? fall_velocity/2 : fall_velocity;
             if (contact.normal.z > 0.9)
             {
                 m_contact[collision.gameObject.GetInstanceID()] = true;
@@ -190,7 +192,7 @@ public class BomberController : MonoBehaviour {
 
     private static int Jump(BomberController me,bool enable)
     {
-         if(me.m_IsOnGround && me.m_State != WorldState.CENTER) 
+         if(me.m_IsOnGround && me.m_State != WorldState.CENTER && enable) 
          {
              me.fall_velocity =-0.15f*me.m_JumpSpeed; 
              return 0;

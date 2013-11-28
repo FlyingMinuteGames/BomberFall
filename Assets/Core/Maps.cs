@@ -126,7 +126,8 @@ public class Maps {
             {
                 //Workaround to enforce collider exit
                 m_maps[pos.x][pos.y].block.gameObject.transform.position = Vector3.up * 1000;
-                Async.Instance.DelayedAction(()=> GameObject.Destroy(m_maps[pos.x][pos.y].block.gameObject) );
+                GameObject todelete = m_maps[pos.x][pos.y].block.gameObject;
+                Async.Instance.DelayedAction(()=> GameObject.Destroy(todelete) );
             } m_maps[pos.x][pos.y].m_type = type;
             Transform obj = null;
             ;

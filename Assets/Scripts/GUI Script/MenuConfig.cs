@@ -29,13 +29,15 @@ public class MenuConfig{
     public static String[] resolution_4_3 = { "640x480", "800x600", "1024x768", "1280x960", "1440x1080" };
     public static String[] resolution_16_10 = { "1280x800", "1440x900", "1680x1050", "1920x1200", "2560x1600" };
     public static String[] resolution_16_9 = { "1280x720", "1366x768", "1600x900", "1920x1080", "2560x1440" };
-    public static String[] quality_string = { "Fast", "Good", "Beautiful", "Fanstatic" };
-    public static String[] gameplay_mode_string = { "Survival", "Arcade"};
+    public static String[] quality_string = { "Not that great", "Meh", "Better", "Can't go higher" };
+    public static String[] gameplay_mode_string = { "Survival", "Arcade" };
+    public static String[] aa_string = { "Disabled", "2x Multi Sampling", "4x Multi Sampling", "8x Multi Sampling" };
+    public static String[] vsync_string = { "Disabled", "Enabled"};
 
    
     public static FileInfo[] mapFiles;
 
-    public static String[] maps_string = { "Here", "Will", "Be", "The", "List", "of", "Maps", "in", "Maps", "Folder" };
+    public static String[] maps_string = { "Here"};
 
     public static String[] power_ups_string = { "As Neil Taught Me", "Back to School", "Bomb Squad", "Bring a Sword to a Gunfight", "Fire Up", "Impenetrable Trinket", "Kick it Like you Mean it!", "Randomizatron teleporter", "Speed Up", "The Home Runner", "Vengeful Phenix" };
     public static bool[] power_ups_settings = new bool[power_ups_string.Length];

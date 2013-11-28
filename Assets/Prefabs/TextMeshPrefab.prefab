@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 23: {fileID: 2300000}
   - 102: {fileID: 10200000}
-  - 114: {fileID: 11400000}
   m_Layer: 8
   m_Name: TextMeshPrefab
   m_TagString: Hud
@@ -25,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.6000004, y: 9.19999981, z: 162.854523}
+  m_LocalPosition: {x: -14.3999996, y: 9.19999981, z: 162.854523}
   m_LocalScale: {x: .125495553, y: .125495553, z: .125495553}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,7 +40,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 35d725b9edc3bb74b8ba024b14fb64f6, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -59,7 +58,7 @@ TextMesh:
   m_GameObject: {fileID: 100000}
   m_Text: Player
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: .75
   m_LineSpacing: 1
   m_Anchor: 3
   m_Alignment: 0
@@ -67,21 +66,10 @@ TextMesh:
   m_FontSize: 30
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 35d725b9edc3bb74b8ba024b14fb64f6, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bbae4d2bbb07b549977b36bb6ba6568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

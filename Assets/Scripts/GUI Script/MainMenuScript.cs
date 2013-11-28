@@ -468,7 +468,7 @@ public class MainMenuScript : MonoBehaviour {
     {
         if (!active)
             return;
-        GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(20, 50, 600 * 0.4f, 189 * 0.4f)), logo);
+        GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(20, 50, 600 * 0.4f, 189 * 0.4f)), logo, ScaleMode.ScaleToFit);
         GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
 
         GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 530, 500, 40)), "Blablabla footer stuff", skin.label);
@@ -552,7 +552,7 @@ public class MainMenuScript : MonoBehaviour {
             GUI.Label(MenuUtils.ResizeGUI(new Rect(240, 55, 100, 40)), "Aspect Ratio :", skin.label);
 
             int selGrid;
-            if ((selGrid = comboBoxQuality.List(MenuUtils.ResizeGUI(new Rect(70, 225, 100, 20)), m_quality[quality].text, m_quality, skin.customStyles[0])) != quality)
+            if ((selGrid = comboBoxQuality.List(MenuUtils.ResizeGUI(new Rect(70, 225, 100, 20)), m_quality[quality].text, m_quality, skin.button, skin.box, skin.customStyles[0])) != quality)
             {
                 quality = selGrid;
             }
@@ -562,26 +562,26 @@ public class MainMenuScript : MonoBehaviour {
             switch (m_ratio)
             {
                 case 0:
-                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _4_3_combobox[m_resolution].text, _4_3_combobox, skin.customStyles[0])) != m_resolution)
+                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _4_3_combobox[m_resolution].text, _4_3_combobox, skin.button, skin.box, skin.customStyles[0])) != m_resolution)
                     {
                         m_resolution = selGrid;
                     }
                     break;
                 case 1:
-                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _16_10_combobox[m_resolution].text, _16_10_combobox, skin.customStyles[0])) != m_resolution)
+                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _16_10_combobox[m_resolution].text, _16_10_combobox, skin.button, skin.box, skin.customStyles[0])) != m_resolution)
                     {
                         m_resolution = selGrid;
                     }
                     break;
                 case 2:
-                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _16_9_combobox[m_resolution].text, _16_9_combobox, skin.customStyles[0])) != m_resolution)
+                    if ((selGrid = comboBoxResolution.List(MenuUtils.ResizeGUI(new Rect(315, 145, 100, 20)), _16_9_combobox[m_resolution].text, _16_9_combobox, skin.button, skin.box, skin.customStyles[0])) != m_resolution)
                     {
                         m_resolution = selGrid;
                     }
                     break;
             }
 
-            if ((selGrid = comboBoxControl.List(MenuUtils.ResizeGUI(new Rect(315, 55, 100, 20)), ratio_combobox[m_ratio].text, ratio_combobox, skin.customStyles[0])) != m_ratio)
+            if ((selGrid = comboBoxControl.List(MenuUtils.ResizeGUI(new Rect(315, 55, 100, 20)), ratio_combobox[m_ratio].text, ratio_combobox, skin.button, skin.box, skin.customStyles[0])) != m_ratio)
             {
                 m_ratio = selGrid;
             }
@@ -594,9 +594,9 @@ public class MainMenuScript : MonoBehaviour {
             m_sound_effects_volume = GUI.HorizontalSlider(MenuUtils.ResizeGUI(new Rect(0, 150, 180, 20)), m_sound_effects_volume, 0, 10.0f, skin.horizontalSlider, skin.horizontalSliderThumb);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(195, 145, 60, 40)), Math.Round(m_sound_effects_volume * 10, 0).ToString() + "%", skin.label);
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 195, 85, 20)), "Fullscreen :");
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 195, 85, 20)), "Fullscreen :", skin.label);
 
-            m_fullscreen = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(70, 195, 100, 20)), m_fullscreen, m_fullscreen ? "True" : "False");
+            m_fullscreen = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(70, 195, 100, 20)), m_fullscreen, m_fullscreen ? "True" : "False", skin.toggle);
 
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(0, 225, 100, 40)), "Quality :", skin.label);
@@ -666,7 +666,7 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 30, 100, 40)), "Gameplay Mode", skin.label);
 
-            if ((selGrid = comboBoxGamemode.List(MenuUtils.ResizeGUI(new Rect(150, 30, 70, 20)), gameplay_mode_combobox[m_gameplay_mode].text, gameplay_mode_combobox, skin.customStyles[0])) != m_gameplay_mode)
+            if ((selGrid = comboBoxGamemode.List(MenuUtils.ResizeGUI(new Rect(150, 30, 70, 20)), gameplay_mode_combobox[m_gameplay_mode].text, gameplay_mode_combobox, skin.button, skin.box, skin.customStyles[0])) != m_gameplay_mode)
             {
                 m_gameplay_mode = selGrid;
             }
@@ -682,7 +682,7 @@ public class MainMenuScript : MonoBehaviour {
 
             if (hasMapFiles)
             {
-                if ((selGrid2 = comboBoxMaps.List(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 20)), maps_combobox[m_map_index].text, maps_combobox, skin.customStyles[0])) != m_map_index)
+                if ((selGrid2 = comboBoxMaps.List(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 20)), maps_combobox[m_map_index].text, maps_combobox, skin.button, skin.box, skin.customStyles[0])) != m_map_index)
                 {
                     m_map_index = selGrid2;
                 }
@@ -691,7 +691,7 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 50, 50, 40)), "Players", skin.label);
 
-            if ((nbPlayers = comboboxNbPlayers.List(MenuUtils.ResizeGUI(new Rect(310, 50, 25, 20)), nb_players_combobox[m_nb_players].text, nb_players_combobox, skin.customStyles[0])) != m_nb_players)
+            if ((nbPlayers = comboboxNbPlayers.List(MenuUtils.ResizeGUI(new Rect(310, 50, 25, 20)), nb_players_combobox[m_nb_players].text, nb_players_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_players)
             {
                 nb_CPUs_combobox = MenuUtils.SetComboboxRange( 0, 3 - nbPlayers);
                 m_nb_players = nbPlayers;
@@ -699,16 +699,16 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(345, 50, 50, 40)), "CPUs", skin.label);
 
-            if ((nbCPUs = comboboxNbCPUs.List(MenuUtils.ResizeGUI(new Rect(405, 50, 25, 20)), nb_CPUs_combobox[m_nb_CPUs].text, nb_CPUs_combobox, skin.customStyles[0])) != m_nb_CPUs)
+            if ((nbCPUs = comboboxNbCPUs.List(MenuUtils.ResizeGUI(new Rect(405, 50, 25, 20)), nb_CPUs_combobox[m_nb_CPUs].text, nb_CPUs_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_CPUs)
             {
                 nb_players_combobox = MenuUtils.SetComboboxRange(1, 4 - nbCPUs);
                 m_nb_CPUs = nbCPUs;
             }
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 140, 200, 40)), "Active power-ups :");
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 140, 200, 40)), "Active power-ups :", skin.label);
 
             for(int index = 0, len = MenuConfig.power_ups_settings.Length; index < len; index++)
-                MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (index*20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index]);
+                MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (index*20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index], skin.toggle);
             
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
@@ -752,8 +752,8 @@ public class MainMenuScript : MonoBehaviour {
             m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 290, 100, 20)), m_server_password, '*', skin.textField);
 
 
-            m_disable_persp_change = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 320, 190, 20)), m_disable_persp_change, "Disable perspective's change");
-            m_auth_reco = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 340, 190, 20)), m_auth_reco, "Allow players to reconnect");
+            m_disable_persp_change = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 320, 190, 20)), m_disable_persp_change, "Disable perspective's change", skin.toggle);
+            m_auth_reco = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 340, 190, 20)), m_auth_reco, "Allow players to reconnect", skin.toggle);
 
 
 
@@ -781,7 +781,7 @@ public class MainMenuScript : MonoBehaviour {
 
             m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 110, 100, 20)), m_server_password, '*', skin.textField);
 
-            if (GUI.Button(new Rect(140, 240, 190, 80), "Join game"))
+            if (GUI.Button(new Rect(140, 240, 190, 80), "Join game", skin.button))
             {
 
                 //Check server connection
@@ -939,12 +939,12 @@ public class MainMenuScript : MonoBehaviour {
             if (isHost)
             {
 
-                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Back to host settings", skin.button))
+                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Settings", skin.button))
                 {
                     submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;   
                 }
 
-                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Force Launch", skin.button))
+                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Start", skin.button))
                 {
                     gameMgr.StartGame();
                     //gameObject.SetActive(false);//Destroy(this);

@@ -10,6 +10,7 @@ public class BombUp : APowerUp {
 
     public override void OnUse()
     {
+
     }
 
 }

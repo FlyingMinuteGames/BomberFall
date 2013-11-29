@@ -12,8 +12,9 @@ public class BomberController : MonoBehaviour
     public bool m_IsPlayer = false;
     Animator m_Animator;
     public WorldState m_State = WorldState.CENTER;
-    private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right) };
+    private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
     private static Vector3[] s_BaseGravity = new Vector3[] { Vector3.zero, Vector3.up };
+    private static int[][] StateIndex = new int[][] { new int[] { 2, 1 }, new int[] { 2, -1 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
     void Start()
     {
         m_Animator = gameObject.GetComponent<Animator>();
@@ -112,7 +113,7 @@ public class BomberController : MonoBehaviour
         m_Animator.SetBool("IsOnGround", m_IsOnGround);
         m_Animator.SetFloat("FallVelocity", fall_velocity);
         m_Animator.speed = 3f;
-        transform.Translate(move * speed * Time.deltaTime - s_BaseGravity[(int)m_State] * fall_velocity);
+        transform.Translate(move * speed * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
         transform.rotation = s_BaseRotation[(int)m_State];
 
     }
@@ -120,15 +121,18 @@ public class BomberController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //register collider
+        if(m_State == WorldState.CENTER)
+            return;
         m_contact[collision.gameObject.GetInstanceID()] = false;
 
         foreach (ContactPoint contact in collision.contacts)
         {
-            Debug.Log("normal ->" + contact.normal);
             //Debug.DrawRay(contact.point, contact.normal, Color.red);
-            if (contact.normal.z < -0.5)
+            // z < -0.5
+            // -z < -0.5
+            if (StateIndex[(int)m_State - 1][1] * contact.normal[StateIndex[(int)m_State - 1][0]] < -0.5)
                 fall_velocity = fall_velocity < 0 ? fall_velocity / 2 : fall_velocity;
-            if (contact.normal.z > 0.7)
+            if (StateIndex[(int)m_State - 1][1] * contact.normal[StateIndex[(int)m_State-1][0]] > 0.7)
             {
                 m_contact[collision.gameObject.GetInstanceID()] = true;
                 m_IsOnGround = true;
@@ -142,18 +146,22 @@ public class BomberController : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
+        
         m_contact.Remove(collision.gameObject.GetInstanceID());
-        if (!m_IsOnGround)
+        
+        if (m_State == WorldState.CENTER || !m_IsOnGround)
             return;
         UpdateOnGround();
     }
 
     void OnCollisionStay(Collision collision)
     {
+        if(m_State == WorldState.CENTER)
+            return;
         stack = 0;
         foreach (ContactPoint contact in collision.contacts)
         {
-            if (contact.normal.normalized.z > 0.5)
+            if (StateIndex[(int)m_State - 1][1] * contact.normal[StateIndex[(int)m_State - 1][0]] > 0.5)
             {
                 stack = 1;
                 break;

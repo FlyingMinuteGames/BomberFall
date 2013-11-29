@@ -12,7 +12,9 @@ public class ClientHandler
             new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_INSTANTIATE_OBJ,HandleInstantiateObject),
             new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_PLAYER_CONNECTED,HandlePlayerConnected),
             new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_START_GAME,HandleStartGame),
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage)
+            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage),
+            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_JUMP,HandleJump),
+            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_CHANGE_PHASE,HandleChangePhase)
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -119,10 +121,25 @@ public class ClientHandler
         }
     }
 
+    
+
     public static void HandleChangePhase(Packet p)
     {
         WorldState state;
         state = (WorldState)p.ReadInt();
         GameMgr.Instance.ChangePhase(state);
+    }
+
+    public static void HandleJump(Packet p)
+    {
+        int guid;
+        Vector3 start_pos;
+        guid = p.ReadInt();
+        start_pos = p.ReadVector3();
+        GameObject obj;
+        if ((obj = ObjectMgr.Instance.get(guid)) != null)
+        {
+            obj.SendMessage("RecvJump",start_pos);
+        }
     }
 }

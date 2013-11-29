@@ -8,7 +8,8 @@ public class ServerHandler  {
             new OpcodeMgr.HandlePacketStruct(Opcode.MSG_PLAYER_MOVE, HandleMovePlayer),
             new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_PLAYER_DROP_BOMB, HandleDropBomb),
             new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_CONNECT,HandleConnect),
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage)
+            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage),
+            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_JUMP,HandleJump)
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -63,6 +64,7 @@ public class ServerHandler  {
         guid = p.ReadInt();
         start_pos = p.ReadVector3();
         GameObject obj;
+        //WTF
         if ((obj = ObjectMgr.Instance.get(guid)) != null)
         {
             obj.SendMessage("RecvJump",start_pos);

@@ -734,6 +734,19 @@ public class MainMenuScript : MonoBehaviour {
             GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(260, 120, 500, 400)));
             int selGrid, selGrid2, nbPlayers, nbCPUs;
 
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 85, 30, 40)), "Map", skin.label);
+
+            if (hasMapFiles)
+            {
+                if ((selGrid2 = comboBoxMaps.List(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 20)), maps_combobox[m_map_index].text, maps_combobox, skin.button, skin.box, skin.customStyles[0])) != m_map_index)
+                {
+                    m_map_index = selGrid2;
+                }
+            }
+            else
+                GUI.Label(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 100)), "No maps found. Please move you map files to the Maps directory located at the root of the game directory.", skin.label);
+
+
             GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 30, 100, 40)), "Gameplay Mode", skin.label);
 
             if ((selGrid = comboBoxGamemode.List(MenuUtils.ResizeGUI(new Rect(150, 30, 70, 20)), gameplay_mode_combobox[m_gameplay_mode].text, gameplay_mode_combobox, skin.button, skin.box, skin.customStyles[0])) != m_gameplay_mode)
@@ -748,16 +761,6 @@ public class MainMenuScript : MonoBehaviour {
                 GUI.Label(MenuUtils.ResizeGUI(new Rect(450, 30, 140, 40)), Math.Round(m_game_duration) + " sec.", skin.label);
             }
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 85, 30, 40)), "Map", skin.label);
-
-            if (hasMapFiles)
-            {
-                if ((selGrid2 = comboBoxMaps.List(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 20)), maps_combobox[m_map_index].text, maps_combobox, skin.button, skin.box, skin.customStyles[0])) != m_map_index)
-                {
-                    m_map_index = selGrid2;
-                }
-            }else
-                GUI.Label(MenuUtils.ResizeGUI(new Rect(90, 85, 150, 100)), "No maps found. Please move you map files to the Maps directory located at the root of the game directory.", skin.label);
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 50, 50, 40)), "Players", skin.label);
 

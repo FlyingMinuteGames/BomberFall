@@ -1,0 +1,1074 @@
+fileFormatVersion: 2
+guid: f59d3f0b6f134e04b9c4870c35dc84e1
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: RobotMesh
+    100004: RobotSkeleton
+    100006: RobotSkeleton Footsteps
+    100008: RobotSkeleton Head
+    100010: RobotSkeleton HeadNub
+    100012: RobotSkeleton L Calf
+    100014: RobotSkeleton L Clavicle
+    100016: RobotSkeleton L Finger0
+    100018: RobotSkeleton L Finger0Nub
+    100020: RobotSkeleton L Finger1
+    100022: RobotSkeleton L Finger1Nub
+    100024: RobotSkeleton L Foot
+    100026: RobotSkeleton L Forearm
+    100028: RobotSkeleton L Hand
+    100030: RobotSkeleton L HorseLink
+    100032: RobotSkeleton L Thigh
+    100034: RobotSkeleton L Toe0
+    100036: RobotSkeleton L Toe0Nub
+    100038: RobotSkeleton L UpperArm
+    100040: RobotSkeleton Neck
+    100042: RobotSkeleton Pelvis
+    100044: RobotSkeleton R Calf
+    100046: RobotSkeleton R Clavicle
+    100048: RobotSkeleton R Finger0
+    100050: RobotSkeleton R Finger0Nub
+    100052: RobotSkeleton R Finger1
+    100054: RobotSkeleton R Finger1Nub
+    100056: RobotSkeleton R Foot
+    100058: RobotSkeleton R Forearm
+    100060: RobotSkeleton R Hand
+    100062: RobotSkeleton R HorseLink
+    100064: RobotSkeleton R Thigh
+    100066: RobotSkeleton R Toe0
+    100068: RobotSkeleton R Toe0Nub
+    100070: RobotSkeleton R UpperArm
+    100072: RobotSkeleton Spine
+    100074: RobotSkeleton Spine1
+    400000: //RootNode
+    400002: RobotMesh
+    400004: RobotSkeleton
+    400006: RobotSkeleton Footsteps
+    400008: RobotSkeleton Head
+    400010: RobotSkeleton HeadNub
+    400012: RobotSkeleton L Calf
+    400014: RobotSkeleton L Clavicle
+    400016: RobotSkeleton L Finger0
+    400018: RobotSkeleton L Finger0Nub
+    400020: RobotSkeleton L Finger1
+    400022: RobotSkeleton L Finger1Nub
+    400024: RobotSkeleton L Foot
+    400026: RobotSkeleton L Forearm
+    400028: RobotSkeleton L Hand
+    400030: RobotSkeleton L HorseLink
+    400032: RobotSkeleton L Thigh
+    400034: RobotSkeleton L Toe0
+    400036: RobotSkeleton L Toe0Nub
+    400038: RobotSkeleton L UpperArm
+    400040: RobotSkeleton Neck
+    400042: RobotSkeleton Pelvis
+    400044: RobotSkeleton R Calf
+    400046: RobotSkeleton R Clavicle
+    400048: RobotSkeleton R Finger0
+    400050: RobotSkeleton R Finger0Nub
+    400052: RobotSkeleton R Finger1
+    400054: RobotSkeleton R Finger1Nub
+    400056: RobotSkeleton R Foot
+    400058: RobotSkeleton R Forearm
+    400060: RobotSkeleton R Hand
+    400062: RobotSkeleton R HorseLink
+    400064: RobotSkeleton R Thigh
+    400066: RobotSkeleton R Toe0
+    400068: RobotSkeleton R Toe0Nub
+    400070: RobotSkeleton R UpperArm
+    400072: RobotSkeleton Spine
+    400074: RobotSkeleton Spine1
+    4300000: RobotMesh
+    7400000: FallStraight
+    7400002: FallLeft
+    7400004: FallRight
+    7400006: FallBack
+    9500000: //RootNode
+    13700000: RobotMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 1
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: FallStraight
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: RobotMesh
+        weight: 0
+      - path: RobotSkeleton
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Footsteps
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0/RobotSkeleton L Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0/RobotSkeleton R Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head/RobotSkeleton HeadNub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0/RobotSkeleton L Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1/RobotSkeleton L Finger1Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0/RobotSkeleton R Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1/RobotSkeleton R Finger1Nub
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: FallLeft
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 90
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: RobotMesh
+        weight: 0
+      - path: RobotSkeleton
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Footsteps
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0/RobotSkeleton L Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0/RobotSkeleton R Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head/RobotSkeleton HeadNub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0/RobotSkeleton L Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1/RobotSkeleton L Finger1Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0/RobotSkeleton R Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1/RobotSkeleton R Finger1Nub
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: FallRight
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: -90
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: RobotMesh
+        weight: 0
+      - path: RobotSkeleton
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Footsteps
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0/RobotSkeleton L Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0/RobotSkeleton R Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head/RobotSkeleton HeadNub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0/RobotSkeleton L Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1/RobotSkeleton L Finger1Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0/RobotSkeleton R Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1/RobotSkeleton R Finger1Nub
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: FallBack
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 180
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: RobotMesh
+        weight: 0
+      - path: RobotSkeleton
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Footsteps
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          L Thigh/RobotSkeleton L Calf/RobotSkeleton L HorseLink/RobotSkeleton L Foot/RobotSkeleton
+          L Toe0/RobotSkeleton L Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          R Thigh/RobotSkeleton R Calf/RobotSkeleton R HorseLink/RobotSkeleton R Foot/RobotSkeleton
+          R Toe0/RobotSkeleton R Toe0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton Head/RobotSkeleton HeadNub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger0/RobotSkeleton L Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton L Clavicle/RobotSkeleton L UpperArm/RobotSkeleton
+          L Forearm/RobotSkeleton L Hand/RobotSkeleton L Finger1/RobotSkeleton L Finger1Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand
+        weight: 1
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger0/RobotSkeleton R Finger0Nub
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1
+        weight: 0
+      - path: RobotSkeleton/RobotSkeleton Pelvis/RobotSkeleton Spine/RobotSkeleton
+          Spine1/RobotSkeleton Neck/RobotSkeleton R Clavicle/RobotSkeleton R UpperArm/RobotSkeleton
+          R Forearm/RobotSkeleton R Hand/RobotSkeleton R Finger1/RobotSkeleton R Finger1Nub
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: RobotSkeleton
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L Thigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R Thigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L Calf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R Calf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L Foot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R Foot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton Spine1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton Neck
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L Clavicle
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R Clavicle
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L UpperArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R UpperArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L Forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R Forearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton L Hand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RobotSkeleton R Hand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: robot_falling(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotMesh
+      position: {x: -4.65195615e-09, y: -.505030811, z: -.00788019132}
+      rotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
+      scale: {x: 1.64164996, y: 1.64164996, z: 1.64164996}
+      transformModified: 1
+    - name: RobotSkeleton
+      position: {x: 8.93277274e-09, y: .215930402, z: -.00651600771}
+      rotation: {x: .5, y: -.50000006, z: -.5, w: -.5}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Footsteps
+      position: {x: -0, y: 0, z: -.209946126}
+      rotation: {x: 0, y: 0, z: -.707106292, w: .707107365}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Pelvis
+      position: {x: 1.86264693e-09, y: -1.2796344e-09, z: -2.98023224e-08}
+      rotation: {x: .499999315, y: -.500000715, z: -.499999315, w: -.500000715}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Spine
+      position: {x: -.069859907, y: -7.5828335e-05, z: 1.38361178e-09}
+      rotation: {x: 2.05636024e-06, y: 2.98022407e-08, z: 2.98022833e-08, w: -1}
+      scale: {x: .999999881, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L Thigh
+      position: {x: .0698599219, y: 7.55222791e-05, z: .10505946}
+      rotation: {x: -.0434379131, y: .998971343, z: .0128142396, w: -.00229682028}
+      scale: {x: 1, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L Calf
+      position: {x: -.109940521, y: 1.19552697e-08, z: -1.32403208e-08}
+      rotation: {x: 2.63015849e-08, y: -1.9817735e-08, z: .156803668, w: .987629771}
+      scale: {x: .999999881, y: .999999881, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton L HorseLink
+      position: {x: -.0685625374, y: 9.07867914e-09, z: -1.52515778e-08}
+      rotation: {x: -1.99326973e-08, y: 1.78485493e-08, z: -.0487957522, w: .998808801}
+      scale: {x: 1.00000036, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L Foot
+      position: {x: -.0168281998, y: 3.98057587e-09, z: -1.82640285e-08}
+      rotation: {x: .0124883205, y: -.00367248128, z: -.0651314333, w: .997791767}
+      scale: {x: .999999762, y: .999999523, z: .999999642}
+      transformModified: 1
+    - name: RobotSkeleton L Toe0
+      position: {x: -.0354032516, y: .0544447228, z: 9.53674295e-09}
+      rotation: {x: -1.63711924e-08, y: 1.45026879e-08, z: -.74852854, w: .663102567}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L Toe0Nub
+      position: {x: -.00412277225, y: 0, z: 0}
+      rotation: {x: 1.78209572e-27, y: 2.91038305e-11, z: 1, w: 6.12323426e-17}
+      scale: {x: -1, y: -1, z: -1}
+      transformModified: 1
+    - name: RobotSkeleton R Thigh
+      position: {x: .0698599517, y: 7.61166448e-05, z: -.105059497}
+      rotation: {x: .00537876785, y: .999985516, z: 1.35567507e-06, w: -1.07994154e-07}
+      scale: {x: 1, y: .999999881, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R Calf
+      position: {x: -.109940566, y: -3.17002176e-08, z: 4.45335679e-09}
+      rotation: {x: -6.93471947e-09, y: 4.57041693e-08, z: .107543327, w: .994200468}
+      scale: {x: 1, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R HorseLink
+      position: {x: -.0643968359, y: 3.33180452e-08, z: -1.30695117e-08}
+      rotation: {x: -1.42091867e-08, y: -6.46973106e-08, z: -.211518884, w: .977373898}
+      scale: {x: 1.00000024, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Foot
+      position: {x: -.0168278869, y: 5.68689806e-08, z: -3.81152283e-08}
+      rotation: {x: 3.02513854e-08, y: 2.08281499e-08, z: .0998316407, w: .995004416}
+      scale: {x: 1, y: 1.00000012, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton R Toe0
+      position: {x: -.0354032516, y: .0544447303, z: -9.53674295e-09}
+      rotation: {x: -1.63698299e-08, y: 1.4503895e-08, z: -.74852854, w: .663102567}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton R Toe0Nub
+      position: {x: -.00412276248, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Spine1
+      position: {x: -.0673704669, y: -4.59398179e-05, z: 3.89238997e-09}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: .99999994, y: .999999881, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Neck
+      position: {x: -.125060052, y: 6.69591245e-05, z: 7.63501973e-09}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton Head
+      position: {x: -.0409748331, y: 3.26158515e-05, z: 2.44783216e-09}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: .999999881, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton HeadNub
+      position: {x: -.423499018, y: 0, z: 0}
+      rotation: {x: -4.82529516e-10, y: 5.82076609e-11, z: 2.80869145e-20, w: 1}
+      scale: {x: 1, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L Clavicle
+      position: {x: -9.9820376e-08, y: 3.2566124e-05, z: .0220047422}
+      rotation: {x: -.707106769, y: -1.00790862e-06, z: .707106829, w: 9.30846227e-07}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L UpperArm
+      position: {x: -.0633814335, y: 2.25398438e-08, z: -1.52789553e-07}
+      rotation: {x: .664017379, y: .0209179465, z: .0248954855, w: -.747009873}
+      scale: {x: .999999821, y: 1.00000012, z: .999999881}
+      transformModified: 1
+    - name: RobotSkeleton L Forearm
+      position: {x: -.133902669, y: -6.90945612e-08, z: 6.18038882e-08}
+      rotation: {x: -3.14547712e-08, y: -1.66670535e-08, z: .0301081948, w: .999546647}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L Hand
+      position: {x: -.111565575, y: 3.17547624e-08, z: -2.26635848e-08}
+      rotation: {x: -.74324882, y: -3.33988282e-05, z: 3.7245456e-05, w: .669015169}
+      scale: {x: .99999994, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton L Finger0
+      position: {x: -.0150026549, y: .0050052898, z: -.0363671668}
+      rotation: {x: .711281478, y: .000302272791, z: .00547009008, w: .702885985}
+      scale: {x: .99999994, y: .999999642, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton L Finger0Nub
+      position: {x: -.0646368787, y: 4.76837148e-09, z: 2.86102289e-08}
+      rotation: {x: 1.11758709e-08, y: 2.98023224e-08, z: 7.45058015e-09, w: 1}
+      scale: {x: 1, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L Finger1
+      position: {x: -.0169512574, y: -.00160694099, z: .0354980826}
+      rotation: {x: .000513354549, y: -.0150887752, z: -7.7764771e-06, w: .999886096}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton L Finger1Nub
+      position: {x: -.0590924434, y: 9.53674295e-09, z: 9.53674295e-09}
+      rotation: {x: 0, y: 1.49011612e-08, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: RobotSkeleton R Clavicle
+      position: {x: -1.08792001e-07, y: 3.26869958e-05, z: -.0220047385}
+      rotation: {x: .707106829, y: -9.3084634e-07, z: .707106829, w: -1.00790874e-06}
+      scale: {x: 1, y: 1, z: .99999994}
+      transformModified: 1
+    - name: RobotSkeleton R UpperArm
+      position: {x: -.0633814484, y: 2.49576644e-08, z: 2.01165847e-07}
+      rotation: {x: .658001602, y: .00663200952, z: -.00787609164, w: .752946079}
+      scale: {x: .99999994, y: 1.00000048, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Forearm
+      position: {x: -.133902714, y: -1.78727049e-07, z: 1.50319512e-09}
+      rotation: {x: -2.60193822e-08, y: 3.5244117e-08, z: .00106421486, w: .999999404}
+      scale: {x: 1.00000024, y: .999999762, z: .999999642}
+      transformModified: 1
+    - name: RobotSkeleton R Hand
+      position: {x: -.11156559, y: 7.58544374e-08, z: 1.61736597e-08}
+      rotation: {x: .669015229, y: -3.71686801e-05, z: 3.35328805e-05, w: -.743248761}
+      scale: {x: .999999881, y: 1.00000048, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Finger0
+      position: {x: -.0149729373, y: .000327920599, z: .0352458134}
+      rotation: {x: -.711281478, y: -.000302415399, z: .00547005329, w: .702885926}
+      scale: {x: 1.00000012, y: .999999881, z: .999999821}
+      transformModified: 1
+    - name: RobotSkeleton R Finger0Nub
+      position: {x: -.0646368414, y: 4.76837148e-09, z: -1.90734859e-08}
+      rotation: {x: 2.98023224e-08, y: -3.72528963e-09, z: 1, w: -7.4505806e-09}
+      scale: {x: -1, y: -1.00000012, z: -1}
+      transformModified: 1
+    - name: RobotSkeleton R Finger1
+      position: {x: -.0169513561, y: 1.11442459e-05, z: -.0362708904}
+      rotation: {x: .00130956026, y: -1.04888052e-07, z: 5.76204577e-08, w: .999999166}
+      scale: {x: 1, y: .999999702, z: 1.00000012}
+      transformModified: 1
+    - name: RobotSkeleton R Finger1Nub
+      position: {x: -.0590924434, y: 9.53674295e-09, z: -9.53674295e-09}
+      rotation: {x: -5.55111446e-17, y: 3.7252903e-09, z: 1, w: -1.49011594e-08}
+      scale: {x: -1.00000012, y: -1, z: -1}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  userData: 

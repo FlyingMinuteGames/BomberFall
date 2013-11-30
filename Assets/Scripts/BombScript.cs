@@ -13,10 +13,12 @@ public class BombScript : MonoBehaviour {
     // Use this for initialization
 	private Transform[] child;
     private bool m_IsInit = false;
+    private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
     void Start () {
         Init();
 
     }
+
     private void Init()
     {
         if (m_IsInit)
@@ -40,11 +42,17 @@ public class BombScript : MonoBehaviour {
             t.gameObject.SetActive(enable);
     }
 
+    void OnChangePhase(WorldState state)
+    {
+        transform.rotation = s_BaseRotation[(int)state];
+    }
+
 
     public void StartScript(Callback onExplode = null,Callback onEnd = null)
     {
         if (!m_IsInit)
             Init();
+        transform.rotation = s_BaseRotation[(int)GameMgr.Instance.State];
         StartCoroutine(WaitAndExplode(onExplode,onEnd));
         CheckIfWithinPlayer();
     }

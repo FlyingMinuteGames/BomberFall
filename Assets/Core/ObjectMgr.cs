@@ -38,12 +38,19 @@ public class ObjectMgr {
         m_objects[guid] = new GOWrapper(type,o,guid) ;
         return guid;
     }
+
+    public bool UnRegister(int guid)
+    {
+        return m_objects.Remove(guid);
+    }
     public GameObject get(int guid)
     {
         if (!m_objects.ContainsKey(guid))
             return null;
         return m_objects[guid].go;
     }
+
+
     public byte[] DumpData()
     {
         byte[] data = new byte[m_objects.Count * 16];

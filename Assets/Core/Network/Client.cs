@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 public class Client
@@ -32,7 +33,7 @@ public class Client
         this.port = port;
     }
 
-    public void SetHandler(OpcodeMgr.HandlePacketStruct[] handler)
+    public void SetHandler(Dictionary<Opcode,OpcodeMgr._HandlePacket> handler)
     {
         m_opcodeMgr.SetHandler(handler);
     }

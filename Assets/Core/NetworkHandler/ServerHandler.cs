@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ServerHandler  {
 
     public static Server current;
-    public static OpcodeMgr.HandlePacketStruct[] handlers = new OpcodeMgr.HandlePacketStruct[]{ 
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_PLAYER_MOVE, HandleMovePlayer),
-            new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_PLAYER_DROP_BOMB, HandleDropBomb),
-            new OpcodeMgr.HandlePacketStruct(Opcode.CMSG_CONNECT,HandleConnect),
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage),
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_JUMP,HandleJump)
+    public static Dictionary<Opcode,OpcodeMgr._HandlePacket> handlers =new Dictionary<Opcode,OpcodeMgr._HandlePacket>()
+    { 
+            {Opcode.MSG_PLAYER_MOVE, HandleMovePlayer},
+            {Opcode.CMSG_PLAYER_DROP_BOMB, HandleDropBomb},
+            {Opcode.CMSG_CONNECT,HandleConnect},
+            {Opcode.MSG_SEND_MESSAGE,HandleSendMessage},
+            {Opcode.MSG_JUMP,HandleJump}
     };
 
     public static void HandleMovePlayer(Packet p)

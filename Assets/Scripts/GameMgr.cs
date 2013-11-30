@@ -49,6 +49,13 @@ public class GameMgr : MonoBehaviour {
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
+
+    public WorldState State
+    {
+        get { return m_state; }
+        
+    }
+
     private GameObject m_MainCamera;
     public GameMgrType Type
     {
@@ -111,10 +118,13 @@ public class GameMgr : MonoBehaviour {
     {
         GameObject go = ObjectMgr.Instance.get(guid);
         if (go != null)
+        {
+            ObjectMgr.Instance.UnRegister(guid);
             Despawn(type, go);
+        }
 
     }
-    public void Despawn(GOType type, GameObject go)
+    private void Despawn(GOType type, GameObject go)
     {
         switch (type)
         {
@@ -134,7 +144,7 @@ public class GameMgr : MonoBehaviour {
         ClientHandler.current = c;
         if (s != null)
             c.Both = true;
-        c.SetHandler(ClientHandler.handlers);
+        c.SetHandler(ClientHandler._handlers);
         c.Connect();
         c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
     }
@@ -192,6 +202,11 @@ public class GameMgr : MonoBehaviour {
         Debug.Log("Change to " + m_state);
         
         IList<GameObject> l = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
+        foreach (var a in l)
+            a.SendMessage("OnChangePhase", m_state);
+
+        l = ObjectMgr.Instance.Get(GOType.GO_BOMB);
+        Debug.Log("size : " + l.Count);
         foreach (var a in l)
             a.SendMessage("OnChangePhase", m_state);
 

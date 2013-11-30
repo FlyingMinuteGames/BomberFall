@@ -35,7 +35,8 @@ public class ObjectMgr {
         if (guid < 0)
             guid = _guid++;
         Debug.Log("register go, type : " + type + ", guid :" + guid);
-        m_objects[guid] = new GOWrapper(type,o,guid) ;
+        m_objects[guid] = new GOWrapper(type,o,guid);
+        o.GetComponent<Guid>().SetGUID(guid);
         return guid;
     }
     public GameObject get(int guid)

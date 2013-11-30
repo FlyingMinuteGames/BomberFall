@@ -179,7 +179,7 @@ public class GameMgr : MonoBehaviour {
         while (game_started)
         {
             yield return new WaitForSeconds(5);
-            ChangePhase();
+            //ChangePhase();
         }
     }
 

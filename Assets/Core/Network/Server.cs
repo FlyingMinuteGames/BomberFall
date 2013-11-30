@@ -31,6 +31,7 @@ public class Server //: INetwork
         
     }
 
+
     public void SetHandler(OpcodeMgr.HandlePacketStruct[] handler)
     {
         m_opcodeMgr.SetHandler(handler);

@@ -22,8 +22,9 @@ public class PowerUpGOScript : MonoBehaviour {
     {
         int index = UnityEngine.Random.Range(0, 12);
         type = (Config.PowerType)index;
-        Vector3 originalTransform = goContainer.transform.position;
-        goContainer = (GameObject)Instantiate(powerGOs[index], originalTransform, Quaternion.identity);
-
+        Debug.Log("Type is "+ index);
+        Vector3 originalTransform = gameObject.transform.position;
+        goContainer = (GameObject)Instantiate(powerGOs[index], originalTransform+ new Vector3(0,-0.5f,0f), Quaternion.identity);
+        goContainer.transform.parent = gameObject.transform;
     }
 }

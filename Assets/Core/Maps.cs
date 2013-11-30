@@ -330,12 +330,10 @@ public class Maps {
                 break;
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
-                AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(i, a.y));
-                /*if (true/*UnityEngine.Random.Range(0, 100) < 70*//*)
-                {
-                    GameMgr.Instance.Spawn(GOType.GO_PWRUP, new Vector3(i, a.y, 0f));
-                }*/
-                x = i-1;
+                IntVector2 vec = new IntVector2(i, a.y);
+                AddBlock(MapsTiles.EMPTY_TILE, vec);
+                OnDestroyBlock(vec);
+                x = i - 1;
                 break;
             }
         }
@@ -351,8 +349,10 @@ public class Maps {
                 break;
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
-                AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(i, a.y));
-                z = i+1;
+                IntVector2 vec = new IntVector2(i, a.y);
+                AddBlock(MapsTiles.EMPTY_TILE, vec);
+                OnDestroyBlock(vec);
+                z = i + 1;
                 break;
             }
         }
@@ -368,7 +368,9 @@ public class Maps {
                 break;
             if (m_maps[a.x][i].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
-                AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(a.x, i));
+                IntVector2 vec = new IntVector2(a.x, i);
+                AddBlock(MapsTiles.EMPTY_TILE, vec);
+                OnDestroyBlock(vec);
                 y = i - 1;
                 break;
             }
@@ -386,7 +388,9 @@ public class Maps {
                 break;
             if (m_maps[a.x][i].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
-                AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(a.x, i));
+                IntVector2 vec = new IntVector2(a.x, i);
+                AddBlock(MapsTiles.EMPTY_TILE, vec);
+                OnDestroyBlock(vec);
                 w = i + 1;
                 break;
             }
@@ -399,4 +403,11 @@ public class Maps {
 
 
     }
+
+    private void OnDestroyBlock(IntVector2 vec)
+    {
+        if (true)
+            GameMgr.Instance.Spawn(GOType.GO_PWRUP, TilePosToWorldPos(vec));
+    }
+
 }

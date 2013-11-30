@@ -26,6 +26,6 @@ public enum Opcode
     MSG_UPDATE_POSITION, // no handle, preparation for movement interpolation
     MSG_JUMP,
     SMSG_CHANGE_PHASE,
-    CMSG_POWER_PICK_UP
+    CMSG_OFF_POWER_PICK_UP
 
 }

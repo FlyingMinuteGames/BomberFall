@@ -7,6 +7,8 @@ public class BackToSchool : APowerUp {
     {
         Debug.Log("In pick up of BackToschool");
         Packet p = PacketBuilder.BuildBindOffensiveItem(clientGuid, Config.PowerType.BACK_TO_SCHOOL);
+        GameMgr.Instance.s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(clientGuid), p);
+        base.Delete(powerGo);   
     }
 
     public override void OnUse()

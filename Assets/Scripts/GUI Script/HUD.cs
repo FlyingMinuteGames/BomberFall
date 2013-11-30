@@ -62,8 +62,8 @@ public class HUD : MonoBehaviour
 
         offensiveStr = "Offensive (" + MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey")) + ")";
         defensiveStr = "Defensive (" + MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey")) + ")";
-        BindOffensivePower(Config.PowerType.BRING_A_SW_TO_A_GF);
-        BindDefensivePower(Config.PowerType.IMPENETRABLE_TRINKET);
+       // BindOffensivePower(Config.PowerType.BACK_TO_SCHOOL);
+       // BindDefensivePower(Config.PowerType.IMPENETRABLE_TRINKET);
 
 
 
@@ -95,6 +95,8 @@ public class HUD : MonoBehaviour
     }
 
     public void BindOffensivePower(Config.PowerType powertype){
+
+        Debug.Log("Bind power ===================>" + powertype);
         hasOffensivePower = true;
         offensivePower = powertype;
     }

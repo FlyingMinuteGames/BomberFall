@@ -107,9 +107,10 @@ public class GameMgr : MonoBehaviour {
                 return ObjectMgr.Instance.Register(go, type, guid);
             case GOType.GO_PWRUP:
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
-                go.GetComponent<PowerUpGOScript>().Init();
+                PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
+                sc.type = (Config.PowerType)1/*UnityEngine.Random.Range(0, 12)*/;
+                sc.Init();
                 return ObjectMgr.Instance.Register(go, type, guid);
-
         }
         return -1;
     }

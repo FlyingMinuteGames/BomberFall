@@ -97,7 +97,7 @@ public class PacketBuilder  {
 
     public static Packet BuildBindOffensiveItem(int guid, Config.PowerType powertype)
     {
-        Packet p = new Packet(4+4, Opcode.CMSG_POWER_PICK_UP);
+        Packet p = new Packet(4+4, Opcode.CMSG_OFF_POWER_PICK_UP);
         p.Write(guid);
         p.Write((int)powertype);
         return p;

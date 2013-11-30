@@ -10,7 +10,8 @@ public abstract class APowerUp {
 
     //Remove item from scene and put it back to pool
     public void Delete(GameObject powerGO){
-
+        Debug.Log("Trying to call despawn on powerUp");
+        GameMgr.Instance.Despawn(GOType.GO_PWRUP, powerGO.GetComponent<Guid>().GetGUID()); 
     }
 
     public void AssignToSlot(GameObject powerGO)

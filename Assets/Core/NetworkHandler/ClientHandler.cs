@@ -16,7 +16,8 @@ public class ClientHandler
             {Opcode.SMSG_START_GAME,HandleStartGame},
             {Opcode.MSG_SEND_MESSAGE,HandleSendMessage},
             {Opcode.MSG_JUMP,HandleJump},
-            {Opcode.SMSG_CHANGE_PHASE,HandleChangePhase}
+            {Opcode.SMSG_CHANGE_PHASE,HandleChangePhase},
+            {Opcode.CMSG_OFF_POWER_PICK_UP, HandlePowerPickUp}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -144,4 +145,17 @@ public class ClientHandler
             obj.SendMessage("RecvJump",start_pos);
         }
     }
+
+    public static void HandlePowerPickUp(Packet p)
+    {
+        int guid;
+        Config.PowerType powertype;
+        guid = p.ReadInt();
+        powertype =(Config.PowerType)p.ReadInt();
+        HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
+        hud.BindOffensivePower(powertype);
+    }
+
+
+
 }

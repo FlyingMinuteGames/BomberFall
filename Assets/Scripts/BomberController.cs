@@ -115,7 +115,7 @@ public class BomberController : MonoBehaviour
         m_Animator.SetFloat("FallVelocity", fall_velocity);
         m_Animator.speed = 3f;
         transform.Translate(move * speed * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
-        transform.rotation = s_BaseRotation[(int)m_State];
+        
 
     }
 
@@ -145,6 +145,13 @@ public class BomberController : MonoBehaviour
             fall_velocity = 0;
     }
 
+    public void ResetOnGround()
+    {
+        m_IsOnGround = false;
+        //WakeUp physics
+        //transform.Translate(0, 0, 0);
+    }
+
     void OnCollisionExit(Collision collision)
     {
         
@@ -160,6 +167,9 @@ public class BomberController : MonoBehaviour
         if(m_State == WorldState.CENTER)
             return;
         stack = 0;
+
+        Debug.Log("on stay " + m_IsOnGround);
+
         foreach (ContactPoint contact in collision.contacts)
         {
             if (StateIndex[(int)m_State - 1][1] * contact.normal[StateIndex[(int)m_State - 1][0]] > 0.5)
@@ -194,6 +204,8 @@ public class BomberController : MonoBehaviour
     {
         m_State = state;
         m_MoveFlags = 0;
+        m_IsOnGround = state == WorldState.CENTER ? true : false;
+        transform.rotation = s_BaseRotation[(int)m_State];
     }
 
 

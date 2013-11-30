@@ -182,7 +182,6 @@ public class Maps {
     void GenerateBound(IntVector2 size)
     {
         IntVector2 size_2 = size/ 2;
-        Vector3 init = new Vector3(-size_2.x - 1, 0, -size_2.y - 1);
         int m1 = size.x%2 == 0 ? size_2.x : size_2.x+1, m2 = size.y%2 == 0 ? size_2.y : size_2.y+1;
         for (int i = -size_2.x; i < m1; i++)
         {

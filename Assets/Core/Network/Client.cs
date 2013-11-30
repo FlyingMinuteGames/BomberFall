@@ -58,8 +58,6 @@ public class Client
     private void HandleClient(object client)
     {
         TcpClient tcpClient = (TcpClient)client;
-
-        NetworkStream clientStream = tcpClient.GetStream();
         Debug.Log("begin to read network stream");
         int size, opcode;
         byte[] buffer = new byte[4096];

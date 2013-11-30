@@ -6,12 +6,22 @@ using System.Threading;
 using System;
 public class Server //: INetwork 
 {
-
+    public struct ClientSession
+    {
+        public ClientSession(int sessionId, int guid, TcpClient client)
+        {
+            this.sessionId = sessionId;
+            playerGUID = guid;
+            tcpClient = client;
+        }
+        public int sessionId, playerGUID;
+        public TcpClient tcpClient;
+    }
     const int BUFFER_SIZE = 4096;
     TcpListener tcp_server;
     List<TcpClient> m_clients;
-    Dictionary<int, TcpClient> m_sessions;
-    public Dictionary<int, TcpClient> Session
+    Dictionary<int, ClientSession> m_sessions;
+    public Dictionary<int, ClientSession> Session
     {
         get { return m_sessions; }
     }
@@ -24,7 +34,7 @@ public class Server //: INetwork
     
     public Server()
     {
-        m_sessions = new Dictionary<int, TcpClient>();
+        m_sessions = new Dictionary<int, ClientSession>();
         tcp_server = new TcpListener(Config.DEFAULT_PORT);
         listener_thread = new Thread(new ThreadStart(ListenForClients));
         listener_thread.Start();
@@ -65,6 +75,26 @@ public class Server //: INetwork
         
         }
         tcp_server.Stop();
+    }
+
+    public int GetSessionId(int playerGuid)
+    {
+        foreach(var v in m_sessions)
+        {
+            if (v.Value.playerGUID == playerGuid)
+                return v.Key;
+        }
+        return -1;
+    }
+
+    public TcpClient GetTcpClient(int playerGuid)
+    {
+        foreach (var v in m_sessions)
+        {
+            if(v.Value.playerGUID == playerGuid)
+                return v.Value.tcpClient;
+        }
+        return null;
     }
 
     private void HandleClient(object client)
@@ -129,6 +159,24 @@ public class Server //: INetwork
         }
         Debug.Log("socket close !");
         tcpClient.Close();
+        //remove
+
+        lock (m_sessions)
+        {
+            foreach(var k in m_sessions)
+            {
+                if (k.Value.tcpClient == tcpClient)
+                {
+                    m_sessions.Remove(k.Key);
+                    break;
+                }
+            }
+        }
+        lock (m_clients)
+        {
+            m_clients.Remove(tcpClient);
+        }
+
     }
     private void HandlePacket(TcpClient client, Packet packet)
     {
@@ -144,7 +192,6 @@ public class Server //: INetwork
     {
         byte[] data = packet.ToByte();
         //Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
-        
         client.Client.Send(data);//client.GetStream().Write(data,0,data.Length);
     }
 
@@ -163,8 +210,8 @@ public class Server //: INetwork
     {
 
         
-        int _session = ++session; 
-        m_sessions[_session] = cl;
+        int _session = ++session;
+       
         Maps maps = GameMgr.Instance.maps;
         SendPacketTo(cl, PacketBuilder.BuildSendMapPacket(maps));
         byte[] data = ObjectMgr.Instance.DumpData();
@@ -172,7 +219,7 @@ public class Server //: INetwork
             SendPacketTo(cl,PacketBuilder.BuildInstantiateObjPacket(data));
 
         int guid = GameMgr.Instance.Spawn(GOType.GO_PLAYER,GetInitPos(session-1));
-
+        m_sessions[_session] = new ClientSession(_session,guid,cl);
 
         if ((flags & 4) != 0) // hack lol
             ObjectMgr.Instance.get(guid).GetComponent<BomberController>().m_IsPlayer = true; 

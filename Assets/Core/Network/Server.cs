@@ -36,6 +36,10 @@ public class Server //: INetwork
     {
         m_opcodeMgr.SetHandler(handler);
     }
+    public void SetHandler(Dictionary<Opcode,OpcodeMgr._HandlePacket> handler)
+    {
+        m_opcodeMgr.SetHandler(handler);
+    }
 
     private void ListenForClients()
     {
@@ -207,7 +211,7 @@ public class Server //: INetwork
             SendPacketBroadCast(PacketBuilder.BuildBombExplode(tpos));
         },
         () => {
-            GameMgr.Instance.Despawn(GOType.GO_BOMB, go);
+            GameMgr.Instance.Despawn(GOType.GO_BOMB, guid);
         });
     }
 }

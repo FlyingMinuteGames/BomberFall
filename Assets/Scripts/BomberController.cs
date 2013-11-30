@@ -196,6 +196,7 @@ public class BomberController : MonoBehaviour
         m_MoveFlags = 0;
     }
 
+
     void OnRecvMove(object[] o)
     {
         this.m_MoveFlags = (int)o[0];

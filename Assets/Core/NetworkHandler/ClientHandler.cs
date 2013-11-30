@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ClientHandler
 {
     public static Client current;
-    public static OpcodeMgr.HandlePacketStruct[] handlers = new OpcodeMgr.HandlePacketStruct[]{ 
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_PLAYER_MOVE, HandleMovePlayer),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_CREATE_PLAYER,HandleCreatePlayer),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_BOMB_EXPLODE, HandleBombExplode),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_SEND_MAP,HandleSendMap),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_INSTANTIATE_OBJ,HandleInstantiateObject),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_PLAYER_CONNECTED,HandlePlayerConnected),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_START_GAME,HandleStartGame),
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_SEND_MESSAGE,HandleSendMessage),
-            new OpcodeMgr.HandlePacketStruct(Opcode.MSG_JUMP,HandleJump),
-            new OpcodeMgr.HandlePacketStruct(Opcode.SMSG_CHANGE_PHASE,HandleChangePhase)
+    public static Dictionary<Opcode, OpcodeMgr._HandlePacket> _handlers = new Dictionary<Opcode, OpcodeMgr._HandlePacket>()
+    {
+            {Opcode.MSG_PLAYER_MOVE, HandleMovePlayer},
+            {Opcode.SMSG_CREATE_PLAYER,HandleCreatePlayer},
+            {Opcode.SMSG_BOMB_EXPLODE, HandleBombExplode},
+            {Opcode.SMSG_SEND_MAP,HandleSendMap},
+            {Opcode.SMSG_INSTANTIATE_OBJ,HandleInstantiateObject},
+            {Opcode.SMSG_PLAYER_CONNECTED,HandlePlayerConnected},
+            {Opcode.SMSG_START_GAME,HandleStartGame},
+            {Opcode.MSG_SEND_MESSAGE,HandleSendMessage},
+            {Opcode.MSG_JUMP,HandleJump},
+            {Opcode.SMSG_CHANGE_PHASE,HandleChangePhase}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -92,7 +94,7 @@ public class ClientHandler
                     () => { ;}
                     , () =>
                     {
-                        GameMgr.Instance.Despawn(GOType.GO_BOMB, go);
+                        GameMgr.Instance.Despawn(GOType.GO_BOMB, guid);
                     });
 
             }
@@ -103,7 +105,7 @@ public class ClientHandler
     {
         Debug.Log("START GAME");
         GameMgr.Instance.game_started = true;
-        GameObject.Find("MenuCam").GetComponent<MainMenuScript>().active = false;
+        GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>().active = false;
         HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
         hud.Init();
 

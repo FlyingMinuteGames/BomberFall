@@ -5,13 +5,29 @@ public class PowerUpGOScript : MonoBehaviour {
 
 
     public GameObject[] powerGOs;
+    public static APowerUp[] powers = {
+                                          new AsNeilTaughtMe(), 
+                                          new BackToSchool(), 
+                                          new BombSquad(), 
+                                          new BombUp(), 
+                                          new BringASwordToAGF(), 
+                                          new FireUp(), 
+                                          new ImpenetrableTrinket(), 
+                                          new KickItLikeYouMeanIt(), 
+                                          new RandomizatronTeleporter(), 
+                                          new SpeedUp(), 
+                                          new TheHomeRunner(), 
+                                          new TheVengefulPhenix()
+                                      };
+
     private GameObject goContainer;
-    private Config.PowerType type;
+    public Config.PowerType type;
     private Collider m_collider;
 
     // Use this for initialization
 	void Start () {
         m_collider = gameObject.GetComponent<Collider>();
+
     }
 	
 	// Update is called once per frame
@@ -36,6 +52,7 @@ public class PowerUpGOScript : MonoBehaviour {
         if (col.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player has entered" + col.gameObject.GetComponent<Guid>().GetGUID());
+            GameMgr.Instance.PowerUpPickUp(gameObject, col.gameObject.GetComponent<Guid>().GetGUID(), powers[(int)type]);
         }
     }
 }

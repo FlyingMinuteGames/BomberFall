@@ -184,6 +184,12 @@ public class GameMgr : MonoBehaviour {
         c.SendPacket(p);
     }
 
+    public void PowerUpPickUp(GameObject powerGo, int player_guid, APowerUp power)
+    {
+        Debug.Log("Power picked by player " + player_guid + " power id is " + powerGo.GetComponent<Guid>().GetGUID() + " power is " + power);
+        power.OnPickUp(powerGo, player_guid);
+    }
+
     IEnumerator ChangePhaseTimer()
     {
         while (game_started)

@@ -36,7 +36,7 @@ public class BomberController : MonoBehaviour
     private Vector3 gravity = Vector3.back;
     delegate int Callback(BomberController me, bool enable);
 
-    private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("RightKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey") };
+    private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("RightKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("DefensiveItemKey") };
     private Callback[] action_callback = {
                                             /*(me,enable) => { me.m_force += enable ? Vector3.forward : Vector3.back; return 1;},
                                             (me,enable) => { me.m_force += !enable ? Vector3.forward : Vector3.back; return 1;},
@@ -55,7 +55,8 @@ public class BomberController : MonoBehaviour
         {(KeyCode)PlayerPrefs.GetInt("LeftKey"),(Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_LEFT : me.m_MoveFlags & ~(int)MoveState.MOVE_LEFT; return 1;})},
         {(KeyCode)PlayerPrefs.GetInt("RightKey"), (Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_RIGHT : me.m_MoveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;})},
         {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 1;})},
-        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{return 0;})}
+        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{return 0;})},
+        {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{return 0;})}
     };
     void UpdateInput()
     {

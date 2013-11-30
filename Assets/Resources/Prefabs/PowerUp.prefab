@@ -8,9 +8,25 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 33: {fileID: 3300000}
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: PowerUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400002}
+  m_Layer: 0
+  m_Name: Power
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,8 +41,27 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 400002}
   m_Father: {fileID: 0}
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.48886681, y: .431677014, z: -1.7171998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400000}
+--- !u!33 &3300000
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,6 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039c2405986375042912c084872f90a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerGOs:
+  - {fileID: 100000, guid: f4b9a1fd4b31bb54f8acb8ce15aba217, type: 2}
+  - {fileID: 100006, guid: 1d5dd2a4bddb0244c83e50495b83ca36, type: 2}
+  - {fileID: 100004, guid: 5111352583c0bf64889ca0f9e298e458, type: 2}
+  - {fileID: 100016, guid: 184e74b533cb43948bb30c595cb5655e, type: 2}
+  - {fileID: 100000, guid: 7a3095cb223b227429e86eb0e25ed12e, type: 2}
+  - {fileID: 100000, guid: 22a4ddddc31bb7648b91c78c6b2a7842, type: 2}
+  - {fileID: 100000, guid: b604366676b6de74493e3a564282306c, type: 2}
+  - {fileID: 100006, guid: 67cce929b966d4d4d9d880c6b24965d8, type: 2}
+  - {fileID: 100014, guid: eb4cfe63c6108c045b41d8ebb9197679, type: 2}
+  - {fileID: 100006, guid: 312c4f9c88bb9504e85a487d09003585, type: 2}
+  - {fileID: 100000, guid: adf160c98d408134fa413016895e3a3e, type: 2}
+  - {fileID: 100006, guid: e975729cb988a7641aff92a92db608a6, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

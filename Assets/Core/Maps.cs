@@ -330,6 +330,10 @@ public class Maps {
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(i, a.y));
+                if (true/*UnityEngine.Random.Range(0, 100) < 70*/)
+                {
+                    GameMgr.Instance.Spawn(GOType.GO_PWRUP, new Vector3(i, a.y, 0f));
+                }
                 x = i-1;
                 break;
             }

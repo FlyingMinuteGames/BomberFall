@@ -1,19 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerUpController : MonoBehaviour {
+public class PowerUpGOScript : MonoBehaviour {
 
 
-    public Config.PowerType type;
-    public Texture illustration;
+    public GameObject[] powerGOs;
+    private GameObject goContainer;
+    private Config.PowerType type;
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
-	
+        goContainer = gameObject.transform.FindChild("Power").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public void Init()
+    {
+        int index = UnityEngine.Random.Range(0, 12);
+        type = (Config.PowerType)index;
+        Vector3 originalTransform = goContainer.transform.position;
+        goContainer = (GameObject)Instantiate(powerGOs[index], originalTransform, Quaternion.identity);
+
+    }
 }

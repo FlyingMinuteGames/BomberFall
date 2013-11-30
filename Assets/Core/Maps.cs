@@ -327,13 +327,15 @@ public class Maps {
                 break;
             }
             Debug.Log("i++" + i);
+            if (m_maps[i][a.y].m_type == MapsTiles.SOLID_BLOCK)
+                break;
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(i, a.y));
-                if (true/*UnityEngine.Random.Range(0, 100) < 70*/)
+                /*if (true/*UnityEngine.Random.Range(0, 100) < 70*//*)
                 {
                     GameMgr.Instance.Spawn(GOType.GO_PWRUP, new Vector3(i, a.y, 0f));
-                }
+                }*/
                 x = i-1;
                 break;
             }
@@ -346,6 +348,8 @@ public class Maps {
                 z = i+1;
                 break;
             }
+            if (m_maps[i][a.y].m_type == MapsTiles.SOLID_BLOCK)
+                break;
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(i, a.y));
@@ -361,6 +365,8 @@ public class Maps {
                 y = i - 1;
                 break;
             }
+            if (m_maps[a.x][i].m_type == MapsTiles.SOLID_BLOCK)
+                break;
             if (m_maps[a.x][i].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(a.x, i));
@@ -377,6 +383,8 @@ public class Maps {
                 w = i + 1;
                 break;
             }
+            if (m_maps[a.x][i].m_type == MapsTiles.SOLID_BLOCK)
+                break;
             if (m_maps[a.x][i].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 AddBlock(MapsTiles.EMPTY_TILE, new IntVector2(a.x, i));

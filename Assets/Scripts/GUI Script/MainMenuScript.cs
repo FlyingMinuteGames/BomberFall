@@ -891,17 +891,14 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(280, 60, 300, 400)));
             GUI.Box(MenuUtils.ResizeGUI(new Rect(0, 0, 200, 200)), "SETTINGS OVERVIEW", skin.box);
-
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 20, 150, 20)), "Server IP : " + GameMgr.Instance.gameIntel.server_ip, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "GameMode :  "+(GameMgr.Instance.gameIntel.game_mode == Config.GameMode.ARCADE ? "Arcade" : "Survival"), skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 40, 150, 20)), "Map name :  "+GameMgr.Instance.gameIntel.map_name, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Players :  "+GameMgr.Instance.gameIntel.nb_players, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs :  "+GameMgr.Instance.gameIntel.nb_cpus, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change :  "+(GameMgr.Instance.gameIntel.disable_persp_change ? "Deactivated" : "Activated"), skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :  " + (GameMgr.Instance.gameIntel.auth_reco ? "Authorized" : "Not Authorized"), skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 100, 150, 200)), "Active power-ups :  " + GameMgr.Instance.gameIntel.powers_str+ "Bomb Up", skin.label);
-
-
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 20, 150, 20)), "Server IP : " + gameMgr.gameIntel.server_ip, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "GameMode :  " + (gameMgr.gameIntel.game_mode == Config.GameMode.ARCADE ? "Arcade" : "Survival"), skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 40, 150, 20)), "Map name :  " + gameMgr.gameIntel.map_name, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Players :  " + gameMgr.gameIntel.nb_players, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs :  " + gameMgr.gameIntel.nb_cpus, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change :  " + (gameMgr.gameIntel.disable_persp_change ? "Deactivated" : "Activated"), skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :  " + (gameMgr.gameIntel.auth_reco ? "Authorized" : "Not Authorized"), skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 100, 150, 200)), "Active power-ups :  " + gameMgr.gameIntel.powers_str + "Bomb Up", skin.label);
 
             GUI.EndGroup();
 

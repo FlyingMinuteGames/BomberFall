@@ -9,13 +9,22 @@ public class HUD : MonoBehaviour
     private GameObject m_timeDisplayer;
     private TimerScript m_timerscript;
     public Texture[] player_textures;
+    public Texture[] power_illustrations;
     public TextMesh[] player_names;
     public TextMesh[] player_scores;
     public TextMesh textMeshPrefab;
+    public Texture power_up_background;
+    public GUISkin skin;
 
     private Color[] colors = { Color.white, Color.red, new Color(0f, 0.2f, 0.8f), new Color(1f,0.5f,0f)};
     private GameIntel gameIntel;
     private bool active = false;
+    private bool hasOffensivePower = false;
+    private bool hasDefensivePower = false;
+    private Config.PowerType offensivePower;
+    private Config.PowerType defensivePower;
+    private string offensiveStr;
+    private string defensiveStr;
 
     void Start()
     {
@@ -51,6 +60,13 @@ public class HUD : MonoBehaviour
 
         }
 
+        offensiveStr = "Offensive (" + MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey")) + ")";
+        defensiveStr = "Defensive (" + MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey")) + ")";
+        BindOffensivePower(Config.PowerType.BRING_A_SW_TO_A_GF);
+        BindDefensivePower(Config.PowerType.IMPENETRABLE_TRINKET);
+
+
+
         if (gameIntel.game_mode == Config.GameMode.ARCADE)
             m_timerscript.Init();
         m_displayer.SetActive(true);
@@ -63,35 +79,40 @@ public class HUD : MonoBehaviour
 
     void OnGUI()
     {
-        //if (Event.current.type == EventType.Repaint)
-        //{
-        //    if (!active)
-        //        return;
-
-        //    float j = 0f;
-        //    for (int i = 0, len = gameIntel.nb_players + gameIntel.nb_cpus; i < len; i++)
-        //    {
-        //        if (i == 2)
-        //            j += 0.15f;
-        //        Rect tmp = screenRect(0.15f*(i+1)+j, 0.03f, 0.05f*0.6f, 0.06f*0.6f);
-        //        Debug.Log("RECT : "+ tmp);
-        //        GUI.DrawTexture(tmp, player_textures[i]);
-
-
-        //        //GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(175 + (80 * i) + j, 10, 50 * 0.4f, 60 * 0.4f)), player_textures[i], ScaleMode.ScaleAndCrop);
-
-        //    }
-        //}
+        if (Event.current.type == EventType.Repaint)
+        {
+            if (!active)
+                return;
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 380, 50, 50)), offensiveStr, skin.customStyles[1]);
+            GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 400, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
+            if (hasOffensivePower)
+                GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 403, 44, 44), false, true), power_illustrations[(int)offensivePower], ScaleMode.ScaleToFit);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 490, 50, 50)), defensiveStr, skin.customStyles[1]);
+            GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 510, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
+            if (hasDefensivePower)
+                GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 513, 44, 44), false, true), power_illustrations[(int)defensivePower], ScaleMode.ScaleToFit);
+        }
     }
 
-    public static Rect screenRect(float tx, float ty, float tw, float th)
+    public void BindOffensivePower(Config.PowerType powertype){
+        hasOffensivePower = true;
+        offensivePower = powertype;
+    }
+
+    public void unBindOffensivePower()
     {
-        float x1 = tx * Screen.width;
-        float y1 = ty * Screen.height;
-
-        float sw = tw * Screen.width;
-        float sh = th * Screen.height;
-
-        return new Rect(x1, y1, sw, sh);
+        hasOffensivePower = false;
     }
+
+    public void BindDefensivePower(Config.PowerType powertype)
+    {
+        hasDefensivePower = true;
+        defensivePower = powertype;
+    }
+
+    public void unBindDefensivePower()
+    {
+        hasDefensivePower = false;
+    }
+
 }

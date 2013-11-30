@@ -98,7 +98,7 @@ public static class MenuUtils{
      * Rect ResizeGUI(Rect _rect, uniformScale)
      *  --> Returns a scaled version (uniformly or not) of the rectangle given in parameters
      * */
-    public static Rect ResizeGUI(Rect _rect, bool uniformScale = false)
+    public static Rect ResizeGUI(Rect _rect, bool uniformScale = false, bool keepSizeProp = false)
     {
         Vector2 scale = new Vector2(Screen.width / 800.0f, Screen.height / 600.0f);
         if (uniformScale)
@@ -106,7 +106,7 @@ public static class MenuUtils{
         float rectX = _rect.x * scale.x;
         float rectY = _rect.y * scale.y;
         float rectWidth = _rect.width * scale.x;
-        float rectHeight = _rect.height * scale.y;
+        float rectHeight = keepSizeProp ? rectWidth : _rect.height * scale.y;
         return new Rect(rectX, rectY, rectWidth, rectHeight);
 
     }

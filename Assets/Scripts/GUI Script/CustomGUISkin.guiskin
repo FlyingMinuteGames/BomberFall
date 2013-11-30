@@ -1287,27 +1287,27 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Padding:
-      m_Left: 4
-      m_Right: 4
-      m_Top: 4
-      m_Bottom: 4
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
     m_Overflow:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 3ab741281dc374b4ba1f7e9d06042824, type: 3}
-    m_FontSize: 80
+    m_Font: {fileID: 12800000, guid: dbfaa8700f6121f419d009577a7b8508, type: 3}
+    m_FontSize: 13
     m_FontStyle: 0
-    m_Alignment: 4
+    m_Alignment: 1
     m_WordWrap: 0
     m_RichText: 1
     m_TextClipping: 0
-    m_ImagePosition: 0
-    m_ContentOffset: {x: 0, y: 0}
+    m_ImagePosition: 3
+    m_ContentOffset: {x: -1.63999999, y: 1.22000003}
     m_FixedWidth: 0
     m_FixedHeight: 0
-    m_StretchWidth: 1
+    m_StretchWidth: 0
     m_StretchHeight: 0
   - m_Name: Score
     m_Normal:

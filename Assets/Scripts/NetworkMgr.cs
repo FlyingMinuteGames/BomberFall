@@ -274,7 +274,7 @@ public class NetworkMgr : MonoBehaviour {
     public void HandleExplode(BombScript script, IntVector2 pos, int radius)
     {
         Debug.Log("ça pete !");
-        current_map.ExplodeAt(pos, radius);
+        //current_map.ExplodeAt(pos, radius);
         networkView.RPC("ClientRecvBomb", RPCMode.Others, pos.x, pos.y, radius);
         Network.RemoveRPCs(script.gameObject.GetComponent<NetworkView>().viewID);
         Network.Destroy(script.gameObject);
@@ -411,7 +411,7 @@ public class NetworkMgr : MonoBehaviour {
     {
         if (server)
             return;
-        current_map.ExplodeAt(new IntVector2(x, y), radius);
+        //current_map.ExplodeAt(new IntVector2(x, y), radius);
     }
 
     [RPC]

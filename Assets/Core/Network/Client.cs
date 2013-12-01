@@ -51,6 +51,7 @@ public class Client
 
     public void SendPacket(Packet packet)
     {
+        Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         byte[] data = packet.ToByte();
         tcp_client.Client.Send(data);
     }

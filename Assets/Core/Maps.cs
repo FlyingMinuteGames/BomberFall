@@ -314,7 +314,7 @@ public class Maps {
         return m;
     }
 
-    public void ExplodeAt(IntVector2 a, int radius)
+    public void ExplodeAt(int bombGuid,IntVector2 a, int radius)
     {
         if (a == null)
             return;
@@ -400,15 +400,22 @@ public class Maps {
 
 
         if (GameMgr.Instance != null && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
+<<<<<<< HEAD
             OnExplode(new Cross(a, x, y, z, w));
+=======
+            OnExplode(new Cross(a, x, y, z, w),bombGuid);
+>>>>>>> 5b28830306ce6dd72f58a6f36c55c3d8c70d8605
 
     }
 
-    private void OnExplode(Cross cross)
+    private void OnExplode(Cross cross,int bombGUID)
     {
         IntVector2 center = cross.Center;
         IntVector2 tmp = new IntVector2(center.x,center.y);
         Vector3 world_pos;
+
+        BombScript bomb = ObjectMgr.Instance.Get(bombGUID).GetComponent<BombScript>();
+        int killerGUID = bomb.OwnerGuid;
         for (int i = cross.Z; i <= cross.X; i++)
         {
             

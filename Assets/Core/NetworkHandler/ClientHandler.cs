@@ -56,7 +56,7 @@ public class ClientHandler
         if ((obj = ObjectMgr.Instance.Get(guid)) != null)
             obj.SendMessage("ForceExplode");
 
-        GameMgr.Instance.maps.ExplodeAt(new IntVector2(x, y), radius);
+        GameMgr.Instance.maps.ExplodeAt(guid,new IntVector2(x, y), radius);
     }
 
     public static void HandlePlayerConnected(Packet p)
@@ -103,7 +103,7 @@ public class ClientHandler
             if (type == (int)(GOType.GO_BOMB))
             {
                 GameObject go = ObjectMgr.Instance.Get(guid);
-                go.GetComponent<BombScript>().StartScript();
+                go.GetComponent<BombScript>().StartScript(0);
 
             }
         }

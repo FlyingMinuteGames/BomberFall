@@ -20,6 +20,12 @@ public class BombScript : MonoBehaviour {
     private static RigidbodyConstraints[] s_constraint = new RigidbodyConstraints[] { ~RigidbodyConstraints.FreezePositionY, ~RigidbodyConstraints.FreezePositionZ, ~RigidbodyConstraints.FreezePositionZ, ~RigidbodyConstraints.FreezePositionX, ~RigidbodyConstraints.FreezePositionX};
     private Callback m_onExplode = null;
     private Callback m_onEnd = null;
+    private int m_OwnerGuid = -1;
+
+    public int OwnerGuid
+    {
+        get { return m_OwnerGuid; }
+    }
     void Start () {
         Init();
 
@@ -58,10 +64,11 @@ public class BombScript : MonoBehaviour {
     }
 
 
-    public void StartScript(Callback onExplode = null,Callback onEnd = null)
+    public void StartScript(int ownerGuid, Callback onExplode = null,Callback onEnd = null)
     {
         if (!m_IsInit)
             Init();
+        m_OwnerGuid = ownerGuid;
         m_onExplode = onExplode;
         m_onEnd = onEnd;
         transform.rotation = s_BaseRotation[(int)GameMgr.Instance.State];

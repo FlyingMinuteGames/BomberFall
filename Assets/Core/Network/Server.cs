@@ -201,7 +201,7 @@ public class Server //: INetwork
         byte[] data = packet.ToByte();
         if (!client.Connected)
             return;
-        //Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         client.Client.Send(data);//client.GetStream().Write(data,0,data.Length);
     }
 
@@ -258,9 +258,10 @@ public class Server //: INetwork
 
     public void SpawnBomb(BomberController controller, Vector3 pos)
     {
-        if (!controller.IsOnGround || controller.BombSpawn > controller.BombCount)
+        if (!controller.IsOnGround || controller.BombSpawn >= controller.BombCount)
             return;
         controller.BombSpawn++;
+        int owner = controller.GetComponent<Guid>().GetGUID();
         Maps maps = GameMgr.Instance.maps;
         IntVector2 tpos = maps.GetTilePosition(pos.x,pos.z);
         pos =   maps.TilePosToWorldPos(tpos);
@@ -274,10 +275,10 @@ public class Server //: INetwork
         int guid = GameMgr.Instance.Spawn(GOType.GO_BOMB, pos);
         int radius = controller.BombRadius;
         GameObject go =  ObjectMgr.Instance.Get(guid);
-        go.GetComponent<BombScript>().StartScript(() =>
+        go.GetComponent<BombScript>().StartScript(owner, () =>
         {
             IntVector2 new_tpos = maps.GetTilePosition(go.transform.position.x, go.transform.position.z);
-            maps.ExplodeAt(new_tpos, radius);
+            maps.ExplodeAt(guid,new_tpos, radius);
             controller.BombSpawn--;
             if (new_tpos == null)
                 return;

@@ -114,11 +114,13 @@ public class GameMgr : MonoBehaviour {
         {
             case GOType.GO_PLAYER:
                 go = player_pool.Pop(pos, Quaternion.identity);
-                _guid =  ObjectMgr.Instance.Register(go, type, guid);
+                _guid = ObjectMgr.Instance.Register(go, type, guid, extra);
+                BomberController controller = go.GetComponent<BomberController>();
+                controller.ColorIndex = extra;
                 break;
             case GOType.GO_BOMB:
                 go = bomb_pool.Pop(pos, Quaternion.identity);
-                _guid = ObjectMgr.Instance.Register(go, type, guid);
+                _guid = ObjectMgr.Instance.Register(go, type, guid, extra);
                 break;
             case GOType.GO_PWRUP:
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);

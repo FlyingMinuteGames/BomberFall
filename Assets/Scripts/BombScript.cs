@@ -15,8 +15,11 @@ public class BombScript : MonoBehaviour {
 	private Transform[] child;
     private bool m_IsInit = false;
     private Rigidbody m_RigidBody;
+    private bool m_Explode = false;
     private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
     private static RigidbodyConstraints[] s_constraint = new RigidbodyConstraints[] { ~RigidbodyConstraints.FreezePositionY, ~RigidbodyConstraints.FreezePositionZ, ~RigidbodyConstraints.FreezePositionZ, ~RigidbodyConstraints.FreezePositionX, ~RigidbodyConstraints.FreezePositionX};
+    private Callback m_onExplode = null;
+    private Callback m_onEnd = null;
     void Start () {
         Init();
 
@@ -59,12 +62,15 @@ public class BombScript : MonoBehaviour {
     {
         if (!m_IsInit)
             Init();
+        m_onExplode = onExplode;
+        m_onEnd = onEnd;
         transform.rotation = s_BaseRotation[(int)GameMgr.Instance.State];
         m_RigidBody.constraints = s_constraint[(int)GameMgr.Instance.State];
         if (GameMgr.Instance.State == WorldState.CENTER)
             m_RigidBody.useGravity = false;
         else m_RigidBody.useGravity = true;
-        StartCoroutine(WaitAndExplode(onExplode,onEnd));
+        m_Explode = false;
+        StartCoroutine(WaitAndExplode());
         CheckIfWithinPlayer();
     }
 
@@ -90,7 +96,32 @@ public class BombScript : MonoBehaviour {
             }
     }
 
-    IEnumerator WaitAndExplode(Callback c1,Callback c2)
+
+    public void ForceExplode()
+    {
+        StartCoroutine(Explode());
+    }
+
+    IEnumerator Explode()
+    {
+        Debug.Log("EXPLODE");
+        if (m_Explode)
+            yield break;
+        m_Explode = true;
+        audio.PlayOneShot(explosion, PlayerPrefs.GetFloat("SoundVolume") * 20f);
+        Debug.Log("explode phase 2");
+        SetActiveChild(false);
+        ((BoxCollider)collider).center = Vector3.up * 100;
+        if (m_onExplode != null)
+            m_onExplode();//StartCoroutine(c1());
+
+        yield return new WaitForSeconds(timer[1]);
+        if (m_onEnd != null)
+            m_onEnd();
+        Debug.Log("explode!");
+    }
+
+    IEnumerator WaitAndExplode()
     {
         progress = 0;
         Debug.Log("begin explode");
@@ -103,20 +134,7 @@ public class BombScript : MonoBehaviour {
         panim.Clear(true);
         panim.Play();
         ((BoxCollider)collider).center = Vector3.zero;
-        yield return new WaitForSeconds(timer[progress++]);
-
-        audio.PlayOneShot(explosion, PlayerPrefs.GetFloat("SoundVolume")*20f);
-        Debug.Log("explode phase 2");
-        //bomb_object.SetActive(false);
-        SetActiveChild(false);
-        ((BoxCollider)collider).center = Vector3.up * 100;
-        //collider.enabled = false;
-        if (c1 != null)
-            c1();//StartCoroutine(c1());
-
-        yield return new WaitForSeconds(timer[progress++]);
-        if (c2 != null) 
-            c2();
-        Debug.Log("explode!");
+        yield return new WaitForSeconds(timer[0]);
+        yield return StartCoroutine(Explode());
     }
 }

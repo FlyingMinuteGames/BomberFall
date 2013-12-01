@@ -117,6 +117,7 @@ public class Maps {
 
     public void AddBlock(MapsTiles type, IntVector2 pos)
     {
+        
         if (m_maps[pos.x][pos.y] != null)
         {
 
@@ -130,7 +131,7 @@ public class Maps {
                 Async.Instance.DelayedAction(()=> GameObject.Destroy(todelete) );
             } m_maps[pos.x][pos.y].m_type = type;
             Transform obj = null;
-            ;
+            
 
             Vector3 b_pos = new Vector3(pos.x + (Size.x % 2 == 0 ? 0.5f : 0) - m_size_2.x, 0.5f, pos.y + (Size.y % 2 == 0 ? 0.5f : 0f) - m_size_2.y);
             switch (type)
@@ -144,7 +145,7 @@ public class Maps {
             }
             if (obj != null)
                 obj.parent = m_gameMaps.transform;
-            
+            Debug.Log("add block at " + pos + " type : " + type);
             m_maps[pos.x][pos.y].block = obj;
         }
     }
@@ -318,7 +319,7 @@ public class Maps {
         if (a == null)
             return;
         int x = a.x + radius, y = a.y + radius, z = a.x - radius, w = a.y - radius;
-        Debug.Log(a);
+        Debug.Log("Explode at " + a + " radius " + radius);
         for (int i = a.x+1; i <= a.x + radius; i++)
         {
             
@@ -397,19 +398,60 @@ public class Maps {
             }
         }
 
+
         if (GameMgr.Instance != null && GameMgr.Instance.Type == GameMgrType.SERVER)
-            GameMgr.Instance.KillPlayer(new Cross(a, x, y, z, w));
+            OnExplode(new Cross(a, x, y, z, w));
 
+    }
 
+    private void OnExplode(Cross cross)
+    {
+        IntVector2 center = cross.Center;
+        IntVector2 tmp = new IntVector2(center.x,center.y);
+        Vector3 world_pos;
+        for (int i = cross.Z; i <= cross.X; i++)
+        {
+            
+            if (center.x == i)
+                continue;
+            tmp.x = i;
+            world_pos = TilePosToWorldPos(tmp);
+            world_pos.y=0.5f;
+            Collider[] hit = Physics.OverlapSphere(world_pos, 0.25f);
+            foreach (Collider c in hit)
+            {
+                if (c.tag == "Bomb")
+                    c.SendMessage("ForceExplode");
+            }
+
+        }
+        tmp.x = center.x;
+        for (int i = cross.W; i <= cross.Y; i++)
+        {
+            if (center.y == i)
+                continue;
+            tmp.y = i;
+            world_pos = TilePosToWorldPos(tmp);
+            world_pos.y = 0.5f;
+            Collider[] hit = Physics.OverlapSphere(world_pos, 0.25f);
+            foreach (Collider c in hit)
+            {
+                if (c.tag == "Bomb")
+                    c.SendMessage("ForceExplode");
+            }
+        }
+        GameMgr.Instance.KillPlayer(cross);
     }
 
     private void OnDestroyBlock(IntVector2 vec)
     {
         if (GameMgr.Instance.Type != GameMgrType.SERVER)
             return;
+
         if (true)
         {
-            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, TilePosToWorldPos(vec), -1, 9/*UnityEngine.Random.Range(0, 12)*/);
+            Vector3 worldpos = TilePosToWorldPos(vec);
+            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, 3/*UnityEngine.Random.Range(0, 12)*/);
             //GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         }
     }

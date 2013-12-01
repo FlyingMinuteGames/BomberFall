@@ -47,10 +47,16 @@ public class ClientHandler
 
     public static void HandleBombExplode(Packet p)
     {
-        int x, y;
+        int x, y, guid,radius;
+        guid = p.ReadInt();
         x = p.ReadInt();
         y = p.ReadInt();
-        GameMgr.Instance.maps.ExplodeAt(new IntVector2(x, y), 2);
+        radius = p.ReadByte();
+        GameObject obj;
+        if ((obj = ObjectMgr.Instance.Get(guid)) != null)
+            obj.SendMessage("ForceExplode");
+
+        GameMgr.Instance.maps.ExplodeAt(new IntVector2(x, y), radius);
     }
 
     public static void HandlePlayerConnected(Packet p)
@@ -90,6 +96,7 @@ public class ClientHandler
             extra = p.ReadByte();
             x =p.ReadFloat();
             y = p.ReadFloat();
+            Debug.Log("recv guid:" + guid + " type:" + (GOType)type + " extra:" + extra + " x:" + x + " y:" + y);
             if (type == (int)(GOType.GO_PLAYER))
                 z = 0.5150594f;
             gmgr.Spawn((GOType)type, new Vector3(x, z, y), guid, extra);

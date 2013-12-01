@@ -6,6 +6,17 @@ public class BomberController : MonoBehaviour
 {
 
     int m_MoveFlags = 0;
+    private static Color[] s_color = new Color[] {Color.red, Color.blue,Color.green,Color.yellow+Color.red};
+    private int m_colorIndex = 0;
+
+    public int ColorIndex
+    {
+        get { return m_colorIndex; }
+        set {
+            m_colorIndex = value;
+            this.transform.FindChild("RobotMesh").renderer.material.color = s_color[m_colorIndex];
+            }
+    }
     public float m_GravityAcceleration = 0.0f;
     public float m_JumpSpeed = 1.0f;
     public bool m_IsNetworkControlled = false;

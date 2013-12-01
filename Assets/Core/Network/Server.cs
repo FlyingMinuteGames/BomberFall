@@ -230,7 +230,7 @@ public class Server //: INetwork
         if(data.Length > 0)
             SendPacketTo(cl,PacketBuilder.BuildInstantiateObjPacket(data));
 
-        int guid = GameMgr.Instance.Spawn(GOType.GO_PLAYER,GetInitPos(session-1));
+        int guid = GameMgr.Instance.Spawn(GOType.GO_PLAYER, GetInitPos(session - 1), -1, _session-1);
         m_sessions[_session] = new ClientSession(_session,guid,cl);
 
         if ((flags & 4) != 0)
@@ -265,7 +265,7 @@ public class Server //: INetwork
         IntVector2 tpos = maps.GetTilePosition(pos.x,pos.z);
         pos =   maps.TilePosToWorldPos(tpos);
         pos.y = 0.5f;
-        var hit = Physics.OverlapSphere(pos, 0.5f);
+        var hit = Physics.OverlapSphere(pos, 0.25f);
         foreach (var c in hit)
         {
             if (c.gameObject.tag == "Bomb")
@@ -281,7 +281,7 @@ public class Server //: INetwork
             controller.BombSpawn--;
             if (new_tpos == null)
                 return;
-            SendPacketBroadCast(PacketBuilder.BuildBombExplode(new_tpos, radius));
+            SendPacketBroadCast(PacketBuilder.BuildBombExplode(guid,new_tpos, radius));
         },
         () => {
             GameMgr.Instance.Despawn(GOType.GO_BOMB, guid);

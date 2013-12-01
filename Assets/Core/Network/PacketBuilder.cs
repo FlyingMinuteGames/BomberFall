@@ -58,12 +58,13 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildBombExplode(IntVector2 pos, int radius = 2)
+    public static Packet BuildBombExplode(int guid, IntVector2 pos, int radius = 2)
     {
-        Packet p = new Packet(8, Opcode.SMSG_BOMB_EXPLODE);
+        Packet p = new Packet(13, Opcode.SMSG_BOMB_EXPLODE);
+        p.Write(guid);
         p.Write(pos.x);
         p.Write(pos.y);
-        p.Write(radius);
+        p.Write((byte)radius);
         return p;
     }
 

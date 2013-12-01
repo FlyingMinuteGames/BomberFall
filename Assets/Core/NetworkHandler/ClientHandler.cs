@@ -20,7 +20,8 @@ public class ClientHandler
             {Opcode.SMSG_CHANGE_PHASE,HandleChangePhase},
             {Opcode.SMSG_OFF_POWER_PICK_UP, HandleOffensivePowerPickUp},
             {Opcode.SMSG_DESPAWN,HandleDespawn},
-            {Opcode.SMSG_PLAY_ANNOUNCEMENT,HandlePlayAnnouncement}
+            {Opcode.SMSG_PLAY_ANNOUNCEMENT,HandlePlayAnnouncement}, 
+            {Opcode.SMSG_SPEED_UP, HandlePlayerSpeedUp}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -172,5 +173,18 @@ public class ClientHandler
         while ((str = p.ReadString()) != null)
             strs.Add(str);
         Announcer.Instance.PlayAnnounce((Announce)announce,variant,strs.ToArray());
+    }
+
+    public static void HandlePlayerSpeedUp(Packet p)
+    {
+        int guid, speedMult;
+        
+        guid = p.ReadInt();
+        speedMult = p.ReadInt();
+
+        GameObject obj = ObjectMgr.Instance.Get(guid);
+        obj.SendMessage("RecvIncSpeedMult");
+
+        
     }
 }

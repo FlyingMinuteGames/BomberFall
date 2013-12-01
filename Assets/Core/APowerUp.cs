@@ -24,7 +24,7 @@ public abstract class APowerUp {
         Delete(powerGO); 
     }
 
-    public abstract void OnUse();
+    public abstract void OnUse(GameObject powerGO, int clientGuid);
 
 
 }

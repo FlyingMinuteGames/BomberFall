@@ -407,7 +407,7 @@ public class Maps {
             return;
         if (true)
         {
-            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, TilePosToWorldPos(vec), -1, UnityEngine.Random.Range(0, 12));
+            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, TilePosToWorldPos(vec), -1, 9/*UnityEngine.Random.Range(0, 12)*/);
             //GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         }
     }

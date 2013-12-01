@@ -132,4 +132,13 @@ public class PacketBuilder  {
             p.Write(str);
         return p;
     }
+
+    public static Packet BuildSpeedUpPacket(int guid, int speedmult)
+    {
+        Packet p = new Packet(4 + 4, Opcode.SMSG_SPEED_UP);
+        p.Write(guid);
+        p.Write(speedmult);
+        return p;
+    }
+
 }

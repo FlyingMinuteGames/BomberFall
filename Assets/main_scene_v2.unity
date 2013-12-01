@@ -583,6 +583,7 @@ GameObject:
   - 23: {fileID: 943083862}
   - 102: {fileID: 943083861}
   - 111: {fileID: 943083863}
+  - 114: {fileID: 943083864}
   m_Layer: 8
   m_Name: Announcer
   m_TagString: Untagged
@@ -661,6 +662,17 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &943083864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 943083859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46afbe223ed6f45baad272b550ffd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &983111037
 Prefab:
   m_ObjectHideFlags: 0

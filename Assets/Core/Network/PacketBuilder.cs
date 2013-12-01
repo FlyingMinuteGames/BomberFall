@@ -97,10 +97,32 @@ public class PacketBuilder  {
 
     public static Packet BuildBindOffensiveItem(int guid, Config.PowerType powertype)
     {
-        Packet p = new Packet(4+4, Opcode.CMSG_OFF_POWER_PICK_UP);
+        Packet p = new Packet(4+4, Opcode.SMSG_OFF_POWER_PICK_UP);
         p.Write(guid);
         p.Write((int)powertype);
         return p;
     }
 
+    public static Packet BuildDespawn(int guid)
+    {
+        Packet p = new Packet(4, Opcode.SMSG_DESPAWN);
+        p.Write(guid);
+        return p;
+    }
+
+
+
+    public static Packet BuildPlayAnnouncePacket(Announce announce, short variant, params string[] values)
+    {
+        //Calculate size of packet
+        int size = 0;
+        foreach (string str in values)
+            size += (str.Length + 1) * 2;
+        Packet p = new Packet(size+3,Opcode.SMSG_PLAY_ANNOUNCEMENT);
+        p.Write((short)announce);
+        p.Write(variant);
+        foreach (string str in values)
+            p.Write(str);
+        return p;
+    }
 }

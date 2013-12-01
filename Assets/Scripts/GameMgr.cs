@@ -49,6 +49,8 @@ public class GameMgr : MonoBehaviour {
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
+    private static float const_gravity = -20.0f;
+    private Vector3[] gravityStates;
 
     public WorldState State
     {
@@ -71,13 +73,16 @@ public class GameMgr : MonoBehaviour {
         hud = GameObject.Find("HUD").GetComponent<HUD>();
         m_MainCamera = GameObject.Find("MainCamera");
         baseRotation = m_MainCamera.transform.rotation;
-	}
+        gravityStates = new Vector3[] { Vector3.up * const_gravity, Vector3.forward * const_gravity, Vector3.forward * -const_gravity, Vector3.right * const_gravity, Vector3.right * -const_gravity };
+	   
+    }
 	
     public void StartServer()
     {
         s = new Server();
         ServerHandler.current = s;
         s.SetHandler(ServerHandler.handlers);
+        type = GameMgrType.SERVER;
         s.OnClientConnected = (client) => { 
             //s.SendPacketTo(client,PacketBuilder.BuildMovePlayerPacket()=;
         };
@@ -90,40 +95,61 @@ public class GameMgr : MonoBehaviour {
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
-        StartCoroutine(ChangePhaseTimer());
-        //ChangePhase();
+        //StartCoroutine(ChangePhaseTimer());
+        ChangePhase();
     }
 
-    public int Spawn(GOType type,Vector3 pos,int guid = -1)
+    public int Spawn(GOType type, Vector3 pos, int guid = -1, int extra = 0)
     {
         GameObject go;
+        int _guid = -1;
         switch (type)
         {
             case GOType.GO_PLAYER:
                 go = player_pool.Pop(pos, Quaternion.identity);
-                return  ObjectMgr.Instance.Register(go, type, guid);
+                _guid =  ObjectMgr.Instance.Register(go, type, guid);
+                break;
             case GOType.GO_BOMB:
                 go = bomb_pool.Pop(pos, Quaternion.identity);
-                return ObjectMgr.Instance.Register(go, type, guid);
+                _guid = ObjectMgr.Instance.Register(go, type, guid);
+                break;
             case GOType.GO_PWRUP:
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
-                sc.type = (Config.PowerType)1/*UnityEngine.Random.Range(0, 12)*/;
+                sc.type = (Config.PowerType)extra/*UnityEngine.Random.Range(0, 12)*/;
                 sc.Init();
-                return ObjectMgr.Instance.Register(go, type, guid);
+                _guid =  ObjectMgr.Instance.Register(go, type, guid,extra);
+                break;
         }
-        return -1;
+        if(_guid > 0 && GameMgr.Instance.Type ==  GameMgrType.SERVER)
+            GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(_guid)));
+        return _guid;
+    }
+
+    public void Despawn(int guid)
+    {
+
+        ObjectMgr.GOWrapper go = ObjectMgr.Instance.GetWrapper(guid);
+        if (go.go != null)
+        {
+            ObjectMgr.Instance.UnRegister(guid);
+            Despawn(go.type, go.go);
+        }
+        if (GameMgr.Instance.Type == GameMgrType.SERVER)
+            GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildDespawn(guid));
+
     }
 
     public void Despawn(GOType type, int guid)
     {
-        GameObject go = ObjectMgr.Instance.get(guid);
+        GameObject go = ObjectMgr.Instance.Get(guid);
         if (go != null)
         {
             ObjectMgr.Instance.UnRegister(guid);
             Despawn(type, go);
         }
-
+        if (GameMgr.Instance.Type == GameMgrType.SERVER)
+            GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildDespawn(guid));
     }
     private void Despawn(GOType type, GameObject go)
     {
@@ -135,12 +161,15 @@ public class GameMgr : MonoBehaviour {
             case GOType.GO_BOMB:
                 bomb_pool.Free(go);
                 break;
+            case GOType.GO_PWRUP:
+                pwr_up_pool.Free(go);
+                break;
         }
     }
 
     public void StartClient(string address)
     {
-       
+        type = type != GameMgrType.SERVER ? GameMgrType.CLIENT : type;
         c = new Client(address);
         ClientHandler.current = c;
         if (s != null)
@@ -148,6 +177,7 @@ public class GameMgr : MonoBehaviour {
         c.SetHandler(ClientHandler._handlers);
         c.Connect();
         c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
+
     }
 
     void OnDestroy()
@@ -196,7 +226,7 @@ public class GameMgr : MonoBehaviour {
         while (game_started)
         {
             yield return new WaitForSeconds(5);
-            //ChangePhase();
+            ChangePhase();
         }
     }
 
@@ -216,7 +246,9 @@ public class GameMgr : MonoBehaviour {
         Debug.Log("size : " + l.Count);
         foreach (var a in l)
             a.SendMessage("OnChangePhase", m_state);
-
+        Debug.Log("change gravity from " + Physics.gravity + " to " + gravityStates[(int)m_state]);
+        Physics.gravity = gravityStates[(int)m_state];
+        
         TurnCamera((int)m_state);
         if (s != null)
             s.SendPacketBroadCast(PacketBuilder.BuildChangePhasePacket(m_state));   
@@ -247,5 +279,23 @@ public class GameMgr : MonoBehaviour {
         clip.SetCurve("", typeof(Transform), "localRotation.w", w);
         m_MainCamera.GetComponent<Animation>().AddClip(clip, "1->"+index);
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
+    }
+
+    public void KillPlayer(Cross cross)
+    {
+        IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_BOMB);
+
+        for (int i = 0, len = m_player.Count; i < len; i++)
+        {
+            GameObject t = m_player[i];
+            if (t == null)
+                continue;
+            IntVector2 tpos = maps.GetTilePosition(t.transform.position.x, t.transform.position.z);
+            Debug.Log(tpos);
+            if (cross.IsIn(tpos))
+                Announcer.Instance.PlayAnnounce(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i);
+            s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i));
+
+        }
     }
 }

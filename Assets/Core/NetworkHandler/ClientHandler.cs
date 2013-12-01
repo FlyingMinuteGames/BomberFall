@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ClientHandler
 {
@@ -17,7 +18,9 @@ public class ClientHandler
             {Opcode.MSG_SEND_MESSAGE,HandleSendMessage},
             {Opcode.MSG_JUMP,HandleJump},
             {Opcode.SMSG_CHANGE_PHASE,HandleChangePhase},
-            {Opcode.CMSG_OFF_POWER_PICK_UP, HandlePowerPickUp}
+            {Opcode.SMSG_OFF_POWER_PICK_UP, HandlePowerPickUp},
+            {Opcode.SMSG_DESPAWN,HandleDespawn},
+            {Opcode.SMSG_PLAY_ANNOUNCEMENT,HandlePlayAnnouncement}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -28,7 +31,7 @@ public class ClientHandler
         guid = p.ReadInt();
         moveflag = p.ReadInt();
         start_pos = p.ReadVector3();
-        if (null == (obj = ObjectMgr.Instance.get(guid)))
+        if (null == (obj = ObjectMgr.Instance.Get(guid)))
             return;
         obj.SendMessage("OnRecvMove", new object[] { moveflag, start_pos });
     }
@@ -75,28 +78,24 @@ public class ClientHandler
 
     public static void HandleInstantiateObject(Packet p)
     {
-        int count = p.Size / 16, guid,type;
+        int count = p.Size / 17, guid,type,extra;
         float x,y,z = 0;
 
         GameMgr gmgr = GameMgr.Instance;
         for (var i = 0; i < count; i++)
         {
             guid = p.ReadInt();
-            type = p.ReadInt();
+            type = p.ReadByte();
+            extra = p.ReadByte();
             x =p.ReadFloat();
             y = p.ReadFloat();
             if (type == (int)(GOType.GO_PLAYER))
                 z = 0.5150594f;
-            gmgr.Spawn((GOType)type, new Vector3(x, z, y), guid);
+            gmgr.Spawn((GOType)type, new Vector3(x, z, y), guid, extra);
             if (type == (int)(GOType.GO_BOMB))
             {
-                GameObject go = ObjectMgr.Instance.get(guid);
-                go.GetComponent<BombScript>().StartScript(
-                    () => { ;}
-                    , () =>
-                    {
-                        GameMgr.Instance.Despawn(GOType.GO_BOMB, guid);
-                    });
+                GameObject go = ObjectMgr.Instance.Get(guid);
+                go.GetComponent<BombScript>().StartScript();
 
             }
         }
@@ -140,7 +139,7 @@ public class ClientHandler
         guid = p.ReadInt();
         start_pos = p.ReadVector3();
         GameObject obj;
-        if ((obj = ObjectMgr.Instance.get(guid)) != null)
+        if ((obj = ObjectMgr.Instance.Get(guid)) != null)
         {
             obj.SendMessage("RecvJump",start_pos);
         }
@@ -157,5 +156,19 @@ public class ClientHandler
     }
 
 
+    public static void HandleDespawn(Packet p)
+    {
+        int guid;
+        guid = p.ReadInt();
+        GameMgr.Instance.Despawn(guid);
+    }
 
+    public static void HandlePlayAnnouncement(Packet p)
+    {
+        List<string> str = new List<string>();
+        int announce = p.ReadShort(),variant = p.ReadByte();
+        while (p.Cursor < p.Size)
+            str.Add(p.ReadString());
+        Announcer.Instance.PlayAnnounce((Announce)announce,variant,str.ToArray());
+    }
 }

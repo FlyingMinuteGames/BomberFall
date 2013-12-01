@@ -16,15 +16,18 @@ public class ServerHandler  {
 
     public static void HandleMovePlayer(Packet p)
     {
+       
         int guid, moveflag;
         Vector3 start_pos;
         GameObject obj;
         guid = p.ReadInt();
         moveflag = p.ReadInt();
         start_pos = p.ReadVector3();
-        if (null == (obj = ObjectMgr.Instance.get(guid)))
+        Debug.Log("HandleMovePlayer : guid:" + guid + ", moveflag:" + moveflag + ", start_pos: " + start_pos);
+        if (null == (obj = ObjectMgr.Instance.Get(guid)))
             return;
         obj.SendMessage("OnRecvMove", new object[] { moveflag, start_pos });
+
         current.SendPacketBroadCast(p, p.Sender);
     }
 
@@ -66,8 +69,7 @@ public class ServerHandler  {
         guid = p.ReadInt();
         start_pos = p.ReadVector3();
         GameObject obj;
-        //WTF
-        if ((obj = ObjectMgr.Instance.get(guid)) != null)
+        if ((obj = ObjectMgr.Instance.Get(guid)) != null)
         {
             obj.SendMessage("RecvJump",start_pos);
             current.SendPacketBroadCast(p, p.Sender);

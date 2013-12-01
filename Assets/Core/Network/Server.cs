@@ -120,7 +120,7 @@ public class Server //: INetwork
                     break;
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
-                //Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
                 if (size == 0)
                 {
                     Packet p = new Packet(size, opcode, null);
@@ -183,6 +183,7 @@ public class Server //: INetwork
     {
         //Debug.Log("handle !");
         packet.Sender = client;
+        Debug.Log("Handle " + packet.GetOpcode());
         Async.Instance.DelayedAction(() =>
         {
             m_opcodeMgr.HandlePacket(packet);
@@ -199,7 +200,7 @@ public class Server //: INetwork
     public void SendPacketBroadCast(Packet packet, TcpClient except = null)
     {
         byte[] data = packet.ToByte();
-        //Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         foreach(TcpClient client in m_clients)
         {
             if(client != except)
@@ -222,9 +223,11 @@ public class Server //: INetwork
         int guid = GameMgr.Instance.Spawn(GOType.GO_PLAYER,GetInitPos(session-1));
         m_sessions[_session] = new ClientSession(_session,guid,cl);
 
-        if ((flags & 4) != 0) // hack lol
-            ObjectMgr.Instance.get(guid).GetComponent<BomberController>().m_IsPlayer = true; 
-        SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
+        if ((flags & 4) != 0)
+        {// hack lol
+            ObjectMgr.Instance.Get(guid).GetComponent<BomberController>().m_IsPlayer = true;
+            GameMgr.Instance.c.Guid = guid;
+        }
         SendPacketTo(cl,PacketBuilder.BuildPlayerConnectPacket(_session,guid, 0));
     }
     public void Destroy()
@@ -250,12 +253,12 @@ public class Server //: INetwork
          pos =   maps.TilePosToWorldPos(tpos);
         
         int guid = GameMgr.Instance.Spawn(GOType.GO_BOMB, pos);
-        GameObject go =  ObjectMgr.Instance.get(guid);
-        SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
+        GameObject go =  ObjectMgr.Instance.Get(guid);
         go.GetComponent<BombScript>().StartScript(() =>
         {
-            maps.ExplodeAt(tpos, 2);
-            SendPacketBroadCast(PacketBuilder.BuildBombExplode(tpos));
+            IntVector2 new_tpos = maps.GetTilePosition(go.transform.position.x, go.transform.position.z);
+            maps.ExplodeAt(new_tpos, 2);
+            SendPacketBroadCast(PacketBuilder.BuildBombExplode(new_tpos));
         },
         () => {
             GameMgr.Instance.Despawn(GOType.GO_BOMB, guid);

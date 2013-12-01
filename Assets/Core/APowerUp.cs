@@ -10,7 +10,7 @@ public abstract class APowerUp {
 
     //Remove item from scene and put it back to pool
     public void Delete(GameObject powerGO){
-        Debug.Log("Trying to call despawn on powerUp");
+        Debug.Log("Trying to call despawn on powerUp(" + powerGO.name + ")");
         GameMgr.Instance.Despawn(GOType.GO_PWRUP, powerGO.GetComponent<Guid>().GetGUID()); 
     }
 
@@ -19,7 +19,10 @@ public abstract class APowerUp {
 
     }
 
-    public abstract void OnPickUp(GameObject powerGO, int ClientGuid);
+    public virtual void OnPickUp(GameObject powerGO, int clientGuid)
+    {
+        Delete(powerGO); 
+    }
 
     public abstract void OnUse();
 

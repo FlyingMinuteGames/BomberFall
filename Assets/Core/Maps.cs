@@ -396,9 +396,9 @@ public class Maps {
             }
         }
 
-        if (NetworkMgr.Instance != null && NetworkMgr.Instance.server)
+        if (GameMgr.Instance != null && GameMgr.Instance.Type == GameMgrType.SERVER)
         {
-            NetworkMgr.Instance.HandleKillPlayer(new Cross(a, x, y, z, w));
+            GameMgr.Instance.KillPlayer(new Cross(a, x, y, z, w));
         }
 
 
@@ -406,8 +406,12 @@ public class Maps {
 
     private void OnDestroyBlock(IntVector2 vec)
     {
+        if (GameMgr.Instance.Type != GameMgrType.SERVER)
+            return;
         if (true)
-            GameMgr.Instance.Spawn(GOType.GO_PWRUP, TilePosToWorldPos(vec));
+        {
+            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, TilePosToWorldPos(vec), -1, UnityEngine.Random.Range(0, 12));
+            //GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
+        }
     }
-
 }

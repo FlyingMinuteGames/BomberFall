@@ -16,6 +16,7 @@ public class Cross
 
     public bool IsIn(IntVector2 pos)
     {
+        Debug.Log("pos" + pos);
         if ((pos.x <= x &&  pos.x >= z && pos.y == center.y) || (pos.y <= y && pos.y >= w && pos.x == center.x))
             return true;
         return false;

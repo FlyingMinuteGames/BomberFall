@@ -45,7 +45,6 @@ public class Async : MonoBehaviour {
                 yield return new WaitForSeconds(0.1f);
                 continue;
             }
-            Debug.Log("do action");
             lock (m_queue)
             {
                 for (int i = 0, len = max_action_frame > m_queue.Count ? m_queue.Count : max_action_frame; i < len; i++)

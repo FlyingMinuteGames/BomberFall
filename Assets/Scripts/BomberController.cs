@@ -168,7 +168,6 @@ public class BomberController : MonoBehaviour
             return;
         stack = 0;
 
-        Debug.Log("on stay " + m_IsOnGround);
 
         foreach (ContactPoint contact in collision.contacts)
         {
@@ -211,6 +210,8 @@ public class BomberController : MonoBehaviour
 
     void OnRecvMove(object[] o)
     {
+        if (m_IsPlayer)
+            return;
         this.m_MoveFlags = (int)o[0];
         this.transform.position = (Vector3)o[1];
     }
@@ -237,6 +238,8 @@ public class BomberController : MonoBehaviour
 
     public void RecvJump(Vector3 start)
     {
+        if (m_IsPlayer)
+            return;
         transform.position = start;
         fall_velocity = -0.15f * m_JumpSpeed;
     }

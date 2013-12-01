@@ -26,7 +26,7 @@ public class NetworkController : MonoBehaviour
     private bool jump = false;
     void Start()
     {
-        Physics.gravity = Vector3.down * Config.CONST_GRAVITY * Config.CONST_FACTOR;
+        //Physics.gravity = Vector3.down * Config.CONST_GRAVITY * Config.CONST_FACTOR;
         
     }   
 

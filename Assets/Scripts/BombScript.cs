@@ -13,7 +13,9 @@ public class BombScript : MonoBehaviour {
     // Use this for initialization
 	private Transform[] child;
     private bool m_IsInit = false;
+    private Rigidbody m_RigidBody;
     private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
+    private static RigidbodyConstraints[] s_constraint = new RigidbodyConstraints[] { ~RigidbodyConstraints.FreezePositionY, ~RigidbodyConstraints.FreezePositionZ, ~RigidbodyConstraints.FreezePositionZ, ~RigidbodyConstraints.FreezePositionX, ~RigidbodyConstraints.FreezePositionX};
     void Start () {
         Init();
 
@@ -30,7 +32,7 @@ public class BombScript : MonoBehaviour {
         child = new Transform[bomb_object.transform.childCount];
         anim = bomb_object.GetComponent<Animation>();
         panim = bomb_object.GetComponent<ParticleSystem>();
-
+        m_RigidBody = GetComponent<Rigidbody>();
         foreach (Transform t in bomb_object.transform)
             child[i++] = t;
 
@@ -45,6 +47,10 @@ public class BombScript : MonoBehaviour {
     void OnChangePhase(WorldState state)
     {
         transform.rotation = s_BaseRotation[(int)state];
+        m_RigidBody.constraints = s_constraint[(int)state];
+        if (state == WorldState.CENTER)
+            m_RigidBody.useGravity = false;
+        else m_RigidBody.useGravity = true;
     }
 
 
@@ -53,6 +59,10 @@ public class BombScript : MonoBehaviour {
         if (!m_IsInit)
             Init();
         transform.rotation = s_BaseRotation[(int)GameMgr.Instance.State];
+        m_RigidBody.constraints = s_constraint[(int)GameMgr.Instance.State];
+        if (GameMgr.Instance.State == WorldState.CENTER)
+            m_RigidBody.useGravity = false;
+        else m_RigidBody.useGravity = true;
         StartCoroutine(WaitAndExplode(onExplode,onEnd));
         CheckIfWithinPlayer();
     }

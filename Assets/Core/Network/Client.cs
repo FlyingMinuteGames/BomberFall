@@ -153,7 +153,7 @@ public class Client
         get { return guid; }
         set{
             guid = value;
-            player = ObjectMgr.Instance.get(guid);
+            player = ObjectMgr.Instance.Get(guid);
             Debug.Log("player : " + (player == null)+ " guid : " + guid);
             player.GetComponent<BomberController>().m_IsPlayer = true;
         } 

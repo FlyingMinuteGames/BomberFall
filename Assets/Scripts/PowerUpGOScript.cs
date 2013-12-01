@@ -39,15 +39,16 @@ public class PowerUpGOScript : MonoBehaviour {
     {
         Debug.Log("Type is "+ type);
         Vector3 originalTransform = gameObject.transform.position;
-        GameObject go = (GameObject)Instantiate(powerGOs[(int)type], originalTransform/*+ new Vector3(0,-0.5f,0f)*/, Quaternion.identity);
+        GameObject go = (GameObject)Instantiate(powerGOs[(int)type], powerGOs[(int)type].transform.position/*+ new Vector3(0,-0.5f,0f)*/, Quaternion.identity);
         go.transform.parent = gameObject.transform;
-        go.transform.position = originalTransform;
+        go.transform.localPosition = powerGOs[(int)type].transform.position;
+        go.transform.rotation = powerGOs[(int)type].transform.rotation;
         gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
     }
 
     void OnTriggerEnter(Collider col){
 
-        if (col.gameObject.CompareTag("Player"))
+        if (GameMgr.Instance.Type == GameMgrType.SERVER && col.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player has entered" + col.gameObject.GetComponent<Guid>().GetGUID());
             GameMgr.Instance.PowerUpPickUp(gameObject, col.gameObject.GetComponent<Guid>().GetGUID(), powers[(int)type]);

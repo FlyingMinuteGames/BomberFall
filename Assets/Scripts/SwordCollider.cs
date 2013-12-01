@@ -15,11 +15,11 @@ public class SwordCollider : MonoBehaviour {
 
     void OnColliderEnter(Collider col)
     {
-        if ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        if ((GameMgr.Instance.Type & GameMgrType.SERVER) == 0)
             return;
         if (col.CompareTag("Player"))
         {
-
+            GameMgr.Instance.HandleKillPlayer(col.gameObject.GetComponent<Guid>().GetGUID(), gameObject.GetComponent<Guid>().GetGUID(), Config.PowerType.BRING_A_SW_TO_A_GF);
         }
     }
 }

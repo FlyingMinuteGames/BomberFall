@@ -140,7 +140,7 @@ public class GameMgr : MonoBehaviour {
                 _guid =  ObjectMgr.Instance.Register(go, type, guid,extra);
                 break;
         }
-        if(_guid > 0 && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        if(_guid > 0 && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
             GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(_guid)));
         return _guid;
     }
@@ -154,7 +154,7 @@ public class GameMgr : MonoBehaviour {
             ObjectMgr.Instance.UnRegister(guid);
             Despawn(go.type, go.go);
         }
-        if (((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        if (((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
             GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildDespawn(guid));
 
     }
@@ -168,7 +168,7 @@ public class GameMgr : MonoBehaviour {
             ObjectMgr.Instance.UnRegister(guid);
             Despawn(type, go);
         }
-        if (((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        if (((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
             GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildDespawn(guid));
     }
     private void Despawn(GOType type, GameObject go)

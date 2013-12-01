@@ -126,7 +126,7 @@ public class Server //: INetwork
                     break;
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
-                Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                //Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
                 if (size == 0)
                 {
                     Packet p = new Packet(size, opcode, null);
@@ -187,9 +187,7 @@ public class Server //: INetwork
     }
     private void HandlePacket(TcpClient client, Packet packet)
     {
-        //Debug.Log("handle !");
         packet.Sender = client;
-        Debug.Log("Handle " + packet.GetOpcode());
         Async.Instance.DelayedAction(() =>
         {
             m_opcodeMgr.HandlePacket(packet);
@@ -201,14 +199,14 @@ public class Server //: INetwork
         byte[] data = packet.ToByte();
         if (!client.Connected)
             return;
-        Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        //Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         client.Client.Send(data);//client.GetStream().Write(data,0,data.Length);
     }
 
     public void SendPacketBroadCast(Packet packet, TcpClient except = null)
     {
         byte[] data = packet.ToByte();
-        Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        //Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         foreach(TcpClient client in m_clients)
         {
             if (!client.Connected)

@@ -50,9 +50,10 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildSpawnBomb(Vector3 pos)
+    public static Packet BuildSpawnBomb(int guid,Vector3 pos)
     {
-        Packet p = new Packet(3 * 4, Opcode.CMSG_PLAYER_DROP_BOMB);
+        Packet p = new Packet(4 * 4, Opcode.CMSG_PLAYER_DROP_BOMB);
+        p.Write(guid);
         p.Write(pos); // need to by only 2 float
         return p;
     }

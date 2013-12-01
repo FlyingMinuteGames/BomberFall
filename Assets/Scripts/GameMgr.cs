@@ -101,7 +101,7 @@ public class GameMgr : MonoBehaviour {
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
         StartCoroutine(ChangePhaseTimer());
-        //ChangePhase();
+        ChangePhase();
         mp.PlayNextTrack();
 
     }
@@ -217,9 +217,9 @@ public class GameMgr : MonoBehaviour {
         c.SendPacket(p);
     }
 
-    public void SpawnBomb(Vector3 pos)
+    public void SpawnBomb(int guid,Vector3 pos)
     {
-        Packet p = PacketBuilder.BuildSpawnBomb(pos);
+        Packet p = PacketBuilder.BuildSpawnBomb(guid, pos);
         c.SendPacket(p);
     }
 
@@ -320,6 +320,8 @@ public class GameMgr : MonoBehaviour {
                 continue;
             IntVector2 tpos = maps.GetTilePosition(t.transform.position.x, t.transform.position.z);
             Debug.Log(tpos);
+            if (tpos == null)
+                continue;
             if (cross.IsIn(tpos))
             {
                 // DO SOMETHING 

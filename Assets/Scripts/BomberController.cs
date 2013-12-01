@@ -18,7 +18,7 @@ public class BomberController : MonoBehaviour
     void Start()
     {
         m_Animator = gameObject.GetComponent<Animator>();
-        m_guid = gameObject.GetComponent<Guid>().GetGUID();
+        m_guid = gameObject.GetComponent<Guid>();
     }
 
     // Update is called once per frame
@@ -29,13 +29,18 @@ public class BomberController : MonoBehaviour
 
     }
     private bool m_IsOnGround = false;
+
+    public bool IsOnGround
+    {
+        get { return m_IsOnGround; }
+    }
     private Dictionary<int, bool> m_contact = new Dictionary<int, bool>();
     private int stack = 0;
     Vector3 move = Vector3.zero;
     public float speed = 1.0f;
     private float fall_velocity = 0;
     private Vector3 gravity = Vector3.back;
-    private int m_guid;
+    private Guid m_guid;
     delegate int Callback(BomberController me, bool enable);
 
     private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("RightKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("DefensiveItemKey") };
@@ -56,7 +61,7 @@ public class BomberController : MonoBehaviour
         {(KeyCode)PlayerPrefs.GetInt("BackwardKey"),(Callback)((me,enable) => { if(me.m_State != WorldState.CENTER) return 0; me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_BACKWARD : me.m_MoveFlags & ~(int)MoveState.MOVE_BACKWARD; return 1;})},
         {(KeyCode)PlayerPrefs.GetInt("LeftKey"),(Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_LEFT : me.m_MoveFlags & ~(int)MoveState.MOVE_LEFT; return 1;})},
         {(KeyCode)PlayerPrefs.GetInt("RightKey"), (Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_RIGHT : me.m_MoveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;})},
-        {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 1;})},
+        {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 0;})},
         {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{me.UseOffensiveItem();return 0;})},
         {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{/*me.UseDefensiveItem();*/return 0;})},
         {KeyCode.Escape,(Callback)((me,enable)=>{
@@ -87,30 +92,14 @@ public class BomberController : MonoBehaviour
 
     public void SpawnBomb()
     {
-
-        GameMgr.Instance.SpawnBomb(transform.position);
-        /*GameObject o = pool.Pop(transform.position,new Quaternion());
-        if (o == null)
-        {
-            Debug.Log("warning no bomb in pool !");
+        if (!m_IsOnGround)
             return;
-        }
-        o.GetComponent<BombScript>().StartScript(() => {/* handle damage  return;}, () => { pool.Free(o); return; });
-        */
+        GameMgr.Instance.SpawnBomb(m_guid.GetGUID(), transform.position);
     }
 
     public void UseOffensiveItem()
     {
-
-        GameMgr.Instance.UseOffensiveItem(m_guid, transform.position);
-        /*GameObject o = pool.Pop(transform.position,new Quaternion());
-        if (o == null)
-        {
-            Debug.Log("warning no bomb in pool !");
-            return;
-        }
-        o.GetComponent<BombScript>().StartScript(() => {/* handle damage  return;}, () => { pool.Free(o); return; });
-        */
+        GameMgr.Instance.UseOffensiveItem(m_guid.GetGUID(), transform.position);
     }
 
 

@@ -315,6 +315,8 @@ public class Maps {
 
     public void ExplodeAt(IntVector2 a, int radius)
     {
+        if (a == null)
+            return;
         int x = a.x + radius, y = a.y + radius, z = a.x - radius, w = a.y - radius;
         Debug.Log(a);
         for (int i = a.x+1; i <= a.x + radius; i++)

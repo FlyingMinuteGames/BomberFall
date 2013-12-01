@@ -33,8 +33,13 @@ public class ServerHandler  {
 
     public static void HandleDropBomb(Packet p)
     {
+        int guid = p.ReadInt();
         Vector3 pos = p.ReadVector3();
-        current.SpawnBomb(pos);
+        GameObject controller = null;
+        Debug.Log("bomb by " + guid);
+        if ((controller = ObjectMgr.Instance.Get(guid)) != null)
+            current.SpawnBomb(controller.GetComponent<BomberController>(),pos);
+        Debug.Log("controller : " + controller);
     }
 
     public static void HandleConnect(Packet p)

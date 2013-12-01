@@ -286,8 +286,6 @@ Prefab:
   m_RootGameObject: {fileID: 424667706}
   m_IsPrefabParent: 0
   m_IsExploded: 1
-<<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &270772443
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,9 +296,6 @@ GameObject:
   - 4: {fileID: 270772444}
   m_Layer: 0
   m_Name: GameObject
-=======
-=======
->>>>>>> 515b28589683300854eb11aa04df54d31d8ae196
 --- !u!1 &254753381
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,17 +307,11 @@ GameObject:
   - 114: {fileID: 254753382}
   m_Layer: 0
   m_Name: GameMgr
-<<<<<<< HEAD
->>>>>>> 515b28589683300854eb11aa04df54d31d8ae196
-=======
->>>>>>> 515b28589683300854eb11aa04df54d31d8ae196
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!4 &270772444
 Transform:
   m_ObjectHideFlags: 0
@@ -331,9 +320,6 @@ Transform:
   m_GameObject: {fileID: 270772443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .503355265, y: 1.08793521, z: -.13346386}
-=======
-=======
->>>>>>> 515b28589683300854eb11aa04df54d31d8ae196
 --- !u!114 &254753382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,10 +343,6 @@ Transform:
   m_GameObject: {fileID: 254753381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.012337327, y: .964416504, z: -10.0441532}
-<<<<<<< HEAD
->>>>>>> 515b28589683300854eb11aa04df54d31d8ae196
-=======
->>>>>>> 515b28589683300854eb11aa04df54d31d8ae196
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

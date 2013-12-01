@@ -28,7 +28,8 @@ public static class Config
         RANDOM_TELEPORTER,
         SPEED_UP,
         THE_HOME_RUNNER,
-        VENGEFUL_PHENIX
+        VENGEFUL_PHENIX,
+        MAX_POWER_UP
     }
 
     public static string[] power_ups_string = { "As Neil Taught Me", "Back to School", "Bomb Squad", "Bring a Sword to a Gunfight", "Fire Up", "Impenetrable Trinket", "Kick it Like you Mean it!", "Randomizatron Teleporter", "Speed Up", "The Home Runner", "Vengeful Phenix" };

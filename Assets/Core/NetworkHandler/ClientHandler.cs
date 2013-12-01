@@ -64,6 +64,18 @@ public class ClientHandler
         int session = p.ReadInt();
         p.ReadInt(); // unused
         int guid = p.ReadInt();
+
+        int game_mode = p.ReadByte();
+        float game_duration = p.ReadFloat();
+        int nb_player = p.ReadByte();
+        int powerup_enable = p.ReadInt();
+
+        bool[] powerup = new bool[12];
+        for (int i = 0, len = powerup.Length; i < len; i++)
+            powerup[i] = (powerup_enable & 1 << i) != 0;
+
+        GameIntel gintel = new GameIntel(game_duration, game_mode, powerup, nb_player, 0, false, false, "");
+        GameMgr.Instance.gameIntel = gintel;
         if (current.Session < 0)
         {
             current.Session = session;

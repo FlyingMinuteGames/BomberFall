@@ -26,12 +26,21 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildPlayerConnectPacket(int sessionId,int guid, int player_index)
+    public static Packet BuildPlayerConnectPacket(int sessionId,int guid, int player_index, GameIntel gintel)
     {
-        Packet p = new Packet(12,(int)Opcode.SMSG_PLAYER_CONNECTED);
+        Packet p = new Packet(12+1+4+1+4,(int)Opcode.SMSG_PLAYER_CONNECTED);
         p.Write(sessionId);
         p.Write(player_index);
         p.Write(guid);
+        p.Write((byte)gintel.game_mode);
+        p.Write(gintel.game_duration);
+        p.Write((byte)gintel.nb_players);
+        int powerUpEnable = 0;
+        foreach (var power in gintel.power_ups)
+            powerUpEnable |= 1 << (int)power;
+        p.Write(powerUpEnable);
+        
+
         return p;
     }
 

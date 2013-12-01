@@ -105,7 +105,7 @@ public class PacketBuilder  {
 
     public static Packet BuildUseOffensiveItem(int guid, Vector3 pos)
     {
-        Packet p = new Packet(4+4*3, Opcode.SMSG_DESPAWN);
+        Packet p = new Packet(4+4*3, Opcode.CMSG_OFF_POWER_USE);
         p.Write(guid);
         p.Write(pos);
         return p;

@@ -27,6 +27,7 @@ public enum Opcode
     MSG_JUMP,
     SMSG_CHANGE_PHASE,
     SMSG_OFF_POWER_PICK_UP,
-    SMSG_DESPAWN
+    SMSG_DESPAWN,
+    CMSG_OFF_POWER_USE
 
 }

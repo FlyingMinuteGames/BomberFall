@@ -48,7 +48,7 @@ public class PowerUpGOScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider col){
 
-        if (GameMgr.Instance.Type == GameMgrType.SERVER && col.gameObject.CompareTag("Player"))
+        if (((GameMgr.Instance.Type & GameMgrType.SERVER) != 0 && col.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player has entered" + col.gameObject.GetComponent<Guid>().GetGUID());
             GameMgr.Instance.PowerUpPickUp(gameObject, col.gameObject.GetComponent<Guid>().GetGUID(), powers[(int)type]);

@@ -399,7 +399,7 @@ public class Maps {
         }
 
 
-        if (GameMgr.Instance != null && GameMgr.Instance.Type == GameMgrType.SERVER)
+        if (GameMgr.Instance != null && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
             OnExplode(new Cross(a, x, y, z, w));
 
     }
@@ -445,7 +445,7 @@ public class Maps {
 
     private void OnDestroyBlock(IntVector2 vec)
     {
-        if (GameMgr.Instance.Type != GameMgrType.SERVER)
+        if (((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
             return;
 
         if (true)

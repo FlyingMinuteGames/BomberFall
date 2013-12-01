@@ -258,9 +258,9 @@ public class Server //: INetwork
 
     public void SpawnBomb(BomberController controller, Vector3 pos)
     {
-        Debug.Log("SpawnBomn");
-        if (controller.IsOnGround)
+        if (!controller.IsOnGround || controller.BombSpawn > controller.BombCount)
             return;
+        controller.BombSpawn++;
         Maps maps = GameMgr.Instance.maps;
         IntVector2 tpos = maps.GetTilePosition(pos.x,pos.z);
         pos =   maps.TilePosToWorldPos(tpos);
@@ -272,14 +272,16 @@ public class Server //: INetwork
                 return;
         }
         int guid = GameMgr.Instance.Spawn(GOType.GO_BOMB, pos);
+        int radius = controller.BombRadius;
         GameObject go =  ObjectMgr.Instance.Get(guid);
         go.GetComponent<BombScript>().StartScript(() =>
         {
             IntVector2 new_tpos = maps.GetTilePosition(go.transform.position.x, go.transform.position.z);
-            maps.ExplodeAt(new_tpos, 2);
+            maps.ExplodeAt(new_tpos, radius);
+            controller.BombSpawn--;
             if (new_tpos == null)
                 return;
-            SendPacketBroadCast(PacketBuilder.BuildBombExplode(new_tpos));
+            SendPacketBroadCast(PacketBuilder.BuildBombExplode(new_tpos, radius));
         },
         () => {
             GameMgr.Instance.Despawn(GOType.GO_BOMB, guid);

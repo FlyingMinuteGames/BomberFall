@@ -82,8 +82,25 @@ public class BomberController : MonoBehaviour
     };
 
     private int bombCount = 1;
+
+    public int BombCount
+    {
+        get { return bombCount; }
+    }
+    private int bombSpawn = 0;
+
+    public int BombSpawn
+    {
+        get { return bombSpawn; }
+        set { bombSpawn = value; }
+    }
     private int speedMult = 1;
     private int bombRadius = 1;
+
+    public int BombRadius
+    {
+        get { return bombRadius; }
+    }
 
 
     void UpdateInput()

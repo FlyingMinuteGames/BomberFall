@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
+using System;
 public class Client
 {
 
@@ -43,10 +44,11 @@ public class Client
     {
         tcp_client.Connect(address, port);
         m_isRunning = true;
-
+        Debug.Log("Connected : " + tcp_client.Connected);
         tcp_thread = new Thread(new ParameterizedThreadStart(HandleClient));
 
         tcp_thread.Start(tcp_client);
+        Debug.Log("(CLIENT) Start !");
     }
 
     public void SendPacket(Packet packet)
@@ -59,7 +61,7 @@ public class Client
     private void HandleClient(object client)
     {
         TcpClient tcpClient = (TcpClient)client;
-        Debug.Log("begin to read network stream");
+        Debug.Log("(CLIENT) begin to read network stream");
         int size, opcode;
         byte[] buffer = new byte[4096];
         int bytesRead;
@@ -75,7 +77,7 @@ public class Client
                     break;
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
-                Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                Debug.Log("(CLIENT) Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
                 if (size == 0)
                 {
                     Packet p = new Packet(size, opcode, null);
@@ -85,7 +87,7 @@ public class Client
                 if (size > BUFFER_SIZE)
                 {
 
-                    Debug.Log("unhandled packet, buffer execced ! " + size + " bytes");
+                    Debug.Log("(CLIENT) unhandled packet, buffer execced ! " + size + " bytes");
                     int max = size / BUFFER_SIZE;
                     int last = size % BUFFER_SIZE;
                     for (int i = 0; i < max; i++)
@@ -97,15 +99,15 @@ public class Client
                 bytesRead = sock.Receive(buffer, size, SocketFlags.None);
                 if (bytesRead == size)
                 {
-                    Debug.Log("Recv packet real size : " + bytesRead + ", opcode : " + (Opcode)opcode);
+                    Debug.Log("(CLIENT) Recv packet real size : " + bytesRead + ", opcode : " + (Opcode)opcode);
                     Packet p = new Packet(size, opcode, buffer);
                     HandlePacket(tcpClient, p);
                 }
             }
-            catch
+            catch (Exception e)
             {
                 //a socket error has occured
-                Debug.Log("socket error has occured !");
+                Debug.Log("(CLIENT) socket error has occured ! "+ e.Message);
                 break;
             }
             //Thread.Sleep(1000);
@@ -117,7 +119,7 @@ public class Client
                 break;
             }
         }
-        Debug.Log("socket close !");
+        Debug.Log("(CLIENT) socket close !");
         tcpClient.Close();
     }
 

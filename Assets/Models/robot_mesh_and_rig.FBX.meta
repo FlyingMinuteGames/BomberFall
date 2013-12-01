@@ -89,17 +89,19 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    optimizeGameObjects: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
+    extraExposedTransformPaths: []
     clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: .00999999978
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
@@ -126,8 +128,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .109784268, y: 0, z: .0548921339}
-        preQ: {x: -.500221789, y: -.499778122, z: .500221789, w: .499778122}
-        postQ: {x: .500221789, y: .499778122, z: .499778122, w: -.500221789}
         length: .137230337
         modified: 1
     - boneName: RobotSkeleton L Thigh
@@ -136,8 +136,6 @@ ModelImporter:
         min: {x: -60.0000038, y: -60.0000038, z: -90}
         max: {x: 60.0000038, y: 60.0000038, z: 50}
         value: {x: .0879524648, y: 0, z: .0439762324}
-        preQ: {x: .953748047, y: .300602317, z: -.0016572657, w: .000521697162}
-        postQ: {x: 2.98023224e-08, y: -.0129012316, z: .999916792, w: 4.47034836e-08}
         length: .109940581
         modified: 1
     - boneName: RobotSkeleton R Thigh
@@ -146,8 +144,6 @@ ModelImporter:
         min: {x: -60.0000038, y: -60.0000038, z: -90}
         max: {x: 60.0000038, y: 60.0000038, z: 50}
         value: {x: .0879524648, y: 0, z: .0439762324}
-        preQ: {x: -.967292011, y: -.253665686, z: -1.72718828e-07, w: 7.19661784e-07}
-        postQ: {x: 8.94069814e-08, y: 6.40749988e-07, z: -1, w: 4.47034907e-08}
         length: .109940581
         modified: 1
     - boneName: RobotSkeleton L Calf
@@ -156,8 +152,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .0682610273, y: 0, z: .0341305137}
-        preQ: {x: .00721474178, y: .00319594191, z: -.663088202, w: .748499691}
-        postQ: {x: .000113964081, y: .0118349642, z: -.999883711, w: -.00961209834}
         length: .0853262842
         modified: 1
     - boneName: RobotSkeleton R Calf
@@ -166,8 +160,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .064017728, y: 0, z: .032008864}
-        preQ: {x: 2.73972262e-07, y: 5.56506166e-08, z: -.723252654, w: .690583408}
-        postQ: {x: -1.78813934e-07, y: 6.55651093e-07, z: -.999052703, w: -.0435158163}
         length: .0800221562
         modified: 1
     - boneName: RobotSkeleton L Foot
@@ -176,8 +168,6 @@ ModelImporter:
         min: {x: 0, y: -30.0000019, z: -50}
         max: {x: 0, y: 30.0000019, z: 50}
         value: {x: .0183479637, y: 0, z: .00917398185}
-        preQ: {x: .00367259979, y: .0124889612, z: -.997791767, w: -.0651313215}
-        postQ: {x: 7.45058131e-08, y: 6.55651149e-07, z: -1, w: 8.94069814e-08}
         length: .0229349546
         modified: 1
     - boneName: RobotSkeleton R Foot
@@ -186,8 +176,6 @@ ModelImporter:
         min: {x: 0, y: -30.0000019, z: -50}
         max: {x: 0, y: 30.0000019, z: 50}
         value: {x: .0213984456, y: 0, z: .0106992228}
-        preQ: {x: 5.96046448e-08, y: 7.15255737e-07, z: -.995004416, w: .0998315811}
-        postQ: {x: 7.4505806e-08, y: 7.4505806e-07, z: -1, w: 0}
         length: .0267480575
         modified: 1
     - boneName: RobotSkeleton Spine1
@@ -196,8 +184,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .100048028, y: 0, z: .050024014}
-        preQ: {x: -5.96046519e-08, y: 7.15255851e-07, z: -1, w: -.000267654686}
-        postQ: {x: -5.96046519e-08, y: 7.00354633e-07, z: -1, w: -.000267639785}
         length: .125060037
         modified: 1
     - boneName: RobotSkeleton Neck
@@ -206,8 +192,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .0327798463, y: 0, z: .0163899232}
-        preQ: {x: -2.98023224e-08, y: -7.00354576e-07, z: .999999881, w: .000398084521}
-        postQ: {x: -5.96046519e-08, y: -6.55651149e-07, z: .99999994, w: .000398099481}
         length: .040974807
         modified: 1
     - boneName: RobotSkeleton Head
@@ -216,8 +200,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .0163899232, y: 0, z: .00819496159}
-        preQ: {x: -0, y: -6.55651149e-07, z: 1, w: 0}
-        postQ: {x: 1.49011612e-08, y: -6.2584877e-07, z: 1, w: 0}
         length: .0204874035
         modified: 1
     - boneName: RobotSkeleton L Clavicle
@@ -226,8 +208,6 @@ ModelImporter:
         min: {x: 0, y: -15.000001, z: -15.000001}
         max: {x: 0, y: 15.000001, z: 30.0000019}
         value: {x: .0507051721, y: 0, z: .0253525861}
-        preQ: {x: .499999732, y: .499998778, z: .500000238, w: -.500001192}
-        postQ: {x: -7.09149901e-07, y: -.707106769, z: .707106769, w: -5.6118796e-07}
         length: .0633814633
         modified: 1
     - boneName: RobotSkeleton R Clavicle
@@ -236,8 +216,6 @@ ModelImporter:
         min: {x: 0, y: -15.000001, z: -15.000001}
         max: {x: 0, y: 15.000001, z: 30.0000019}
         value: {x: .0507051609, y: 0, z: .0253525805}
-        preQ: {x: -.499999046, y: .499999523, z: .500000954, w: .500000477}
-        postQ: {x: 3.02574875e-07, y: .707106709, z: -.707106769, w: 3.71125253e-07}
         length: .0633814484
         modified: 1
     - boneName: RobotSkeleton L UpperArm
@@ -246,8 +224,6 @@ ModelImporter:
         min: {x: -90, y: -100, z: -60.0000038}
         max: {x: 90, y: 100, z: 100}
         value: {x: .107122175, y: 0, z: .0535610877}
-        preQ: {x: -.0855246708, y: -.644021571, z: .630506694, w: -.424715251}
-        postQ: {x: -5.99771795e-07, y: .998283684, z: -.0585642941, w: -1.35714814e-07}
         length: .133902714
         modified: 1
     - boneName: RobotSkeleton R UpperArm
@@ -256,8 +232,6 @@ ModelImporter:
         min: {x: -90, y: -100, z: -60.0000038}
         max: {x: 90, y: 100, z: 100}
         value: {x: .107122242, y: 0, z: .0535611212}
-        preQ: {x: -.412749499, y: .640053153, z: -.644322515, w: -.0694135278}
-        postQ: {x: 1.21071935e-08, y: .0671235397, z: -.997744739, w: -4.98075678e-07}
         length: .133902803
         modified: 1
     - boneName: RobotSkeleton L Forearm
@@ -266,8 +240,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .089252457, y: 0, z: .0446262285}
-        preQ: {x: .41141656, y: .523753703, z: -.55592376, w: .497360289}
-        postQ: {x: -3.63797881e-08, y: .664346278, z: -.74742496, w: -7.47386366e-08}
         length: .111565568
         modified: 1
     - boneName: RobotSkeleton R Forearm
@@ -276,8 +248,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .0892524496, y: 0, z: .0446262248}
-        preQ: {x: .484507173, y: -.568624735, z: .513381243, w: .422325075}
-        postQ: {x: 4.18978743e-07, y: -.752994597, z: .658026576, w: -3.3370452e-07}
         length: .11156556
         modified: 1
     - boneName: RobotSkeleton L Hand
@@ -286,8 +256,6 @@ ModelImporter:
         min: {x: 0, y: -40, z: -80}
         max: {x: 0, y: 40, z: 80}
         value: {x: .0446262285, y: 0, z: .0223131143}
-        preQ: {x: 2.70083511e-08, y: .998273313, z: -.0587401018, w: -7.84628966e-08}
-        postQ: {x: 3.51790804e-05, y: .711518526, z: .702667415, w: -3.55911179e-05}
         length: .0557827838
         modified: 1
     - boneName: RobotSkeleton R Hand
@@ -296,8 +264,6 @@ ModelImporter:
         min: {x: 0, y: -40, z: -80}
         max: {x: 0, y: 40, z: 80}
         value: {x: .0446262248, y: 0, z: .0223131124}
-        preQ: {x: -5.97210601e-08, y: .0671267211, z: -.997744441, w: 5.32461854e-07}
-        postQ: {x: -3.51699964e-05, y: -.717397988, z: .696663558, w: -3.63000399e-05}
         length: .0557827801
         modified: 1
     skeleton:
@@ -486,7 +452,6 @@ ModelImporter:
       rotation: {x: 0, y: 0, z: .99999994, w: -2.91038894e-11}
       scale: {x: -1, y: -1.00000012, z: -1.00000012}
       transformModified: 1
-    handles: []
     armTwist: .5
     foreArmTwist: .5
     upperLegTwist: .5
@@ -496,6 +461,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  additionalBone: 1
   animationType: 3
   userData: 

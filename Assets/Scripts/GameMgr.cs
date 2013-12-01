@@ -81,6 +81,7 @@ public class GameMgr : MonoBehaviour
     {
         Application.runInBackground = true;
         s_instance = this;
+        Debug.Log("GameMgr init");
         player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
         bomb_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb"), 100);
         pwr_up_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/PowerUp"), 100);
@@ -94,17 +95,34 @@ public class GameMgr : MonoBehaviour
 
     }
 
+
+    void Reset()
+    {
+        if (null != c)
+            c.Destroy();
+        c = null;
+        if (null != s)
+            s.Destroy();
+        s = null;
+        type = (GameMgrType)0;
+        ObjectMgr.Instance.Clear();
+        player_pool.ClearAndRealloc();
+        bomb_pool.ClearAndRealloc();
+        pwr_up_pool.ClearAndRealloc();
+        maps.Clear();
+        game_started = false;
+        StopAllCoroutines();
+        Async.Instance.Restart();
+        
+        
+    }
+
     public void StartServer()
     {
         s = new Server();
         ServerHandler.current = s;
         s.SetHandler(ServerHandler.handlers);
         type |= GameMgrType.SERVER;
-        s.OnClientConnected = (client) =>
-        {
-            //s.SendPacketTo(client,PacketBuilder.BuildMovePlayerPacket()=;
-        };
-        //StartClient("127.0.0.1");
     }
 
     public void StartGame()
@@ -118,6 +136,15 @@ public class GameMgr : MonoBehaviour
         mp.PlayNextTrack();
 
     }
+
+    /*private int xtra = 0;
+    public void _switch()
+    {
+        xtra++;
+        if (xtra > 3)
+            xtra = 0;
+        ChangePhase(WorldState.CENTER, (WorldStateExtra)xtra);
+    }*/
 
     public int Spawn(GOType type, Vector3 pos, int guid = -1, int extra = 0)
     {
@@ -189,36 +216,33 @@ public class GameMgr : MonoBehaviour
                 break;
         }
     }
-
+    IEnumerator ClientConnect()
+    {
+        yield return new WaitForSeconds(0.1f);
+        c.Connect();
+        c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
+    }
     public void StartClient(string address)
     {
         type |= GameMgrType.CLIENT;
         c = new Client(address);
         ClientHandler.current = c;
-        if (s != null)
+        if ((type & GameMgrType.SERVER) != 0)
             c.Both = true;
         c.SetHandler(ClientHandler._handlers);
-        c.Connect();
-        c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
+        StartCoroutine(ClientConnect());
 
     }
 
     void OnDestroy()
     {
-        Debug.Log("TEST");
-        if (null != c)
-            c.Destroy();
-        if (null != s)
-            s.Destroy();
+       
+        Reset();
     }
 
     void OnApplicationQuit()
     {
-        Debug.Log("TEST");
-        if (null != c)
-            c.Destroy();
-        if (null != s)
-            s.Destroy();
+        Reset();
     }
 
     public void PlayerMove(int flag, Vector3 pos)
@@ -307,7 +331,7 @@ public class GameMgr : MonoBehaviour
 
         IList<GameObject> l = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
         foreach (var a in l)
-            a.SendMessage("OnChangePhase", m_state);
+            a.SendMessage("OnChangePhase", new short[] { (short)m_state, (short)m_state_extra });
 
         l = ObjectMgr.Instance.Get(GOType.GO_BOMB);
         Debug.Log("size : " + l.Count);
@@ -395,19 +419,9 @@ public class GameMgr : MonoBehaviour
     {
         mp.PlayNextTrack();
         hud.Deactivate();
-        if ((type & GameMgrType.SERVER) != 0)
-        {
-            c.Destroy();
-            s.Destroy();
-            mainMenu.active = true;
-        }
-        else
-        {
-            c.Destroy();
-            s.Destroy();
-            mainMenu.active = true;
-
-        }
+        Reset();
+        mainMenu.Reset();
+        mainMenu.active = true;
     }
 
     public void RespawnPlayer()

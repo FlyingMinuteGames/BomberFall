@@ -31,6 +31,12 @@ public class Async : MonoBehaviour {
 
     void Start()
     {
+        Restart();
+    }
+
+    public void Restart()
+    {
+        m_queue.Clear();
         StartCoroutine(HandleAction());
     }
 

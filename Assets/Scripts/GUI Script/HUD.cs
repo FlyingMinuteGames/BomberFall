@@ -19,8 +19,8 @@ public class HUD : MonoBehaviour
     private Color[] colors = { Color.white, Color.red, new Color(0f, 0.2f, 0.8f), new Color(1f,0.5f,0f)};
     private GameIntel gameIntel;
     private bool active = false;
-    private bool hasOffensivePower = false;
-    private bool hasDefensivePower = false;
+    public bool hasOffensivePower = false;
+    public bool hasDefensivePower = false;
     private Config.PowerType offensivePower;
     private Config.PowerType defensivePower;
     private string offensiveStr;
@@ -72,8 +72,9 @@ public class HUD : MonoBehaviour
         m_displayer.SetActive(true);
     }
 
-    void Deactivate()
+    public void Deactivate()
     {
+        active = false;
         m_displayer.SetActive(false);
     }
 

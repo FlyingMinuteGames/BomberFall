@@ -49,8 +49,12 @@ public class GameMgr : MonoBehaviour {
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
+<<<<<<< HEAD
     private static float const_gravity = -20.0f;
     private Vector3[] gravityStates;
+=======
+    private MusicPlayer mp;
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
 
     public WorldState State
     {
@@ -59,6 +63,7 @@ public class GameMgr : MonoBehaviour {
     }
 
     private GameObject m_MainCamera;
+    private MainMenuScript mainMenu;
     public GameMgrType Type
     {
         get { return type; }
@@ -72,6 +77,9 @@ public class GameMgr : MonoBehaviour {
         pwr_up_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/PowerUp"), 100);
         hud = GameObject.Find("HUD").GetComponent<HUD>();
         m_MainCamera = GameObject.Find("MainCamera");
+        mainMenu = GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>();
+        mp = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
+
         baseRotation = m_MainCamera.transform.rotation;
         gravityStates = new Vector3[] { Vector3.up * const_gravity, Vector3.forward * const_gravity, Vector3.forward * -const_gravity, Vector3.right * const_gravity, Vector3.right * -const_gravity };
 	   
@@ -95,8 +103,15 @@ public class GameMgr : MonoBehaviour {
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
+<<<<<<< HEAD
         //StartCoroutine(ChangePhaseTimer());
         ChangePhase();
+=======
+        StartCoroutine(ChangePhaseTimer());
+
+        mp.PlayNextTrack();
+        //ChangePhase();
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
     }
 
     public int Spawn(GOType type, Vector3 pos, int guid = -1, int extra = 0)
@@ -116,7 +131,11 @@ public class GameMgr : MonoBehaviour {
             case GOType.GO_PWRUP:
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
+<<<<<<< HEAD
                 sc.type = (Config.PowerType)extra/*UnityEngine.Random.Range(0, 12)*/;
+=======
+                sc.type = (Config.PowerType)3/*UnityEngine.Random.Range(0, 12)*/;
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
                 sc.Init();
                 _guid =  ObjectMgr.Instance.Register(go, type, guid,extra);
                 break;
@@ -142,7 +161,12 @@ public class GameMgr : MonoBehaviour {
 
     public void Despawn(GOType type, int guid)
     {
+<<<<<<< HEAD
         GameObject go = ObjectMgr.Instance.Get(guid);
+=======
+        GameObject go = ObjectMgr.Instance.get(guid);
+        Debug.Log("GO in despawn " + go);
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
         if (go != null)
         {
             ObjectMgr.Instance.UnRegister(guid);
@@ -215,6 +239,14 @@ public class GameMgr : MonoBehaviour {
         c.SendPacket(p);
     }
 
+    public void UseOffensiveItem(int clientguid, Vector3 pos)
+    {
+        if (!hud.hasOffensivePower)
+            return;
+        //Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid, pos);
+        //c.SendPacket(p);
+    }
+
     public void PowerUpPickUp(GameObject powerGo, int player_guid, APowerUp power)
     {
         Debug.Log("Power picked by player " + player_guid + " power id is " + powerGo.GetComponent<Guid>().GetGUID() + " power is " + power);
@@ -281,6 +313,7 @@ public class GameMgr : MonoBehaviour {
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
     }
 
+<<<<<<< HEAD
     public void KillPlayer(Cross cross)
     {
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_BOMB);
@@ -297,5 +330,25 @@ public class GameMgr : MonoBehaviour {
             s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i));
 
         }
+=======
+    public void QuitGame()
+    {
+        mp.PlayNextTrack();
+        hud.Deactivate();
+        if (type == GameMgrType.SERVER)
+        {
+            c.Destroy();
+            s.Destroy();
+            mainMenu.active = true;
+        }
+        else
+        {
+            c.Destroy();
+            s.Destroy();
+            mainMenu.active = true;
+            
+        }
+
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
     }
 }

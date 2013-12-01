@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 using System;
+using System.Net;
 public class Server //: INetwork 
 {
     public struct ClientSession
@@ -35,10 +36,10 @@ public class Server //: INetwork
     public Server()
     {
         m_sessions = new Dictionary<int, ClientSession>();
-        tcp_server = new TcpListener(Config.DEFAULT_PORT);
+        tcp_server = new TcpListener(new IPEndPoint(IPAddress.Any, Config.DEFAULT_PORT));
         listener_thread = new Thread(new ThreadStart(ListenForClients));
         listener_thread.Start();
-        
+        Debug.Log("(SERVER) Start !");
     }
 
 
@@ -58,7 +59,7 @@ public class Server //: INetwork
         m_clients = new List<TcpClient>();
         while (m_isRunning)
         {
-            //Debug.Log("listen");
+            Debug.Log("(SERVER) Listen...");
             if (!tcp_server.Pending())
             {
                 Thread.Sleep(100);
@@ -74,7 +75,7 @@ public class Server //: INetwork
                 }
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                 clientThread.Start(client);
-                Debug.Log("client connected : " + client);
+                Debug.Log("(SERVER) client connected : " + client);
                 m_clients.Add(client);
                 if (null != OnClientConnected)
                     OnClientConnected(client);
@@ -82,6 +83,8 @@ public class Server //: INetwork
         
         }
         tcp_server.Stop();
+        tcp_server = null;
+        Debug.Log("(SERVER) Stop listen socket");
     }
 
     public int GetSessionId(int playerGuid)
@@ -126,7 +129,7 @@ public class Server //: INetwork
                     break;
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
-                //Debug.Log("Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
+                Debug.Log("(SERVER) Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
                 if (size == 0)
                 {
                     Packet p = new Packet(size, opcode, null);
@@ -135,8 +138,8 @@ public class Server //: INetwork
                 }
                 if(size > BUFFER_SIZE)
                 {
-                    
-                    Debug.Log("unhandled packet, buffer execced ! "+size+" bytes");
+
+                    Debug.Log("(SERVER) unhandled packet, buffer execced ! " + size + " bytes");
                     int max = size/BUFFER_SIZE;
                     int last = size%BUFFER_SIZE;
                     for(int i = 0; i < max; i++)
@@ -154,7 +157,7 @@ public class Server //: INetwork
             catch(Exception e)
             {
                 //a socket error has occured
-                Debug.Log("catch an error"+e.Message);
+                Debug.Log("(SERVER) catch an error"+e.Message);
                 break;
             }
 
@@ -164,7 +167,7 @@ public class Server //: INetwork
                 break;
             }
         }
-        Debug.Log("socket close !");
+        Debug.Log("(SERVER) socket close !");
         tcpClient.Close();
         //remove
 
@@ -206,7 +209,7 @@ public class Server //: INetwork
     public void SendPacketBroadCast(Packet packet, TcpClient except = null)
     {
         byte[] data = packet.ToByte();
-        //Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         foreach(TcpClient client in m_clients)
         {
             if (!client.Connected)
@@ -236,7 +239,7 @@ public class Server //: INetwork
             ObjectMgr.Instance.Get(guid).GetComponent<BomberController>().m_IsPlayer = true;
             GameMgr.Instance.c.Guid = guid;
         }
-        SendPacketTo(cl,PacketBuilder.BuildPlayerConnectPacket(_session,guid, 0));
+        SendPacketTo(cl,PacketBuilder.BuildPlayerConnectPacket(_session,guid, 0,GameMgr.Instance.gameIntel));
     }
     public void Destroy()
     {

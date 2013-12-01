@@ -5,19 +5,26 @@ public class PoolSystem<T> where T : Object{
     private Queue<T> m_data;
     private T template;
     bool m_IsGo = false;
+    int size;
+    GameObject ctn_go;
     public PoolSystem(T _template, int allocate)
     {
+        size = allocate;
         template = _template;
-        m_data = new Queue<T>(allocate);
+        Allocate();
+    }
+
+    public void Allocate()
+    {
+        m_data = new Queue<T>(size);
         m_IsGo = template.GetType() == typeof(GameObject);
-        GameObject ctn_go = null;
-        if (m_IsGo)
+        if (m_IsGo && ctn_go == null)
         {
             ctn_go = new GameObject();
             ctn_go.name = "Pool(" + template.name + ")";
         }
 
-        for (int i = 0; i < allocate; i++)
+        for (int i = 0; i < size; i++)
         {
             Object obj = Object.Instantiate(template);
             T o = (T)obj;
@@ -65,6 +72,23 @@ public class PoolSystem<T> where T : Object{
     }
 
 
+    public void Clear()
+    {
+        List<GameObject> go = new List<GameObject>();
+        foreach (Transform t in ctn_go.transform)
+            go.Add(t.gameObject);
 
-	
+        foreach (GameObject _go in go)
+        {
+            _go.transform.parent = null;
+            GameObject.Destroy(_go);
+        }              
+    }
+
+
+    public void ClearAndRealloc()
+    {
+        Clear();
+        Allocate();
+    }
 }

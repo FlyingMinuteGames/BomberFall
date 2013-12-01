@@ -101,11 +101,12 @@ public class MainMenuScript : MonoBehaviour {
 
 
     void Start()
-    {
+    {/*
     }
 
 	//Initialization block
-	void Awake() {
+	void Awake() {*/
+
 
 
         Screen.showCursor = true;
@@ -192,8 +193,17 @@ public class MainMenuScript : MonoBehaviour {
         comboBoxMaps.SetSelectedItemIndex(m_map_index);
         comboboxNbPlayers.SetSelectedItemIndex(m_nb_players);
         comboboxNbCPUs.SetSelectedItemIndex(m_nb_CPUs);
-        networkManager = ResourcesLoader.LoadResources<GameObject>("Prefabs/GameMgr");
+        Debug.Log("MainMenu init");
+        gameMgr = GameMgr.Instance;
+
+        active = true;
 	}
+
+    public void Reset()
+    {
+        menu = MenuConfig.MainMenuSelected.NO_SELECTED;
+        submenu = MenuConfig.SubMenuSelected.NO_SELECTED;
+    }
 
     /*
      * InitializePlayerPrefs()
@@ -513,7 +523,7 @@ public class MainMenuScript : MonoBehaviour {
             return true;
         return false;
     }
-    public bool active = true;
+    public bool active = false;
     void OnGUI()
     {
         if (!active)
@@ -785,13 +795,7 @@ public class MainMenuScript : MonoBehaviour {
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
             {
-                instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
-                instantiatedMaster.name = "GameMgr";
-
                 //popup.ShowMessage("Test popup message and fun stuff");
-               
-                gameMgr = instantiatedMaster.GetComponent<GameMgr>();
-
                 gameMgr.gameIntel = new GameIntel(m_game_duration, m_gameplay_mode, MenuConfig.power_ups_settings, m_nb_players + 1, m_nb_CPUs, m_auth_reco, m_disable_persp_change, MenuConfig.maps_string[m_map_index]);
                 gameMgr.maps = Maps.LoadMapsFromFile(MenuConfig.maps_string[m_map_index]);
                 gameMgr.StartServer();
@@ -859,10 +863,6 @@ public class MainMenuScript : MonoBehaviour {
                 //Check server connection
                 //IF fails -> display error message 
                 // ELSE CONNECT TO LOBBY 
-                instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
-                instantiatedMaster.name = "GameMgr";
-
-                gameMgr = instantiatedMaster.GetComponent<GameMgr>();
                 gameMgr.StartClient(serverIP);
                 isHost = false;
                 m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player " + (m_connected_players.Count + 1), false));

@@ -6,7 +6,7 @@ public class BomberController : MonoBehaviour
 {
 
     int m_MoveFlags = 0;
-    private static Color[] s_color = new Color[] {Color.red, Color.blue,Color.green,Color.yellow+Color.red};
+    private static Color[] s_color = new Color[] {Color.white, Color.red,Color.blue,Color.yellow+Color.red};
     private int m_colorIndex = 0;
 
     public int ColorIndex
@@ -25,6 +25,7 @@ public class BomberController : MonoBehaviour
     private SwordSwinger m_swordSwinger;
     public WorldState m_State = WorldState.CENTER;
     private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
+    private static Quaternion[] s_ExtraRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(180, Vector3.up), Quaternion.AngleAxis(90, Vector3.up), Quaternion.AngleAxis(-90, Vector3.up) };
     private static Vector3[] s_BaseGravity = new Vector3[] { Vector3.zero, Vector3.up };
     private static int[][] StateIndex = new int[][] { new int[] { 2, 1 }, new int[] { 2, -1 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
 
@@ -80,7 +81,8 @@ public class BomberController : MonoBehaviour
                 me.Swing();
                 }
             return 0;
-        })}
+        })},
+        /*{KeyCode.Alpha8,(Callback)((me,enable)=>{ if(enable)GameMgr.Instance._switch(); return 0;})}*/
     };
 
     private int bombCount = 1;
@@ -164,7 +166,7 @@ public class BomberController : MonoBehaviour
         m_Animator.SetBool("IsOnGround", m_IsOnGround);
         m_Animator.SetFloat("FallVelocity", fall_velocity);
         m_Animator.speed = 3f;
-        transform.Translate(move * speed * (1+speedMult*0.5f) * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
+        transform.Translate(move.normalized * speed * ((1+speedMult)*0.5f) * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
 
     }
 
@@ -248,12 +250,15 @@ public class BomberController : MonoBehaviour
         m_IsOnGround = false;
     }
 
-    void OnChangePhase(WorldState state)
+    void OnChangePhase(short[] value)
     {
-        m_State = state;
+        m_State = (WorldState)value[0];
         m_MoveFlags = 0;
-        m_IsOnGround = state == WorldState.CENTER ? true : false;
-        transform.rotation = s_BaseRotation[(int)m_State];
+        m_IsOnGround = m_State == WorldState.CENTER ? true : false;
+        if (m_State == WorldState.CENTER)
+            transform.rotation = s_ExtraRotation[value[1]];
+        else
+            transform.rotation = s_BaseRotation[(int)m_State];
     }
 
 

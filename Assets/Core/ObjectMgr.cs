@@ -111,4 +111,10 @@ public class ObjectMgr {
         return objs;
     }
 
+
+    public void Clear()
+    {
+        m_objects.Clear();
+        _guid = 1;
+    }
 }

@@ -390,4 +390,15 @@ public class GameMgr : MonoBehaviour {
             
         }
     }
+
+    public void RespawnPlayer()
+    {
+        List<IntVector2> respawn_position = new List<IntVector2>(){new IntVector2(0,0),new IntVector2(maps.Size.x - 1,maps.Size.y-1),new IntVector2(maps.Size.x - 1,0),new IntVector2(0,maps.Size.y-1)};
+
+        for(int i = 0; i < 4; i++)
+        {
+            int index = Random.Range(0,4-i);
+
+        }
+    }
 }

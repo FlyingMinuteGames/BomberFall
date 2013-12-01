@@ -41,7 +41,7 @@ public class BomberController : MonoBehaviour
             UpdateInput();
 
     }
-    private bool m_IsOnGround = false;
+    private bool m_IsOnGround = true;
 
     public bool IsOnGround
     {
@@ -56,18 +56,6 @@ public class BomberController : MonoBehaviour
     private Guid m_guid;
     delegate int Callback(BomberController me, bool enable);
 
-    private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("RightKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("DefensiveItemKey") };
-    private Callback[] action_callback = {
-                                            /*(me,enable) => { me.m_force += enable ? Vector3.forward : Vector3.back; return 1;},
-                                            (me,enable) => { me.m_force += !enable ? Vector3.forward : Vector3.back; return 1;},
-                                            (me,enable) => { me.m_force += !enable ? Vector3.right : Vector3.left; return 1;},
-                                            (me,enable) => { me.m_force += enable ? Vector3.right : Vector3.left; return 1;},*/
-                                            (me,enable) => { if(me.stack > 0 && me.m_State != WorldState.CENTER) {me.fall_velocity =-0.15f*me.m_JumpSpeed; return 0;} if(me.m_State != WorldState.CENTER)return 0;me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_FORWARD : me.m_MoveFlags & ~(int)MoveState.MOVE_FORWARD; return 1;},
-                                            (me,enable) => { if(me.m_State != WorldState.CENTER) return 0; me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_BACKWARD : me.m_MoveFlags & ~(int)MoveState.MOVE_BACKWARD; return 1;},
-                                            (me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_LEFT : me.m_MoveFlags & ~(int)MoveState.MOVE_LEFT; return 1;},
-                                            (me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_RIGHT : me.m_MoveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;},
-                                            (me,enable) => { if(enable) me.SpawnBomb(); return 1;}
-                                           };
     private Dictionary<KeyCode, Callback> m_actions = new Dictionary<KeyCode, Callback>()
     {
         {(KeyCode)PlayerPrefs.GetInt("ForwardKey"),Jump},

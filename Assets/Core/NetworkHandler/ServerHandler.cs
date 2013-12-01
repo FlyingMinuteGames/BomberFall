@@ -24,7 +24,6 @@ public class ServerHandler  {
         guid = p.ReadInt();
         moveflag = p.ReadInt();
         start_pos = p.ReadVector3();
-        Debug.Log("HandleMovePlayer : guid:" + guid + ", moveflag:" + moveflag + ", start_pos: " + start_pos);
         if (null == (obj = ObjectMgr.Instance.Get(guid)))
             return;
         obj.SendMessage("OnRecvMove", new object[] { moveflag, start_pos });

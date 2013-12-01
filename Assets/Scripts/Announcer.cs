@@ -40,13 +40,11 @@ public class Announcer : MonoBehaviour {
                     continue;
                 str = format.Substring(b, i - 2 - b);
                 l.Add(str);
-                Debug.Log("format : " + str);
                 b = i;
 
             }
             str = format.Substring(b);
             l.Add(str);
-            Debug.Log("format : " + str);
             return l.ToArray();
         }
         public string[][] text;
@@ -90,8 +88,6 @@ public class Announcer : MonoBehaviour {
         if (tpl == null)
             return "";
         StringBuilder builder = new StringBuilder();
-        Debug.Log("template "+tpl+" length "+tpl.Length);
-        Debug.Log("value " + values + " length " + values.Length);
         for (int i, j = i = 0; i < tpl.Length; )
         {
             builder.Append(tpl[i++]);

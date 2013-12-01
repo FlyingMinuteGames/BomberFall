@@ -145,7 +145,7 @@ public class Maps {
             }
             if (obj != null)
                 obj.parent = m_gameMaps.transform;
-            Debug.Log("add block at " + pos + " type : " + type);
+            //Debug.Log("add block at " + pos + " type : " + type);
             m_maps[pos.x][pos.y].block = obj;
         }
     }
@@ -445,7 +445,7 @@ public class Maps {
 
     private void OnDestroyBlock(IntVector2 vec)
     {
-        if ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        if ((GameMgr.Instance.Type & GameMgrType.SERVER) == 0)
             return;
 
         if (true)

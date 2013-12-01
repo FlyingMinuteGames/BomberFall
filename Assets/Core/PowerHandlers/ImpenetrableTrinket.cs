@@ -9,7 +9,7 @@ public class ImpenetrableTrinket : APowerUp {
         base.OnPickUp(powerGo, clientGuid);
     }
 
-    public override void OnUse()
+    public override void OnUse(GameObject powerGo, int clientGuid)
     {
     }
 

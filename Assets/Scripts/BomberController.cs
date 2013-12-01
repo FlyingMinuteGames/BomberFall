@@ -11,6 +11,7 @@ public class BomberController : MonoBehaviour
     public bool m_IsNetworkControlled = false;
     public bool m_IsPlayer = false;
     Animator m_Animator;
+    private SwordSwinger m_swordSwinger;
     public WorldState m_State = WorldState.CENTER;
     private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
     private static Vector3[] s_BaseGravity = new Vector3[] { Vector3.zero, Vector3.up };
@@ -19,6 +20,7 @@ public class BomberController : MonoBehaviour
     {
         m_Animator = gameObject.GetComponent<Animator>();
         m_guid = gameObject.GetComponent<Guid>();
+        m_swordSwinger = gameObject.transform.FindChild("SwordSwinger").GetComponent<SwordSwinger>();
     }
 
     // Update is called once per frame
@@ -70,8 +72,20 @@ public class BomberController : MonoBehaviour
                     pause.SwitchState();
                 }
             return 0;
+        })},
+        {KeyCode.Backspace,(Callback)((me,enable)=>{
+            if (enable){
+                me.m_swordSwinger.Swing();
+                }
+            return 0;
         })}
     };
+
+    private int bombCount = 1;
+    private int speedMult = 1;
+    private int bombRadius = 1;
+
+
     void UpdateInput()
     {
         int flag = 0;
@@ -127,8 +141,7 @@ public class BomberController : MonoBehaviour
         m_Animator.SetBool("IsOnGround", m_IsOnGround);
         m_Animator.SetFloat("FallVelocity", fall_velocity);
         m_Animator.speed = 3f;
-        transform.Translate(move * speed * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
-        
+        transform.Translate(move * speed * (1+speedMult*0.5f) * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
 
     }
 
@@ -257,6 +270,33 @@ public class BomberController : MonoBehaviour
         fall_velocity = -0.15f * m_JumpSpeed;
     }
 
+    public void RecvIncBombCount()
+    {
+        bombCount++;
+    }
 
+    public void RecvIncRadius()
+    {
+        bombRadius++;
+    }
+
+
+    public int GetSpeedMult()
+    {
+        return speedMult;
+    }
+
+    public int GetBombRadius(){
+        return bombRadius;
+    }
+
+    public void RecvIncSpeedMult()
+    {
+        if (speedMult >= 6)
+            return;
+        speedMult++;
+        m_Animator.speed *= (3 * 0.5f);
+
+    }
 
 }

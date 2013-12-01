@@ -11,7 +11,8 @@ public class ServerHandler  {
             {Opcode.CMSG_PLAYER_DROP_BOMB, HandleDropBomb},
             {Opcode.CMSG_CONNECT,HandleConnect},
             {Opcode.MSG_SEND_MESSAGE,HandleSendMessage},
-            {Opcode.MSG_JUMP,HandleJump}
+            {Opcode.MSG_JUMP,HandleJump},
+            {Opcode.CMSG_OFF_POWER_USE,HandleOffPowerUse}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -80,4 +81,13 @@ public class ServerHandler  {
             current.SendPacketBroadCast(p, p.Sender);
         }
     }
+
+    public static void HandleOffPowerUse(Packet p)
+    {
+        int guid;
+        Vector3 start_pos;
+        guid = p.ReadInt();
+        start_pos = p.ReadVector3();
+    }
+
 }

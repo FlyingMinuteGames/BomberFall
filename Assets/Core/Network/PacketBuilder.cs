@@ -104,13 +104,20 @@ public class PacketBuilder  {
         return p;
     }
 
+    public static Packet BuildUseOffensiveItem(int guid, Vector3 pos)
+    {
+        Packet p = new Packet(4+4*3, Opcode.CMSG_OFF_POWER_USE);
+        p.Write(guid);
+        p.Write(pos);
+        return p;
+    }
+
     public static Packet BuildDespawn(int guid)
     {
         Packet p = new Packet(4, Opcode.SMSG_DESPAWN);
         p.Write(guid);
         return p;
     }
-
 
 
     public static Packet BuildPlayAnnouncePacket(Announce announce, byte variant, params string[] values)
@@ -126,4 +133,13 @@ public class PacketBuilder  {
             p.Write(str);
         return p;
     }
+
+    public static Packet BuildSpeedUpPacket(int guid, int speedmult)
+    {
+        Packet p = new Packet(4 + 4, Opcode.SMSG_SPEED_UP);
+        p.Write(guid);
+        p.Write(speedmult);
+        return p;
+    }
+
 }

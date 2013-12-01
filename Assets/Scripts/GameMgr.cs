@@ -100,7 +100,7 @@ public class GameMgr : MonoBehaviour {
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
-        //StartCoroutine(ChangePhaseTimer());
+        StartCoroutine(ChangePhaseTimer());
         //ChangePhase();
         mp.PlayNextTrack();
 
@@ -237,11 +237,23 @@ public class GameMgr : MonoBehaviour {
         power.OnPickUp(powerGo, player_guid);
     }
 
+    public void PlayAnnounce(Announce annnouce,byte variant, params string[] var)
+    {
+        if(type != GameMgrType.SERVER)
+            return;
+        Announcer.Instance.PlayAnnounce(annnouce, variant, var);
+        s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(annnouce, variant, var));
+    }
+
     IEnumerator ChangePhaseTimer()
     {
         while (game_started)
         {
+            PlayAnnounce(Announce.ANNOUNCE_CHANGE_PHASE, 0, "30");
+            yield return new WaitForSeconds(30);
+            PlayAnnounce(Announce.ANNOUNCE_CHANGE_PHASE, 0, "5");
             yield return new WaitForSeconds(5);
+            PlayAnnounce(Announce.ANNOUNCE_CHANGE_NOW, 0);
             ChangePhase();
         }
     }
@@ -309,9 +321,10 @@ public class GameMgr : MonoBehaviour {
             IntVector2 tpos = maps.GetTilePosition(t.transform.position.x, t.transform.position.z);
             Debug.Log(tpos);
             if (cross.IsIn(tpos))
-                Announcer.Instance.PlayAnnounce(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i);
-            s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + (i+1)));
-
+            {
+                // DO SOMETHING 
+                PlayAnnounce(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + (i + 1));
+            }
         }
     }
     public void QuitGame()

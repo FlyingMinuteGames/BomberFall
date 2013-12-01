@@ -6,7 +6,9 @@ using System.Text;
 
 public enum Announce
 {
-    ANNOUNCE_PLAYER_KILL
+    ANNOUNCE_PLAYER_KILL,
+    ANNOUNCE_CHANGE_PHASE,
+    ANNOUNCE_CHANGE_NOW
 }
 
 public class Announcer : MonoBehaviour {
@@ -58,7 +60,9 @@ public class Announcer : MonoBehaviour {
 	
     private static Dictionary<Announce,Format> m_announce = new Dictionary<Announce,Format>()
     {
-        {Announce.ANNOUNCE_PLAYER_KILL, new Format(Color.red,"Player %v is dead")}
+        {Announce.ANNOUNCE_PLAYER_KILL, new Format(Color.red,"Player %v is dead")},
+        {Announce.ANNOUNCE_CHANGE_PHASE, new Format(Color.red,"Change phase in %vs")},
+        {Announce.ANNOUNCE_CHANGE_NOW, new Format(Color.red,"Change phase NOW !")}
     };
 
 	void Start () {

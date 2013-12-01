@@ -51,7 +51,7 @@ public class GameMgr : MonoBehaviour {
     private WorldState m_state = WorldState.CENTER;
     private static float const_gravity = -20.0f;
     private Vector3[] gravityStates;
-    private MusicPlayer mp;
+    public MusicPlayer mp;
 
     public WorldState State
     {

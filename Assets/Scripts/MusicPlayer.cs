@@ -17,7 +17,7 @@ public class MusicPlayer : MonoBehaviour
 
     void Update()
     {
-        audio.volume = PlayerPrefs.GetFloat("MusicVolume") / 2.5f;
+        audio.volume = PlayerPrefs.GetFloat("MusicVolume") / 5f;
     }
 
     public void PlayNextTrack()

@@ -349,10 +349,11 @@ public class GameMgr : MonoBehaviour
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
     }
 
-    public void KillPlayer(Cross cross)
+    public void KillPlayer(Cross cross,int bombGUID)
     {
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
-
+        BombScript bomb = ObjectMgr.Instance.Get(bombGUID).GetComponent<BombScript>();
+        int killerGUID = bomb.OwnerGuid;
         for (int i = 0, len = m_player.Count; i < len; i++)
         {
             GameObject t = m_player[i];

@@ -49,17 +49,9 @@ public class GameMgr : MonoBehaviour {
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
-<<<<<<< HEAD
-<<<<<<< HEAD
     private static float const_gravity = -20.0f;
     private Vector3[] gravityStates;
-=======
     private MusicPlayer mp;
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
-=======
-    private MusicPlayer mp;
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
-
     public WorldState State
     {
         get { return m_state; }
@@ -107,15 +99,11 @@ public class GameMgr : MonoBehaviour {
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
-<<<<<<< HEAD
         //StartCoroutine(ChangePhaseTimer());
-        ChangePhase();
-=======
-        StartCoroutine(ChangePhaseTimer());
+        //ChangePhase();
 
         mp.PlayNextTrack();
-        //ChangePhase();
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
+
     }
 
     public int Spawn(GOType type, Vector3 pos, int guid = -1, int extra = 0)
@@ -135,15 +123,8 @@ public class GameMgr : MonoBehaviour {
             case GOType.GO_PWRUP:
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
-<<<<<<< HEAD
-<<<<<<< HEAD
-                sc.type = (Config.PowerType)extra/*UnityEngine.Random.Range(0, 12)*/;
-=======
-                sc.type = (Config.PowerType)3/*UnityEngine.Random.Range(0, 12)*/;
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
-=======
-                sc.type = (Config.PowerType)3/*UnityEngine.Random.Range(0, 12)*/;
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
+                sc.type = (Config.PowerType)extra;
+
                 sc.Init();
                 _guid =  ObjectMgr.Instance.Register(go, type, guid,extra);
                 break;
@@ -169,15 +150,9 @@ public class GameMgr : MonoBehaviour {
 
     public void Despawn(GOType type, int guid)
     {
-<<<<<<< HEAD
         GameObject go = ObjectMgr.Instance.Get(guid);
-=======
-        GameObject go = ObjectMgr.Instance.get(guid);
-        Debug.Log("GO in despawn " + go);
-<<<<<<< HEAD
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
-=======
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
+
+
         if (go != null)
         {
             ObjectMgr.Instance.UnRegister(guid);
@@ -324,8 +299,6 @@ public class GameMgr : MonoBehaviour {
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public void KillPlayer(Cross cross)
     {
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_BOMB);
@@ -342,9 +315,7 @@ public class GameMgr : MonoBehaviour {
             s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i));
 
         }
-=======
-=======
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
+    }
     public void QuitGame()
     {
         mp.PlayNextTrack();
@@ -362,10 +333,5 @@ public class GameMgr : MonoBehaviour {
             mainMenu.active = true;
             
         }
-
-<<<<<<< HEAD
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
-=======
->>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
     }
 }

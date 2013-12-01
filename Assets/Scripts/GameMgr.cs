@@ -35,9 +35,10 @@ public enum WorldStateExtra
 }
 
 
-public class GameMgr : MonoBehaviour {
+public class GameMgr : MonoBehaviour
+{
 
-	// Use this for initialization
+    // Use this for initialization
 
     private static Quaternion[] s_CameraRotation = new Quaternion[] { Quaternion.identity, Quaternion.identity, Quaternion.AngleAxis(180, Vector3.forward), Quaternion.AngleAxis(-90, Vector3.forward), Quaternion.AngleAxis(90, Vector3.forward) };
     private Quaternion baseRotation;
@@ -66,7 +67,7 @@ public class GameMgr : MonoBehaviour {
     public WorldState State
     {
         get { return m_state; }
-        
+
     }
 
     private GameObject m_MainCamera;
@@ -76,7 +77,8 @@ public class GameMgr : MonoBehaviour {
         get { return type; }
     }
 
-    void Start () {
+    void Start()
+    {
         Application.runInBackground = true;
         s_instance = this;
         player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
@@ -89,16 +91,17 @@ public class GameMgr : MonoBehaviour {
 
         baseRotation = m_MainCamera.transform.rotation;
         gravityStates = new Vector3[] { Vector3.up * const_gravity, Vector3.forward * const_gravity, Vector3.forward * -const_gravity, Vector3.right * const_gravity, Vector3.right * -const_gravity };
-	   
+
     }
-	
+
     public void StartServer()
     {
         s = new Server();
         ServerHandler.current = s;
         s.SetHandler(ServerHandler.handlers);
         type |= GameMgrType.SERVER;
-        s.OnClientConnected = (client) => { 
+        s.OnClientConnected = (client) =>
+        {
             //s.SendPacketTo(client,PacketBuilder.BuildMovePlayerPacket()=;
         };
         //StartClient("127.0.0.1");
@@ -137,10 +140,10 @@ public class GameMgr : MonoBehaviour {
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
                 sc.type = (Config.PowerType)extra;
                 sc.Init();
-                _guid =  ObjectMgr.Instance.Register(go, type, guid,extra);
+                _guid = ObjectMgr.Instance.Register(go, type, guid, extra);
                 break;
         }
-        if(_guid > 0 && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
+        if (_guid > 0 && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
             GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(_guid)));
         return _guid;
     }
@@ -229,7 +232,7 @@ public class GameMgr : MonoBehaviour {
         c.SendPacket(p);
     }
 
-    public void SpawnBomb(int guid,Vector3 pos)
+    public void SpawnBomb(int guid, Vector3 pos)
     {
         Packet p = PacketBuilder.BuildSpawnBomb(guid, pos);
         c.SendPacket(p);
@@ -249,9 +252,9 @@ public class GameMgr : MonoBehaviour {
         power.OnPickUp(powerGo, player_guid);
     }
 
-    public void PlayAnnounce(Announce annnouce,byte variant, params string[] var)
+    public void PlayAnnounce(Announce annnouce, byte variant, params string[] var)
     {
-        if((type & GameMgrType.SERVER) == 0)
+        if ((type & GameMgrType.SERVER) == 0)
             return;
         Announcer.Instance.PlayAnnounce(annnouce, variant, var);
         s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(annnouce, variant, var));
@@ -272,7 +275,7 @@ public class GameMgr : MonoBehaviour {
 
     public void ChangePhase(WorldState state = WorldState.UNKNOWN, WorldStateExtra extra = WorldStateExtra.NONE)
     {
-        Debug.Log("Change from "+m_state);
+        Debug.Log("Change from " + m_state);
         if (state != WorldState.UNKNOWN)
         {
             m_state = state;
@@ -291,7 +294,7 @@ public class GameMgr : MonoBehaviour {
             }
             else
             {
-                extra = (WorldStateExtra)((int)m_state-1);
+                extra = (WorldStateExtra)((int)m_state - 1);
                 if (extra == m_state_extra)
                 {
                     extra++;
@@ -301,7 +304,7 @@ public class GameMgr : MonoBehaviour {
             }
         }
         Debug.Log("Change to " + m_state);
-        
+
         IList<GameObject> l = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
         foreach (var a in l)
             a.SendMessage("OnChangePhase", m_state);
@@ -312,10 +315,10 @@ public class GameMgr : MonoBehaviour {
             a.SendMessage("OnChangePhase", m_state);
         Debug.Log("change gravity from " + Physics.gravity + " to " + gravityStates[(int)m_state]);
         Physics.gravity = gravityStates[(int)m_state];
-        
+
         TurnCamera();
         if (s != null)
-            s.SendPacketBroadCast(PacketBuilder.BuildChangePhasePacket(m_state, m_state_extra));   
+            s.SendPacketBroadCast(PacketBuilder.BuildChangePhasePacket(m_state, m_state_extra));
     }
 
     public void TurnCamera()
@@ -328,11 +331,11 @@ public class GameMgr : MonoBehaviour {
 
         x.AddKey(0, m_MainCamera.transform.rotation.x);
         y.AddKey(0, m_MainCamera.transform.rotation.y);
-        z.AddKey(0, m_MainCamera.transform.rotation.z); 
+        z.AddKey(0, m_MainCamera.transform.rotation.z);
         w.AddKey(0, m_MainCamera.transform.rotation.w);
         int index = (int)m_state;
 
-        Quaternion final = m_state == WorldState.CENTER ? baseRotation * s_CameraRotation[(int)m_state_extra+1] : baseRotation * s_CameraRotation[index];
+        Quaternion final = m_state == WorldState.CENTER ? baseRotation * s_CameraRotation[(int)m_state_extra + 1] : baseRotation * s_CameraRotation[index];
         x.AddKey(1, final.x);
         y.AddKey(1, final.y);
         z.AddKey(1, final.z);
@@ -342,7 +345,7 @@ public class GameMgr : MonoBehaviour {
         clip.SetCurve("", typeof(Transform), "localRotation.y", y);
         clip.SetCurve("", typeof(Transform), "localRotation.z", z);
         clip.SetCurve("", typeof(Transform), "localRotation.w", w);
-        m_MainCamera.GetComponent<Animation>().AddClip(clip, "1->"+index);
+        m_MainCamera.GetComponent<Animation>().AddClip(clip, "1->" + index);
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
     }
 
@@ -369,7 +372,22 @@ public class GameMgr : MonoBehaviour {
 
     public void KillPlayer(int victim, int killer, Config.PowerType powertype)
     {
+        IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
 
+        for (int i = 0, len = m_player.Count; i < len; i++)
+        {
+            int curId = m_player[i].GetComponent<Guid>().GetGUID();
+            if (curId == victim)
+            {
+                PlayAnnounce(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1));
+            }
+            else if (curId == killer)
+            {
+
+                s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(killer),PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1)));
+
+            }
+        }
     }
 
     public void QuitGame()
@@ -387,7 +405,7 @@ public class GameMgr : MonoBehaviour {
             c.Destroy();
             s.Destroy();
             mainMenu.active = true;
-            
+
         }
     }
 }

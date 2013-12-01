@@ -9,7 +9,8 @@ public enum Announce
     ANNOUNCE_PLAYER_KILL,
     ANNOUNCE_CHANGE_PHASE,
     ANNOUNCE_CHANGE_NOW,
-    ANNOUNCE_PWR_PICK_UP
+    ANNOUNCE_PWR_PICK_UP,
+    ANNOUNCE_KILL_BY_SW
 }
 
 public class Announcer : MonoBehaviour {
@@ -64,8 +65,8 @@ public class Announcer : MonoBehaviour {
         {Announce.ANNOUNCE_PLAYER_KILL, new Format(Color.red,"Player %v is dead")},
         {Announce.ANNOUNCE_CHANGE_PHASE, new Format(Color.red,"Change phase in %vs")},
         {Announce.ANNOUNCE_CHANGE_NOW, new Format(Color.red,"Change phase NOW !")},
-        {Announce.ANNOUNCE_PWR_PICK_UP, new Format(Color.red,"%v")}
-
+        {Announce.ANNOUNCE_PWR_PICK_UP, new Format(Color.red,"%v")},
+        {Announce.ANNOUNCE_KILL_BY_SW, new Format(Color.red,"%v has been violently beheaded!")}
     };
 
 	void Start () {

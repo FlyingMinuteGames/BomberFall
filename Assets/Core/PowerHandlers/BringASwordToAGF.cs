@@ -5,7 +5,8 @@ public class BringASwordToAGF : APowerUp {
 
     public override void OnPickUp(GameObject powerGo, int clientGuid)
     {
-        this.AssignToSlot(powerGo);
+        Packet p = PacketBuilder.BuildBindOffensiveItem(clientGuid, Config.PowerType.BACK_TO_SCHOOL);
+        GameMgr.Instance.s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(clientGuid), p);
         base.OnPickUp(powerGo, clientGuid);
     }
 

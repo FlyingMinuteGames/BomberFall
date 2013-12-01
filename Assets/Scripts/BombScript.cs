@@ -5,6 +5,7 @@ public class BombScript : MonoBehaviour {
 
     public delegate void /*IEnumerator*/ Callback();
     public Callback callback;
+    public AudioClip explosion;
     private float[] timer = {4,2};
     private int progress = 0;
     private GameObject bomb_object;
@@ -104,6 +105,7 @@ public class BombScript : MonoBehaviour {
         ((BoxCollider)collider).center = Vector3.zero;
         yield return new WaitForSeconds(timer[progress++]);
 
+        audio.PlayOneShot(explosion, PlayerPrefs.GetFloat("SoundVolume")*20f);
         Debug.Log("explode phase 2");
         //bomb_object.SetActive(false);
         SetActiveChild(false);

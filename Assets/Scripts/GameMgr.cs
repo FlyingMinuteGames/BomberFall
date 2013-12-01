@@ -52,6 +52,7 @@ public class GameMgr : MonoBehaviour {
     private static float const_gravity = -20.0f;
     private Vector3[] gravityStates;
     private MusicPlayer mp;
+
     public WorldState State
     {
         get { return m_state; }
@@ -101,7 +102,6 @@ public class GameMgr : MonoBehaviour {
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
         //StartCoroutine(ChangePhaseTimer());
         //ChangePhase();
-
         mp.PlayNextTrack();
 
     }
@@ -124,7 +124,6 @@ public class GameMgr : MonoBehaviour {
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
                 sc.type = (Config.PowerType)extra;
-
                 sc.Init();
                 _guid =  ObjectMgr.Instance.Register(go, type, guid,extra);
                 break;
@@ -151,7 +150,6 @@ public class GameMgr : MonoBehaviour {
     public void Despawn(GOType type, int guid)
     {
         GameObject go = ObjectMgr.Instance.Get(guid);
-
 
         if (go != null)
         {

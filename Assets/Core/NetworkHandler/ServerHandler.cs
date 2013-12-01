@@ -56,7 +56,7 @@ public class ServerHandler  {
         message = p.ReadString();
         if(!GameMgr.Instance.game_started)
         {
-            MainMenuScript menu = GameObject.Find("MenuCam").GetComponent<MainMenuScript>();
+            MainMenuScript menu = GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>();
             menu.AddMessage(name, message);
             current.SendPacketBroadCast(p);
         }

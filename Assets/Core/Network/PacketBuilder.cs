@@ -90,10 +90,11 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildChangePhasePacket(WorldState state)
+    public static Packet BuildChangePhasePacket(WorldState state, WorldStateExtra extra)
     {
-        Packet p = new Packet(4, Opcode.SMSG_CHANGE_PHASE);
-        p.Write((int)state);
+        Packet p = new Packet(2, Opcode.SMSG_CHANGE_PHASE);
+        p.Write((byte)state);
+        p.Write((byte)extra);
         return p;
     }
 

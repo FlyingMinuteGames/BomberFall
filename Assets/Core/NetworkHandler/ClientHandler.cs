@@ -136,8 +136,10 @@ public class ClientHandler
     public static void HandleChangePhase(Packet p)
     {
         WorldState state;
-        state = (WorldState)p.ReadInt();
-        GameMgr.Instance.ChangePhase(state);
+        WorldStateExtra extra;
+        state = (WorldState)p.ReadByte();
+        extra = (WorldStateExtra)p.ReadByte();
+        GameMgr.Instance.ChangePhase(state, extra);
     }
 
     public static void HandleJump(Packet p)

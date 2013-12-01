@@ -97,7 +97,7 @@ public class Maps {
                 m_gameMaps = new GameObject("GameMaps");
         }
         generateGrid(Size);
-        generateGrid(Size + new IntVector2(4, 4), "grid", true, s_grid).transform.position += new Vector3(0, 0.01f, 0) ;
+        generateGrid(Size + new IntVector2(2, 2), "grid", true, s_grid).transform.position += new Vector3(0, 0.01f, 0) ;
         GenerateBound(Size + new IntVector2(2, 2));
     }
 

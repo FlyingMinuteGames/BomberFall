@@ -27,6 +27,9 @@ public class BomberController : MonoBehaviour
     private static Quaternion[] s_BaseRotation = new Quaternion[] { Quaternion.identity, Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(180, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right), Quaternion.AngleAxis(-90, Vector3.up) * Quaternion.AngleAxis(90, Vector3.right) };
     private static Vector3[] s_BaseGravity = new Vector3[] { Vector3.zero, Vector3.up };
     private static int[][] StateIndex = new int[][] { new int[] { 2, 1 }, new int[] { 2, -1 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
+
+    public int hasOffensiveItem = -1;
+
     void Start()
     {
         m_Animator = gameObject.GetComponent<Animator>();
@@ -63,7 +66,7 @@ public class BomberController : MonoBehaviour
         {(KeyCode)PlayerPrefs.GetInt("LeftKey"),(Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_LEFT : me.m_MoveFlags & ~(int)MoveState.MOVE_LEFT; return 1;})},
         {(KeyCode)PlayerPrefs.GetInt("RightKey"), (Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_RIGHT : me.m_MoveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;})},
         {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 0;})},
-        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{me.UseOffensiveItem();return 0;})},
+        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{if (enable)me.UseOffensiveItem();return 0;})},
         {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{/*me.UseDefensiveItem();*/return 0;})},
         {KeyCode.Escape,(Callback)((me,enable)=>{
             if (enable){
@@ -74,7 +77,7 @@ public class BomberController : MonoBehaviour
         })},
         {KeyCode.Backspace,(Callback)((me,enable)=>{
             if (enable){
-                me.m_swordSwinger.Swing();
+                me.Swing();
                 }
             return 0;
         })}
@@ -101,6 +104,10 @@ public class BomberController : MonoBehaviour
         get { return bombRadius; }
     }
 
+    public void Swing()
+    {
+        m_swordSwinger.Swing();
+    }
 
     void UpdateInput()
     {
@@ -129,7 +136,7 @@ public class BomberController : MonoBehaviour
 
     public void UseOffensiveItem()
     {
-        GameMgr.Instance.UseOffensiveItem(m_guid.GetGUID(), transform.position);
+        GameMgr.Instance.UseOffensiveItem(m_guid.GetGUID());
     }
 
 

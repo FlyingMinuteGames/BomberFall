@@ -21,7 +21,9 @@ public class ClientHandler
             {Opcode.SMSG_OFF_POWER_PICK_UP, HandleOffensivePowerPickUp},
             {Opcode.SMSG_DESPAWN,HandleDespawn},
             {Opcode.SMSG_PLAY_ANNOUNCEMENT,HandlePlayAnnouncement}, 
-            {Opcode.SMSG_SPEED_UP, HandlePlayerSpeedUp}
+            {Opcode.SMSG_SPEED_UP, HandlePlayerSpeedUp},
+            {Opcode.SMSG_OFF_POWER_USED, HandleOffensivePowerDrop}
+
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -47,7 +49,7 @@ public class ClientHandler
 
     public static void HandleBombExplode(Packet p)
     {
-        int x, y, guid,radius;
+        int x, y, guid, radius;
         guid = p.ReadInt();
         x = p.ReadInt();
         y = p.ReadInt();
@@ -56,7 +58,7 @@ public class ClientHandler
         if ((obj = ObjectMgr.Instance.Get(guid)) != null)
             obj.SendMessage("ForceExplode");
 
-        GameMgr.Instance.maps.ExplodeAt(guid,new IntVector2(x, y), radius);
+        GameMgr.Instance.maps.ExplodeAt(guid, new IntVector2(x, y), radius);
     }
 
     public static void HandlePlayerConnected(Packet p)
@@ -73,20 +75,20 @@ public class ClientHandler
 
     public static void HandleSendMap(Packet p)
     {
-        Debug.Log("handle maps "+p.Size);
+        Debug.Log("handle maps " + p.Size);
         byte[] buffer = new byte[p.Size];
         p.ReadBuffer(buffer);
         string str = "";
         foreach (byte b in buffer)
-            str += "."+b;
+            str += "." + b;
         Debug.Log(str);
         current.LoadMap(buffer);
     }
 
     public static void HandleInstantiateObject(Packet p)
     {
-        int count = p.Size / 17, guid,type,extra;
-        float x,y,z = 0;
+        int count = p.Size / 17, guid, type, extra;
+        float x, y, z = 0;
 
         GameMgr gmgr = GameMgr.Instance;
         for (var i = 0; i < count; i++)
@@ -94,7 +96,7 @@ public class ClientHandler
             guid = p.ReadInt();
             type = p.ReadByte();
             extra = p.ReadByte();
-            x =p.ReadFloat();
+            x = p.ReadFloat();
             y = p.ReadFloat();
             Debug.Log("recv guid:" + guid + " type:" + (GOType)type + " extra:" + extra + " x:" + x + " y:" + y);
             if (type == (int)(GOType.GO_PLAYER))
@@ -131,7 +133,7 @@ public class ClientHandler
         }
     }
 
-    
+
 
     public static void HandleChangePhase(Packet p)
     {
@@ -151,7 +153,7 @@ public class ClientHandler
         GameObject obj;
         if ((obj = ObjectMgr.Instance.Get(guid)) != null)
         {
-            obj.SendMessage("RecvJump",start_pos);
+            obj.SendMessage("RecvJump", start_pos);
         }
     }
 
@@ -160,9 +162,18 @@ public class ClientHandler
         int guid;
         Config.PowerType powertype;
         guid = p.ReadInt();
-        powertype =(Config.PowerType)p.ReadInt();
+        powertype = (Config.PowerType)p.ReadInt();
         HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
         hud.BindOffensivePower(powertype);
+    }
+
+    public static void HandleOffensivePowerDrop(Packet p)
+    {
+        int guid;
+        guid = p.ReadInt();
+        
+        HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
+        hud.unBindOffensivePower();
     }
 
 
@@ -176,24 +187,24 @@ public class ClientHandler
     public static void HandlePlayAnnouncement(Packet p)
     {
         List<string> strs = new List<string>();
-        int announce = p.ReadShort(),variant = p.ReadByte();
+        int announce = p.ReadShort(), variant = p.ReadByte();
         string str = null;
         Debug.Log("read string");
         while ((str = p.ReadString()) != null)
             strs.Add(str);
-        Announcer.Instance.PlayAnnounce((Announce)announce,variant,strs.ToArray());
+        Announcer.Instance.PlayAnnounce((Announce)announce, variant, strs.ToArray());
     }
 
     public static void HandlePlayerSpeedUp(Packet p)
     {
         int guid, speedMult;
-        
+
         guid = p.ReadInt();
         speedMult = p.ReadInt();
 
         GameObject obj = ObjectMgr.Instance.Get(guid);
         obj.SendMessage("RecvIncSpeedMult");
 
-        
+
     }
 }

@@ -227,8 +227,8 @@ public class GameMgr : MonoBehaviour {
     {
         if (!hud.hasOffensivePower)
             return;
-        //Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid, pos);
-        //c.SendPacket(p);
+        Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid, pos);
+        c.SendPacket(p);
     }
 
     public void PowerUpPickUp(GameObject powerGo, int player_guid, APowerUp power)

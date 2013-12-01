@@ -103,13 +103,20 @@ public class PacketBuilder  {
         return p;
     }
 
+    public static Packet BuildUseOffensiveItem(int guid, Vector3 pos)
+    {
+        Packet p = new Packet(4+4*3, Opcode.SMSG_DESPAWN);
+        p.Write(guid);
+        p.Write(pos);
+        return p;
+    }
+
     public static Packet BuildDespawn(int guid)
     {
         Packet p = new Packet(4, Opcode.SMSG_DESPAWN);
         p.Write(guid);
         return p;
     }
-
 
 
     public static Packet BuildPlayAnnouncePacket(Announce announce, byte variant, params string[] values)

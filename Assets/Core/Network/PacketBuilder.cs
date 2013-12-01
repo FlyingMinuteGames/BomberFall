@@ -106,10 +106,11 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildUnbindOffensiveItem(int guid)
+    public static Packet BuildUnbindOffensiveItem(int guid, Config.PowerType powertype)
     {
         Packet p = new Packet(4, Opcode.SMSG_OFF_POWER_USED);
         p.Write(guid);
+        p.Write((int)powertype);
         return p;
     }
 
@@ -151,4 +152,22 @@ public class PacketBuilder  {
         return p;
     }
 
+
+    public static Packet BuildUpdateScoresPacket(int[] scores)
+    {
+        Packet p = new Packet(4 *scores.Length, Opcode.SMSG_UPDATE_SCORES);
+        for (int i = 0, len = scores.Length; i < len; i++)
+            p.Write(scores[i]);
+        return p;
+    }
+
+
+    public static Packet BuildPlayerDespawn(int guid)
+    {
+        Packet p = new Packet(4 + 4, Opcode.SMSG_PLAYER_DESPAWN);
+        p.Write(guid);
+        return p;
+    }
+
+      
 }

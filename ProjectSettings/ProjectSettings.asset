@@ -10,8 +10,8 @@ PlayerSettings:
   targetGlesGraphics: 1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: bm_project
+  companyName: Flying Minute Games
+  productName: BomberFall
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1280
@@ -110,7 +110,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 93258d0d82290f348953e190b0fc4ad6, type: 3}
       m_Size: 128
   m_BuildTargetBatching:
   - m_BuildTarget: Web

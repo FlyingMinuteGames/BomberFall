@@ -201,10 +201,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 935171836}
   - {fileID: 29060029}
   - {fileID: 2005882392}
   - {fileID: 1615038227}
+  - {fileID: 935171836}
   m_Father: {fileID: 0}
 --- !u!1001 &220951076
 Prefab:
@@ -286,6 +286,32 @@ Prefab:
   m_RootGameObject: {fileID: 424667706}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &270772443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 270772444}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &270772444
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 270772443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .503355265, y: 1.08793521, z: -.13346386}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &424667706
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +757,7 @@ TextMesh:
   m_FontSize: 40
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: dbfaa8700f6121f419d009577a7b8508, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4285690507
@@ -748,7 +774,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: dbfaa8700f6121f419d009577a7b8508, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -819,6 +845,15 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 374009be7c010134c89d7bc7f8b7fe0f, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: dbfaa8700f6121f419d009577a7b8508,
+        type: 3}
+    - target: {fileID: 2300000, guid: 374009be7c010134c89d7bc7f8b7fe0f, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dbfaa8700f6121f419d009577a7b8508, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 374009be7c010134c89d7bc7f8b7fe0f, type: 2}
   m_RootGameObject: {fileID: 1599361888}

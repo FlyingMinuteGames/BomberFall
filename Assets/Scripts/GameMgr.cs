@@ -113,7 +113,7 @@ public class GameMgr : MonoBehaviour
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
-        StartCoroutine(ChangePhaseTimer());
+        //StartCoroutine(ChangePhaseTimer());
         //ChangePhase();
         mp.PlayNextTrack();
 
@@ -241,8 +241,8 @@ public class GameMgr : MonoBehaviour
     public void UseOffensiveItem(int clientguid)
     {
         Debug.Log("Trying to use offensive item");
-        //if (!hud.hasOffensivePower)
-        //    return;
+        if (!hud.hasOffensivePower)
+            return;
         Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid);
         c.SendPacket(p);
     }
@@ -350,14 +350,19 @@ public class GameMgr : MonoBehaviour
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
     }
 
-    public void KillPlayer(Cross cross,int bombGUID)
+    public void KillPlayer(Cross cross, int bombGUID)
     {
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
         BombScript bomb = ObjectMgr.Instance.Get(bombGUID).GetComponent<BombScript>();
         int killerGUID = bomb.OwnerGuid;
+        int[] scores = hud.getScores();
+
+        bool suicide = false, hasvictim = false; ;
         for (int i = 0, len = m_player.Count; i < len; i++)
         {
             GameObject t = m_player[i];
+            int curID = t.GetComponent<Guid>().GetGUID();
+
             if (t == null)
                 continue;
             IntVector2 tpos = maps.GetTilePosition(t.transform.position.x, t.transform.position.z);
@@ -366,14 +371,42 @@ public class GameMgr : MonoBehaviour
                 continue;
             if (cross.IsIn(tpos))
             {
-                // DO SOMETHING 
+                hasvictim = true;
                 PlayAnnounce(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + (i + 1));
+                if (this.gameIntel.game_mode == Config.GameMode.SURVIVAL)
+                {
+                    scores = hud.getScores();
+                    scores[i] = -1;
+                    hud.setScores(scores);
+                    s.SendPacketBroadCast(PacketBuilder.BuildPlayerDespawn(curID));
+                    this.Despawn(curID);
+                }
+                else
+                {
+                    scores = hud.getScores();
+                    if (curID == killerGUID)
+                    {
+                        scores[i]--;
+                        suicide = true;
+                    }
+                    hud.setScores(scores);
+
+                    //RESPAWN THE PLAYER
+                }
             }
+            if (this.gameIntel.game_mode == Config.GameMode.SURVIVAL && curID == killerGUID && hasvictim && !suicide)
+                scores[i]++;
+        }
+
+        if (hasvictim)
+        {
+            s.SendPacketBroadCast(PacketBuilder.BuildUpdateScoresPacket(scores));
         }
     }
 
     public void KillPlayer(int victim, int killer, Config.PowerType powertype)
     {
+        Debug.Log("Kill player !!!");
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
 
         for (int i = 0, len = m_player.Count; i < len; i++)
@@ -387,7 +420,7 @@ public class GameMgr : MonoBehaviour
             else if (curId == killer)
             {
 
-                s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(killer),PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1)));
+                s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(killer), PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1)));
 
             }
         }
@@ -414,11 +447,11 @@ public class GameMgr : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        List<IntVector2> respawn_position = new List<IntVector2>(){new IntVector2(0,0),new IntVector2(maps.Size.x - 1,maps.Size.y-1),new IntVector2(maps.Size.x - 1,0),new IntVector2(0,maps.Size.y-1)};
+        List<IntVector2> respawn_position = new List<IntVector2>() { new IntVector2(0, 0), new IntVector2(maps.Size.x - 1, maps.Size.y - 1), new IntVector2(maps.Size.x - 1, 0), new IntVector2(0, maps.Size.y - 1) };
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            int index = Random.Range(0,4-i);
+            int index = Random.Range(0, 4 - i);
 
         }
     }

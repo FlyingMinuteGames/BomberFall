@@ -13,13 +13,16 @@ public class SwordCollider : MonoBehaviour {
 	
 	}
 
-    void OnColliderEnter(Collider col)
+    void OnTriggerEnter(Collider col)
     {
+        Debug.Log("Colliding with stuff !!!!!!!!!!!!!!");
         if ((GameMgr.Instance.Type & GameMgrType.SERVER) == 0)
             return;
+        Debug.Log("I AM the SERVER !!!, Walter White");
         if (col.CompareTag("Player"))
         {
-            GameMgr.Instance.KillPlayer(col.gameObject.GetComponent<Guid>().GetGUID(), gameObject.GetComponent<Guid>().GetGUID(), Config.PowerType.BRING_A_SW_TO_A_GF);
+            Debug.Log("I've touched a player");
+            //GameMgr.Instance.KillPlayer(col.gameObject.GetComponent<Guid>().GetGUID(), gameObject.GetComponent<Guid>().GetGUID(), Config.PowerType.BRING_A_SW_TO_A_GF);
 
         }
     }

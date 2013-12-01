@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class HUD : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class HUD : MonoBehaviour
     private Config.PowerType defensivePower;
     private string offensiveStr;
     private string defensiveStr;
+    private int[] m_scores;
 
     void Start()
     {
@@ -38,12 +40,14 @@ public class HUD : MonoBehaviour
 
     public void Init()
     {
+
         active = true;
         gameIntel = GameMgr.Instance.gameIntel;
 
         int len = gameIntel.nb_players + gameIntel.nb_cpus;
         player_names = new TextMesh[4];
         player_scores = new TextMesh[4];
+        m_scores = new int[len];
         float j = 0;
         for (int i = 0; i < len; i++)
         {
@@ -56,7 +60,7 @@ public class HUD : MonoBehaviour
 
             player_scores[i] = (TextMesh)Instantiate(textMeshPrefab, new Vector3(textMeshPrefab.transform.position.x + (3f * i) + j, textMeshPrefab.transform.position.y - 0.4f, textMeshPrefab.transform.position.z), Quaternion.identity);
             player_scores[i].text = gameIntel.game_mode == Config.GameMode.ARCADE ? "0" : "";
-
+            m_scores[i] = 0;
 
         }
 
@@ -116,6 +120,28 @@ public class HUD : MonoBehaviour
     public void unBindDefensivePower()
     {
         hasDefensivePower = false;
+    }
+
+    public void setScores(int[] scores)
+    {
+
+        int len = gameIntel.nb_players + gameIntel.nb_cpus, len2 = scores.Length;
+        for (int i = 0; i < len && i < len2 ; i++)
+        {
+            m_scores[i] = scores[i];
+            player_scores[i].text = scores[i] == -1 && GameMgr.Instance.gameIntel.game_mode == Config.GameMode.SURVIVAL ? "Dead" : (GameMgr.Instance.gameIntel.game_mode == Config.GameMode.SURVIVAL ? "" : m_scores[i].ToString());
+        }
+    }
+
+    public int[] getScores()
+    {
+        int len = gameIntel.nb_players + gameIntel.nb_cpus;
+        int[] scores = new int[len];
+        for (int i = 0; i < len; i++)
+        {
+            scores[i] = m_scores[i];
+        }
+        return scores;
     }
 
 }

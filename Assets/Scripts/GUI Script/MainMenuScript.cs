@@ -765,7 +765,7 @@ public class MainMenuScript : MonoBehaviour {
 
             if ((nbPlayers = comboboxNbPlayers.List(MenuUtils.ResizeGUI(new Rect(310, 50, 25, 20)), nb_players_combobox[m_nb_players].text, nb_players_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_players)
             {
-                nb_CPUs_combobox = MenuUtils.SetComboboxRange( 0, 3 - nbPlayers);
+               /* nb_CPUs_combobox = MenuUtils.SetComboboxRange( 0, 3 - nbPlayers);*/
                 m_nb_players = nbPlayers;
             }
 

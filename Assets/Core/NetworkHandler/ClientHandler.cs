@@ -22,8 +22,9 @@ public class ClientHandler
             {Opcode.SMSG_DESPAWN,HandleDespawn},
             {Opcode.SMSG_PLAY_ANNOUNCEMENT,HandlePlayAnnouncement}, 
             {Opcode.SMSG_SPEED_UP, HandlePlayerSpeedUp},
-            {Opcode.SMSG_OFF_POWER_USED, HandleOffensivePowerDrop}
-
+            {Opcode.SMSG_OFF_POWER_USED, HandleOffensivePowerDrop},
+            {Opcode.SMSG_UPDATE_SCORES, HandleUpdateScores},
+            {Opcode.SMSG_PLAYER_DESPAWN, HandlePlayerDespawn}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -171,9 +172,17 @@ public class ClientHandler
     {
         int guid;
         guid = p.ReadInt();
-        
-        HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
-        hud.unBindOffensivePower();
+        Config.PowerType powertype = (Config.PowerType)p.ReadInt();
+       
+        if(current.Guid == guid)
+        {
+            HUD hud = GameObject.Find("HUD").GetComponent<HUD>();
+            hud.unBindOffensivePower();
+        }
+
+        GameObject go = ObjectMgr.Instance.Get(guid);
+        go.GetComponent<BomberController>().Swing();
+       
     }
 
 
@@ -207,4 +216,22 @@ public class ClientHandler
 
 
     }
+
+    public static void HandleUpdateScores(Packet p)
+    {
+        int[] scores = new int[p.Size/4];
+        for (int i = 0, len = scores.Length; i < len; i++)
+            scores[i] = p.ReadInt();
+
+        GameMgr.Instance.hud.setScores(scores);
+
+    }
+
+
+    public static void HandlePlayerDespawn(Packet p)
+    {
+        int guid = p.ReadInt();
+        GameMgr.Instance.Despawn(guid);
+    }
+
 }

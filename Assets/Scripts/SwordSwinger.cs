@@ -6,6 +6,7 @@ public class SwordSwinger : MonoBehaviour {
     private AudioClip m_audioclip;
     private AudioSource m_audiosource;
     private Animation m_animation;
+    private GameObject m_sword;
 
 	// Use this for initialization
 	void Start () {
@@ -13,8 +14,9 @@ public class SwordSwinger : MonoBehaviour {
         m_animation = gameObject.GetComponent<Animation>();
         m_audioclip = m_audiosource.clip;
         m_animation.Rewind();
+        m_sword = gameObject.transform.FindChild("sword").gameObject;
 
-        gameObject.SetActive(false);
+        //m_sword.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -25,17 +27,19 @@ public class SwordSwinger : MonoBehaviour {
 
     IEnumerator SwingRoutine()
     {
+        Debug.Log("Start swinging");
         m_audiosource.PlayOneShot(m_audioclip, PlayerPrefs.GetFloat("SoundVolume"));
         m_animation.Play();
 
         yield return new WaitForSeconds(m_animation.clip.length);
+        Debug.Log("end of swing :(");
         m_animation.Rewind();
-        gameObject.SetActive(false);
+        //m_sword.SetActive(false);
     }
 
     public void Swing()
     {
-        gameObject.SetActive(true);
+        //m_sword.SetActive(true);
         StartCoroutine(SwingRoutine());
     }
 }

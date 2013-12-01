@@ -97,7 +97,8 @@ public class ServerHandler  {
             {
                 case (int)Config.PowerType.BRING_A_SW_TO_A_GF :
                     bc.Swing();
-                    GameMgr.Instance.s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(guid), PacketBuilder.BuildUnbindOffensiveItem(guid));
+                    bc.hasOffensiveItem = -1;
+                    GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildUnbindOffensiveItem(guid, Config.PowerType.BRING_A_SW_TO_A_GF));
                     break;
             }
         }

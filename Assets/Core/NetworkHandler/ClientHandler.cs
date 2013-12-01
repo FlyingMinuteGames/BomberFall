@@ -165,10 +165,12 @@ public class ClientHandler
 
     public static void HandlePlayAnnouncement(Packet p)
     {
-        List<string> str = new List<string>();
+        List<string> strs = new List<string>();
         int announce = p.ReadShort(),variant = p.ReadByte();
-        while (p.Cursor < p.Size)
-            str.Add(p.ReadString());
-        Announcer.Instance.PlayAnnounce((Announce)announce,variant,str.ToArray());
+        string str = null;
+        Debug.Log("read string");
+        while ((str = p.ReadString()) != null)
+            strs.Add(str);
+        Announcer.Instance.PlayAnnounce((Announce)announce,variant,strs.ToArray());
     }
 }

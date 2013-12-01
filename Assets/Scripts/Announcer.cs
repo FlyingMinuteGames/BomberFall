@@ -83,6 +83,7 @@ public class Announcer : MonoBehaviour {
             return "";
         StringBuilder builder = new StringBuilder();
         Debug.Log("template "+tpl+" length "+tpl.Length);
+        Debug.Log("value " + values + " length " + values.Length);
         for (int i, j = i = 0; i < tpl.Length; )
         {
             builder.Append(tpl[i++]);

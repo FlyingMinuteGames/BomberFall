@@ -49,6 +49,7 @@ public class GameMgr : MonoBehaviour {
     public bool game_started = false;
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
+    private MusicPlayer mp;
 
     public WorldState State
     {
@@ -57,6 +58,7 @@ public class GameMgr : MonoBehaviour {
     }
 
     private GameObject m_MainCamera;
+    private MainMenuScript mainMenu;
     public GameMgrType Type
     {
         get { return type; }
@@ -70,6 +72,9 @@ public class GameMgr : MonoBehaviour {
         pwr_up_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/PowerUp"), 100);
         hud = GameObject.Find("HUD").GetComponent<HUD>();
         m_MainCamera = GameObject.Find("MainCamera");
+        mainMenu = GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>();
+        mp = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
+
         baseRotation = m_MainCamera.transform.rotation;
 	}
 	
@@ -91,6 +96,8 @@ public class GameMgr : MonoBehaviour {
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
         StartCoroutine(ChangePhaseTimer());
+
+        mp.PlayNextTrack();
         //ChangePhase();
     }
 
@@ -108,7 +115,7 @@ public class GameMgr : MonoBehaviour {
             case GOType.GO_PWRUP:
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
-                sc.type = (Config.PowerType)1/*UnityEngine.Random.Range(0, 12)*/;
+                sc.type = (Config.PowerType)3/*UnityEngine.Random.Range(0, 12)*/;
                 sc.Init();
                 return ObjectMgr.Instance.Register(go, type, guid);
         }
@@ -118,6 +125,7 @@ public class GameMgr : MonoBehaviour {
     public void Despawn(GOType type, int guid)
     {
         GameObject go = ObjectMgr.Instance.get(guid);
+        Debug.Log("GO in despawn " + go);
         if (go != null)
         {
             ObjectMgr.Instance.UnRegister(guid);
@@ -185,6 +193,14 @@ public class GameMgr : MonoBehaviour {
         c.SendPacket(p);
     }
 
+    public void UseOffensiveItem(int clientguid, Vector3 pos)
+    {
+        if (!hud.hasOffensivePower)
+            return;
+        //Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid, pos);
+        //c.SendPacket(p);
+    }
+
     public void PowerUpPickUp(GameObject powerGo, int player_guid, APowerUp power)
     {
         Debug.Log("Power picked by player " + player_guid + " power id is " + powerGo.GetComponent<Guid>().GetGUID() + " power is " + power);
@@ -247,5 +263,25 @@ public class GameMgr : MonoBehaviour {
         clip.SetCurve("", typeof(Transform), "localRotation.w", w);
         m_MainCamera.GetComponent<Animation>().AddClip(clip, "1->"+index);
         m_MainCamera.GetComponent<Animation>().Play("1->" + index);
+    }
+
+    public void QuitGame()
+    {
+        mp.PlayNextTrack();
+        hud.Deactivate();
+        if (type == GameMgrType.SERVER)
+        {
+            c.Destroy();
+            s.Destroy();
+            mainMenu.active = true;
+        }
+        else
+        {
+            c.Destroy();
+            s.Destroy();
+            mainMenu.active = true;
+            
+        }
+
     }
 }

@@ -73,7 +73,6 @@ public class MainMenuScript : MonoBehaviour {
     private GUIContent[] _16_10_combobox;
     private GUIContent[] _16_9_combobox;
 
-    //Newly added
     private GUIContent[] gameplay_mode_combobox;
     private GUIContent[] maps_combobox;
     private GUIContent[] nb_players_combobox;
@@ -288,7 +287,7 @@ public class MainMenuScript : MonoBehaviour {
         if (!PlayerPrefs.HasKey("nbPlayers"))
             PlayerPrefs.SetInt("nbPlayers", 2);
 
-        if (!PlayerPrefs.HasKey("nbCPUs"))
+        //if (!PlayerPrefs.HasKey("nbCPUs"))
             PlayerPrefs.SetInt("nbCPUs", 0);
 
         if (!PlayerPrefs.HasKey("allowReconnection"))
@@ -696,7 +695,7 @@ public class MainMenuScript : MonoBehaviour {
             int i;
             for (i = 0; i < MenuConfig.m_keybindings_labels.Length; i++)
             {
-                GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 25 * (i + 1), 80, 40)), MenuConfig.m_keybindings_labels[i] + " :", skin.label);
+                GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 25 * (i + 1), 90, 40)), MenuConfig.m_keybindings_labels[i] + " :", skin.label);
                 MenuConfig.m_keybindings[i] = GUI.TextField(MenuUtils.ResizeGUI(new Rect(130, 25 * (i + 1), 20, 20)), MenuConfig.m_keybindings[i], 1, skin.textField);
             }
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 25 * (i + 1), 80, 40)), "Jump :", skin.label);
@@ -770,13 +769,13 @@ public class MainMenuScript : MonoBehaviour {
                 m_nb_players = nbPlayers;
             }
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(345, 50, 50, 40)), "CPUs", skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(345, 50, 50, 40)), "CPUs", skin.label);
 
-            if ((nbCPUs = comboboxNbCPUs.List(MenuUtils.ResizeGUI(new Rect(405, 50, 25, 20)), nb_CPUs_combobox[m_nb_CPUs].text, nb_CPUs_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_CPUs)
-            {
-                nb_players_combobox = MenuUtils.SetComboboxRange(1, 4 - nbCPUs);
-                m_nb_CPUs = nbCPUs;
-            }
+            //if ((nbCPUs = comboboxNbCPUs.List(MenuUtils.ResizeGUI(new Rect(405, 50, 25, 20)), nb_CPUs_combobox[m_nb_CPUs].text, nb_CPUs_combobox, skin.button, skin.box, skin.customStyles[0])) != m_nb_CPUs)
+            //{
+            //    nb_players_combobox = MenuUtils.SetComboboxRange(1, 4 - nbCPUs);
+            //    m_nb_CPUs = nbCPUs;
+            //}
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 140, 200, 40)), "Active power-ups :", skin.label);
 
@@ -895,7 +894,7 @@ public class MainMenuScript : MonoBehaviour {
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "GameMode :  " + (gameMgr.gameIntel.game_mode == Config.GameMode.ARCADE ? "Arcade" : "Survival"), skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 40, 150, 20)), "Map name :  " + gameMgr.gameIntel.map_name, skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Players :  " + gameMgr.gameIntel.nb_players, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs :  " + gameMgr.gameIntel.nb_cpus, skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs :  " + gameMgr.gameIntel.nb_cpus, skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change :  " + (gameMgr.gameIntel.disable_persp_change ? "Deactivated" : "Activated"), skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :  " + (gameMgr.gameIntel.auth_reco ? "Authorized" : "Not Authorized"), skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 100, 150, 200)), "Active power-ups :  " + gameMgr.gameIntel.powers_str + "Bomb Up", skin.label);
@@ -915,34 +914,34 @@ public class MainMenuScript : MonoBehaviour {
                 if (i < m_connected_players.Count)
                 {
                     MenuConfig.ConnectedPlayer current = m_connected_players.Find(x => x.name == "Player "+(i+1));
-                    if (i == 0)//Replace to test if current player is this one
-                    {
-                        if (!current.ready)
-                        {
-                            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Ready", skin.button))
-                            {
-                                current.ready = true;
-                            }
-                        }else
-                            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Not Ready", skin.button))
-                            {
-                                current.ready = false;
-                            }
-                    }
-                    else
-                    {
-                        if (current.ready)
-                            GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Ready", skin.label);
-                        else
-                            GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Not Ready", skin.label);
-                    }
-                    if (isHost && i > 0)
-                    {
-                        if (GUI.Button(MenuUtils.ResizeGUI(new Rect(205, 60 + (10 * (i + 1)), 50, 10)), "Kick", skin.button))
-                        {
-                            //KICK HIM
-                        }
-                    }
+                    //if (i == 0)//Replace to test if current player is this one
+                    //{
+                    //    if (!current.ready)
+                    //    {
+                    //        if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Ready", skin.button))
+                    //        {
+                    //            current.ready = true;
+                    //        }
+                    //    }else
+                    //        if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Not Ready", skin.button))
+                    //        {
+                    //            current.ready = false;
+                    //        }
+                    //}
+                    //else
+                    //{
+                    //    if (current.ready)
+                    //        GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Ready", skin.label);
+                    //    else
+                    //        GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Not Ready", skin.label);
+                    //}
+                    //if (isHost && i > 0)
+                    //{
+                    //    if (GUI.Button(MenuUtils.ResizeGUI(new Rect(205, 60 + (10 * (i + 1)), 50, 10)), "Kick", skin.button))
+                    //    {
+                    //        //KICK HIM
+                    //    }
+                    //}
                 }
             }
 

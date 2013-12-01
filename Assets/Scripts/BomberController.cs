@@ -18,6 +18,7 @@ public class BomberController : MonoBehaviour
     void Start()
     {
         m_Animator = gameObject.GetComponent<Animator>();
+        m_guid = gameObject.GetComponent<Guid>().GetGUID();
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class BomberController : MonoBehaviour
     public float speed = 1.0f;
     private float fall_velocity = 0;
     private Vector3 gravity = Vector3.back;
+    private int m_guid;
     delegate int Callback(BomberController me, bool enable);
 
     private KeyCode[] key_binding = { (KeyCode)PlayerPrefs.GetInt("ForwardKey"), (KeyCode)PlayerPrefs.GetInt("BackwardKey"), (KeyCode)PlayerPrefs.GetInt("LeftKey"), (KeyCode)PlayerPrefs.GetInt("RightKey"), KeyCode.Space, (KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"), (KeyCode)PlayerPrefs.GetInt("DefensiveItemKey") };
@@ -55,8 +57,15 @@ public class BomberController : MonoBehaviour
         {(KeyCode)PlayerPrefs.GetInt("LeftKey"),(Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_LEFT : me.m_MoveFlags & ~(int)MoveState.MOVE_LEFT; return 1;})},
         {(KeyCode)PlayerPrefs.GetInt("RightKey"), (Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_RIGHT : me.m_MoveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;})},
         {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 1;})},
-        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{return 0;})},
-        {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{return 0;})}
+        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{me.UseOffensiveItem();return 0;})},
+        {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{/*me.UseDefensiveItem();*/return 0;})},
+        {KeyCode.Escape,(Callback)((me,enable)=>{
+            if (enable){
+                    PauseMenu pause = GameObject.Find("PauseMenu").GetComponent<PauseMenu>();
+                    pause.SwitchState();
+                }
+            return 0;
+        })}
     };
     void UpdateInput()
     {
@@ -89,6 +98,21 @@ public class BomberController : MonoBehaviour
         o.GetComponent<BombScript>().StartScript(() => {/* handle damage  return;}, () => { pool.Free(o); return; });
         */
     }
+
+    public void UseOffensiveItem()
+    {
+
+        GameMgr.Instance.UseOffensiveItem(m_guid, transform.position);
+        /*GameObject o = pool.Pop(transform.position,new Quaternion());
+        if (o == null)
+        {
+            Debug.Log("warning no bomb in pool !");
+            return;
+        }
+        o.GetComponent<BombScript>().StartScript(() => {/* handle damage  return;}, () => { pool.Free(o); return; });
+        */
+    }
+
 
     void FixedUpdate()
     {

@@ -465,6 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTracks:
   - {fileID: 8300000, guid: 8027846be7724dc4497263ae184c279c, type: 3}
+  - {fileID: 8300000, guid: fc08d4199e0582a4c913c99a167bb279, type: 3}
 --- !u!82 &789121242
 AudioSource:
   m_ObjectHideFlags: 0

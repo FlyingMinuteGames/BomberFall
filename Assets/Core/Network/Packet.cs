@@ -196,7 +196,7 @@ public class Packet  {
         if (m_cursor + 2 > m_size)
             return 0;
         var value = BitConverter.ToInt16(m_data, m_cursor);
-        m_cursor += 1;
+        m_cursor += 2;
         return value;
     }
 
@@ -213,6 +213,7 @@ public class Packet  {
     {
         IList<char> _string = new List<char>();
 
+        Debug.Log("cursor at "+ m_cursor);
         char tmp;
         int c = 0;
         while ((tmp = ReadChar()) != 0)
@@ -222,7 +223,7 @@ public class Packet  {
 
         }
         if (_string.Count == 0)
-            return "";
+            return null;
         char[] _str = new char[_string.Count];
         for (int i = 0, len = _string.Count; i < len; i++)
             _str[i] = _string[i];

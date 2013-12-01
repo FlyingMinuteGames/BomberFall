@@ -299,7 +299,7 @@ public class GameMgr : MonoBehaviour {
 
     public void KillPlayer(Cross cross)
     {
-        IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_BOMB);
+        IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
 
         for (int i = 0, len = m_player.Count; i < len; i++)
         {
@@ -310,7 +310,7 @@ public class GameMgr : MonoBehaviour {
             Debug.Log(tpos);
             if (cross.IsIn(tpos))
                 Announcer.Instance.PlayAnnounce(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i);
-            s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + i));
+            s.SendPacketBroadCast(PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PLAYER_KILL, 0, "" + (i+1)));
 
         }
     }

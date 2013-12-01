@@ -112,7 +112,7 @@ public class PacketBuilder  {
 
 
 
-    public static Packet BuildPlayAnnouncePacket(Announce announce, short variant, params string[] values)
+    public static Packet BuildPlayAnnouncePacket(Announce announce, byte variant, params string[] values)
     {
         //Calculate size of packet
         int size = 0;

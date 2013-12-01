@@ -83,10 +83,25 @@ public class ServerHandler  {
 
     public static void HandleOffPowerUse(Packet p)
     {
+        Debug.Log("IN HANDLER");
         int guid;
-        Vector3 start_pos;
         guid = p.ReadInt();
-        start_pos = p.ReadVector3();
+
+
+        GameObject go = ObjectMgr.Instance.Get(guid);
+        BomberController bc = go.GetComponent<BomberController>();
+
+        if (bc.hasOffensiveItem > -1)
+        {
+            switch (bc.hasOffensiveItem)
+            {
+                case (int)Config.PowerType.BRING_A_SW_TO_A_GF :
+                    bc.Swing();
+                    GameMgr.Instance.s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(guid), PacketBuilder.BuildUnbindOffensiveItem(guid));
+                    break;
+            }
+        }
+
     }
 
 }

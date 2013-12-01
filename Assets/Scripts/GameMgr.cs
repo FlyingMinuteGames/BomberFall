@@ -262,11 +262,12 @@ public class GameMgr : MonoBehaviour
         c.SendPacket(p);
     }
 
-    public void UseOffensiveItem(int clientguid, Vector3 pos)
+    public void UseOffensiveItem(int clientguid)
     {
-        if (!hud.hasOffensivePower)
-            return;
-        Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid, pos);
+        Debug.Log("Trying to use offensive item");
+        //if (!hud.hasOffensivePower)
+        //    return;
+        Packet p = PacketBuilder.BuildUseOffensiveItem(clientguid);
         c.SendPacket(p);
     }
 
@@ -405,6 +406,7 @@ public class GameMgr : MonoBehaviour
             if (curId == victim)
             {
                 PlayAnnounce(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1));
+                //TODO KILL PLAYER AND ATTRIBUTE POINTS
             }
             else if (curId == killer)
             {

@@ -115,11 +115,18 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildUseOffensiveItem(int guid, Vector3 pos)
+    public static Packet BuildUnbindOffensiveItem(int guid)
     {
-        Packet p = new Packet(4+4*3, Opcode.CMSG_OFF_POWER_USE);
+        Packet p = new Packet(4, Opcode.SMSG_OFF_POWER_USED);
         p.Write(guid);
-        p.Write(pos);
+        return p;
+    }
+
+
+    public static Packet BuildUseOffensiveItem(int guid)
+    {
+        Packet p = new Packet(4, Opcode.CMSG_OFF_POWER_USE);
+        p.Write(guid);
         return p;
     }
 

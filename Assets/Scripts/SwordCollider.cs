@@ -19,7 +19,8 @@ public class SwordCollider : MonoBehaviour {
             return;
         if (col.CompareTag("Player"))
         {
-            GameMgr.Instance.HandleKillPlayer(col.gameObject.GetComponent<Guid>().GetGUID(), gameObject.GetComponent<Guid>().GetGUID(), Config.PowerType.BRING_A_SW_TO_A_GF);
+            GameMgr.Instance.KillPlayer(col.gameObject.GetComponent<Guid>().GetGUID(), gameObject.GetComponent<Guid>().GetGUID(), Config.PowerType.BRING_A_SW_TO_A_GF);
+
         }
     }
 }

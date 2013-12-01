@@ -366,6 +366,12 @@ public class GameMgr : MonoBehaviour {
             }
         }
     }
+
+    public void KillPlayer(int victim, int killer, Config.PowerType powertype)
+    {
+
+    }
+
     public void QuitGame()
     {
         mp.PlayNextTrack();

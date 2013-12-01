@@ -325,7 +325,6 @@ public class Maps {
                 x = i-1;
                 break;
             }
-            Debug.Log("i++" + i);
             if (m_maps[i][a.y].m_type == MapsTiles.SOLID_BLOCK)
                 break;
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
@@ -397,9 +396,7 @@ public class Maps {
         }
 
         if (GameMgr.Instance != null && GameMgr.Instance.Type == GameMgrType.SERVER)
-        {
             GameMgr.Instance.KillPlayer(new Cross(a, x, y, z, w));
-        }
 
 
     }

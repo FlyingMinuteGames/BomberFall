@@ -65,7 +65,13 @@ public class Server //: INetwork
             }
             else
             {
+
                 TcpClient client = tcp_server.AcceptTcpClient();
+                if (GameMgr.Instance.game_started)
+                {
+                    client.Close();
+                    continue;
+                }
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                 clientThread.Start(client);
                 Debug.Log("client connected : " + client);
@@ -193,6 +199,8 @@ public class Server //: INetwork
     public void SendPacketTo(TcpClient client, Packet packet)
     {
         byte[] data = packet.ToByte();
+        if (!client.Connected)
+            return;
         //Debug.Log("send packet to client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         client.Client.Send(data);//client.GetStream().Write(data,0,data.Length);
     }
@@ -203,6 +211,8 @@ public class Server //: INetwork
         Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         foreach(TcpClient client in m_clients)
         {
+            if (!client.Connected)
+                return;
             if(client != except)
                 client.Client.Send(data);//client.Send(data,0,data.Length);
         }

@@ -50,8 +50,12 @@ public class GameMgr : MonoBehaviour {
     private GameMgrType type;
     private WorldState m_state = WorldState.CENTER;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static float const_gravity = -20.0f;
     private Vector3[] gravityStates;
+=======
+    private MusicPlayer mp;
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
 =======
     private MusicPlayer mp;
 >>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
@@ -132,7 +136,11 @@ public class GameMgr : MonoBehaviour {
                 go = pwr_up_pool.Pop(pos, Quaternion.identity);
                 PowerUpGOScript sc = go.GetComponent<PowerUpGOScript>();
 <<<<<<< HEAD
+<<<<<<< HEAD
                 sc.type = (Config.PowerType)extra/*UnityEngine.Random.Range(0, 12)*/;
+=======
+                sc.type = (Config.PowerType)3/*UnityEngine.Random.Range(0, 12)*/;
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
 =======
                 sc.type = (Config.PowerType)3/*UnityEngine.Random.Range(0, 12)*/;
 >>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
@@ -166,6 +174,9 @@ public class GameMgr : MonoBehaviour {
 =======
         GameObject go = ObjectMgr.Instance.get(guid);
         Debug.Log("GO in despawn " + go);
+<<<<<<< HEAD
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
+=======
 >>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
         if (go != null)
         {
@@ -314,6 +325,7 @@ public class GameMgr : MonoBehaviour {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void KillPlayer(Cross cross)
     {
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_BOMB);
@@ -331,6 +343,8 @@ public class GameMgr : MonoBehaviour {
 
         }
 =======
+=======
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
     public void QuitGame()
     {
         mp.PlayNextTrack();
@@ -349,6 +363,9 @@ public class GameMgr : MonoBehaviour {
             
         }
 
+<<<<<<< HEAD
+>>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
+=======
 >>>>>>> c673baf66d54a050b8362c5be5a2e3e63db21002
     }
 }

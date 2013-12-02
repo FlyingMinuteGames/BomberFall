@@ -182,4 +182,12 @@ public class PacketBuilder  {
         return p;
     }
 
+
+    public static Packet BuildRespawnPacket(int guid, Vector3 respawn_pos)
+    {
+        Packet p = new Packet(16, Opcode.SMSG_PLAYER_RESPAWN);
+        p.Write(guid);
+        p.Write(respawn_pos);
+        return p;
+    }
 }

@@ -40,15 +40,24 @@ public class Client
     }
 
 
-    public void Connect()
+    public bool Connect()
     {
-        tcp_client.Connect(address, port);
+        try
+        {
+            tcp_client.Connect(address, port);
+        }
+        catch
+        {
+            return false;
+        }
         m_isRunning = true;
         Debug.Log("Connected : " + tcp_client.Connected);
         tcp_thread = new Thread(new ParameterizedThreadStart(HandleClient));
 
         tcp_thread.Start(tcp_client);
         Debug.Log("(CLIENT) Start !");
+        return true;
+
     }
 
     public void SendPacket(Packet packet)
@@ -121,7 +130,7 @@ public class Client
         }
         Debug.Log("(CLIENT) socket close !");
         tcpClient.Close();
-        Async.Instance.DelayedAction(() => GameMgr.Instance.Reset());
+        Async.Instance.DelayedAction(() => GameMgr.Instance.QuitGame());
     }
 
     private void HandlePacket(TcpClient client, Packet packet)

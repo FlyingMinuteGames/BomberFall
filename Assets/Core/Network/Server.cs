@@ -37,9 +37,10 @@ public class Server //: INetwork
     {
         get { return m_clients.Count; }
     }
-
-    public Server()
+    private int max_client;
+    public Server(int max = 4)
     {
+        max_client = max;
         m_sessions = new Dictionary<int, ClientSession>();
         tcp_server = new TcpListener(new IPEndPoint(IPAddress.Any, Config.DEFAULT_PORT));
         listener_thread = new Thread(new ThreadStart(ListenForClients));
@@ -72,10 +73,10 @@ public class Server //: INetwork
             {
 
                 TcpClient client = tcp_server.AcceptTcpClient();
-                if (GameMgr.Instance.game_started)
+                if (GameMgr.Instance.game_started || m_clients.Count >= max_client)
                 {
                     client.Close();
-                    continue;
+                    break;
                 }
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                 clientThread.Start(client);

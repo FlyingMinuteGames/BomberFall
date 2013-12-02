@@ -34,6 +34,7 @@ public class MainMenuScript : MonoBehaviour {
 
     private MenuConfig.MainMenuSelected menu;
     private MenuConfig.SubMenuSelected submenu;
+    private MenuConfig.SubMenuSelected prev_submenu;
     private int m_ratio = 0;
     private int m_resolution = 0;
     private int quality = 0;
@@ -857,10 +858,12 @@ public class MainMenuScript : MonoBehaviour {
                 //Check server connection
                 //IF fails -> display error message 
                 // ELSE CONNECT TO LOBBY 
-                gameMgr.StartClient(serverIP);
-                isHost = false;
-                m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player " + (m_connected_players.Count + 1), false));
-                submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
+                if (gameMgr.StartClient(serverIP))
+                {
+                    isHost = false;
+                    m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player " + (m_connected_players.Count + 1), false));
+                    submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
+                }
 
 
             }
@@ -1022,7 +1025,10 @@ public class MainMenuScript : MonoBehaviour {
 
         }
 
+        if(prev_submenu != submenu && prev_submenu == MenuConfig.SubMenuSelected.LOBBY_SELECTED)
+            gameMgr.Reset();
 
+        prev_submenu = submenu;
 
     }
 

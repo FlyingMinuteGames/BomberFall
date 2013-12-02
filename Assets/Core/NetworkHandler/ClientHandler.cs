@@ -25,7 +25,8 @@ public class ClientHandler
             {Opcode.SMSG_OFF_POWER_USED, HandleOffensivePowerDrop},
             {Opcode.SMSG_UPDATE_SCORES, HandleUpdateScores},
             {Opcode.SMSG_PLAYER_DESPAWN, HandlePlayerDespawn},
-            {Opcode.SMSG_GAME_ENDED, HandleEndGame}
+            {Opcode.SMSG_GAME_ENDED, HandleEndGame},
+            {Opcode.SMSG_PLAYER_RESPAWN,HandleRespawn}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -283,5 +284,16 @@ public class ClientHandler
         GameMgr.Instance.EndGame(gamemode);
     }
 
+    public static void HandleRespawn(Packet p)
+    {
+        int guid = p.ReadInt();
+        Vector3 v = p.ReadVector3();
+
+
+        GameObject player = null;
+        if ((player = ObjectMgr.Instance.Get(guid)) != null)
+            player.transform.position = v;
+
+    }
 
 }

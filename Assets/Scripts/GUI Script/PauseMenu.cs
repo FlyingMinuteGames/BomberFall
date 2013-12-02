@@ -93,8 +93,8 @@ public class PauseMenu : MonoBehaviour {
             MenuConfig.m_keybindings[1] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("BackwardKey"));
             MenuConfig.m_keybindings[2] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("LeftKey"));
             MenuConfig.m_keybindings[3] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("RightKey"));
-            MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
-            MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
+            //MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
+            //MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
         }
     }
 
@@ -175,11 +175,11 @@ public class PauseMenu : MonoBehaviour {
             if (kb != KeyCode.Dollar)
                 PlayerPrefs.SetInt("RightKey", (int)kb);
             kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[4]);
-            if (kb != KeyCode.Dollar)
-                PlayerPrefs.SetInt("DefensiveItemKey", (int)kb);
-            kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[5]);
-            if (kb != KeyCode.Dollar)
-                PlayerPrefs.SetInt("OffensiveItemKey", (int)kb);
+            //if (kb != KeyCode.Dollar)
+            //    PlayerPrefs.SetInt("DefensiveItemKey", (int)kb);
+            //kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[5]);
+            //if (kb != KeyCode.Dollar)
+            //    PlayerPrefs.SetInt("OffensiveItemKey", (int)kb);
         }
 
         PlayerPrefs.Save();

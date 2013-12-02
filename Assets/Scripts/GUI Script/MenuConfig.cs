@@ -9,18 +9,18 @@ public class MenuConfig{
                                                "Go Forward/Jump", 
                                                "Go Backward", 
                                                "Go Left", 
-                                               "Go Right", 
+                                               "Go Right"/*, 
                                                "Defensive Item", 
-                                               "Offensive Item"
+                                               "Offensive Item"*/
                                           };
 
     public static String[] m_keybindings_default = {
                                                "Z",
                                                "S",
                                                "Q",
-                                               "D",
+                                               "D"/*,
                                                "A",
-                                               "E"
+                                               "E"*/
                                           };
 
     public static String[] m_keybindings = new String[m_keybindings_default.Length];

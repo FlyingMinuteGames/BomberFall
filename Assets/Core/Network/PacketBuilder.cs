@@ -178,5 +178,11 @@ public class PacketBuilder  {
         return p;
     }
 
-      
+    public static Packet BuildSendEndOfGame(int gametype)
+    {
+        Packet p = new Packet(4 + 4, Opcode.SMSG_GAME_ENDED);
+        p.Write(gametype);
+        return p;
+    }
+
 }

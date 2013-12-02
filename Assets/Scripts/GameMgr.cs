@@ -63,6 +63,7 @@ public class GameMgr : MonoBehaviour
     private static float const_gravity = -20.0f;
     private Vector3[] gravityStates;
     public MusicPlayer mp;
+    private EndMenu endmenu;
 
     public WorldState State
     {
@@ -81,7 +82,6 @@ public class GameMgr : MonoBehaviour
     {
         Application.runInBackground = true;
         s_instance = this;
-        Debug.Log("GameMgr init");
         player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
         bomb_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb"), 100);
         pwr_up_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/PowerUp"), 100);
@@ -89,6 +89,7 @@ public class GameMgr : MonoBehaviour
         m_MainCamera = GameObject.Find("MainCamera");
         mainMenu = GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>();
         mp = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
+
 
         baseRotation = m_MainCamera.transform.rotation;
         gravityStates = new Vector3[] { Vector3.up * const_gravity, Vector3.forward * const_gravity, Vector3.forward * -const_gravity, Vector3.right * const_gravity, Vector3.right * -const_gravity };
@@ -468,5 +469,10 @@ public class GameMgr : MonoBehaviour
             int index = Random.Range(0, 4 - i);
 
         }
+    }
+
+    public void EndGame(Config.GameMode gamemode)
+    {
+
     }
 }

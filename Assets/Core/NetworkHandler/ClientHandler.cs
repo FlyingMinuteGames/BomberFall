@@ -30,6 +30,8 @@ public class ClientHandler
 
     public static void HandleMovePlayer(Packet p)
     {
+        if (current.Both)
+            return;
         int guid, moveflag;
         Vector3 start_pos;
         GameObject obj;
@@ -43,6 +45,8 @@ public class ClientHandler
 
     public static void HandleCreatePlayer(Packet p)
     {
+        if (current.Both)
+            return;
         int guid; byte flags;
         guid = p.ReadInt();
         flags = p.ReadByte();
@@ -51,6 +55,8 @@ public class ClientHandler
 
     public static void HandleBombExplode(Packet p)
     {
+        if (current.Both)
+            return;
         int x, y, guid, radius;
         guid = p.ReadInt();
         x = p.ReadInt();
@@ -65,6 +71,8 @@ public class ClientHandler
 
     public static void HandlePlayerConnected(Packet p)
     {
+        if (current.Both)
+            return;
         int session = p.ReadInt();
         p.ReadInt(); // unused
         int guid = p.ReadInt();
@@ -89,6 +97,8 @@ public class ClientHandler
 
     public static void HandleSendMap(Packet p)
     {
+        if (current.Both)
+            return;
         Debug.Log("handle maps " + p.Size);
         byte[] buffer = new byte[p.Size];
         p.ReadBuffer(buffer);
@@ -101,6 +111,8 @@ public class ClientHandler
 
     public static void HandleInstantiateObject(Packet p)
     {
+        if (current.Both)
+            return;
         int count = p.Size / 17, guid, type, extra;
         float x, y, z = 0;
 
@@ -127,6 +139,8 @@ public class ClientHandler
 
     public static void HandleStartGame(Packet p)
     {
+        if (current.Both)
+            return;
         Debug.Log("START GAME");
         GameMgr.Instance.game_started = true;
         GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>().active = false;
@@ -137,6 +151,8 @@ public class ClientHandler
 
     public static void HandleSendMessage(Packet p)
     {
+        if (current.Both)
+            return;
         string name, message;
         name = p.ReadString();
         message = p.ReadString();
@@ -151,6 +167,8 @@ public class ClientHandler
 
     public static void HandleChangePhase(Packet p)
     {
+        if (current.Both)
+            return;
         WorldState state;
         WorldStateExtra extra;
         state = (WorldState)p.ReadByte();
@@ -160,6 +178,8 @@ public class ClientHandler
 
     public static void HandleJump(Packet p)
     {
+        if (current.Both)
+            return;
         int guid;
         Vector3 start_pos;
         guid = p.ReadInt();
@@ -201,6 +221,8 @@ public class ClientHandler
 
     public static void HandleDespawn(Packet p)
     {
+        if (current.Both)
+            return;
         int guid;
         guid = p.ReadInt();
         GameMgr.Instance.Despawn(guid);
@@ -219,6 +241,8 @@ public class ClientHandler
 
     public static void HandlePlayerSpeedUp(Packet p)
     {
+        if (current.Both)
+            return;
         int guid, speedMult;
 
         guid = p.ReadInt();
@@ -232,6 +256,8 @@ public class ClientHandler
 
     public static void HandleUpdateScores(Packet p)
     {
+        if (current.Both)
+            return;
         int[] scores = new int[p.Size/4];
         for (int i = 0, len = scores.Length; i < len; i++)
             scores[i] = p.ReadInt();
@@ -243,12 +269,16 @@ public class ClientHandler
 
     public static void HandlePlayerDespawn(Packet p)
     {
+        if (current.Both)
+            return;
         int guid = p.ReadInt();
         GameMgr.Instance.Despawn(guid);
     }
 
     public static void HandleEndGame(Packet p)
     {
+        if (current.Both)
+            return;
         Config.GameMode gamemode = (Config.GameMode)p.ReadInt();
         GameMgr.Instance.EndGame(gamemode);
     }

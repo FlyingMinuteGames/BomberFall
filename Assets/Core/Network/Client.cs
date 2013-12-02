@@ -126,9 +126,6 @@ public class Client
 
     private void HandlePacket(TcpClient client, Packet packet)
     {
-        if (m_isBoth)
-            return;
-        Debug.Log("handle !");
         packet.Sender = client;
         Async.Instance.DelayedAction(() =>
         {

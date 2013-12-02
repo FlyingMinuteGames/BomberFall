@@ -44,7 +44,6 @@ public class Server //: INetwork
         tcp_server = new TcpListener(new IPEndPoint(IPAddress.Any, Config.DEFAULT_PORT));
         listener_thread = new Thread(new ThreadStart(ListenForClients));
         listener_thread.Start();
-        Debug.Log("(SERVER) Start !");
     }
 
 
@@ -80,7 +79,6 @@ public class Server //: INetwork
                 }
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                 clientThread.Start(client);
-                Debug.Log("(SERVER) client connected : " + client);
                 m_clients.Add(client);
                 if (null != OnClientConnected)
                     OnClientConnected(client);
@@ -89,7 +87,6 @@ public class Server //: INetwork
         }
         tcp_server.Stop();
         tcp_server = null;
-        Debug.Log("(SERVER) Stop listen socket");
     }
 
     public int GetSessionId(int playerGuid)
@@ -134,7 +131,6 @@ public class Server //: INetwork
                     break;
                 size = Packet.ToInt(buffer, 0);
                 opcode = Packet.ToInt(buffer, 4);
-                Debug.Log("(SERVER) Recv packet size : " + size + ", opcode : " + (Opcode)opcode);
                 if (size == 0)
                 {
                     Packet p = new Packet(size, opcode, null);
@@ -214,7 +210,7 @@ public class Server //: INetwork
     public void SendPacketBroadCast(Packet packet, TcpClient except = null)
     {
         byte[] data = packet.ToByte();
-        Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
+        //Debug.Log("send packet to all client, opcode : " + packet.GetOpcode() + " ,size : " + packet.Size + " bytes");
         foreach(TcpClient client in m_clients)
         {
             if (!client.Connected)

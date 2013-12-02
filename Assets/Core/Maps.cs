@@ -452,10 +452,21 @@ public class Maps {
         if ((GameMgr.Instance.Type & GameMgrType.SERVER) == 0)
             return;
 
-        if (true)
+        if (UnityEngine.Random.Range(0,3) == 1)
         {
             Vector3 worldpos = TilePosToWorldPos(vec);
-            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, 4/*UnityEngine.Random.Range(0, 12)*/);
+
+            Config.PowerType type;
+            int rand = UnityEngine.Random.Range(0, 100);
+            if (rand < 30)
+                type = Config.PowerType.BOMB_UP;
+            else if (rand < 60)
+                type = Config.PowerType.FIRE_UP;
+            else if (rand < 90)
+                type = Config.PowerType.SPEED_UP;
+            else type = Config.PowerType.BACK_TO_SCHOOL;
+
+            int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, (int)type);
             //GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         }
     }

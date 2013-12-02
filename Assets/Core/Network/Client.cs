@@ -121,12 +121,13 @@ public class Client
         }
         Debug.Log("(CLIENT) socket close !");
         tcpClient.Close();
-        GameMgr.Instance.Reset();
+        Async.Instance.DelayedAction(() => GameMgr.Instance.Reset());
     }
 
     private void HandlePacket(TcpClient client, Packet packet)
     {
         packet.Sender = client;
+        Debug.Log("both:" + Both);
         Async.Instance.DelayedAction(() =>
         {
             m_opcodeMgr.HandlePacket(packet);

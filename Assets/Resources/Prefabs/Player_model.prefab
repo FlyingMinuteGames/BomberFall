@@ -605,7 +605,8 @@ GameObject:
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400004}
+  - 54: {fileID: 5400002}
   m_Layer: 0
   m_Name: sword
   m_TagString: Untagged
@@ -622,8 +623,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400080}
   - 82: {fileID: 8200000}
-  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   - 111: {fileID: 11100000}
+  - 54: {fileID: 5400004}
   m_Layer: 0
   m_Name: SwordSwinger
   m_TagString: Untagged
@@ -709,7 +711,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .526535749, z: 0}
+  m_LocalPosition: {x: -19.8518429, y: .5, z: 49.5822334}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400064}
@@ -1165,6 +1167,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100078}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &5400004
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100080}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1298,10 +1330,10 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100080}
+  m_GameObject: {fileID: 100078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146de5c999c4b6945bdca6e791cdc5b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4be95b0e1e9fbe647973d655d4196f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11400006
@@ -1309,10 +1341,10 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100078}
+  m_GameObject: {fileID: 100080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4be95b0e1e9fbe647973d655d4196f8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 146de5c999c4b6945bdca6e791cdc5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!136 &13600000

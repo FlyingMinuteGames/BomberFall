@@ -16,7 +16,7 @@ public class SwordSwinger : MonoBehaviour {
         m_animation.Rewind();
         m_sword = gameObject.transform.FindChild("sword").gameObject;
 
-        //m_sword.SetActive(false);
+        m_sword.SetActive(false);
 	}
 	
 	// Update is called once per frame

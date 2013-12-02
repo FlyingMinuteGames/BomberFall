@@ -213,15 +213,10 @@ public class Packet  {
     {
         IList<char> _string = new List<char>();
 
-        Debug.Log("cursor at "+ m_cursor);
         char tmp;
         int c = 0;
         while ((tmp = ReadChar()) != 0)
-        {
             _string.Add(tmp);
-            Debug.Log("read tmp : "+tmp+" count : "+c);
-
-        }
         if (_string.Count == 0)
             return null;
         char[] _str = new char[_string.Count];

@@ -476,7 +476,7 @@ public class GameMgr : MonoBehaviour
 
     public void EndGame(Config.GameMode gamemode)
     {
-        endmenu.setMode(gamemode);
-        endmenu.active = true; ;
+        //endmenu.setMode(gamemode);
+        //endmenu.active = true; ;
     }
 }

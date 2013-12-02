@@ -12,9 +12,6 @@ public class PacketBuilder  {
         return p;
     }
 
-    public static Packet BuildPlayAnnouncementPacket(int announceId)
-    { return null; }
-
     public static Packet BuildConnectPacket(int flag, int sessionId)
     {
         Packet p = new Packet(4 * 2, (int)Opcode.CMSG_CONNECT);

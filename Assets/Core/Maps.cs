@@ -128,7 +128,7 @@ public class Maps {
                 //Workaround to enforce collider exit
                 m_maps[pos.x][pos.y].block.gameObject.transform.position = Vector3.up * 1000;
                 GameObject todelete = m_maps[pos.x][pos.y].block.gameObject;
-                Async.Instance.DelayedAction(()=> GameObject.Destroy(todelete) );
+                GameObject.Destroy(todelete, 5);
             } m_maps[pos.x][pos.y].m_type = type;
             Transform obj = null;
             
@@ -221,9 +221,6 @@ public class Maps {
     public IntVector2 GetTilePosition(float x, float y)
     {
         IntVector2 a = new IntVector2((int)(Mathf.Floor(x + (m_size.x % 2 != 0 ? 0.5f : 0f))) + m_size_2.x, (int)(Mathf.Floor(y + (m_size.x % 2 != 0 ? 0.5f : 0f))) + m_size_2.y);
-        //a.x = Mathf.Clamp(a.x, 0, m_size.x - 1);
-        //a.y = Mathf.Clamp(a.y, 0, m_size.y - 1);
-        //Debug.Log("size/2 : " + m_size_2.x + " " + m_size_2.y);
 
         if (a.x < 0 || a.x >= m_size.x || a.y < 0 || a.y >= m_size.y)
             return null;
@@ -253,9 +250,16 @@ public class Maps {
     public void LoadFromFile(string path)
     {
         Debug.Log("load " + path);
-        FileStream stream = new FileStream(PATH + "\\Maps\\" + path, FileMode.Open);
-        LoadFromStream(stream);
-        stream.Close();
+        try
+        {
+            FileStream stream = new FileStream(PATH + "\\Maps\\" + path, FileMode.Open);
+            LoadFromStream(stream);
+            stream.Close();
+        }
+        catch
+        {
+ 
+        }
     }
 
     public void LoadFromStream(Stream stream)
@@ -280,7 +284,7 @@ public class Maps {
     public void SaveToFile(string path)
     { 
         Debug.Log(PATH + "\\" + path);
-        FileStream stream = new FileStream(PATH + "\\" + path, FileMode.Create);
+        FileStream stream = new FileStream(PATH + "\\Maps\\" + path, FileMode.Create);
         SaveToStream(stream);
         stream.Close();
     }

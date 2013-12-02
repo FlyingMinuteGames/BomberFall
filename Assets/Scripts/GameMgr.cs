@@ -91,6 +91,8 @@ public class GameMgr : MonoBehaviour
         mainMenu = GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>();
         mp = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
 
+        endmenu = GameObject.Find("OrthoCamera").GetComponent<EndMenu>();
+
 
         baseRotation = m_MainCamera.transform.rotation;
         gravityStates = new Vector3[] { Vector3.up * const_gravity, Vector3.forward * const_gravity, Vector3.forward * -const_gravity, Vector3.right * const_gravity, Vector3.right * -const_gravity };
@@ -474,6 +476,7 @@ public class GameMgr : MonoBehaviour
 
     public void EndGame(Config.GameMode gamemode)
     {
-
+        endmenu.setMode(gamemode);
+        endmenu.active = true; ;
     }
 }

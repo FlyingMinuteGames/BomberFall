@@ -6,6 +6,7 @@ public class EndMenu : MonoBehaviour {
     public GUISkin skin;
     public Texture logo;
     public Texture background;
+    private Config.GameMode gamemode;
 
     public bool active = false;
 
@@ -21,6 +22,7 @@ public class EndMenu : MonoBehaviour {
             return;
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), background, ScaleMode.StretchToFill);
 
+        GUI.Label(MenuUtils.ResizeGUI(new Rect(100, 25, 80, 40)), "GAME OVER");
         GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(30, 50, 600 * 0.38f, 189 * 0.38f)), logo, ScaleMode.ScaleToFit);
 
 
@@ -37,6 +39,12 @@ public class EndMenu : MonoBehaviour {
         }
 
     }
+
+    public void setMode(Config.GameMode gamemode)
+    {
+        this.gamemode = gamemode;
+    }
+
     public void SwitchState()
     {
         active = !active;

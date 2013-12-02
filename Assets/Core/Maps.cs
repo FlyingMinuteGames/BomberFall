@@ -333,7 +333,10 @@ public class Maps {
                 break;
             }
             if (m_maps[i][a.y].m_type == MapsTiles.SOLID_BLOCK)
+            {
+                x = i - 1;
                 break;
+            }
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 IntVector2 vec = new IntVector2(i, a.y);
@@ -352,7 +355,10 @@ public class Maps {
                 break;
             }
             if (m_maps[i][a.y].m_type == MapsTiles.SOLID_BLOCK)
+            {
+                z = i + 1;
                 break;
+            }
             if (m_maps[i][a.y].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 IntVector2 vec = new IntVector2(i, a.y);
@@ -371,7 +377,10 @@ public class Maps {
                 break;
             }
             if (m_maps[a.x][i].m_type == MapsTiles.SOLID_BLOCK)
+            {
+                y = i - 1;
                 break;
+            }
             if (m_maps[a.x][i].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 IntVector2 vec = new IntVector2(a.x, i);
@@ -391,7 +400,10 @@ public class Maps {
                 break;
             }
             if (m_maps[a.x][i].m_type == MapsTiles.SOLID_BLOCK)
+            {
+                w = i + 1;
                 break;
+            }
             if (m_maps[a.x][i].m_type == MapsTiles.DESTRUCTIBLE_BLOCK)
             {
                 IntVector2 vec = new IntVector2(a.x, i);
@@ -464,7 +476,7 @@ public class Maps {
                 type = Config.PowerType.FIRE_UP;
             else if (rand < 90)
                 type = Config.PowerType.SPEED_UP;
-            else type = Config.PowerType.BACK_TO_SCHOOL;
+            else type = Config.PowerType.BRING_A_SW_TO_A_GF;
 
             int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, (int)type);
             //GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));

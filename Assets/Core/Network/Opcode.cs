@@ -9,7 +9,7 @@ using System.Collections;
  *  - SMSG -> Server Message
  */
 public enum Opcode
-{ 
+{
     MSG_PLAYER_MOVE,
     CMSG_PLAYER_DROP_BOMB,
     SMSG_PLAYER_DIE,
@@ -33,5 +33,6 @@ public enum Opcode
     SMSG_OFF_POWER_USED,
     SMSG_UPDATE_SCORES,
     SMSG_PLAYER_DESPAWN,
-    SMSG_GAME_ENDED
+    SMSG_GAME_ENDED,
+    SMSG_PLAYER_RESPAWN
 }

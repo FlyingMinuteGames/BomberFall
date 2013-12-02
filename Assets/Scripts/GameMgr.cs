@@ -102,6 +102,7 @@ public class GameMgr : MonoBehaviour
     
     public void Reset()
     {
+
         if (null != c)
             c.Destroy();
         c = null;
@@ -113,7 +114,8 @@ public class GameMgr : MonoBehaviour
         player_pool.ClearAndRealloc();
         bomb_pool.ClearAndRealloc();
         pwr_up_pool.ClearAndRealloc();
-        maps.Clear();
+        if (maps != null)
+            maps.Clear();
         game_started = false;
         StopAllCoroutines();
         Async.Instance.Restart();
@@ -123,7 +125,7 @@ public class GameMgr : MonoBehaviour
 
     public void StartServer()
     {
-        s = new Server();
+        s = new Server(gameIntel.nb_players);
         ServerHandler.current = s;
         s.SetHandler(ServerHandler.handlers);
         type |= GameMgrType.SERVER;
@@ -220,13 +222,8 @@ public class GameMgr : MonoBehaviour
                 break;
         }
     }
-    IEnumerator ClientConnect()
-    {
-        yield return new WaitForSeconds(0.1f);
-        c.Connect();
-        c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
-    }
-    public void StartClient(string address)
+
+    public bool StartClient(string address)
     {
         type |= GameMgrType.CLIENT;
         c = new Client(address);
@@ -234,7 +231,12 @@ public class GameMgr : MonoBehaviour
         if ((type & GameMgrType.SERVER) != 0)
             c.Both = true;
         c.SetHandler(ClientHandler._handlers);
-        StartCoroutine(ClientConnect());
+        if (c.Connect())
+        {
+            c.SendPacket(PacketBuilder.BuildConnectPacket(c.Both ? 4 : 0, 0));
+            return true;
+        }
+        else return false;
 
     }
 
@@ -431,7 +433,7 @@ public class GameMgr : MonoBehaviour
                     hud.setScores(scores);
 
 
-                    //RESPAWN THE PLAYER
+                    RespawnPlayer(curID);
                 }
             }
             if (this.gameIntel.game_mode == Config.GameMode.SURVIVAL && curID == killerGUID && hasvictim && !suicide)
@@ -485,7 +487,7 @@ public class GameMgr : MonoBehaviour
                     }
                     hud.setScores(scores);
 
-                    //RESPAWN THE PLAYER
+                    RespawnPlayer(victim);
                 }
             
             
@@ -510,15 +512,41 @@ public class GameMgr : MonoBehaviour
         mainMenu.active = true;
     }
 
-    public void RespawnPlayer()
+    public void RespawnPlayer(int guid)
     {
         List<IntVector2> respawn_position = new List<IntVector2>() { new IntVector2(0, 0), new IntVector2(maps.Size.x - 1, maps.Size.y - 1), new IntVector2(maps.Size.x - 1, 0), new IntVector2(0, maps.Size.y - 1) };
-
+        Vector3 respawn_pos = Vector3.zero;
+        Debug.Log("Respawn Player !!!!!!!!!!");
         for (int i = 0; i < 4; i++)
         {
             int index = Random.Range(0, 4 - i);
-
+            IntVector2 pos = respawn_position[index];
+            respawn_position.RemoveAt(index);
+            Vector3 world_pos = maps.TilePosToWorldPos(pos);
+            world_pos.y = 0.5f;
+            var hit = Physics.OverlapSphere(world_pos, 0.25f);
+            bool isOk = true;
+            foreach( var o in hit)
+            {
+                if (o.gameObject.tag == "Player" || o.gameObject.tag == "Bomb")
+                {
+                    Debug.Log(o.gameObject.tag + " found at " + pos);
+                    isOk = false;
+                    break;
+                }
+            }
+            if(isOk)
+            {
+                respawn_pos = world_pos;
+                break;
+            }
         }
+
+
+        GameObject player = ObjectMgr.Instance.Get(guid);
+        respawn_pos.y =  player.transform.position.y;
+        player.transform.position = respawn_pos;
+        GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildRespawnPacket(guid, respawn_pos));
     }
 
     public void EndGame(Config.GameMode gamemode)

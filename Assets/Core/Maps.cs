@@ -415,9 +415,18 @@ public class Maps {
         }
 
 
+
         if (GameMgr.Instance != null && ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0))
             OnExplode(new Cross(a, x, y, z, w),bombGuid);
     }
+
+    private void DrawCross(Cross c)
+    {
+        Vector3[] pos = new Vector3[] { TilePosToWorldPos(new IntVector2(c.X, c.Center.y)), TilePosToWorldPos(new IntVector2(c.Z, c.Center.y)), TilePosToWorldPos(new IntVector2(c.Center.x, c.Y)), TilePosToWorldPos(new IntVector2(c.Center.x, c.W)) };
+        GameObject go = new GameObject();
+        LineRenderer line =  go.AddComponent<LineRenderer>();
+    }
+
 
     private void OnExplode(Cross cross,int bombGUID)
     {

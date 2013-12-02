@@ -131,11 +131,10 @@ public class GameMgr : MonoBehaviour
 
     public void StartGame()
     {
-        //maps = Maps.LoadMapsFromFile("map1.map");
         hud.Init();
         game_started = true;
         s.SendPacketBroadCast(PacketBuilder.BuildStartGame());
-        //StartCoroutine(ChangePhaseTimer());
+        StartCoroutine(ChangePhaseTimer());
         //ChangePhase();
         mp.PlayNextTrack();
 

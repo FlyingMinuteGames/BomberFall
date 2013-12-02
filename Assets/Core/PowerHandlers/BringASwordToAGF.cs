@@ -7,7 +7,7 @@ public class BringASwordToAGF : APowerUp {
     {
 
         System.Net.Sockets.TcpClient client = GameMgr.Instance.s.GetTcpClient(clientGuid);
-        GameMgr.Instance.s.SendPacketTo(client, PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PWR_PICK_UP, 0, "BRING A SWORD TO A GUNFIGHT"));
+        GameMgr.Instance.s.SendPacketTo(client, PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_PWR_PICK_UP, 0, "BRING A SWORD TO A BOMBFIGHT"));
         Packet p = PacketBuilder.BuildBindOffensiveItem(clientGuid, Config.PowerType.BRING_A_SW_TO_A_GF);
         GameMgr.Instance.s.SendPacketTo(client, p);
         GameObject go = ObjectMgr.Instance.Get(clientGuid);

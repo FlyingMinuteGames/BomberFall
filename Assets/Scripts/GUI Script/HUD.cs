@@ -57,6 +57,7 @@ public class HUD : MonoBehaviour
             player_names[i] = (TextMesh)Instantiate(textMeshPrefab, new Vector3(textMeshPrefab.transform.position.x + (3f * i) + j, textMeshPrefab.transform.position.y, textMeshPrefab.transform.position.z), Quaternion.identity);
             player_names[i].text = "Player " + (i + 1);
             player_names[i].renderer.material.color = colors[i];
+            player_names[i].transform.parent = m_timeDisplayer.gameObject.transform;
 
             player_scores[i] = (TextMesh)Instantiate(textMeshPrefab, new Vector3(textMeshPrefab.transform.position.x + (3f * i) + j, textMeshPrefab.transform.position.y - 0.4f, textMeshPrefab.transform.position.z), Quaternion.identity);
             player_scores[i].text = gameIntel.game_mode == Config.GameMode.ARCADE ? "0" : "";
@@ -83,20 +84,26 @@ public class HUD : MonoBehaviour
         m_displayer.SetActive(false);
     }
 
+    public void Activate()
+    {
+        active = true;
+        m_displayer.SetActive(true);
+    }
+
     void OnGUI()
     {
         if (Event.current.type == EventType.Repaint)
         {
             if (!active)
                 return;
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 380, 50, 50)), offensiveStr, skin.customStyles[1]);
-            GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 400, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 490, 50, 50)), offensiveStr, skin.customStyles[1]);
+            GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 510, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
             if (hasOffensivePower)
-                GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 403, 44, 44), false, true), power_illustrations[(int)offensivePower], ScaleMode.ScaleToFit);
+                GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 513, 44, 44), false, true), power_illustrations[(int)offensivePower], ScaleMode.ScaleToFit);
             //GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 490, 50, 50)), defensiveStr, skin.customStyles[1]);
-            //GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 510, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
+            //GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 400, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
             //if (hasDefensivePower)
-            //    GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 513, 44, 44), false, true), power_illustrations[(int)defensivePower], ScaleMode.ScaleToFit);
+            //    GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 403, 44, 44), false, true), power_illustrations[(int)defensivePower], ScaleMode.ScaleToFit);
         }
     }
 

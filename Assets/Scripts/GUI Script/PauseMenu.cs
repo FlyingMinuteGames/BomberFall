@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour {
     private bool m_fullscreen = false;
     private int m_antialiasing;
     private int m_vsync;
+    private HUD hud;
    
     private Vector2 m_keybindings_scrollPosition = Vector2.zero;
 
@@ -87,14 +88,15 @@ public class PauseMenu : MonoBehaviour {
             m_antialiasing = PlayerPrefs.GetInt("AntiAliasing");
 
         }
-        if (st.Equals("keybindings") || st.Equals(""))
+        else if (st.Equals("keybindings"))
         {
             MenuConfig.m_keybindings[0] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("ForwardKey"));
             MenuConfig.m_keybindings[1] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("BackwardKey"));
             MenuConfig.m_keybindings[2] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("LeftKey"));
             MenuConfig.m_keybindings[3] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("RightKey"));
-            //MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
-            //MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
+            MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
+
+            //MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
         }
     }
 
@@ -175,13 +177,13 @@ public class PauseMenu : MonoBehaviour {
             if (kb != KeyCode.Dollar)
                 PlayerPrefs.SetInt("RightKey", (int)kb);
             kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[4]);
-            //if (kb != KeyCode.Dollar)
-            //    PlayerPrefs.SetInt("DefensiveItemKey", (int)kb);
+            if (kb != KeyCode.Dollar)
+                PlayerPrefs.SetInt("OffensiveItemKey", (int)kb);
             //kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[5]);
             //if (kb != KeyCode.Dollar)
-            //    PlayerPrefs.SetInt("OffensiveItemKey", (int)kb);
-        }
+            //    PlayerPrefs.SetInt("DefensiveItemKey", (int)kb);
 
+        }
         PlayerPrefs.Save();
     }
 
@@ -227,6 +229,9 @@ public class PauseMenu : MonoBehaviour {
         comboBoxResolution.SetSelectedItemIndex(m_resolution);
         comboboxAA.SetSelectedItemIndex(m_antialiasing);
         comboboxVsync.SetSelectedItemIndex(m_vsync);
+
+         hud = GameObject.Find("HUD").GetComponent<HUD>();
+
 
     }
 
@@ -423,7 +428,13 @@ public class PauseMenu : MonoBehaviour {
     {
         active = !active;
         if (active)
+        {
             LoadFromPlayerPrefs();
+            hud.Deactivate();
+        }
+        else
+            hud.Activate();
+
     }
 
     public void Update()

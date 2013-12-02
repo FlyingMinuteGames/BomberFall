@@ -37,9 +37,9 @@ public class MenuConfig{
    
     public static FileInfo[] mapFiles;
 
-    public static String[] maps_string = { "Here"};
+    public static String[] maps_string = { ""};
 
-    public static String[] power_ups_string = { "As Neil Taught Me", "Back to School", "Bomb Squad", "Bring a Sword to a Gunfight", "Fire Up", "Impenetrable Trinket", "Kick it Like you Mean it!", "Randomizatron teleporter", "Speed Up", "The Home Runner", "Vengeful Phenix" };
+    public static String[] power_ups_string = { "As Neil Taught Me", "Back to School", "Bomb Squad", "Bring a Sword to a BombFight", "Fire Up", "Impenetrable Trinket", "Kick it Like you Mean it!", "Randomizatron teleporter", "Speed Up", "The Home Runner", "Vengeful Phenix" };
     public static bool[] power_ups_settings = new bool[power_ups_string.Length];
     
     public enum MainMenuSelected

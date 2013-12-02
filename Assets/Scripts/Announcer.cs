@@ -64,7 +64,7 @@ public class Announcer : MonoBehaviour {
         {Announce.ANNOUNCE_CHANGE_PHASE, new Format(Color.red,"Change phase in %vs")},
         {Announce.ANNOUNCE_CHANGE_NOW, new Format(Color.red,"Change phase NOW !")},
         {Announce.ANNOUNCE_PWR_PICK_UP, new Format(Color.red,"%v")},
-        {Announce.ANNOUNCE_KILL_BY_SW, new Format(Color.red,"%v has been violently beheaded!")}
+        {Announce.ANNOUNCE_KILL_BY_SW, new Format(Color.red,"Player %v has been violently beheaded!")}
     };
 
 	void Start () {

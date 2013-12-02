@@ -793,7 +793,7 @@ public class MainMenuScript : MonoBehaviour {
 
             for (int index = 0,j=0, len = MenuConfig.power_ups_settings.Length; index < len; index++)
             {
-                if (index != 4 && index != 8)
+                if (index != 4 && index != 8 && index != 3)
                     continue;
 
                 MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (j * 20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index], skin.toggle);

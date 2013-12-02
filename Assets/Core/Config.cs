@@ -32,7 +32,7 @@ public static class Config
         MAX_POWER_UP
     }
 
-    public static string[] power_ups_string = { "As Neil Taught Me", "Back to School", "Bomb Squad", "Bring a Sword to a Gunfight", "Fire Up", "Impenetrable Trinket", "Kick it Like you Mean it!", "Randomizatron Teleporter", "Speed Up", "The Home Runner", "Vengeful Phenix" };
+    public static string[] power_ups_string = { "As Neil Taught Me", "Back to School", "Bomb Squad", "Bring a Sword to a Bombfight", "Fire Up", "Impenetrable Trinket", "Kick it Like you Mean it!", "Randomizatron Teleporter", "Speed Up", "The Home Runner", "Vengeful Phenix" };
 
 }
 

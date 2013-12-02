@@ -24,7 +24,8 @@ public class ClientHandler
             {Opcode.SMSG_SPEED_UP, HandlePlayerSpeedUp},
             {Opcode.SMSG_OFF_POWER_USED, HandleOffensivePowerDrop},
             {Opcode.SMSG_UPDATE_SCORES, HandleUpdateScores},
-            {Opcode.SMSG_PLAYER_DESPAWN, HandlePlayerDespawn}
+            {Opcode.SMSG_PLAYER_DESPAWN, HandlePlayerDespawn},
+            {Opcode.SMSG_GAME_ENDED, HandleEndGame}
     };
 
     public static void HandleMovePlayer(Packet p)
@@ -245,5 +246,12 @@ public class ClientHandler
         int guid = p.ReadInt();
         GameMgr.Instance.Despawn(guid);
     }
+
+    public static void HandleEndGame(Packet p)
+    {
+        Config.GameMode gamemode = (Config.GameMode)p.ReadInt();
+        GameMgr.Instance.EndGame(gamemode);
+    }
+
 
 }

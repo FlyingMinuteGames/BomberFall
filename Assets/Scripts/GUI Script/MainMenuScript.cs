@@ -255,38 +255,38 @@ public class MainMenuScript : MonoBehaviour {
         if (!PlayerPrefs.HasKey("OffensiveItemKey"))
             PlayerPrefs.SetInt("OffensiveItemKey", (int)MenuUtils.GetKeyCode(MenuConfig.m_keybindings_default[5]));
 
-        if (!PlayerPrefs.HasKey("antmPower"))
-            PlayerPrefs.SetInt("antmPower", 1);
+        //if (!PlayerPrefs.HasKey("antmPower"))
+            PlayerPrefs.SetInt("antmPower", 0);
         
-        if (!PlayerPrefs.HasKey("btsPower"))
-            PlayerPrefs.SetInt("btsPower", 1);
+        //if (!PlayerPrefs.HasKey("btsPower"))
+            PlayerPrefs.SetInt("btsPower", 0);
         
-        if (!PlayerPrefs.HasKey("bsPower"))
-            PlayerPrefs.SetInt("bsPower", 1);
+        //if (!PlayerPrefs.HasKey("bsPower"))
+            PlayerPrefs.SetInt("bsPower", 0);
         
-        if (!PlayerPrefs.HasKey("bastabfPower"))
-            PlayerPrefs.SetInt("bastabfPower", 1);
+        //if (!PlayerPrefs.HasKey("bastabfPower"))
+            PlayerPrefs.SetInt("bastabfPower", 0);
         
         if (!PlayerPrefs.HasKey("fuPower"))
             PlayerPrefs.SetInt("fuPower", 1);
         
-        if (!PlayerPrefs.HasKey("itPower"))
-            PlayerPrefs.SetInt("itPower", 1);
+        //if (!PlayerPrefs.HasKey("itPower"))
+            PlayerPrefs.SetInt("itPower", 0);
         
-        if (!PlayerPrefs.HasKey("kilymiPower"))
-            PlayerPrefs.SetInt("kilymiPower", 1);
+        //if (!PlayerPrefs.HasKey("kilymiPower"))
+            PlayerPrefs.SetInt("kilymiPower", 0);
         
-        if (!PlayerPrefs.HasKey("rtPower"))
-            PlayerPrefs.SetInt("rtPower", 1);
+        //if (!PlayerPrefs.HasKey("rtPower"))
+            PlayerPrefs.SetInt("rtPower", 0);
         
-        if (!PlayerPrefs.HasKey("suPower"))
-            PlayerPrefs.SetInt("suPower", 1);
+        //if (!PlayerPrefs.HasKey("suPower"))
+            PlayerPrefs.SetInt("suPower", 0);
         
-        if (!PlayerPrefs.HasKey("thrPower"))
-            PlayerPrefs.SetInt("thrPower", 1);
+        //if (!PlayerPrefs.HasKey("thrPower"))
+            PlayerPrefs.SetInt("thrPower", 0);
         
-        if (!PlayerPrefs.HasKey("vpPower"))
-            PlayerPrefs.SetInt("vpPower", 1);
+        //if (!PlayerPrefs.HasKey("vpPower"))
+            PlayerPrefs.SetInt("vpPower", 0);
 
         if (!PlayerPrefs.HasKey("gameDuration"))
             PlayerPrefs.SetFloat("gameDuration", 30f);
@@ -368,8 +368,8 @@ public class MainMenuScript : MonoBehaviour {
            MenuConfig.m_keybindings[1] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("BackwardKey"));
            MenuConfig.m_keybindings[2] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("LeftKey"));
            MenuConfig.m_keybindings[3] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("RightKey"));
-           MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
-           MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
+           //MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
+           //MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
         }
         else if (st.Equals("host_params"))
         {
@@ -789,9 +789,14 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 140, 200, 40)), "Active power-ups :", skin.label);
 
-            for(int index = 0, len = MenuConfig.power_ups_settings.Length; index < len; index++)
-                MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (index*20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index], skin.toggle);
-            
+            for (int index = 0,j=0, len = MenuConfig.power_ups_settings.Length; index < len; index++)
+            {
+                if (index != 4 && index != 8)
+                    continue;
+
+                MenuConfig.power_ups_settings[index] = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(260, 160 + (j * 20), 250, 20)), MenuConfig.power_ups_settings[index], MenuConfig.power_ups_string[index], skin.toggle);
+                j++;
+            }
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
             {
@@ -821,15 +826,15 @@ public class MainMenuScript : MonoBehaviour {
 
 
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 260, 250, 20)), "Additionnal Settings :", skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 260, 250, 20)), "Additionnal Settings :", skin.label);
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 290, 150, 20)), "Server password", skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 290, 150, 20)), "Server password", skin.label);
 
-            m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 290, 100, 20)), m_server_password, '*', skin.textField);
+            //m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 290, 100, 20)), m_server_password, '*', skin.textField);
 
 
-            m_disable_persp_change = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 320, 190, 20)), m_disable_persp_change, "Disable perspective's change", skin.toggle);
-            m_auth_reco = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 340, 190, 20)), m_auth_reco, "Allow players to reconnect", skin.toggle);
+            //m_disable_persp_change = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 320, 190, 20)), m_disable_persp_change, "Disable perspective's change", skin.toggle);
+            //m_auth_reco = GUI.Toggle(MenuUtils.ResizeGUI(new Rect(50, 340, 190, 20)), m_auth_reco, "Allow players to reconnect", skin.toggle);
 
 
 
@@ -853,9 +858,9 @@ public class MainMenuScript : MonoBehaviour {
             serverIP = GUI.TextField(MenuUtils.ResizeGUI(new Rect(140, 70, 100, 20)), serverIP, skin.textField);
 
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 110, 150, 20)), "Server password", skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 110, 150, 20)), "Server password", skin.label);
 
-            m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 110, 100, 20)), m_server_password, '*', skin.textField);
+            //m_server_password = GUI.PasswordField(MenuUtils.ResizeGUI(new Rect(140, 110, 100, 20)), m_server_password, '*', skin.textField);
 
             if (GUI.Button(new Rect(140, 240, 190, 80), "Join game", skin.button))
             {
@@ -888,15 +893,17 @@ public class MainMenuScript : MonoBehaviour {
             //HOST SETTINGS OVERVIEW
             //GUI.Label(MenuUtils.ResizeGUI(new Rect(220, 50, 180, 40)), "Host settings overview :", skin.label);
 
-            GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(280, 60, 300, 400)));
+            GUI.BeginGroup(MenuUtils.ResizeGUI(new Rect(120, 60, 300, 400)));
             GUI.Box(MenuUtils.ResizeGUI(new Rect(0, 0, 200, 200)), "SETTINGS OVERVIEW", skin.box);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 20, 150, 20)), "Server IP : " + gameMgr.gameIntel.server_ip, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "GameMode :  " + (gameMgr.gameIntel.game_mode == Config.GameMode.ARCADE ? "Arcade" : "Survival"), skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 40, 150, 20)), "Map name :  " + gameMgr.gameIntel.map_name, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Players :  " + gameMgr.gameIntel.nb_players, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 30, 150, 20)), "Game Mode :  " + (gameMgr.gameIntel.game_mode == Config.GameMode.ARCADE ? "Arcade" : "Survival"), skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 50, 150, 20)), "Map Name :  " + gameMgr.gameIntel.map_name, skin.label);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Players :  " + gameMgr.gameIntel.nb_players, skin.label);
+            if (gameMgr.gameIntel.game_mode == Config.GameMode.ARCADE)
+                GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 90, 150, 20)), "Game Duration :  " + gameMgr.gameIntel.nb_players, skin.label);
+
             //GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 60, 150, 20)), "CPUs :  " + gameMgr.gameIntel.nb_cpus, skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change :  " + (gameMgr.gameIntel.disable_persp_change ? "Deactivated" : "Activated"), skin.label);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :  " + (gameMgr.gameIntel.auth_reco ? "Authorized" : "Not Authorized"), skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 70, 150, 20)), "Perspective change :  " + (gameMgr.gameIntel.disable_persp_change ? "Deactivated" : "Activated"), skin.label);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 80, 150, 20)), "Reconnection :  " + (gameMgr.gameIntel.auth_reco ? "Authorized" : "Not Authorized"), skin.label);
             GUI.Label(MenuUtils.ResizeGUI(new Rect(10, 100, 150, 200)), "Active power-ups :  " + gameMgr.gameIntel.powers_str + "Bomb Up", skin.label);
 
             GUI.EndGroup();
@@ -904,60 +911,61 @@ public class MainMenuScript : MonoBehaviour {
 
             //LOBBY VIEW
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 50, 180, 40)), "Players :", skin.label);
-            GUI.Box(MenuUtils.ResizeGUI(new Rect(40, 70, 100, 65)), "", skin.box);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 50, 180, 40)), "Players :", skin.label);
+            //GUI.Box(MenuUtils.ResizeGUI(new Rect(40, 70, 100, 65)), "", skin.box);
 
-            for (int i = 0, len = m_nb_players + 1; i < len; i++)
-            {
-                GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 60 + (10*(i+1)), 180, 40)), m_connected_players.Count >= (i+1) ? "Player"+(i+1) : "Waiting for oponent...", skin.label);
+            //for (int i = 0, len = m_nb_players + 1; i < len; i++)
+            //{
+            //    GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 60 + (10*(i+1)), 180, 40)), m_connected_players.Count >= (i+1) ? "Player"+(i+1) : "Waiting for oponent...", skin.label);
 
-                if (i < m_connected_players.Count)
-                {
-                    MenuConfig.ConnectedPlayer current = m_connected_players.Find(x => x.name == "Player "+(i+1));
-                    //if (i == 0)//Replace to test if current player is this one
-                    //{
-                    //    if (!current.ready)
-                    //    {
-                    //        if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Ready", skin.button))
-                    //        {
-                    //            current.ready = true;
-                    //        }
-                    //    }else
-                    //        if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Not Ready", skin.button))
-                    //        {
-                    //            current.ready = false;
-                    //        }
-                    //}
-                    //else
-                    //{
-                    //    if (current.ready)
-                    //        GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Ready", skin.label);
-                    //    else
-                    //        GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Not Ready", skin.label);
-                    //}
-                    //if (isHost && i > 0)
-                    //{
-                    //    if (GUI.Button(MenuUtils.ResizeGUI(new Rect(205, 60 + (10 * (i + 1)), 50, 10)), "Kick", skin.button))
-                    //    {
-                    //        //KICK HIM
-                    //    }
-                    //}
-                }
-            }
+            //    if (i < m_connected_players.Count)
+            //    {
+            //        MenuConfig.ConnectedPlayer current = m_connected_players.Find(x => x.name == "Player "+(i+1));
+            //        if (i == 0)//Replace to test if current player is this one
+            //        {
+            //            if (!current.ready)
+            //            {
+            //                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Ready", skin.button))
+            //                {
+            //                    current.ready = true;
+            //                }
+            //            }
+            //            else
+            //                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Not Ready", skin.button))
+            //                {
+            //                    current.ready = false;
+            //                }
+            //        }
+            //        else
+            //        {
+            //            if (current.ready)
+            //                GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Ready", skin.label);
+            //            else
+            //                GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Not Ready", skin.label);
+            //        }
+            //        if (isHost && i > 0)
+            //        {
+            //            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(205, 60 + (10 * (i + 1)), 50, 10)), "Kick", skin.button))
+            //            {
+            //                //KICK HIM
+            //            }
+            //        }
+            //    }
+            //}
 
 
-            if (m_nb_CPUs > 0)
-            {
+            //if (m_nb_CPUs > 0)
+            //{
 
-                GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 150, 180, 40)), "CPUs :", skin.label);
-                GUI.Box(MenuUtils.ResizeGUI(new Rect(40, 170, 100, 65)), "", skin.box);
+            //    GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 150, 180, 40)), "CPUs :", skin.label);
+            //    GUI.Box(MenuUtils.ResizeGUI(new Rect(40, 170, 100, 65)), "", skin.box);
 
-                for (int i = 0, len = m_nb_CPUs; i < len; i++)
-                {
-                    GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 160 + (10 * (i + 1)), 180, 40)), "CPU" + (i + 1), skin.label);
-                }
+            //    for (int i = 0, len = m_nb_CPUs; i < len; i++)
+            //    {
+            //        GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 160 + (10 * (i + 1)), 180, 40)), "CPU" + (i + 1), skin.label);
+            //    }
 
-            }
+            //}
              
 
             

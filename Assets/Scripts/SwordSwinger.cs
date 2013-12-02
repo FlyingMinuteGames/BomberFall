@@ -34,12 +34,12 @@ public class SwordSwinger : MonoBehaviour {
         yield return new WaitForSeconds(m_animation.clip.length);
         Debug.Log("end of swing :(");
         m_animation.Rewind();
-        //m_sword.SetActive(false);
+        m_sword.SetActive(false);
     }
 
     public void Swing()
     {
-        //m_sword.SetActive(true);
+        m_sword.SetActive(true);
         StartCoroutine(SwingRoutine());
     }
 }

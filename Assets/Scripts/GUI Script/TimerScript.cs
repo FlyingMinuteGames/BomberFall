@@ -38,6 +38,10 @@ public class TimerScript : MonoBehaviour {
     void EndOfTimer()
     {
         ended = true;
-        Debug.Log("Kill everyone, this game is over !!!!!!!");
+        if ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        {
+            GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
+            GameMgr.Instance.EndGame(GameMgr.Instance.gameIntel.game_mode);
+        }
     }
 }

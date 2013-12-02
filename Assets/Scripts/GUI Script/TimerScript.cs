@@ -38,7 +38,7 @@ public class TimerScript : MonoBehaviour {
     void EndOfTimer()
     {
         ended = true;
-        if ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0)
+        if ((GameMgr.Instance.Type & GameMgrType.SERVER) != 0 && GameMgr.Instance.gameIntel.game_mode == Config.GameMode.ARCADE)
         {
             GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
             GameMgr.Instance.EndGame(GameMgr.Instance.gameIntel.game_mode);

@@ -380,6 +380,7 @@ public class GameMgr : MonoBehaviour
 
     public void KillPlayer(Cross cross, int bombGUID)
     {
+        Debug.Log("In kill player by bomb");
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
         BombScript bomb = ObjectMgr.Instance.Get(bombGUID).GetComponent<BombScript>();
         int killerGUID = bomb.OwnerGuid;
@@ -445,7 +446,8 @@ public class GameMgr : MonoBehaviour
 
     public void KillPlayer(int victim, int killer, Config.PowerType powertype)
     {
-        Debug.Log("Kill player !!!");
+        Debug.Log("In kill player by sword");
+
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
 
         int[] scores = hud.getScores();

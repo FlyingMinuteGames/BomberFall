@@ -93,16 +93,14 @@ public class HUD : MonoBehaviour
             GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 400, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
             if (hasOffensivePower)
                 GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 403, 44, 44), false, true), power_illustrations[(int)offensivePower], ScaleMode.ScaleToFit);
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 490, 50, 50)), defensiveStr, skin.customStyles[1]);
-            GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 510, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
-            if (hasDefensivePower)
-                GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 513, 44, 44), false, true), power_illustrations[(int)defensivePower], ScaleMode.ScaleToFit);
+            //GUI.Label(MenuUtils.ResizeGUI(new Rect(700, 490, 50, 50)), defensiveStr, skin.customStyles[1]);
+            //GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(700, 510, 50, 50), false, true), power_up_background, ScaleMode.StretchToFill);
+            //if (hasDefensivePower)
+            //    GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(703, 513, 44, 44), false, true), power_illustrations[(int)defensivePower], ScaleMode.ScaleToFit);
         }
     }
 
     public void BindOffensivePower(Config.PowerType powertype){
-
-        Debug.Log("Bind power ===================>" + powertype);
         hasOffensivePower = true;
         offensivePower = powertype;
     }

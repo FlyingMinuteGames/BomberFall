@@ -51,7 +51,7 @@ public class EndMenu : MonoBehaviour
             if (count > 1)
                 GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 250, 600 * 0.50f, 40)), "WOW THIS IS A DRAW !", skin.customStyles[3]);
             else
-                GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 250, 600 * 0.50f, 40)), "CONGRATS TO PLAYER " + (maxindex + 1) + " YOU JUST WON THE GAME !", skin.customStyles[3]);
+                GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 250, 600 * 0.50f, 40)), "CONGRATS TO THE PLAYER " + (maxindex + 1) + " YOU JUST WON THE GAME !", skin.customStyles[3]);
 
         }
         else
@@ -59,12 +59,14 @@ public class EndMenu : MonoBehaviour
             for (int i = 0; i < scores.Length; i++)
             {
                 if (scores[i] > 0)
+                {
                     maxindex = i;
-                break;
+                    break;
+                }
 
             }
 
-            GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 250, 600 * 0.50f, 40)), "CONGRATS TO PLAYER " + (maxindex + 1) + " YOU JUST WON THE GAME !", skin.customStyles[3]);
+            GUI.Label(MenuUtils.ResizeGUI(new Rect(250, 250, 600 * 0.50f, 40)), "CONGRATS TO THE PLAYER " + (maxindex + 1) + " YOU JUST WON THE GAME !", skin.customStyles[3]);
         }
 
         if (GUI.Button(MenuUtils.ResizeGUI(new Rect(300, 300, 100, 80)), "QUIT TO MENU", skin.button))

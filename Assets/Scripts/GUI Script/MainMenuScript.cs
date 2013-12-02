@@ -163,7 +163,7 @@ public class MainMenuScript : MonoBehaviour {
             maps_combobox[i] = new GUIContent(MenuConfig.maps_string[i]);
 
 
-        nb_players_combobox = MenuUtils.SetComboboxRange(1, 4);
+        nb_players_combobox = MenuUtils.SetComboboxRange(2, 4);
         nb_CPUs_combobox = MenuUtils.SetComboboxRange(0, 3);
 
 
@@ -264,7 +264,7 @@ public class MainMenuScript : MonoBehaviour {
         //if (!PlayerPrefs.HasKey("bsPower"))
             PlayerPrefs.SetInt("bsPower", 0);
         
-        //if (!PlayerPrefs.HasKey("bastabfPower"))
+        if (!PlayerPrefs.HasKey("bastabfPower"))
             PlayerPrefs.SetInt("bastabfPower", 0);
         
         if (!PlayerPrefs.HasKey("fuPower"))
@@ -368,8 +368,9 @@ public class MainMenuScript : MonoBehaviour {
            MenuConfig.m_keybindings[1] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("BackwardKey"));
            MenuConfig.m_keybindings[2] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("LeftKey"));
            MenuConfig.m_keybindings[3] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("RightKey"));
-           //MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
-           //MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
+           MenuConfig.m_keybindings[4] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"));
+
+           //MenuConfig.m_keybindings[5] = MenuUtils.GetStringFromKeycode((KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"));
         }
         else if (st.Equals("host_params"))
         {
@@ -477,10 +478,11 @@ public class MainMenuScript : MonoBehaviour {
                 PlayerPrefs.SetInt("RightKey", (int)kb);
             kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[4]);
             if (kb != KeyCode.Dollar)
-                PlayerPrefs.SetInt("DefensiveItemKey", (int)kb);
-            kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[5]);
-            if (kb != KeyCode.Dollar)
                 PlayerPrefs.SetInt("OffensiveItemKey", (int)kb);
+            //kb = MenuUtils.GetKeyCode(MenuConfig.m_keybindings[5]);
+            //if (kb != KeyCode.Dollar)
+            //    PlayerPrefs.SetInt("DefensiveItemKey", (int)kb);
+
         }
         else if (st.Equals("host_params"))
         {
@@ -530,10 +532,10 @@ public class MainMenuScript : MonoBehaviour {
             return;
 
         GUI.DrawTexture(MenuUtils.ResizeGUI(new Rect(20, 50, 600 * 0.4f, 189 * 0.4f)), logo, ScaleMode.ScaleToFit);
-        GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 40)), "", skin.box);
+        GUI.Box(MenuUtils.ResizeGUI(new Rect(10, 530, 780, 50)), "", skin.box);
 
-        GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 530, 500, 40)), "Blablabla footer stuff", skin.label);
-        //GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 550, 800, 40)), "For the music tracks all credits goes to Parametric, go check his work at http://http://sgustokmusic.org/", skin.label);
+        GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 535, 700, 40)), "BOMBERFALL - Student Project made in 50 days by Cyril Basset and Jean-Vincent Lamberti using the UnityEngine", skin.label);
+        GUI.Label(MenuUtils.ResizeGUI(new Rect(20, 550, 800, 40)), "Music by PocketMaster. All musics, sounds and fonts are under Creative Commons Licences and free for non-commercial use", skin.label);
 
         if (GUI.Button(MenuUtils.ResizeGUI(new Rect(20, 200, 100, 30)), "PLAY", skin.button))
         {
@@ -800,28 +802,15 @@ public class MainMenuScript : MonoBehaviour {
             
             if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
             {
+                Debug.Log("Create game " + m_nb_players);
                 //popup.ShowMessage("Test popup message and fun stuff");
-                gameMgr.gameIntel = new GameIntel(m_game_duration, m_gameplay_mode, MenuConfig.power_ups_settings, m_nb_players + 1, m_nb_CPUs, m_auth_reco, m_disable_persp_change, MenuConfig.maps_string[m_map_index]);
+                gameMgr.gameIntel = new GameIntel(m_game_duration, m_gameplay_mode, MenuConfig.power_ups_settings, m_nb_players + 2, m_nb_CPUs, m_auth_reco, m_disable_persp_change, MenuConfig.maps_string[m_map_index]);
                 gameMgr.maps = Maps.LoadMapsFromFile(MenuConfig.maps_string[m_map_index]);
                 gameMgr.StartServer();
                 gameMgr.StartClient("127.0.0.1");
-                if (m_nb_players > 0)//IF MORE THAN ONE PLAYER ELSE NO LOBBY NEEDED JUST LAUNCH THE GAME
-                {
-                    isHost = true;
-                    //m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player "+(m_connected_players.Count+1), false));
-                    submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
-                }
-                else
-                {
-                    
-                    /*
-                    instantiatedMaster = (GameObject)Instantiate(networkManager, Vector3.zero, Quaternion.identity);
-                    instantiatedMaster.name = "NetworkManager";
-                    scriptStartNet = instantiatedMaster.GetComponent<NetworkMgr>();
-                    scriptStartNet.server = true;
-                    scriptStartNet.listenPort = serverPort;
-                    Destroy(this);*/
-                }
+                isHost = true;
+                //m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player "+(m_connected_players.Count+1), false));
+                submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
             }
 
 

@@ -99,7 +99,7 @@ public class GameMgr : MonoBehaviour
     }
 
 
-    void Reset()
+    public void Reset()
     {
         if (null != c)
             c.Destroy();

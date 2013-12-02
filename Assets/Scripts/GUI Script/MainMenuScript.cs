@@ -266,7 +266,7 @@ public class MainMenuScript : MonoBehaviour {
             PlayerPrefs.SetInt("bsPower", 0);
         
         if (!PlayerPrefs.HasKey("bastabfPower"))
-            PlayerPrefs.SetInt("bastabfPower", 0);
+            PlayerPrefs.SetInt("bastabfPower", 1);
         
         if (!PlayerPrefs.HasKey("fuPower"))
             PlayerPrefs.SetInt("fuPower", 1);
@@ -801,16 +801,14 @@ public class MainMenuScript : MonoBehaviour {
                 j++;
             }
             
-            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(50, 160, 190, 80)), "Create Game", skin.button))
+            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(260, 300, 190, 80)), "Create Game", skin.button))
             {
                 Debug.Log("Create game " + m_nb_players);
-                //popup.ShowMessage("Test popup message and fun stuff");
                 gameMgr.gameIntel = new GameIntel(m_game_duration, m_gameplay_mode, MenuConfig.power_ups_settings, m_nb_players + 2, m_nb_CPUs, m_auth_reco, m_disable_persp_change, MenuConfig.maps_string[m_map_index]);
                 gameMgr.maps = Maps.LoadMapsFromFile(MenuConfig.maps_string[m_map_index]);
                 gameMgr.StartServer();
                 gameMgr.StartClient("127.0.0.1");
                 isHost = true;
-                //m_connected_players.Add(new MenuConfig.ConnectedPlayer("Player "+(m_connected_players.Count+1), false));
                 submenu = MenuConfig.SubMenuSelected.LOBBY_SELECTED;
             }
 
@@ -855,9 +853,6 @@ public class MainMenuScript : MonoBehaviour {
             if (GUI.Button(new Rect(140, 240, 190, 80), "Join game", skin.button))
             {
 
-                //Check server connection
-                //IF fails -> display error message 
-                // ELSE CONNECT TO LOBBY 
                 if (gameMgr.StartClient(serverIP))
                 {
                     isHost = false;
@@ -900,74 +895,9 @@ public class MainMenuScript : MonoBehaviour {
 
             GUI.EndGroup();
 
-
-            //LOBBY VIEW
-
-            //GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 50, 180, 40)), "Players :", skin.label);
-            //GUI.Box(MenuUtils.ResizeGUI(new Rect(40, 70, 100, 65)), "", skin.box);
-
-            //for (int i = 0, len = m_nb_players + 1; i < len; i++)
-            //{
-            //    GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 60 + (10*(i+1)), 180, 40)), m_connected_players.Count >= (i+1) ? "Player"+(i+1) : "Waiting for oponent...", skin.label);
-
-            //    if (i < m_connected_players.Count)
-            //    {
-            //        MenuConfig.ConnectedPlayer current = m_connected_players.Find(x => x.name == "Player "+(i+1));
-            //        if (i == 0)//Replace to test if current player is this one
-            //        {
-            //            if (!current.ready)
-            //            {
-            //                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Ready", skin.button))
-            //                {
-            //                    current.ready = true;
-            //                }
-            //            }
-            //            else
-            //                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(150, 60 + (10 * (i + 1)), 50, 10)), "Not Ready", skin.button))
-            //                {
-            //                    current.ready = false;
-            //                }
-            //        }
-            //        else
-            //        {
-            //            if (current.ready)
-            //                GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Ready", skin.label);
-            //            else
-            //                GUI.Label(MenuUtils.ResizeGUI(new Rect(155, 60 + (10 * (i + 1)), 50, 15)), "Not Ready", skin.label);
-            //        }
-            //        if (isHost && i > 0)
-            //        {
-            //            if (GUI.Button(MenuUtils.ResizeGUI(new Rect(205, 60 + (10 * (i + 1)), 50, 10)), "Kick", skin.button))
-            //            {
-            //                //KICK HIM
-            //            }
-            //        }
-            //    }
-            //}
-
-
-            //if (m_nb_CPUs > 0)
-            //{
-
-            //    GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 150, 180, 40)), "CPUs :", skin.label);
-            //    GUI.Box(MenuUtils.ResizeGUI(new Rect(40, 170, 100, 65)), "", skin.box);
-
-            //    for (int i = 0, len = m_nb_CPUs; i < len; i++)
-            //    {
-            //        GUI.Label(MenuUtils.ResizeGUI(new Rect(50, 160 + (10 * (i + 1)), 180, 40)), "CPU" + (i + 1), skin.label);
-            //    }
-
-            //}
-             
-
-            
-
-
-
             //CHAT SECTION
             GUI.Box(MenuUtils.ResizeGUI(new Rect(80, 300, 250, 65)), "", skin.box);
             m_chat_scrollPosition = GUI.BeginScrollView(MenuUtils.ResizeGUI(new Rect(80, 300, 250, 65)), m_chat_scrollPosition, MenuUtils.ResizeGUI(new Rect(0, 0, 200, 10 * (m_chat_messages.Count + 1))));
-            //Debug.Log("scroll" + m_chat_scrollPosition);
 
 
             for (int i = 0; i < m_chat_messages.Count; i++)
@@ -1008,16 +938,14 @@ public class MainMenuScript : MonoBehaviour {
             if (isHost)
             {
 
-                //if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Settings", skin.button))
-                //{
-                //    submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;   
-                //}
 
                 if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Start", skin.button))
                 {
-                    gameMgr.StartGame();
-                    //gameObject.SetActive(false);//Destroy(this);
-                    active = false;
+                    if (gameMgr.s.client_count > 1)
+                    {
+                        gameMgr.StartGame();
+                        active = false;
+                    }
                 }
             }
 

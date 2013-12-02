@@ -488,7 +488,6 @@ public class Maps {
             else type = Config.PowerType.BRING_A_SW_TO_A_GF;
 
             int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, (int)type);
-            //GameMgr.Instance.s.SendPacketBroadCast(PacketBuilder.BuildInstantiateObjPacket(ObjectMgr.Instance.DumpData(guid)));
         }
     }
 }

@@ -69,13 +69,6 @@ public class BomberController : MonoBehaviour
         {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 0;})},
         {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{if (enable)me.UseOffensiveItem();return 0;})},
         {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{/*me.UseDefensiveItem();*/return 0;})},
-        {KeyCode.Escape,(Callback)((me,enable)=>{
-            if (enable){
-                    PauseMenu pause = GameObject.Find("PauseMenu").GetComponent<PauseMenu>();
-                    pause.SwitchState();
-                }
-            return 0;
-        })},
         {KeyCode.Backspace,(Callback)((me,enable)=>{
             if (enable){
                 me.Swing();

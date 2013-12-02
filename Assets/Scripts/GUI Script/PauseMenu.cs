@@ -426,4 +426,15 @@ public class PauseMenu : MonoBehaviour {
             LoadFromPlayerPrefs();
     }
 
+    public void Update()
+    {
+        if (!GameMgr.Instance.game_started)
+            return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            this.SwitchState();
+        }
+    
+    }
+
 }

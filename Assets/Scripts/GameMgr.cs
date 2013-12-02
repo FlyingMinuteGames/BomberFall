@@ -64,6 +64,7 @@ public class GameMgr : MonoBehaviour
     private Vector3[] gravityStates;
     public MusicPlayer mp;
     private EndMenu endmenu;
+    private int nbDeads = 0;
 
     public WorldState State
     {
@@ -81,7 +82,6 @@ public class GameMgr : MonoBehaviour
     void Start()
     {
         Application.runInBackground = true;
-        Debug.Log("GMGR INIT");
         s_instance = this;
         player_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Player_model"), 4);
         bomb_pool = new PoolSystem<GameObject>(ResourcesLoader.LoadResources<GameObject>("Prefabs/Bomb"), 100);
@@ -91,7 +91,7 @@ public class GameMgr : MonoBehaviour
         mainMenu = GameObject.Find("OrthoCamera").GetComponent<MainMenuScript>();
         mp = GameObject.Find("MusicPlayer").GetComponent<MusicPlayer>();
 
-        endmenu = GameObject.Find("OrthoCamera").GetComponent<EndMenu>();
+        endmenu = GameObject.Find("EndMenu").GetComponent<EndMenu>();
 
 
         baseRotation = m_MainCamera.transform.rotation;
@@ -99,7 +99,7 @@ public class GameMgr : MonoBehaviour
 
     }
 
-
+    
     public void Reset()
     {
         if (null != c)
@@ -408,6 +408,16 @@ public class GameMgr : MonoBehaviour
                     hud.setScores(scores);
                     s.SendPacketBroadCast(PacketBuilder.BuildPlayerDespawn(curID));
                     this.Despawn(curID);
+                    nbDeads++;
+
+                    if (nbDeads == this.s.client_count - 1)
+                    {
+                        if ((this.type & GameMgrType.SERVER) != 0)
+                        {
+                           this.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
+                           EndGame(GameMgr.Instance.gameIntel.game_mode);
+                        }
+                    }
                 }
                 else
                 {
@@ -418,6 +428,7 @@ public class GameMgr : MonoBehaviour
                         suicide = true;
                     }
                     hud.setScores(scores);
+
 
                     //RESPAWN THE PLAYER
                 }
@@ -437,13 +448,45 @@ public class GameMgr : MonoBehaviour
         Debug.Log("Kill player !!!");
         IList<GameObject> m_player = ObjectMgr.Instance.Get(GOType.GO_PLAYER);
 
+        int[] scores = hud.getScores();
+
         for (int i = 0, len = m_player.Count; i < len; i++)
         {
             int curId = m_player[i].GetComponent<Guid>().GetGUID();
             if (curId == victim)
             {
                 PlayAnnounce(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1));
-                //TODO KILL PLAYER AND ATTRIBUTE POINTS
+                if (this.gameIntel.game_mode == Config.GameMode.SURVIVAL)
+                {
+                    scores = hud.getScores();
+                    scores[i] = -1;
+                    hud.setScores(scores);
+                    s.SendPacketBroadCast(PacketBuilder.BuildPlayerDespawn(victim));
+                    this.Despawn(victim);
+                    nbDeads++;
+
+                    if (nbDeads == this.s.client_count - 1)
+                    {
+                        if ((this.type & GameMgrType.SERVER) != 0)
+                        {
+                            this.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
+                            EndGame(GameMgr.Instance.gameIntel.game_mode);
+                        }
+                    }
+                }
+                else
+                {
+                    scores = hud.getScores();
+                    if (victim == killer)
+                    {
+                        scores[i]--;
+                    }
+                    hud.setScores(scores);
+
+                    //RESPAWN THE PLAYER
+                }
+            
+            
             }
             else if (curId == killer)
             {
@@ -451,6 +494,8 @@ public class GameMgr : MonoBehaviour
                 s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(killer), PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1)));
 
             }
+            s.SendPacketBroadCast(PacketBuilder.BuildUpdateScoresPacket(scores));
+
         }
     }
 
@@ -476,7 +521,9 @@ public class GameMgr : MonoBehaviour
 
     public void EndGame(Config.GameMode gamemode)
     {
-        endmenu.setMode(gamemode);
-        endmenu.active = true; ;
+        hud.Deactivate();
+
+        endmenu.setMode(gamemode, hud.getScores());
+        endmenu.m_active = true;
     }
 }

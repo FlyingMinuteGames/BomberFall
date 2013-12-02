@@ -1016,10 +1016,10 @@ public class MainMenuScript : MonoBehaviour {
             if (isHost)
             {
 
-                if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Settings", skin.button))
-                {
-                    submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;   
-                }
+                //if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 300, 80, 30)), "Settings", skin.button))
+                //{
+                //    submenu = MenuConfig.SubMenuSelected.HOST_SELECTED;   
+                //}
 
                 if (GUI.Button(MenuUtils.ResizeGUI(new Rect(400, 350, 80, 30)), "Start", skin.button))
                 {

@@ -32,7 +32,12 @@ public class Server //: INetwork
     public  delegate void _OnClientConnected(TcpClient cl);
     public _OnClientConnected OnClientConnected;
     private int session = 0;
-    
+
+    public int client_count
+    {
+        get { return m_clients.Count; }
+    }
+
     public Server()
     {
         m_sessions = new Dictionary<int, ClientSession>();
@@ -59,7 +64,7 @@ public class Server //: INetwork
         m_clients = new List<TcpClient>();
         while (m_isRunning)
         {
-            Debug.Log("(SERVER) Listen...");
+            //Debug.Log("(SERVER) Listen...");
             if (!tcp_server.Pending())
             {
                 Thread.Sleep(100);

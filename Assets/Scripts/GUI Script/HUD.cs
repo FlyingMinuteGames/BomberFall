@@ -78,6 +78,7 @@ public class HUD : MonoBehaviour
 
     public void Deactivate()
     {
+        Debug.Log("Deactivating hud");
         active = false;
         m_displayer.SetActive(false);
     }

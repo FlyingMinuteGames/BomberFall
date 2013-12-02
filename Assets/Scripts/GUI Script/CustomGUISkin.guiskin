@@ -1309,7 +1309,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 0
     m_StretchHeight: 0
-  - m_Name: Score
+  - m_Name: Game Over
     m_Normal:
       m_Background: {fileID: 0}
       m_TextColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1354,8 +1354,8 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 3ab741281dc374b4ba1f7e9d06042824, type: 3}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: dbfaa8700f6121f419d009577a7b8508, type: 3}
+    m_FontSize: 40
     m_FontStyle: 0
     m_Alignment: 4
     m_WordWrap: 0
@@ -1412,8 +1412,8 @@ MonoBehaviour:
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
-    m_Font: {fileID: 12800000, guid: 3ab741281dc374b4ba1f7e9d06042824, type: 3}
-    m_FontSize: 30
+    m_Font: {fileID: 12800000, guid: dbfaa8700f6121f419d009577a7b8508, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_Alignment: 4
     m_WordWrap: 0

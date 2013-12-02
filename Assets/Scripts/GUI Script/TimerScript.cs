@@ -18,7 +18,7 @@ public class TimerScript : MonoBehaviour {
 	}
 
     public void Init(){
-        startValue = 2f/*GameMgr.Instance.gameIntel.game_duration*/;
+        startValue = GameMgr.Instance.gameIntel.game_duration;
         textmesh = gameObject.GetComponent<TextMesh>();
         textmesh.text = startValue.ToString();
     }

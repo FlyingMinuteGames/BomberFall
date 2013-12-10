@@ -100,7 +100,7 @@ public class GameMgr : MonoBehaviour
     }
 
     
-    public void Reset()
+    public void Reset(bool exit = false)
     {
 
         if (null != c)
@@ -108,6 +108,8 @@ public class GameMgr : MonoBehaviour
         c = null;
         if (null != s)
             s.Destroy();
+        if (exit)
+            return;
         s = null;
         type = (GameMgrType)0;
         ObjectMgr.Instance.Clear();
@@ -241,13 +243,13 @@ public class GameMgr : MonoBehaviour
 
     void OnDestroy()
     {
-       
-        Reset();
+
+        Reset(true);
     }
 
     void OnApplicationQuit()
     {
-        Reset();
+        Reset(true);
     }
 
     public void PlayerMove(int flag, Vector3 pos)

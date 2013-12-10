@@ -242,7 +242,7 @@ public class Maps {
 
     public Vector3 TilePosToWorldPos(IntVector2 tpos)
     {
-        Vector3 pos = new Vector3(-m_size_2.x + tpos.x,0, -m_size_2.y + tpos.y);
+        Vector3 pos = new Vector3(-m_size_2.x + tpos.x + (m_size.x % 2 == 0 ? 0.5f : 0f), 0, -m_size_2.y + tpos.y + (m_size.y % 2 == 0 ? 0.5f : 0f));
         return pos;
     }
 
@@ -473,17 +473,17 @@ public class Maps {
         if ((GameMgr.Instance.Type & GameMgrType.SERVER) == 0)
             return;
 
-        if (UnityEngine.Random.Range(0,3) == 1)
+        if (UnityEngine.Random.Range(0,2) == 1)
         {
             Vector3 worldpos = TilePosToWorldPos(vec);
 
             Config.PowerType type;
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 30)
+            if (rand < 25)
                 type = Config.PowerType.BOMB_UP;
-            else if (rand < 60)
+            else if (rand < 50)
                 type = Config.PowerType.FIRE_UP;
-            else if (rand < 90)
+            else if (rand < 75)
                 type = Config.PowerType.SPEED_UP;
             else type = Config.PowerType.BRING_A_SW_TO_A_GF;
             int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, (int)type);

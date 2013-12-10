@@ -58,7 +58,7 @@ public class EndMenu : MonoBehaviour
         {
             for (int i = 0; i < scores.Length; i++)
             {
-                if (scores[i] > 0)
+                if (scores[i] > -1)
                 {
                     maxindex = i;
                     break;

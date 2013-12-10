@@ -21,6 +21,7 @@ public class TimerScript : MonoBehaviour {
         startValue = GameMgr.Instance.gameIntel.game_duration;
         textmesh = gameObject.GetComponent<TextMesh>();
         textmesh.text = startValue.ToString();
+        ended = false;
     }
 	
 	// Update is called once per frame

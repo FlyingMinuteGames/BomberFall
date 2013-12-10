@@ -146,6 +146,7 @@ public class GameMgr : MonoBehaviour
         StartCoroutine(ChangePhaseTimer());
         //ChangePhase();
         mp.PlayNextTrack();
+        nbDeads = 0;
 
     }
 
@@ -424,14 +425,7 @@ public class GameMgr : MonoBehaviour
                     this.Despawn(curID);
                     nbDeads++;
 
-                    if (nbDeads == this.s.client_count - 1)
-                    {
-                        if ((this.type & GameMgrType.SERVER) != 0)
-                        {
-                           this.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
-                           EndGame(GameMgr.Instance.gameIntel.game_mode);
-                        }
-                    }
+
                 }
                 else
                 {
@@ -459,6 +453,14 @@ public class GameMgr : MonoBehaviour
             hud.setScores(scores);
             s.SendPacketBroadCast(PacketBuilder.BuildUpdateScoresPacket(scores));
         }
+        if (nbDeads == this.s.client_count - 1)
+        {
+            if ((this.type & GameMgrType.SERVER) != 0)
+            {
+                this.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
+                EndGame(GameMgr.Instance.gameIntel.game_mode);
+            }
+        }
     }
 
     public void KillPlayer(int victim, int killer, Config.PowerType powertype)
@@ -469,7 +471,8 @@ public class GameMgr : MonoBehaviour
 
         int[] scores = hud.getScores();
 
-        for (int i = 0, len = m_player.Count; i < len; i++)
+        // VODKA_CODE_LIKE {
+        /*for (int i = 0, len = m_player.Count; i < len; i++)
         {
             int curId = m_player[i].GetComponent<Guid>().GetGUID();
             if (curId == victim)
@@ -495,13 +498,6 @@ public class GameMgr : MonoBehaviour
                 }
                 else
                 {
-                    scores = hud.getScores();
-                    if (victim == killer)
-                    {
-                        scores[i]--;
-                    }
-                    hud.setScores(scores);
-
                     RespawnPlayer(victim);
                 }
             
@@ -510,12 +506,39 @@ public class GameMgr : MonoBehaviour
             else if (curId == killer)
             {
 
-                s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(killer), PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (i + 1)));
+                //s.SendPacketTo(GameMgr.Instance.s.GetTcpClient(killer), PacketBuilder.BuildPlayAnnouncePacket(Announce.ANNOUNCE_KILL_BY_SW, 1, "" + (i + 1)));
 
             }
-            s.SendPacketBroadCast(PacketBuilder.BuildUpdateScoresPacket(scores));
+  
 
         }
+        */
+        int sessionID = GameMgr.Instance.s.GetSessionId(killer);
+        int sessionIDVictim = GameMgr.Instance.s.GetSessionId(victim);
+        scores[sessionID - 1]++;
+        PlayAnnounce(Announce.ANNOUNCE_KILL_BY_SW, 0, "" + (sessionIDVictim));
+        if (this.gameIntel.game_mode == Config.GameMode.SURVIVAL)
+        {
+            scores[sessionIDVictim] = -1;
+            s.SendPacketBroadCast(PacketBuilder.BuildPlayerDespawn(victim));
+            this.Despawn(victim);
+            nbDeads++;
+            if (nbDeads == this.s.client_count - 1)
+            {
+                if ((this.type & GameMgrType.SERVER) != 0)
+                {
+                    hud.setScores(scores);
+                    this.s.SendPacketBroadCast(PacketBuilder.BuildSendEndOfGame((int)GameMgr.Instance.gameIntel.game_mode));
+                    EndGame(GameMgr.Instance.gameIntel.game_mode);
+                }
+            }
+        }
+        else
+        {
+            RespawnPlayer(victim);
+        }
+        hud.setScores(scores);
+        s.SendPacketBroadCast(PacketBuilder.BuildUpdateScoresPacket(scores));
     }
 
     public void QuitGame()

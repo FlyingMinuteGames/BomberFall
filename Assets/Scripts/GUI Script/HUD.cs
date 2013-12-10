@@ -82,6 +82,18 @@ public class HUD : MonoBehaviour
         Debug.Log("Deactivating hud");
         active = false;
         m_displayer.SetActive(false);
+        for (int i = 0; i <player_names.Length; i++)
+            if (player_names[i] != null)
+            {
+                GameObject.Destroy(player_names[i].gameObject);
+                player_names[i] = null;
+            }
+        for (int i = 0; i < player_scores.Length; i++)
+            if (player_scores[i] != null)
+            {
+                GameObject.Destroy(player_scores[i].gameObject);
+                player_scores[i] = null;
+            }
     }
 
     public void Activate()
@@ -135,7 +147,8 @@ public class HUD : MonoBehaviour
         for (int i = 0; i < len && i < len2 ; i++)
         {
             m_scores[i] = scores[i];
-            player_scores[i].text = scores[i] == -1 && GameMgr.Instance.gameIntel.game_mode == Config.GameMode.SURVIVAL ? "Dead" : (GameMgr.Instance.gameIntel.game_mode == Config.GameMode.SURVIVAL ? "" : m_scores[i].ToString());
+            if (player_scores[i] != null) 
+                player_scores[i].text = scores[i] == -1 && GameMgr.Instance.gameIntel.game_mode == Config.GameMode.SURVIVAL ? "Dead" : (GameMgr.Instance.gameIntel.game_mode == Config.GameMode.SURVIVAL ? "" : m_scores[i].ToString());
         }
     }
 

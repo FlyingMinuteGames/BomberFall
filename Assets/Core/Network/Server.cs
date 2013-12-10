@@ -263,7 +263,7 @@ public class Server //: INetwork
     {
         if (!controller.IsOnGround || controller.BombSpawn >= controller.BombCount)
             return;
-        controller.BombSpawn++;
+        
         int owner = controller.GetComponent<Guid>().GetGUID();
         Maps maps = GameMgr.Instance.maps;
         IntVector2 tpos = maps.GetTilePosition(pos.x,pos.z);
@@ -275,6 +275,7 @@ public class Server //: INetwork
             if (c.gameObject.tag == "Bomb")
                 return;
         }
+        controller.BombSpawn++;
         int guid = GameMgr.Instance.Spawn(GOType.GO_BOMB, pos);
         int radius = controller.BombRadius;
         GameObject go =  ObjectMgr.Instance.Get(guid);

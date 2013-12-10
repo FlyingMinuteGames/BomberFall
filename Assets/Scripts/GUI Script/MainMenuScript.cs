@@ -248,13 +248,13 @@ public class MainMenuScript : MonoBehaviour {
 
         if (!PlayerPrefs.HasKey("RightKey"))
             PlayerPrefs.SetInt("RightKey", (int)MenuUtils.GetKeyCode(MenuConfig.m_keybindings_default[3]));
-       
-        if (!PlayerPrefs.HasKey("DefensiveItemKey"))
-            PlayerPrefs.SetInt("DefensiveItemKey", (int)MenuUtils.GetKeyCode(MenuConfig.m_keybindings_default[4]));
-
 
         if (!PlayerPrefs.HasKey("OffensiveItemKey"))
-            PlayerPrefs.SetInt("OffensiveItemKey", (int)MenuUtils.GetKeyCode(MenuConfig.m_keybindings_default[5]));
+            PlayerPrefs.SetInt("OffensiveItemKey", (int)MenuUtils.GetKeyCode(MenuConfig.m_keybindings_default[4]));
+
+
+        //if (!PlayerPrefs.HasKey("DefensiveItemKey"))
+        //    PlayerPrefs.SetInt("DefensiveItemKey", (int)MenuUtils.GetKeyCode(MenuConfig.m_keybindings_default[5]));
 
         //if (!PlayerPrefs.HasKey("antmPower"))
             PlayerPrefs.SetInt("antmPower", 0);

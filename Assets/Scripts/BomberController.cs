@@ -67,9 +67,7 @@ public class BomberController : MonoBehaviour
         {(KeyCode)PlayerPrefs.GetInt("LeftKey"),(Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_LEFT : me.m_MoveFlags & ~(int)MoveState.MOVE_LEFT; return 1;})},
         {(KeyCode)PlayerPrefs.GetInt("RightKey"), (Callback)((me,enable) => { me.m_MoveFlags = enable ? me.m_MoveFlags | (int)MoveState.MOVE_RIGHT : me.m_MoveFlags & ~(int)MoveState.MOVE_RIGHT; return 1;})},
         {KeyCode.Space,(Callback)((me,enable) => { if(enable) me.SpawnBomb(); return 0;})},
-        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{if (enable)me.UseOffensiveItem();return 0;})},
-        {(KeyCode)PlayerPrefs.GetInt("DefensiveItemKey"),(Callback)((me,enable)=>{/*me.UseDefensiveItem();*/return 0;})}
-        /*{KeyCode.Alpha8,(Callback)((me,enable)=>{ if(enable)GameMgr.Instance._switch(); return 0;})}*/
+        {(KeyCode)PlayerPrefs.GetInt("OffensiveItemKey"),(Callback)((me,enable)=>{if (enable)me.UseOffensiveItem();return 0;})}
     };
 
     private int bombCount = 1;

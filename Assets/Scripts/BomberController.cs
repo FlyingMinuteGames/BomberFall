@@ -83,7 +83,7 @@ public class BomberController : MonoBehaviour
         get { return bombSpawn; }
         set { bombSpawn = value; }
     }
-    private int speedMult = 1;
+    private int speedMult = 0;
     private int bombRadius = 1;
 
     public int BombRadius
@@ -129,6 +129,7 @@ public class BomberController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         move = Vector3.zero;
         if ((m_MoveFlags & (int)MoveState.MOVE_FORWARD) != 0)
             move += Vector3.forward;
@@ -151,7 +152,7 @@ public class BomberController : MonoBehaviour
         m_Animator.SetBool("IsOnGround", m_IsOnGround);
         m_Animator.SetFloat("FallVelocity", fall_velocity);
         m_Animator.speed = 3f;
-        transform.Translate(move.normalized * speed * ((1+speedMult)*0.5f) * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
+        transform.Translate(move.normalized * speed * (1 + speedMult * 0.13f) * Time.deltaTime - s_BaseGravity[(int)m_State != 0 ? 1 : 0] * fall_velocity);
 
     }
 

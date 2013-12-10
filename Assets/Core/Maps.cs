@@ -486,7 +486,6 @@ public class Maps {
             else if (rand < 90)
                 type = Config.PowerType.SPEED_UP;
             else type = Config.PowerType.BRING_A_SW_TO_A_GF;
-
             int guid = GameMgr.Instance.Spawn(GOType.GO_PWRUP, worldpos, -1, (int)type);
         }
     }

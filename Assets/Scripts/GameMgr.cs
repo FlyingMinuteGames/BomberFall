@@ -398,7 +398,7 @@ public class GameMgr : MonoBehaviour
         BombScript bomb = ObjectMgr.Instance.Get(bombGUID).GetComponent<BombScript>();
         int killerGUID = bomb.OwnerGuid;
         int[] scores = hud.getScores();
-
+        int score = 0;
         bool suicide = false, hasvictim = false; ;
         for (int i = 0, len = m_player.Count; i < len; i++)
         {
@@ -438,21 +438,25 @@ public class GameMgr : MonoBehaviour
                     scores = hud.getScores();
                     if (curID == killerGUID)
                     {
-                        scores[i]--;
+                        score--;
                         suicide = true;
                     }
-                    hud.setScores(scores);
+                    else score++;
+                    
 
 
                     RespawnPlayer(curID);
                 }
             }
-            if (this.gameIntel.game_mode == Config.GameMode.SURVIVAL && curID == killerGUID && hasvictim && !suicide)
-                scores[i]++;
+            
         }
+        int sessionID = GameMgr.Instance.s.GetSessionId(killerGUID);
+        scores[sessionID-1] += score;
 
-        if (hasvictim)
+        
+        if (score != 0 || hasvictim)
         {
+            hud.setScores(scores);
             s.SendPacketBroadCast(PacketBuilder.BuildUpdateScoresPacket(scores));
         }
     }

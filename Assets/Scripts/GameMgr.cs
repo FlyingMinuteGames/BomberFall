@@ -110,6 +110,11 @@ public class GameMgr : MonoBehaviour
             s.Destroy();
         if (exit)
             return;
+
+        m_state = WorldState.CENTER;
+        m_state_extra = WorldStateExtra.WORLDSTATE_1;
+        TurnCamera(true);
+
         s = null;
         type = (GameMgrType)0;
         ObjectMgr.Instance.Clear();
@@ -353,9 +358,15 @@ public class GameMgr : MonoBehaviour
             s.SendPacketBroadCast(PacketBuilder.BuildChangePhasePacket(m_state, m_state_extra));
     }
 
-    public void TurnCamera()
+    public void TurnCamera(bool noAnim = false)
     {
-
+        int index = (int)m_state;
+        Quaternion final = m_state == WorldState.CENTER ? baseRotation * s_CameraRotation[(int)m_state_extra + 1] : baseRotation * s_CameraRotation[index];
+        if(noAnim)
+        {
+            m_MainCamera.transform.rotation = final;
+            return;
+        }
         AnimationCurve x = new AnimationCurve();
         AnimationCurve y = new AnimationCurve();
         AnimationCurve z = new AnimationCurve();
@@ -365,9 +376,8 @@ public class GameMgr : MonoBehaviour
         y.AddKey(0, m_MainCamera.transform.rotation.y);
         z.AddKey(0, m_MainCamera.transform.rotation.z);
         w.AddKey(0, m_MainCamera.transform.rotation.w);
-        int index = (int)m_state;
+        
 
-        Quaternion final = m_state == WorldState.CENTER ? baseRotation * s_CameraRotation[(int)m_state_extra + 1] : baseRotation * s_CameraRotation[index];
         x.AddKey(1, final.x);
         y.AddKey(1, final.y);
         z.AddKey(1, final.z);
